@@ -20,6 +20,9 @@
 *.lnd
 *.rgn
 
+Server/Resource/Model
+Server/Resource/World
+
 #################
 ## Eclipse
 #################
