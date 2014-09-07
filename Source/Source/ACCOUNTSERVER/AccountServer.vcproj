@@ -15,8 +15,8 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory=".\..\..\Output\AccountServer\Release"
-			IntermediateDirectory=".\..\..\Output\AccountServer\Release"
+			OutputDirectory=".\..\..\..\Output\AccountServer\Release"
+			IntermediateDirectory=".\..\..\..\Output\AccountServer\Release"
 			ConfigurationType="1"
 			UseOfMFC="1"
 			UseOfATL="0"
