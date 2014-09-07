@@ -1,0 +1,21 @@
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+#include "VersionCommon.h"
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here... //rev1
+
+	IDR_MAINFRAME       ICON    DISCARDABLE     "res\\flyff_icon.ico"
+
+
+	LANGUAGE 9, 1
+	#pragma code_page(1252)
+	#include "string_eng.rc2"
+	
+	IDC_BITMAP_MAIN         IMAGE   MOVEABLE PURE   "Image\\main_eng.jpg"
+	IDC_BITMAP_OPTION       IMAGE   MOVEABLE PURE   "Image\\option_eng.jpg"
+
+
+/////////////////////////////////////////////////////////////////////////////
