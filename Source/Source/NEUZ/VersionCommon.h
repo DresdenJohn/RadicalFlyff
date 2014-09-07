@@ -11,6 +11,9 @@
 #define		__VS2003		// ÄÄÆÄÀÏ·¯º¯°æ.net
 #endif
 
+// ADDED SYSTEMS
+
+
 #define		NO_GAMEGUARD	//rev1
 
 #define		__TRANSFER_ERROR_TEXT
@@ -29,7 +32,7 @@
 #define		__LANG_IME_0327				// ±¹°¡º° imeÇ¥½Ã Ã¢ Ãâ·Â ±¸ºÐ
 #define		__STL_0402					// stl
 
-#define		__NEWYEARDAY_EVENT_COUPON	// ¼³ ÀÌº¥Æ® - Çì¾î˜Þ, ¼ºÇü ¹«·áÀÌ¿ë±Ç °ü·Ã.
+#define		__NEWYEARDAY_EVENT_COUPON	// ¼³ ÀÌº¥Æ® - Çì¾î˜? ¼ºÇü ¹«·áÀÌ¿ë±Ç °ü·Ã.
 // ÇØ¿Ü 6Â÷ Àû¿ë
 #define		__LANG_1013					// ÇØ¿Ü ¹öÀü ½Å±Ô Ãß°¡ ½ºÅ©¸³Æ®
 
@@ -303,7 +306,7 @@
 	#define		__TRAFIC_1218				// ¼­¹ö¿¡¼­ º¸³½ ÆÐÅ¶ Á¤º¸
 	#define		__Y_HAIR_BUG_FIX
 	#define		__FOR_PROLOGUE_UPDATE		// ÅÂ±¹,´ë¸¸,¹Ì±¹,µ¶ÀÏ PrologueÃß°¡
-//	#define		__NEWYEARDAY_EVENT_COUPON	// ¼³ ÀÌº¥Æ® - Çì¾î˜Þ, ¼ºÇü ¹«·áÀÌ¿ë±Ç °ü·Ã.
+//	#define		__NEWYEARDAY_EVENT_COUPON	// ¼³ ÀÌº¥Æ® - Çì¾î˜? ¼ºÇü ¹«·áÀÌ¿ë±Ç °ü·Ã.
 	#define		__TRAFIC_1215				// Àü¼Û·® °¨¼Ò
 
 //	#define     __Y_NEW_ENCHANT				// Á¦·Ã ¾ÆÀÌÅÛ º¯°æ, Neuz, World

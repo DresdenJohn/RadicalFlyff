@@ -1,4 +1,4 @@
-# _Project Radical Flyff__
+# _Project Radical Flyff_
 
 _Radical Flight Online offcial Source and Server files stored and updated here_
 
