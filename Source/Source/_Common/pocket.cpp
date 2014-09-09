@@ -139,7 +139,12 @@ BOOL	CPocketController::Add( int nPocket, CItemElem*pItemElem, vector<PocketCont
 	BYTE anId[POCKET_SLOT_SIZE_1_2];
 	short	anNum[POCKET_SLOT_SIZE_1_2];
 	BYTE nCount	= 0;
-
+	
+#ifdef __SECURITY_FIXES
+	if (nPocket < 0)
+		return FALSE;
+#endif // __SECURITY_FIXES
+	
 	if( IsAvailable( nPocket ) && m_apPocket[nPocket]->Add( pItemElem, anId, anNum, &nCount ) )
 	{
 		if( apResult )

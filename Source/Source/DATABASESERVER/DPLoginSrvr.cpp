@@ -115,6 +115,13 @@ void CDPLoginSrvr::SendOneHourNotify( const char* lpszAccount)
 void CDPLoginSrvr::SendPlayerList( const char* lpszAccount, const char* lpszPassword, DPID dpid, DWORD dwAuthKey )
 {
 	LPDB_OVERLAPPED_PLUS lpDbOverlappedPlus	= g_DbManager.AllocRequest();
+#ifdef __SECURITY_FIXES
+	if(!prj.IsAllowedLetter(lpszAccount,FALSE) || 
+		!prj.IsAllowedLetter(lpszPassword,FALSE))
+	{
+		return;
+	}
+#endif // __SECURITY_FIXES
 	lpDbOverlappedPlus->dpid	= dpid;
 	lpDbOverlappedPlus->nQueryMode	= SENDPLAYERLIST;
 	lpDbOverlappedPlus->dwAuthKey	= dwAuthKey;
@@ -125,6 +132,18 @@ void CDPLoginSrvr::SendPlayerList( const char* lpszAccount, const char* lpszPass
 
 void CDPLoginSrvr::OnCreatePlayer( CAr & ar, DPID dpid, LPBYTE lpBuf, u_long uBufSize )
 {
+#ifdef __SECURITY_FIXES
+	CAr arRead(lpBuf,uBufSize);
+	char szAccount[MAX_ACCOUNT] = {0,};
+	char szPassword[MAX_PASSWORD] = {0,};
+	arRead.ReadString(szAccount,MAX_ACCOUNT);
+	arRead.ReadString(szPassword,MAX_PASSWORD);
+	if(!prj.IsAllowedLetter(szAccount,FALSE) || 
+		!prj.IsAllowedLetter(szPassword,FALSE))
+	{
+		return;
+	}
+#endif // __SECURITY_FIXES
 	LPDB_OVERLAPPED_PLUS lpDbOverlappedPlus = g_DbManager.AllocRequest();
 	g_DbManager.MakeRequest( lpDbOverlappedPlus, lpBuf, uBufSize );
 	lpDbOverlappedPlus->dpid = dpid;
@@ -135,6 +154,22 @@ void CDPLoginSrvr::OnCreatePlayer( CAr & ar, DPID dpid, LPBYTE lpBuf, u_long uBu
 void CDPLoginSrvr::OnRemovePlayer( CAr & ar, DPID dpid, LPBYTE lpBuf, u_long uBufSize )
 {
 #ifdef __REMOVE_PLAYER_0221
+#ifdef __SECURITY_FIXES
+	CAr arRead(lpBuf,uBufSize);
+	char szAccount[MAX_ACCOUNT] = {0,};
+	char szPassword[MAX_PASSWORD] = {0,};
+	char szNo[MAX_PASSWORD] = {0,};
+
+	arRead.ReadString( szAccount,MAX_ACCOUNT );
+	arRead.ReadString( szPassword,MAX_PASSWORD );
+	arRead.ReadString( szNo, MAX_PASSWORD );
+	if(!prj.IsAllowedLetter(szAccount,FALSE) || 
+		!prj.IsAllowedLetter(szPassword,FALSE) || 
+		!prj.IsAllowedLetter(szNo,FALSE))
+	{
+		return;
+	}
+#endif // __SECURITY_FIXES
 	CAr ar1;
 	ar1 << PACKETTYPE_DEL_PLAYER;
 	ar1.Write( lpBuf, uBufSize );
@@ -153,6 +188,22 @@ void CDPLoginSrvr::OnRemovePlayer( CAr & ar, DPID dpid, LPBYTE lpBuf, u_long uBu
 
 void CDPLoginSrvr::OnGetPlayerList( CAr & ar, DPID dpid, LPBYTE lpBuf, u_long uBufSize )
 {
+#ifdef __SECURITY_FIXES
+	CAr arRead(lpBuf,uBufSize);
+	DWORD dwAuthKey;
+	arRead >> dwAuthKey;
+	u_long uIdofMulti;
+	arRead >> uIdofMulti;
+	char szAccount[MAX_ACCOUNT] = {0,};
+	char szPassword[MAX_PASSWORD] = {0,};
+	arRead.ReadString( szAccount, MAX_ACCOUNT );
+	arRead.ReadString( szPassword, MAX_PASSWORD );
+	if(!prj.IsAllowedLetter(szAccount,FALSE) || 
+		!prj.IsAllowedLetter(szPassword,FALSE))
+	{
+		return;
+	}
+#endif // __SECURITY_FIXES
 	CAr ar1;
 	ar1 << PACKETTYPE_GETPLAYERLIST;
 	ar1.Write( lpBuf, uBufSize );
@@ -164,8 +215,23 @@ void CDPLoginSrvr::OnGetPlayerList( CAr & ar, DPID dpid, LPBYTE lpBuf, u_long uB
 
 void CDPLoginSrvr::OnLeave( CAr & ar, DPID dpid, LPBYTE lpBuf, u_long uBufSize )
 {
+#ifdef __SECURITY_FIXES
+	CAr arRead(lpBuf,uBufSize);
+	char szAccount[MAX_ACCOUNT] = {0,};
+	arRead.ReadString( szAccount, MAX_ACCOUNT );
+	if(!prj.IsAllowedLetter(szAccount,FALSE))
+	{
+		return;
+	}
+#endif // __SECURITY_FIXES
 	char lpszAccount[MAX_ACCOUNT] = { 0, };
 	ar.ReadString( lpszAccount, MAX_ACCOUNT );
+#ifdef __SECURITY_FIXES
+	if(!prj.IsAllowedLetter(lpszAccount,FALSE))
+	{
+		return;
+	}
+#endif // __SECURITY_FIXES
 	g_dpAccountClient.SendRemoveAccount( lpszAccount );
 
 	u_long idPlayer;
@@ -189,6 +255,12 @@ void CDPLoginSrvr::OnCloseError( CAr & ar, DPID dpid, LPBYTE lpBuf, u_long uBufS
 {
 	char lpszAccount[MAX_ACCOUNT]	= { 0, };
 	ar.ReadString( lpszAccount, MAX_ACCOUNT );
+#ifdef __SECURITY_FIXES
+	if(!prj.IsAllowedLetter(lpszAccount,FALSE))
+	{
+		return;
+	}
+#endif // __SECURITY_FIXES
 	g_dpAccountClient.SendRemoveAccount( lpszAccount );
 
 #ifdef __INTERNALSERVER

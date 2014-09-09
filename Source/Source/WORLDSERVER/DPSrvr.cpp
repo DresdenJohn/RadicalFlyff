@@ -2610,6 +2610,11 @@ void CDPSrvr::OnDoUseItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf
 	if( IsValidObj( pUser ) == FALSE )
 		return;
 
+#ifdef __SECURITY_FIXES
+	if ( dwData < 0 )
+		return;
+#endif // __SECURITY_FIXES	
+		
 	WORD nId = HIWORD( dwData );
 	if( nPart > 0 )
 	{
@@ -2801,7 +2806,11 @@ void CDPSrvr::OnCloseShopWnd( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lp
 
 void CDPSrvr::OnBuyItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
 {
+#ifdef __SECURITY_FIXES
+	BYTE cTab;
+#else // __SECURITY_FIXES
 	CHAR cTab;
+#endif // __SECURITY_FIXES
 	BYTE nId;
 	short nNum;
 	DWORD dwItemId;
@@ -2942,7 +2951,11 @@ void CDPSrvr::OnBuyItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 // 칩으로 아이템 구매
 void CDPSrvr::OnBuyChipItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
 {
+#ifdef __SECURITY_FIXES
+	BYTE cTab;
+#else // __SECURITY_FIXES
 	CHAR cTab;
+#endif // __SECURITY_FIXES
 	BYTE nId;
 	short nNum;
 	DWORD dwItemId;
@@ -3531,7 +3544,11 @@ void CDPSrvr::OnPutItemGuildBank( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYT
 		return;
 
 	BYTE nId, mode;
+#ifdef __DUPE_FIX
+	UINT nItemNum;
+#else // __DUPE_FIX
 	DWORD nItemNum;
+#endif //__DUPE_FIX
 
 	ar >> nId >> nItemNum >> mode;
 
@@ -3576,7 +3593,11 @@ void CDPSrvr::OnPutItemGuildBank( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYT
 		if( pItemElem->IsCharged() )
 			return;
 	
+		#ifdef __DUPE_FIX
+		if( nItemNum > (UINT)pItemElem->m_nItemNum )
+#else // __DUPE_FIX
 		if( (int)( nItemNum ) > pItemElem->m_nItemNum )
+#endif // __DUPE_FIX
 			nItemNum = pItemElem->m_nItemNum;
 		if( nItemNum < 1 )
 			nItemNum = 1;
@@ -3590,7 +3611,11 @@ void CDPSrvr::OnPutItemGuildBank( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYT
 		{
 			CItemElem itemElem;
 			itemElem	= *pItemElem;
+#ifdef __DUPE_FIX
+			itemElem.m_nItemNum	= nItemNum;
+#else // __DUPE_FIX
 			itemElem.m_nItemNum	= (short)nItemNum;
+#endif // __DUPE_FIX
 			if ( pGuild->m_GuildBank.Add( &itemElem ) )
 			{
 				LogItemInfo aLogItem;
@@ -3601,8 +3626,13 @@ void CDPSrvr::OnPutItemGuildBank( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYT
 				aLogItem.Gold = aLogItem.Gold2 = pUser->GetGold();
 				OnLogItem( aLogItem, &itemElem, nItemNum );
 
-				pUser->RemoveItem( (BYTE)( nId ), (short)( nItemNum ) );
+				#ifdef __DUPE_FIX
+				pUser->RemoveItem( (BYTE)( nId ), nItemNum  );
 				UpdateGuildBank( pGuild, GUILD_PUT_ITEM, 0, pUser->m_idPlayer, &itemElem, 0, (short)( nItemNum ) );
+#else // __DUPE_FIX
+				pUser->RemoveItem( (BYTE)( nId ), (short)( nItemNum ) );
+				UpdateGuildBank( pGuild, GUILD_PUT_ITEM, 0, pUser->m_idPlayer, &itemElem, 0, nItemNum  );
+#endif // __DUPE_FIX
 				pUser->AddPutItemGuildBank( &itemElem );
 				g_UserMng.AddPutItemElem( pUser, &itemElem );
 			}
@@ -3635,7 +3665,11 @@ void CDPSrvr::OnGetItemGuildBank( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYT
 		
 		if (mode == 0) // Gold를 길드창고에서 빼낼때
 		{
-			int nGold = (int)dwItemNum;
+#ifdef __DUPE_FIX
+			int nGold = (UINT)dwItemNum;
+#else // __DUPE_FIX
+			int nGold = dwItemNum;
+#endif // __DUPE_FIX
 			if( nGold <= 0 || CanAdd( pUser->GetGold(), nGold ) == FALSE )
 				return;
 
@@ -4306,7 +4340,7 @@ void CDPSrvr::OnSetTarget( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf
 			CMover *pTarget = prj.GetMover( idTarget );		// 타겟의 포인터
 			if( IsValidObj( pTarget ) )
 			{
-				if( bClear )	// 타겟이 해제됬다.
+				if( bClear )	// 타겟이 해제됬�?
 				{
 					if( pTarget->m_idTargeter == pUser->GetId() )	// 자기가 잡았던 타겟만 자기가 풀수있다.
 					{
@@ -4439,7 +4473,12 @@ void CDPSrvr::OnModifyMode( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBu
 			return;
 		}
 #endif	// __HACK_0516
-
+#ifdef __SECURITY_FIXES
+		if( !pUser->IsAuthHigher(AUTH_GAMEMASTER) )
+		{
+			return;
+		}
+#endif // __SECURITY_FIXES
 		if( f )
 			pUser->m_dwMode		|= dwMode;
 		else
@@ -4452,6 +4491,9 @@ void CDPSrvr::OnModifyMode( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBu
 // 운영자의 소환 명령어 
 void CDPSrvr::OnSummonPlayer( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long )
 {
+#ifdef __SECURITY_FIXES
+	return;
+#else // __SECURITY_FIXES
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
@@ -4478,7 +4520,6 @@ void CDPSrvr::OnSummonPlayer( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u
 		int nLayer;
 		ar >> nLayer;
 #endif	// __LAYER_1015
-
 		if( !pUser->GetWorld() )
 		{
 			WriteError( "PACKETTYPE_SUMMONPLAYER//1" );
@@ -4487,10 +4528,14 @@ void CDPSrvr::OnSummonPlayer( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u
 
 		pUser->REPLACE( uIdofMulti, dwWorldID, vPos, REPLACE_FORCE, nLayer );
 	}
+#endif // __SECURITY_FIXES
 }
 
 void CDPSrvr::OnTeleportPlayer( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long )
 {
+#ifdef __SECURITY_FIXES
+	return;
+#else // __SECURITY_FIXES
 	u_long idOperator;
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	
@@ -4507,12 +4552,19 @@ void CDPSrvr::OnTeleportPlayer( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE,
 			return;
 		}
 #endif	// __HACK_0516
+#ifdef __SECURITY_FIXES
+		if( !pUser->IsAuthHigher(AUTH_GAMEMASTER) )
+		{
+			return;
+		}
+#endif // __SECURITY_FIXES
 #ifdef __LAYER_1015
 		g_DPCoreClient.SendSummonPlayer( pUser->m_idPlayer, pWorld->GetID(), pUser->GetPos(), idOperator, pUser->GetLayer() );
 #else	// __LAYER_1015
 		g_DPCoreClient.SendSummonPlayer( pUser->m_idPlayer, pWorld->GetID(), pUser->GetPos(), idOperator );
 #endif	// __LAYER_1015
 	}
+#endif // __SECURITY_FIXES
 }
 
 void CDPSrvr::OnChangeFace( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
@@ -6338,6 +6390,7 @@ void CDPSrvr::OnRequestGuildRank( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYT
 
 void CDPSrvr::OnBuyingInfo( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
 {
+#ifndef __SECURITY_FIXES
 	BUYING_INFO2 bi2;
 	ar.Read( (void*)&bi2, sizeof(BUYING_INFO2) );
 
@@ -6380,6 +6433,8 @@ void CDPSrvr::OnBuyingInfo( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBu
 	sprintf( lpOutputString, "dwServerIndex = %d\tdwPlayerId = %d\tdwItemId = %d\tdwItemNum = %d",
 		bi2.dwServerIndex, bi2.dwPlayerId, bi2.dwItemId, bi2.dwItemNum );		
 	OutputDebugString( lpOutputString );
+
+#endif // __SECURITY_FIXES
 }
 
 void CDPSrvr::OnEnterChattingRoom( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
@@ -7241,6 +7296,15 @@ void CDPSrvr::OnQueryPostMail( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE l
 					return;
 				}
 			}
+#ifdef __SECURITY_FIXES
+			if( pUser->GetGold() < (UINT)( ( nPostGold + nGold ) ) )
+			{
+				pUser->AddDiagText( prj.GetText( TID_GAME_LACKMONEY ) );
+				return;
+			}
+
+			pUser->AddGold( (int)( (UINT)( nPostGold + nGold ) * (-1) ), TRUE );	// 사용료 지급
+#else // __SECURITY_FIXES
 			if( pUser->GetGold() < (int)( ( nPostGold + nGold ) ) )
 			{
 				pUser->AddDiagText( prj.GetText( TID_GAME_LACKMONEY ) );
@@ -7248,7 +7312,7 @@ void CDPSrvr::OnQueryPostMail( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE l
 			}
 
 			pUser->AddGold( (int)( (int)( nPostGold + nGold ) * (-1) ), TRUE );	// 사용료 지급
-			
+#endif // __SECURITY_FIXES			
 			CItemElem	itemElem;
 			if( pItemElem )
 			{
@@ -10964,6 +11028,10 @@ void	CDPSrvr::OnMoveItemOnPocket( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYT
 				return;
 			if( nNum > pItem->m_nItemNum )
 				return;
+#ifdef __SECURITY_FIXES
+			if( nNum < 1 )
+				return;
+#endif // __SECURITY_FIXES
 
 			CItemElem item;
 			item	= *pItem;

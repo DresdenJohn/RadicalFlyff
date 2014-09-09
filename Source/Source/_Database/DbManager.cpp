@@ -148,6 +148,10 @@ void CDbManager::CreatePlayer( CQuery *qry, LPDB_OVERLAPPED_PLUS lpDbOverlappedP
 	//	 @im_szCharacterKey,@im_dwSkinSet,@im_dwHairMesh,@im_dwHairColor,@im_dwHeadMesh,@im_dwSex
 	// 	 CHARACTER_STR 'I1','','01','beat','»ûº°°øÁÖ',0,0,0,0,0,0,'',0,0,0,0,0
 	arRead >> nSlot;
+#ifdef __SECURITY_FIXES
+	if( nSlot < 0 || nSlot > 2 )
+		return;
+#endif // __SECURITY_FIXES
 	arRead.ReadString( lpDbOverlappedPlus->AccountInfo.szPlayer, MAX_PLAYER );
 
 #ifdef __RULE_0615

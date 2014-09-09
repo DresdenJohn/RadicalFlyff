@@ -466,8 +466,13 @@ BOOL CMover::DoEquip( int nSex, int nSkinSet,
 	BOOL bIfParts = pMover ? pMover->GetProp()->bIfParts : 0;
 	TCHAR lpszTemp[ 64 ];
 	BOOL bFake = (pInventory == NULL) ? TRUE : FALSE;
+#ifdef __SECURITY_FIXES
+	if( dwParts == NULL_ID || ( nPart == -1 &&  dwParts != PARTS_RIDE && dwParts != PARTS_RING2 && dwParts != PARTS_EARRING2) )
+		return FALSE;
+#else // __SECURITY_FIXES
 	if( dwParts == NULL_ID )
 		return FALSE;
+#endif// __SECURITY_FIXES
 
 	// 반지/귀걸이 벗을때 처리.
 	if( !bEquip )

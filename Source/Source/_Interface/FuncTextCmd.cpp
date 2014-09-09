@@ -2170,15 +2170,22 @@ BOOL TextCmd_Summon( CScanner& scanner )
 #endif	// __SYS_PLAYER_DATA
 		if( idPlayer > 0 ){
 			strcpy( lpszPlayer, scanner.Token );
+#ifdef __SECURITY_FIXES
+		CUser* pUserTarget = static_cast<CUser*>( prj.GetUserByID( idPlayer ) );
+		if( pUserTarget )
+			pUserTarget->REPLACE( g_uIdofMulti, pUser->GetWorld()->GetID(),  pUser->GetPos(), REPLACE_FORCE,  pUser->GetLayer() );
+#else// __SECURITY_FIXES
 #ifdef __LAYER_1015
 			g_DPCoreClient.SendSummonPlayer( pUser->m_idPlayer, pUser->GetWorld()->GetID(), pUser->GetPos(), idPlayer, pUser->GetLayer() );
 #else	// __LAYER_1015
 			g_DPCoreClient.SendSummonPlayer( pUser->m_idPlayer, pUser->GetWorld()->GetID(), pUser->GetPos(), idPlayer );
 #endif	// __LAYER_1015
+#endif // __SECURITY_FIXES
 		}
 		else {
 //			scanner.Token라는 이름을 가진 사용자는 이 게임에 존재하지 않는다.
 			pUser->AddReturnSay( 3, scanner.Token );
+
 		}
 	}
 	else 
