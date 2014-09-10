@@ -78,7 +78,7 @@ void CCoupleHelper::PlayProposeAnimation( CUser* pProposer, CUser* pTarget )
 	ASSERT( pTarget );
 	FLOAT fAngle	= GetDegree( pTarget->GetPos(), pProposer->GetPos());
 	pProposer->SetAngle( fAngle );
-	pProposer->SendActMsg( OBJMSG_MOTION, MTI_CHEEROTHER, ANILOOP_1PLAY );
+	pProposer->SendActMsg( OBJMSG_MOTION, MTI_KNEEDOWN, ANILOOP_1PLAY );
 	g_UserMng.AddCreateSfxObj( pProposer, XI_CHEERSENDEFFECT );
 	g_UserMng.AddCreateSfxObj( pTarget, XI_CHEERRECEIVEEFFECT );
 	g_UserMng.AddMoverBehavior( pProposer, pProposer->GetPos(), pProposer->m_pActMover->m_vDelta,

@@ -23,7 +23,41 @@
 #define CUR_GATE	     16
 #define CUR_LEVER        17
 #define CUR_HAMMER       18
+#ifdef __FIX_CHEAT
+char ce64[30] = "cheatengine-x86_64.exe";
+char ce[30] = "cheatengine-i386.exe";
+char cheat[30] = "Cheat Engine.exe";
 
+#define CE7 "Cheat Engine 7.0"
+#define CE69 "Cheat Engine 6.9"
+#define CE68 "Cheat Engine 6.8"
+#define CE67 "Cheat Engine 6.7"
+#define CE66 "Cheat Engine 6.6"
+#define CE65 "Cheat Engine 6.5"
+#define CE64 "Cheat Engine 6.4"
+#define CE63 "Cheat Engine 6.3"
+#define CE62 "Cheat Engine 6.2"
+#define CE61 "Cheat Engine 6.1"
+#define CE6 "Cheat Engine 6.0"
+#define CE561 "Cheat Engine 5.6.1"
+#define	CE56 "Cheat Engine 5.6"
+#define	CE55 "Cheat Engine 5.5"
+#define CE54 "Cheat Engine 5.4"
+#define CE53 "Cheat Engine 5.3"
+#define CE52 "Cheat Engine 5.2"
+#define CE51 "Cheat Engine 5.1"
+#define CE4 "Cheat Engine 4.9"
+
+#define TSearch1 "Tsearch"
+#define SpeedG "Speed Gear v7.1"
+#define MSH "L. Spiro Memory Hacking Software"
+#define HACK "Winject.exe"
+#endif //__FIX_CHEAT
+
+#ifdef __FIX_CHEAT
+BOOL KillProcess(char *szProcessToKill);
+void CheatEngine();
+#endif //__FIX_CHEAT
 struct LOGIN_STEP_INFO
 {
 	LPCTSTR		pszAccount;			// account

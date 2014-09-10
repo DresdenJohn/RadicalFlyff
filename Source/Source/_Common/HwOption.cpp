@@ -162,9 +162,9 @@ void COption::Init()
 	memset( m_szFileName, 0, sizeof(m_szFileName) );
 	m_nWeatherEffect = TRUE;
 	m_bOperator = FALSE;
-	m_nResWidth = 800;	//rev1
-	m_nResHeight = 600;	//" "
-	m_bStartFullScreen = FALSE;	//" "
+	m_nResWidth = 1024;
+	m_nResHeight = 768;
+	m_bStartFullScreen = FALSE;		
 	m_nTextureQuality = 1;
 	m_nViewArea = 1;
 	m_nObjectDistant = 1;
@@ -932,12 +932,12 @@ int COption::Load( LPCTSTR szFileName )
 			m_dwChatFilterEtc = scan.GetNumber();
 #endif //__Y_CHAT_SYSTEM_8
 		}
-		else
-		if( scan.Token == _T( "ip" ) )
-		{
-			scan.GetTokenEx();
-			strcpy( m_IPAddress, scan.Token );
-		}
+		/*else
+        if( scan.Token == _T( "ip" ) )
+        {
+            scan.GetTokenEx();
+            strcpy( m_IPAddress, scan.Token );
+        } */
 #ifdef __YENV
 		else
 		if( scan.Token == _T( "SpecBumpEffect" ) )

@@ -30,6 +30,9 @@ public:
 	int			m_nWrite;
 	int			m_nRead;
 	BOOL		m_bAuth;
+#ifdef __NO_SPEEDHACK
+	BOOL		bNotFirstPing;
+#endif // __NO_SPEEDHACK
 
 public:
 	// Constructions

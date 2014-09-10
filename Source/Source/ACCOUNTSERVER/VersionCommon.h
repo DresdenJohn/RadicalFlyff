@@ -7,10 +7,22 @@
 	#define __INTERNALSERVER
 #endif
 
+#define __SECURITY_FIXES
+#define	__NO_SPEEDHACK
+#define	__DUPE_FIX
+#define	__RESTAT_BUG
+#define	__SAVE_AFTER_TRADE
+#define __CASTBREAKFIX
+#define	__SWITCH_FIX
+#define __HACK_FIXXES
+
+#define __FIX_CHEAT
+#define __IP_CRYPTION
+#define __AUTO_SKILL_MAX
 #define		__SERVER				// 클라이언트 전용코드를 빌드하지 않기 위한 define
 //#define	__S0114_RELOADPRO		// 캐릭터 DB에서 읽어오기 : Neuz, Trans, login, World, Certifier, Account( ini : SKIP_TRACKING 추가 )
 #define		__STL_0402		// stl
-
+#define     __CASTBREAKFIX
 #if (_MSC_VER > 1200)
 #define		__VS2003		// 컴파일러변경.net
 #endif

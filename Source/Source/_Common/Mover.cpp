@@ -1495,6 +1495,9 @@ void CMover::InitProp( BOOL bInitAI )
 			ItemProp* pSkillProp = apSkillProp[ i ];
 			lpSkill = &m_aJobSkill[ i ];
 			lpSkill->dwSkill = pSkillProp->dwID;
+#ifdef	__AUTO_SKILL_MAX
+			lpSkill->dwLevel = pSkillProp->dwExpertMax;
+#endif	//__AUTO_SKILL_MAX
 		}
 	}
 
@@ -1586,6 +1589,9 @@ void CMover::InitLevel( int nJob, LONG nLevel, BOOL bGamma )
 			ItemProp* pSkillProp = apSkillProp[ i ];
 			lpSkill = &m_aJobSkill[ i ];
 			lpSkill->dwSkill = pSkillProp->dwID;
+#ifdef	__AUTO_SKILL_MAX
+			lpSkill->dwLevel = pSkillProp->dwExpertMax;
+#endif	//__AUTO_SKILL_MAX
 		}
 		// 2. 기본 능력치 초기화 
 		m_nLevel	= 1;

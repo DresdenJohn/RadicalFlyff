@@ -274,6 +274,38 @@ void CDPLoginSrvr::OnPreJoin( CAr & ar, DPID dpid )
 	}
 }
 
+#ifdef __NO_SPEEDHACK
+void CDPLoginSrvr::OnPing( CAr & ar, DPID dpid )
+{
+	CMclAutoLock	Lock( g_UserMng.m_AddRemoveLock );
+	CUser* pUser	= g_UserMng.GetUser( dpid );
+	if( pUser )
+	{
+		DWORD lastPingRecvd = 0;
+		DWORD PingRecvdDelai = 0;
+
+        lastPingRecvd = pUser->m_tPingRecvd;
+        pUser->m_tPingRecvd = timeGetTime();
+        PingRecvdDelai = pUser->m_tPingRecvd - lastPingRecvd;
+        
+        if( pUser->bNotFirstPing && ( PingRecvdDelai < 2000 ) && ( pUser->m_idPlayer > 0 ) && ( pUser->m_idPlayer != NULL ) )
+        {
+            g_UserMng.RemoveUser( dpid );
+            g_dpDBClient.DestroyPlayer( dpid );
+            g_dpLoginSrvr.DestroyPlayer( dpid );
+        }
+
+		pUser->bNotFirstPing = TRUE;
+
+		DWORD dwPingTime;
+		ar >> dwPingTime;
+		
+		BEFORESEND( ar1, PACKETTYPE_PING );
+		ar1 << dwPingTime;
+		SEND( ar1, this, dpid );
+	}
+}
+#else
 void CDPLoginSrvr::OnPing( CAr & ar, DPID dpid )
 {
 	CMclAutoLock	Lock( g_UserMng.m_AddRemoveLock );
@@ -290,6 +322,7 @@ void CDPLoginSrvr::OnPing( CAr & ar, DPID dpid )
 		SEND( ar1, this, dpid );
 	}
 }
+#endif
 
 void CDPLoginSrvr::OnAuthQuery( CAr & ar, DPID dpid )
 {

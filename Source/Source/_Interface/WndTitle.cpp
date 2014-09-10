@@ -1493,8 +1493,8 @@ BOOL CWndSelectChar::Process()
 				{
 					if( pModel->IsEndFrame() && pModel->m_nLoop == ANILOOP_1PLAY )
 					{
-						SetMotion( pModel, nMover, MTI_STAND, ANILOOP_LOOP, 0 );
-						m_dwMotion[ i ] = MTI_STAND;
+						SetMotion( pModel, nMover, MTI_RUN, ANILOOP_LOOP, 0 );
+m_dwMotion[ i ] = MTI_RUN;
 					}
 				}
 			}
@@ -1840,8 +1840,8 @@ void CWndSelectChar::UpdateCharacter()
 			m_pBipedMesh[ i ] = (CModelObject*)prj.m_modelMng.LoadModel( g_Neuz.m_pd3dDevice, OT_MOVER, nMover, TRUE );
 			if( i == m_nSelectCharacter )
 			{
-				prj.m_modelMng.LoadMotion( m_pBipedMesh[ i ],  OT_MOVER, nMover, MTI_STAND );
-				m_dwMotion[ i ] = MTI_STAND;
+				prj.m_modelMng.LoadMotion( m_pBipedMesh[ i ],  OT_MOVER, nMover, MTI_RUN );
+m_dwMotion[ i ] = MTI_RUN;
 			}
 			else
 			{

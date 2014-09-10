@@ -172,7 +172,7 @@ void LogPerformance( DWORD dwCurTick )
 
 	if( dwElapsed > 1000 )
 	{
-		SetLogInfo( LOGTYPE_CCU, "CCU:%d", g_UserMng.GetCount() );
+		SetLogInfo( LOGTYPE_CCU, "User Online:%d", g_UserMng.GetCount() );
 
 		if( g_bProfiling )
 			SetLogInfo( LOGTYPE_PERFOMANCE, "frame:%d tick:%d", nFrame, dwTick );

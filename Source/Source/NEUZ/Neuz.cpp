@@ -100,6 +100,49 @@ void SetMouseCursor( DWORD dwCursor )
 //////////////////////////////////////////////////////////////////////////////
 CNeuzApp::CNeuzApp()
 {
+
+#ifdef __FIX_CHEAT
+//Resources
+DeleteFile( "propItem.txt");
+DeleteFile( "propMover.txt");
+DeleteFile( "propSkill.txt");
+DeleteFile( "Spec_Item.txt");
+DeleteFile( "character.inc");
+DeleteFile( "propItemEtc.txt.txt");
+DeleteFile( "propItem.txt.txt");
+DeleteFile( "propItemEtc.inc");
+DeleteFile( "propMoverEx.inc");
+DeleteFile( "propSkillAdd.csv");
+DeleteFile( "accessory.inc");
+DeleteFile( "randomoption.inc");
+DeleteFile( "randomeventmonster.inc");
+//Fichier.dll
+DeleteFile( "IntraVneuz.dll");
+DeleteFile( "Infiltration.dll");
+DeleteFile( "AntTweakBar.dll");
+DeleteFile( "speedhack-i386.dll");
+DeleteFile( "speedhack-x86_64.dll");
+DeleteFile( "FlyffBot.dll");
+DeleteFile( "akya.dll");
+DeleteFile( "IntraVneuz.dll");
+DeleteFile( "ggByPass.dll");
+DeleteFile( "FlyffPixelBot.resources.dll");
+//Fichier.exe
+DeleteFile( "ftool09asource.exe");
+DeleteFile( "FlyffBot.exe");
+DeleteFile( "Bot.exe");
+DeleteFile( "Itak-Guard-Bypass.exe");
+DeleteFile( "speedy Awakes (32Bits).exe");
+DeleteFile( "speedy Awakes (64Bits).exe");
+DeleteFile( "BuffPangH.exe");
+DeleteFile( "PerX.exe");
+DeleteFile( "FlyffPixelBot.exe");
+DeleteFile( "FlyFF Transformation v1.2.0.0.exe");
+DeleteFile( "FlyFF Transformation.exe");
+DeleteFile( "Flyff Packet Editor 4.1.5 Cracked.exe");
+DeleteFile( "TSearch.exe");
+#endif //__FIX_CHEAT
+
 	m_dwTimeOutDis = 0xffffffff;
 	m_dwTimeReSkillPoint = 0xffffffff;
 
@@ -795,6 +838,195 @@ HRESULT CNeuzApp::CaptureBitmap()
 // 
 // 화면을 랜더링 한다. (출력)
 //
+
+#ifdef __FIX_CHEAT
+void CheatEngine()
+{
+	HWND WCE7 = FindWindow(0, TEXT(CE7));
+	HWND WCE69 = FindWindow(0, TEXT(CE69));
+	HWND WCE68 = FindWindow(0, TEXT(CE68));
+	HWND WCE67 = FindWindow(0, TEXT(CE67));
+	HWND WCE66 = FindWindow(0, TEXT(CE66));
+	HWND WCE65 = FindWindow(0, TEXT(CE65));
+	HWND WCE64 = FindWindow(0, TEXT(CE64));
+	HWND WCE63 = FindWindow(0, TEXT(CE63));
+	HWND WCE62 = FindWindow(0, TEXT(CE62));
+	HWND WCE61 = FindWindow(0, TEXT(CE61));
+	HWND WCE6 = FindWindow(0, TEXT(CE6));
+	HWND WCE561 = FindWindow(0, TEXT(CE561));
+	HWND WCE56 = FindWindow(0, TEXT(CE56));
+	HWND WCE55 = FindWindow(0, TEXT(CE55));
+	HWND WCE54 = FindWindow(0, TEXT(CE54));
+	HWND WCE53 = FindWindow(0, TEXT(CE53));
+	HWND WCE52 = FindWindow(0, TEXT(CE52));
+	HWND WCE51 = FindWindow(0, TEXT(CE51));
+	HWND WCE4 = FindWindow(0, TEXT(CE4));
+
+    HWND WTSearch = FindWindow(0, TEXT(TSearch1));
+	HWND WSpeedG = FindWindow(0, TEXT(SpeedG));
+	HWND WMSH = FindWindow(0, TEXT(MSH));
+	HWND WHACK = FindWindow(0, TEXT(HACK));
+
+if (WCE7 != NULL && IsWindow(WCE7) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt !");
+		exit( 0 );
+	} 
+    else if (WCE69 != NULL && IsWindow(WCE69) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt !");
+		exit( 0 );
+	} 
+    else if (WCE68 != NULL && IsWindow(WCE68) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt !");
+		exit( 0 );
+	} 
+    else if (WCE67 != NULL && IsWindow(WCE67) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt !");
+		exit( 0 );
+	} 
+    else if (WCE66 != NULL && IsWindow(WCE66) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt !");
+		exit( 0 );
+	} 
+    else if (WCE65 != NULL && IsWindow(WCE65) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt !");
+		exit( 0 );
+	} 
+    else if (WCE64 != NULL && IsWindow(WCE64) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt !");
+		exit( 0 );
+	} 
+    else if (WCE63 != NULL && IsWindow(WCE63) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt !");
+		exit( 0 );
+	} 
+    else if (WCE62 != NULL && IsWindow(WCE62) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt !");
+		exit( 0 );
+	} 
+	else if (WCE61 != NULL && IsWindow(WCE61) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt !");
+		exit( 0 );
+	} 
+	else if (WCE6 != NULL && IsWindow(WCE6) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt ! ");
+		exit( 0 );
+	}
+	else if (WCE561 != NULL && IsWindow(WCE561) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt ! ");
+		exit( 0 );
+	}
+	else if (WCE56 != NULL && IsWindow(WCE56) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt ! ");
+		exit( 0 );
+	}
+	else if (WCE55 != NULL && IsWindow(WCE55) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt ! ");
+		exit( 0 );
+	}
+	else if (WCE54 != NULL && IsWindow(WCE54) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt ! ");
+		exit( 0 );
+	}
+	else if (WCE53 != NULL && IsWindow(WCE53) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt ! ");
+		exit( 0 );
+	}
+	else if (WCE52 != NULL && IsWindow(WCE52) == TRUE)
+	{
+		Error(" Cheat Engine entdeckt ! ");
+		exit( 0 );
+	}
+	else if (WCE51 != NULL && IsWindow(WCE51) == TRUE)
+	{
+		Error("Hack entdeckt");
+		exit(0);
+	}
+	else if (WCE4 != NULL && IsWindow(WCE4) == TRUE)
+	{
+		Error("Hack entdeckt");
+		exit(0);
+	}
+	else if(WSpeedG != NULL && IsWindow(WSpeedG) == TRUE)
+	{
+		Error("Hack entdeckt");
+		AfxMessageBox("Hack entdeckt");
+		exit(0);
+	}
+	else if(WMSH != NULL && IsWindow(WMSH) == TRUE)
+	{
+		Error("Hack entdeckt");
+		AfxMessageBox("Hack entdeckt");
+		exit(0);
+	}
+	else if(WHACK != NULL && IsWindow(WHACK) == TRUE)
+	{
+		Error("Hack entdeckt");
+		AfxMessageBox("Hack entdeckt");
+		exit(0);
+	}
+	else if(WTSearch != NULL && IsWindow(WTSearch) == TRUE)
+	{
+		Error("Hack entdeckt");
+		AfxMessageBox("Hack entdeckt");
+		exit(0);
+	}
+}
+
+
+BOOL KillProcess(char *szProcessToKill)
+{
+	HANDLE hProcessSnap;
+	HANDLE hProcess;
+	PROCESSENTRY32 pe32;
+
+	hProcessSnap = CreateToolhelp32Snapshot( TH32CS_SNAPPROCESS, 0 );
+
+	if( hProcessSnap == INVALID_HANDLE_VALUE )
+	{
+		return( FALSE );
+	}
+
+	pe32.dwSize = sizeof( PROCESSENTRY32 );
+
+	if( !Process32First( hProcessSnap, &pe32 ) )
+	{
+		CloseHandle( hProcessSnap );
+		return( FALSE );
+	}
+
+	do{
+		if(!strcmp(pe32.szExeFile,szProcessToKill))
+		{
+			exit(0);
+			hProcess = OpenProcess(PROCESS_TERMINATE,0, pe32.th32ProcessID);
+			TerminateProcess(hProcess,0);
+			CloseHandle(hProcess);
+			Error(" Cheat Engine entdeckt ");
+		}
+	}		while( Process32Next(hProcessSnap,&pe32) );
+
+
+	CloseHandle( hProcessSnap );
+	return( TRUE );
+}
+#endif //__FIX_CHEAT
+
 #ifdef __VCINEMASCOPE
 int m_nCinemaScopeCnt = -100;
 #endif

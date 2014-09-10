@@ -12,7 +12,17 @@
 /**************************************************************************/
 
 #define __SECURITY_FIXES
+#define	__NO_SPEEDHACK
+#define	__DUPE_FIX
+#define	__RESTAT_BUG
+#define	__SAVE_AFTER_TRADE
+#define __CASTBREAKFIX
+#define	__SWITCH_FIX
+#define __HACK_FIXXES
 
+#define __FIX_CHEAT
+#define __IP_CRYPTION
+#define __AUTO_SKILL_MAX
 /**************************************************************************/
 ////////////////////////////////////////////////////////////////////////////
 /**************************************************************************/

@@ -403,9 +403,9 @@ BOOL InitApp()
 	}
 	#endif
 
-	g_Neuz.LoadOption();		// Neuz.ini를 로딩 	
-	if( lstrlen( g_Option.m_IPAddress ) > 2 )
-		lstrcpy( g_Neuz.m_lpCertifierAddr, g_Option.m_IPAddress );
+	g_Neuz.LoadOption(); // Neuz.ini를 로딩
+
+	lstrcpy( g_Neuz.m_lpCertifierAddr, "127.0.0.1" );
 
 	TestNetLib( g_Neuz.m_lpCertifierAddr, PN_CERTIFIER );
 

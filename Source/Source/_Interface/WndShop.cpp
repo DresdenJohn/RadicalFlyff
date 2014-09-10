@@ -433,7 +433,7 @@ void CWndConfirmBuy::OnDraw( C2DRender* p2DRender )
 	return;
 } 
 
-const int MAX_BUY_ITEMCOUNT = 99;
+const int MAX_BUY_ITEMCOUNT = 9999;
 
 BOOL CWndConfirmBuy::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult ) 
 { 
