@@ -155,7 +155,22 @@ void CResFile::AddResource( TCHAR* lpszResName )
 		memcpy( &nFileNameLength, &pHeader[ nHeaderPosition ], sizeof( short ) ); nHeaderPosition += sizeof( short );
 		memcpy( szFileName, &pHeader[ nHeaderPosition ], nFileNameLength ); nHeaderPosition += nFileNameLength;
 		memcpy( &nFileSize, &pHeader[ nHeaderPosition ], sizeof( int ) ); nHeaderPosition += sizeof( int );
+
+#ifdef __RES_ENCRYPT
+		if( strcmp( lpszResName, "data.res" ) == 0 ||
+			strcmp( lpszResName, "datasub1.res" ) == 0 ||
+			strcmp( lpszResName, "datasub2.res" ) == 0 )
+		{
+#endif // __RES_ENCRYPT
 		memcpy( &time_, &pHeader[ nHeaderPosition ], sizeof( time_t ) ); nHeaderPosition += sizeof( time_t );
+#ifdef __RES_ENCRYPT
+		}
+		else
+		{
+			memcpy( &time_, &pHeader[ nHeaderPosition ], sizeof( time_t ) ); nHeaderPosition += sizeof( time_t );
+		}
+#endif // __RES_ENCRYPT
+
 		memcpy( &nFilePosition, &pHeader[ nHeaderPosition ], sizeof( int ) ); nHeaderPosition += sizeof( int );
 		RESOURCE* lpRes = new RESOURCE;
 		ZeroMemory( lpRes, sizeof( RESOURCE ) );

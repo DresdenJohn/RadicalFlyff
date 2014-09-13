@@ -48,7 +48,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="d3dx9dt.lib d3d9.lib d3dxof.lib dxerr9.lib dsound.lib winmm.lib dxguid.lib imm32.lib ws2_32.lib VERSION.LIB"
-				OutputFile=".\..\..\Output/Neuz.exe"
+				OutputFile=".\..\..\Output\Neuz.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="..\__lib"
@@ -67,7 +67,8 @@
 				TypeLibraryName=".\..\..\Output\Neuz\Release/Neuz.tlb"
 				HeaderFileName=""/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCPostBuildEventTool"
+				CommandLine="copy .\..\..\Output\Neuz.exe .\..\..\..\RadicalFlyffClient\"/>
 			<Tool
 				Name="VCPreBuildEventTool"/>
 			<Tool

@@ -74,7 +74,8 @@
 				TypeLibraryName=".\..\..\Output\AccountServer\Release/AccountServer.tlb"
 				HeaderFileName=""/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCPostBuildEventTool"
+				CommandLine="copy .\..\..\Output\1.AccountServer.exe .\..\..\Program\"/>
 			<Tool
 				Name="VCPreBuildEventTool"/>
 			<Tool

@@ -47,7 +47,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="winmm.lib Dsetup.lib zlib.lib"
-				OutputFile=".\..\..\Output/Flyff.exe"
+				OutputFile=".\..\..\Output\Flyff.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories=".\zlib;..\__lib"
@@ -67,7 +67,8 @@
 				TypeLibraryName=".\Release/PatchClient.tlb"
 				HeaderFileName=""/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCPostBuildEventTool"
+				CommandLine="copy .\..\..\Output\Flyff.exe .\..\..\..\RadicalFlyffClient\"/>
 			<Tool
 				Name="VCPreBuildEventTool"/>
 			<Tool

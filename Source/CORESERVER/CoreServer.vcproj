@@ -44,7 +44,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="odbc32.lib odbccp32.lib ws2_32.lib winmm.lib pdh.lib VERSION.LIB"
-				OutputFile=".\..\..\Output/3.CoreServer.exe"
+				OutputFile=".\..\..\Output\3.CoreServer.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="..\_Network\Mcl\Lib\Release"
@@ -64,7 +64,8 @@
 				TypeLibraryName=".\..\..\Output\CoreServer\Release/CoreServer.tlb"
 				HeaderFileName=""/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCPostBuildEventTool"
+				CommandLine="copy .\..\..\Output\3.CoreServer.exe .\..\..\Program\"/>
 			<Tool
 				Name="VCPreBuildEventTool"/>
 			<Tool

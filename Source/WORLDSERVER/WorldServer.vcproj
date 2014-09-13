@@ -48,7 +48,7 @@
 				Name="VCLinkerTool"
 				AdditionalOptions="/IGNORE:4089"
 				AdditionalDependencies="d3dx9dt.lib d3d9.lib Dxerr9.lib winmm.lib odbc32.lib odbccp32.lib ws2_32.lib d3dxof.lib dxguid.lib imm32.lib Dsound.lib pdh.lib VERSION.LIB"
-				OutputFile=".\..\..\Output/7.WorldServer.exe"
+				OutputFile=".\..\..\Output\7.WorldServer.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="..\_Network\Mcl\Lib\Release;..\__lib"
@@ -69,7 +69,8 @@
 				TypeLibraryName=".\..\..\Output\WorldServer\Release/WorldServer.tlb"
 				HeaderFileName=""/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCPostBuildEventTool"
+				CommandLine="copy .\..\..\Output\7.WorldServer.exe .\..\..\Program\"/>
 			<Tool
 				Name="VCPreBuildEventTool"/>
 			<Tool

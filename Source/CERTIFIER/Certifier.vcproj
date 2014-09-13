@@ -46,7 +46,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="odbc32.lib odbccp32.lib ws2_32.lib d3dx9.lib winmm.lib"
-				OutputFile=".\..\..\Output/4.Certifier.exe"
+				OutputFile=".\..\..\Output\4.Certifier.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="..\__lib;..\_Network\Mcl\Lib\Release"
@@ -65,7 +65,8 @@
 				TypeLibraryName=".\..\..\Output\Certifier\Release/Certifier.tlb"
 				HeaderFileName=""/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCPostBuildEventTool"
+				CommandLine="copy .\..\..\Output\4.Certifier.exe .\..\..\Program\"/>
 			<Tool
 				Name="VCPreBuildEventTool"/>
 			<Tool
