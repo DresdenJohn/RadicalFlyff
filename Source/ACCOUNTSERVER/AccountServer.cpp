@@ -194,20 +194,22 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	g_MyTrace.Add( 0, FALSE, "%s", time.Format( "%Y/%m/%d %H:%M:%S" ) );
 	g_MyTrace.AddLine( '\0' );
 	
-	if( FALSE == g_dpSrvr.StartServer( PN_ACCOUNTSRVR_0 )
+if( FALSE == g_dpSrvr.StartServer( PN_ACCOUNTSRVR_0 ))
+	AfxMessageBox( "Unable to start PN_ACCOUNTSRVR_0" );
+if( FALSE == g_dpDbSrvr.StartServer( PN_ACCOUNTSRVR_1 ))
+	AfxMessageBox( "Unable to start PN_ACCOUNTSRVR_1" );
+if( FALSE == CDPAdbill::GetInstance()->StartServer( PN_ADBILL ))
+	AfxMessageBox( "Unable to start PN_ADBILL)
+
+/*	if( FALSE == g_dpSrvr.StartServer( PN_ACCOUNTSRVR_0 )
 		|| FALSE == g_dpDbSrvr.StartServer( PN_ACCOUNTSRVR_1 )
 		|| FALSE == CDPAdbill::GetInstance()->StartServer( PN_ADBILL )
-		/*
-#ifdef __GIFTBOX0213
-		|| FALSE == CDPWldSrvr::GetInstance()->StartServer( PN_ACCOUNTSRVR_2 )
-#endif	// __GIFTBOX0213
-		*/
 		 )
 	{
 		AfxMessageBox( "Unable to start server" );
 		return FALSE;
 	}
-
+*/
 #ifdef __BILLING0712
 	if( GetBillingMgr()->Init( hWnd ) == false )
 		return FALSE;
