@@ -68,7 +68,7 @@
 				HeaderFileName=""/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy .\..\..\Output\Neuz.exe .\..\..\..\RadicalFlyffClient\"/>
+				CommandLine="copy .\..\..\Output\Neuz.exe .\..\..\Client\"/>
 			<Tool
 				Name="VCPreBuildEventTool"/>
 			<Tool

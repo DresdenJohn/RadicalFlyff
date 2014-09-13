@@ -68,7 +68,7 @@
 				HeaderFileName=""/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy .\..\..\Output\Flyff.exe .\..\..\..\RadicalFlyffClient\"/>
+				CommandLine="copy .\..\..\Output\Flyff.exe .\..\..\Client\"/>
 			<Tool
 				Name="VCPreBuildEventTool"/>
 			<Tool
