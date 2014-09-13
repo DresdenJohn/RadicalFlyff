@@ -20,8 +20,8 @@
 *.lnd
 *.rgn
 
-Server/Resource/Model
-Server/Resource/World
+Resource/Model
+Resource/World
 Source/Output
 Client/
 Output/
