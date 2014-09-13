@@ -25,6 +25,7 @@ Resource/World
 Source/Output
 Client/
 Output/
+*.exe
 
 #################
 ## Eclipse
