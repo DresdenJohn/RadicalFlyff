@@ -1398,7 +1398,7 @@ void CMover::RenderName( LPDIRECT3DDEVICE9 pd3dDevice, CD3DFont* pFont, DWORD dw
 #ifdef __CLIENT
 	if( IsPlayer() )
 	{
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		if( dwColor == prj.m_PKSetting.dwGeneralColor )		// 핑크색이나 카오색이면 바뀌지 않게 하자
 #endif // __VER >= 8 // __S8_PK
 		if( g_Party.FindMember( m_idPlayer ) != -1 )		// 파티멤버면 색깔 다르게 표시.
@@ -1573,7 +1573,7 @@ void CMover::RenderName( LPDIRECT3DDEVICE9 pd3dDevice, CD3DFont* pFont, DWORD dw
 		point.y -= 32;
 		point.x -= 3;
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 		KarmaProp* pKarmaProp = prj.GetKarmaProp(m_nSlaughter);
 		if( pKarmaProp )
 			dwColor = pKarmaProp->dwColor;

@@ -161,13 +161,13 @@ int		CMover::GetQueueCastingTime()
 // sutType : 스킬사용시 단축키/스킬큐의 여부를 클라로부터 받아서 처리.  캐스팅타임 계산이 다르다.
 //
 #ifdef __CLIENT
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	BOOL	CMover::DoUseSkill( int nType, int nIdx, OBJID idFocusObj, SKILLUSETYPE sutType, BOOL bControl, const int nCastingTime, DWORD dwSkill, DWORD dwLevel )
 #else // __VER >= 8 // __S8_PK
 	BOOL	CMover::DoUseSkill( int nType, int nIdx, OBJID idFocusObj, SKILLUSETYPE sutType, const int nCastingTime, DWORD dwSkill, DWORD dwLevel )
 #endif // __VER >= 8 // __S8_PK
 #else // __CLIENT
-	#if __VER >= 8 // __S8_PK
+	#ifdef __NEWPKSYS // __S8_PK
 		BOOL	CMover::DoUseSkill( int nType, int nIdx, OBJID idFocusObj, SKILLUSETYPE sutType, BOOL bControl )
 	#else // __VER >= 8 // __S8_PK
 		BOOL	CMover::DoUseSkill( int nType, int nIdx, OBJID idFocusObj, SKILLUSETYPE sutType )
@@ -274,7 +274,7 @@ int		CMover::GetQueueCastingTime()
 	#endif
 	}
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	BOOL bSuccess = DoUseSkill( dwSkill, dwLevel, idFocusObj, sutType, bControl, nCastingTime );
 #else // __VER >= 8 // __S8_PK
 	BOOL bSuccess = DoUseSkill( dwSkill, dwLevel, idFocusObj, sutType, nCastingTime );
@@ -284,7 +284,7 @@ int		CMover::GetQueueCastingTime()
 
 // dwSkill,nLevel만 있으면 어디서든지 사용가능한 버전	
 // 몬스터까지 사용가능
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 BOOL CMover::DoUseSkill( DWORD dwSkill, int nLevel, OBJID idFocusObj, SKILLUSETYPE sutType, BOOL bControl, const int nCastingTime )
 #else // __VER >= 8 // __S8_PK
 BOOL CMover::DoUseSkill( DWORD dwSkill, int nLevel, OBJID idFocusObj, SKILLUSETYPE sutType, const int nCastingTime )
@@ -433,7 +433,7 @@ BOOL CMover::DoUseSkill( DWORD dwSkill, int nLevel, OBJID idFocusObj, SKILLUSETY
 			if( pSkillProp->nEvildoing > 0 )	// 좋은 마법을
 			{
 				HITTYPE hy;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 				if( (hy = GetHitType2( pTarget, TRUE, TRUE)) != HITTYPE_FAIL )  	// 적대적인 대상에게 쓰려할때
 #else // __VER >= 8 // __S8_PK
 				if( (hy = GetHitType2( pTarget, TRUE)) != HITTYPE_FAIL )  	// 적대적인 대상에게 쓰려할때
@@ -842,7 +842,7 @@ BOOL CMover::DoUseSkill( DWORD dwSkill, int nLevel, OBJID idFocusObj, SKILLUSETY
 		// 명령수행중 필요한 파라메터세팅.
 		SetActParam( OBJACT_USESKILL, dwSkill, idFocusObj );	
 		m_nAParam[3]	= nLevel;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		m_nAParam[4]	= bControl;
 #endif // __VER >= 8 // __S8_PK
 
@@ -1046,7 +1046,7 @@ BOOL CMover::DoUseSkill( DWORD dwSkill, int nLevel, OBJID idFocusObj, SKILLUSETY
 	}
 #endif	// __CLIENT
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 #ifdef __WORLDSERVER
 	if( g_eLocal.GetState( EVE_PK ) )
 	{
@@ -1810,7 +1810,7 @@ BOOL CMover::DoUseItemBlinkWing( ItemProp *pItemProp, CItemElem* pItemElem, BOOL
 
 		if( IsChaotic() )
 		{
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			if( pWorld->GetID() != pWorld->m_dwIdWorldRevival && pWorld->m_dwIdWorldRevival != 0 )
 				pRgnElem	= g_WorldMng.GetRevivalPosChao( pWorld->m_dwIdWorldRevival, pWorld->m_szKeyRevival );
 			if( NULL == pRgnElem )	// Find near revival pos
@@ -1852,7 +1852,7 @@ BOOL CMover::DoUseItemBlinkWing( ItemProp *pItemProp, CItemElem* pItemElem, BOOL
 			pItemElem->UseItem();
 			UpdateItem( (BYTE)( pItemElem->m_dwObjId ), UI_NUM, pItemElem->m_nItemNum );
 		}
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		if( IsChaotic() )
 		{
 			PRegionElem pRgnElem	= NULL;
@@ -2119,6 +2119,8 @@ int	CMover::DoUseItemSystem( ItemProp *pItemProp, CItemElem* pItemElem, int nPar
 		}
 		break;
 	case II_CHR_SYS_SCR_ACTIVITION:
+	case II_SYS_SYS_EVE_CHRISTMASTEA01:
+	case II_CHR_SYS_SCR_NEWACTIVITION:
 		{
 			if( !( IsSMMode( SM_ACTPOINT ) ) )
 				SetSMMode( SM_ACTPOINT, pItemProp->dwCircleTime );
@@ -2144,7 +2146,7 @@ int	CMover::DoUseItemSystem( ItemProp *pItemProp, CItemElem* pItemElem, int nPar
 				nResult = 2;
 		}
 		break;
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	case II_SYS_SYS_SCR_FORGIVE:
 		if( IsPlayer() )
 		{
@@ -2860,7 +2862,7 @@ BOOL CMover::IsDoUseBuff( ItemProp* pItemProp )
 		if( HasBuffByIk3( pItemProp->dwItemKind3 ) )
 			nResult = 1;
 
-#if __VER >= 8 //__CSC_VER8_5
+#if __NEWPKSYS //__CSC_VER8_5
 #ifdef __PKSERVER_USE_ANGEL
 		if( pItemProp->dwItemKind3 == IK3_ANGEL_BUFF )
 		{

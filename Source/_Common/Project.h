@@ -128,11 +128,11 @@ struct QuestProp
 	char	m_nBeginCondSex; 
 	int		m_nBeginCondSkillIdx;
 	char	m_nBeginCondSkillLvl;
-#if __VER >= 8 // __S8_PK
+#if ( defined(__NEWPKSYS) || defined(__OLDPKSYS) )// __S8_PK
 	QuestPropItem* m_paBeginCondNotItem; 
 	char	m_nBeginCondNotItemNum;
 	int		m_nBeginCondPKValue;
-#else // __VER >= 8 // __S8_PK
+//#else // __VER >= 8 // __S8_PK
 	char	m_nBeginCondKarmaComp;
 	int		m_nBeginCondKarmaPoint;
 	char	m_nBeginCondChaotic; 
@@ -175,7 +175,7 @@ struct QuestProp
 	CHAR*   m_lpszEndCondMultiCharacter; 
 	int		m_nEndCondSkillIdx;
 	char	m_nEndCondSkillLvl;
-#if __VER >= 8 // __S8_PK
+#if( defined(__NEWPKSYS) || defined(__OLDPKSYS) ) // __S8_PK
 	QuestPropItem* m_paEndCondOneItem;
 	char	m_nEndCondOneItemNum;
 	int		m_nEndCondGold;
@@ -185,7 +185,7 @@ struct QuestProp
 	int		m_nEndCondExpPercentMin;	
 	int		m_nEndCondExpPercentMax;
 	#endif	//__LEGEND	//	10차 전승시스템	Neuz, World, Trans
-#else // __VER >= 8 // __S8_PK
+//#else // __VER >= 8 // __S8_PK
 	char	m_nEndCondKarmaComp;
 	int		m_nEndCondKarmaPoint;
 	char	m_nEndCondChaotic; 
@@ -235,13 +235,13 @@ struct QuestProp
 	int		m_nEndRewardGoldMax;
 	int		m_nEndRewardExpMin;
 	int		m_nEndRewardExpMax;
-#if __VER >= 8 // __S8_PK
+//#ifdef __NEWPKSYS // __S8_PK
 	int		m_nEndRewardPKValueMin;
 	int		m_nEndRewardPKValueMax;
-#else // __VER >= 8 // __S8_PK
+//#else // __VER >= 8 // __S8_PK
 	int     m_nEndRewardKarmaPoint;
 	char	m_nEndRewardKarmaStyle; // 0은 적용 안함, 1은 세팅, 2는 추가 
-#endif // __VER >= 8 // __S8_PK
+//#endif // __VER >= 8 // __S8_PK
 #if __VER >= 9 // __S_9_ADD
 	int		m_nEndRewardTeleport;
 	D3DXVECTOR3		m_nEndRewardTeleportPos;
@@ -470,7 +470,7 @@ typedef struct _DIE_PENALTY
 } DIE_PENALTY, *PDIE_PENALTY;
 #endif //  __VER >= 8  
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 typedef struct _CHAO_PROPENSITY
 {
 	DWORD	dwPropensityMin;		/// 성향 수치 Min
@@ -577,7 +577,7 @@ inline void LOG_CALLSTACK()
 // KARMAPROP 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 const int MAX_KARMAPROP = 13;
 
 enum SLAUGHTER_GRADE
@@ -585,6 +585,7 @@ enum SLAUGHTER_GRADE
 	SLAUGHTER_NORMAL,			// 일반유저 
 	SLAUGHTER_SEMI_CHAOTIC,		// 준 카오 
 	SLAUGHTER_CHAOTIC,			// 카오 
+	SLAUGHTER_POS,
 };
 
 // 카르마별 프로퍼티 
@@ -973,7 +974,7 @@ public:
 	vector< DIE_PENALTY >		m_vecDecExpPenalty;
 	vector< DIE_PENALTY >		m_vecLevelDownPenalty;
 #endif //  __VER >= 8  
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	PK_SETTING					m_PKSetting;
 #else // __VER >= 8 // __S8_PK
 	KarmaProp					m_aKarmaProp[ MAX_KARMAPROP ];
@@ -1225,7 +1226,7 @@ public:
 #endif // __IMPROVE_MAP_SYSTEM
 };
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 inline DWORD CProject::GetLevelExp( int nLevel )
 {
 	map<int, DWORD>::iterator it = m_PKSetting.mapLevelExp.find( nLevel );
@@ -1250,7 +1251,7 @@ inline CHAO_PROPENSITY CProject::GetPropensityPenalty( DWORD dwPropensity )
 	CHAO_PROPENSITY Propensity;
 	return Propensity;
 }
-#else // __VER >= 8 // __S8_PK
+#else if defined(__OLDPKSYS)  // __VER >= 8 // __S8_PK
 inline SLAUGHTER_GRADE CProject::GetSlaughterGrade( int nSlaughter )
 {
 	KarmaProp* pProp = GetKarmaProp( nSlaughter );
@@ -1260,6 +1261,7 @@ inline SLAUGHTER_GRADE CProject::GetSlaughterGrade( int nSlaughter )
 	case 0: return SLAUGHTER_NORMAL;
 	case 1: return SLAUGHTER_SEMI_CHAOTIC;
 	case 2: return SLAUGHTER_CHAOTIC;
+	case 3: return SLAUGHTER_POS;
 	default:	ASSERT( FALSE ); break;
 	}
 	return SLAUGHTER_NORMAL;

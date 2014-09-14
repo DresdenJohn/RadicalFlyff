@@ -34,6 +34,11 @@ enum
 #ifdef __JEFF_11_4
 	EVE_ARENA, 
 #endif // __JEFF_11_4
+
+#ifdef __OLDPKSYS
+	EVE_BOUNTY,
+#endif // __OLDPKSYS
+
 	EVE_SECRETROOM,	// 12차 비밀의 방
 	EVE_RAINBOWRACE,
 };

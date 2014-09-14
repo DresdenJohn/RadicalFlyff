@@ -1548,7 +1548,7 @@ BOOL CMover::IsEquipAble( ItemProp *pItemProp, OBJID dwObjid ,BOOL bIgnoreLevel 
 		#endif 
 		}
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 #ifdef __WORLDSERVER
 		if( IsChaotic() )
 		{
@@ -1679,7 +1679,7 @@ BOOL CMover::IsEquipAble( ItemProp *pItemProp, OBJID dwObjid ,BOOL bIgnoreLevel 
 		}
 
 	}
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	//카오용 아이템을 선한자가 장착할 수 없다.
 	if( (pItemProp->nEvildoing < 0) && IsChaotic() == FALSE )
 	{
@@ -2109,14 +2109,14 @@ int	CMover::InvalidEquipOff( BOOL bFakeParts )
 		if( pItemProp == NULL )	
 			continue;	// 프로퍼티 없으면 실패.
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 #if __VER >= 11 // __SYS_IDENTIFY
 		if( IsEquipAble( pItemElem,TRUE ) == FALSE )	// 장착할 수 없는 아이템이다.
 #else	// __SYS_IDENTIFY
 		if( IsEquipAble( pItemProp, pItemElem->m_dwObjId, TRUE ) == FALSE )	// 장착할 수 없는 아이템이다.
 #endif	// __SYS_IDENTIFY
 #else	// __S8_PK
-		if( IsEquipAble( pItemProp, pItemElem->m_dwObjId) == FALSE )	// 장착할 수 없는 아이템이다.
+		if( IsEquipAble( pItemElem /*prop*/, TRUE/*pItemElem->m_dwObjId*/) == FALSE )	// 장착할 수 없는 아이템이다.
 #endif	// __S8_PK
 		{
 			if( pItemElem )
@@ -2126,7 +2126,7 @@ int	CMover::InvalidEquipOff( BOOL bFakeParts )
 				#ifdef __WORLDSERVER
 					// 벗기는데 실패함. 인벤이 꽉찼다거나 기타등등 이유
 					#ifndef _DEBUG
-						Error( "아템 벗기는데 실패:%s", GetName() );
+						Error( "Invalid Equipment Removed : %s", GetName() );
 					#endif
 				#endif
 				}

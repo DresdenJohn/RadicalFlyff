@@ -1144,6 +1144,13 @@ BOOL CWorld::IsUsableDYO( CObj* pObj )
  			}
 #endif // __JEFF_11_4
 
+#ifdef __OLDPKSYS
+			if( stricmp( pCharacter->m_szKey, "Npc_Reward" ) == 0 )
+ 			{
+ 				if( g_eLocal.GetState( EVE_BOUNTY ) == FALSE )
+ 					return FALSE;
+ 			}
+#endif // __OLDPKSYS
 			if( stricmp( pCharacter->m_szKey, "MaFl_SecretRoom_EAST" ) == 0
 				|| stricmp( pCharacter->m_szKey, "MaDa_SecretRoom_WEST" ) == 0 )
 			{

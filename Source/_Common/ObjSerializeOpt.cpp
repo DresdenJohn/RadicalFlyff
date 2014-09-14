@@ -162,7 +162,7 @@ void CMover::Serialize( CAr & ar )
  #else // __WORLDSERVER
 			ar << m_dwUseItemId;
  #endif // __WORLDSERVER
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			if( m_dwPKTime > 0 )
 	#ifdef __WORLDSERVER
 				ar << ( m_dwPKTime - GetTickCount() );
@@ -415,7 +415,7 @@ void CMover::Serialize( CAr & ar )
 			m_nInt	=
 			m_nLevel	=
 			m_dwAuthorization	=
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 			m_nNumKill	=
 #endif // __VER < 8 // __S8_PK
 									0;
@@ -466,7 +466,7 @@ void CMover::Serialize( CAr & ar )
 #else // __WORLDSERVER
 			ar >> m_dwUseItemId;
 #endif // __WORLDSERVER
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			ar >> m_dwPKTime;
 	#ifdef __WORLDSERVER
 			if( m_dwPKTime > 0 )

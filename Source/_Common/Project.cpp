@@ -484,7 +484,7 @@ BOOL CProject::OpenProject( LPCTSTR lpszFileName )
 			scanner.GetToken();	
 			LoadMotionProp( scanner.token );
 		}
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 		else if( scanner.Token == "propKarma" )
 		{
 			scanner.GetToken();
@@ -581,7 +581,7 @@ BOOL CProject::OpenProject( LPCTSTR lpszFileName )
 		LoadScriptDiePenalty( "DiePenalty.inc" );
 	#endif //  __VER >= 8  
 #endif // __WORLDSERVER
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	LoadScriptPK( "PKSetting.inc" );
 #endif // __VER >= 8 // __S8_PK
 
@@ -1395,7 +1395,7 @@ BOOL CProject::LoadPropQuest( LPCTSTR lpszFileName, BOOL bOptimize )
 		int nBeginCondItemNum = 0;
 		ZeroMemory( aBeginCondItem, sizeof( aBeginCondItem ) );
 
-#if __VER >= 8 // __S8_PK
+//#ifdef __NEWPKSYS // __S8_PK
 		QuestPropItem aBeginCondNotItem[ MAX_QUESTCONDITEM ]; 
 		int nBeginCondNotItemNum = 0;
 		ZeroMemory( aBeginCondNotItem, sizeof( aBeginCondNotItem ) );		
@@ -1403,7 +1403,7 @@ BOOL CProject::LoadPropQuest( LPCTSTR lpszFileName, BOOL bOptimize )
 		QuestPropItem aEndCondOneItem[ MAX_QUESTCONDITEM ]; 
 		int nEndCondOneItemNum = 0;
 		ZeroMemory( aEndCondOneItem, sizeof( aEndCondOneItem ) );				
-#endif // __VER >= 8 // __S8_PK
+//#endif // __VER >= 8 // __S8_PK
 
 		QuestPropItem aEndCondItem[ MAX_QUESTCONDITEM ]; 
 		int nEndCondItemNum = 0;
@@ -1533,7 +1533,7 @@ BOOL CProject::LoadPropQuest( LPCTSTR lpszFileName, BOOL bOptimize )
 				script.GetToken(); // ,
 				propQuest.m_nBeginCondSkillLvl = script.GetNumber();
 			}
-#if __VER >= 8 // __S8_PK
+//#ifdef __NEWPKSYS // __S8_PK
 			else
 			if( script.Token == "SetBeginCondPKValue" )
 			{
@@ -1563,7 +1563,7 @@ BOOL CProject::LoadPropQuest( LPCTSTR lpszFileName, BOOL bOptimize )
 				aBeginCondNotItem[ nBeginCondNotItemNum ].m_nItemNum = script.GetNumber();
 				nBeginCondNotItemNum++;
 			}
-#else // __VER >= 8 // __S8_PK
+//#else // __VER >= 8 // __S8_PK
 			else 
 			if( script.Token == "SetBeginCondKarmaPoint" )
 			{
@@ -1578,7 +1578,7 @@ BOOL CProject::LoadPropQuest( LPCTSTR lpszFileName, BOOL bOptimize )
 				script.GetToken(); // (
 				propQuest.m_nBeginCondChaotic = script.GetNumber();
 			}
-#endif // __VER >= 8 // __S8_PK
+//#endif // __VER >= 8 // __S8_PK
 			else
 			if( script.Token == "SetBeginCondLevel" )
 			{
@@ -1782,7 +1782,7 @@ BOOL CProject::LoadPropQuest( LPCTSTR lpszFileName, BOOL bOptimize )
 				script.GetToken(); // ,
 				propQuest.m_nEndCondSkillLvl = script.GetNumber();
 			}
-#if __VER >= 8 // __S8_PK
+//#ifdef __NEWPKSYS // __S8_PK
 			else
 			if( script.Token == "SetEndCondLevel" )
 			{
@@ -1831,7 +1831,7 @@ BOOL CProject::LoadPropQuest( LPCTSTR lpszFileName, BOOL bOptimize )
 				aEndCondOneItem[ nEndCondOneItemNum ].m_nItemNum = script.GetNumber();
 				nEndCondOneItemNum++;
 			}
-#else // __VER >= 8 // __S8_PK
+//#else // __VER >= 8 // __S8_PK
 			else 
 			if( script.Token == "SetEndCondKarmaPoint" )
 			{
@@ -1846,7 +1846,7 @@ BOOL CProject::LoadPropQuest( LPCTSTR lpszFileName, BOOL bOptimize )
 				script.GetToken(); // (
 				propQuest.m_nEndCondChaotic = script.GetNumber();
 			}
-#endif // __VER >= 8 // __S8_PK
+//#endif // __VER >= 8 // __S8_PK
 			else
 			if( script.Token == "SetEndCondLimitTime" )
 			{
@@ -2182,7 +2182,7 @@ BOOL CProject::LoadPropQuest( LPCTSTR lpszFileName, BOOL bOptimize )
 				script.GetToken(); // (
 				propQuest.m_nEndRewardSkillPoint = script.GetNumber();
 			}
-#if __VER >= 8 // __S8_PK
+//#ifdef __NEWPKSYS // __S8_PK
 			else
 			if( script.Token == "SetEndRewardPKValue" )
 			{
@@ -2191,7 +2191,7 @@ BOOL CProject::LoadPropQuest( LPCTSTR lpszFileName, BOOL bOptimize )
 				script.GetToken(); // ,
 				propQuest.m_nEndRewardPKValueMax = script.GetNumber();
 			}
-#else // __VER >= 8 // __S8_PK
+//#else // __VER >= 8 // __S8_PK
 			else
 			if( script.Token == "SetEndRewardKarmaPoint" )
 			{
@@ -2200,7 +2200,7 @@ BOOL CProject::LoadPropQuest( LPCTSTR lpszFileName, BOOL bOptimize )
 				script.GetToken(); // ,
 				propQuest.m_nEndRewardKarmaPoint = script.GetNumber();
 			}
-#endif // __VER >= 8 // __S8_PK
+//#endif // __VER >= 8 // __S8_PK
 #if __VER >= 9 // __S_9_ADD
 			else
 			if( script.Token == "SetEndRewardTeleport" )
@@ -2473,7 +2473,7 @@ BOOL CProject::LoadPropQuest( LPCTSTR lpszFileName, BOOL bOptimize )
 			memcpy( propQuest.m_paBeginCondItem, aBeginCondItem, sizeof( QuestPropItem ) * nBeginCondItemNum );
 			propQuest.m_nBeginCondItemNum = nBeginCondItemNum;
 		}
-#if __VER >= 8 // __S8_PK
+//#ifdef __NEWPKSYS // __S8_PK
 		if( nBeginCondNotItemNum )
 		{
 			propQuest.m_paBeginCondNotItem = new QuestPropItem[ nBeginCondNotItemNum ];
@@ -2487,7 +2487,7 @@ BOOL CProject::LoadPropQuest( LPCTSTR lpszFileName, BOOL bOptimize )
 			memcpy( propQuest.m_paEndCondOneItem, aEndCondOneItem, sizeof( QuestPropItem ) * nEndCondOneItemNum );
 			propQuest.m_nEndCondOneItemNum = nEndCondOneItemNum;
 		}		
-#endif // __VER >= 8 // __S8_PK
+//#endif // __VER >= 8 // __S8_PK
 		if( nEndCondItemNum )
 		{
 			propQuest.m_paEndCondItem = new QuestPropItem[ nEndCondItemNum ];
@@ -4960,7 +4960,7 @@ BOOL CProject::LoadScriptDiePenalty( LPCTSTR lpszFileName )
 }
 #endif //  __VER >= 8  
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 BOOL CProject::LoadScriptPK( LPCTSTR lpszFileName )
 {
 	CScript scanner;

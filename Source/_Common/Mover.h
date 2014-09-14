@@ -151,19 +151,26 @@ enum PVP_MODE
 	PVP_MODE_DUEL				/// 듀얼 
 };
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 /// PK 타입 
 enum PK_TYPE
 {
 	NORMAL_AND_NORMAL,			/// 일반 유저 와 일반 유저 
 	NORMAL_AND_SEMI,
 	NORMAL_AND_CHAO,
+	NORMAL_AND_POS,
 	SEMI_AND_NORMAL,			/// 준카오와 일반 유저 
 	SEMI_AND_SEMI,
 	SEMI_AND_CHAO,
+	SEMI_AND_POS,
 	CHAO_AND_NORMAL,			/// 카오와 일반 유저 
 	CHAO_AND_SEMI,
-	CHAO_AND_CHAO
+	CHAO_AND_CHAO,
+	CHAO_AND_POS,
+	POS_AND_NORMAL,
+	POS_AND_SEMI,
+	POS_AND_CHAO,
+	POS_AND_POS
 };
 
 /// 카르마 변경원인 
@@ -394,7 +401,7 @@ struct SFXHIT_INFO
 	float	fDmgAngle;
 	float	fDmgPower;
 	DWORD	dwAtkFlags;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	BOOL	bControl;
 #endif // __VER >= 8 // __S8_PK
 	DWORD	dwTickCount;
@@ -639,7 +646,7 @@ public:
 	
 	int				m_nFame;					/// 명성치 
 	u_long			m_idMurderer;				/// 날 마지막으로 죽였던넘 플레이어 아이디
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	DWORD			m_dwPKTime;					/// 핑크 상태 시간
 	int				m_nPKValue;					/// PK 수치
 	DWORD			m_dwPKPropensity;			/// PK 성향
@@ -772,9 +779,9 @@ public:
 private:
 	void	DoUseEatPet( CItemElem* PitemElem );
 	void	DoUseSystemPet( CItemElem* pItemElem );
-public:
 	void	ActivateEatPet( CItemElem* pItemElem );
 	void	ActivateSystemPet( CItemElem* pItemElem );
+public:
 	void	InactivateEatPet( void );
 	void	InactivateSystemPet( CItemElem* pItemElem );
 
@@ -885,7 +892,7 @@ private:
 	OBJACT			m_oaCmd;					/// 오브젝트 명령  
 	int				m_nCParam[3];				/// 범용 명령 파라메터
 	OBJACT			m_oaAct;					/// 오브젝트 행동상태
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	int				m_nAParam[5];				/// 범용 행동 파라메터
 #else // __VER >= 8 // __S8_PK
 	int				m_nAParam[4];				/// 범용 행동 파라메터
@@ -1122,7 +1129,7 @@ public:
 	BOOL			DecExperiencePercent( float fPercent, BOOL bExp2Clear, BOOL bLvDown  );	// 경험치를 퍼센트로 깎는다.
 	BOOL			AddFxp( int nFxp );
 	BOOL			SetFxp( int nFxp, int nFlightLv );
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	int				GetKarma() { return m_nSlaughter; }
 #endif // __VER < 8 // __S8_PK
 	BOOL			IsPVPTarget( CMover* pMover );
@@ -1132,7 +1139,7 @@ public:
 #ifdef __JEFF_11_4
 	BOOL	IsArenaTarget( CMover* pMover );
 #endif	// __JEFF_11_4
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	HITTYPE			GetHitType2( CMover* pMover, BOOL bTarget, BOOL bGood );
 #else // __VER >= 8 // __S8_PK
 	HITTYPE			GetHitType2( CMover* pMover, BOOL bTarget );
@@ -1221,11 +1228,11 @@ public:
 	BOOL			IsDie() { return m_pActMover->IsDie() || m_nHitPoint == 0; }
 	BOOL			IsLive() { return m_pActMover->IsDie() == FALSE || m_nHitPoint > 0; }		// && 를  ||로 바꿨음.  !=를 >로 바꿈
 	int				GetCount() { return m_nCount; }
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	void			SetPKPink( DWORD dwTime ) { if( dwTime == 0 || m_dwPKTime < dwTime ) m_dwPKTime = dwTime; }
 	DWORD			GetPKPink( void ) { return m_dwPKTime; }
 	BOOL			IsPKPink( void )	{ return m_dwPKTime > 0; }			/// PK 핑크 모드인지
-	BOOL			IsChaotic( void ) { return m_dwPKPropensity > 0; }	/// 카오인지
+	BOOL			IsChaotic() { return GetSlaughterGrade() == SLAUGHTER_CHAOTIC; }	/// 카오인지
 	void			SetPKValue( int nValue );
 	int				GetPKValue( void ) { return m_nPKValue; }
 	void			SetPKPropensity( DWORD dwValue );
@@ -1299,7 +1306,7 @@ public:
 	void			RemoveItemBankId( int nSlot, DWORD dwId );
 	void			GenerateVendorItem( ItemProp** apItemProp, int* pcbSize, int nMax, LPVENDOR_ITEM pVendor );
 	BOOL			DropItemByDied( CMover* pAttacker );		// 죽어서 떨어트리는 드랍.
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	BOOL			DoUseSkill( DWORD dwSkill, int nLevel, OBJID idFocusObj, SKILLUSETYPE sutType = SUT_NORMAL, BOOL bControl = FALSE, const int nCastingTime = 0 );		// dwSkill/nLevel만 가지고도 사용할 수 있는 버전.
 #else // __VER >= 8 // __S8_PK
 	BOOL			DoUseSkill( DWORD dwSkill, int nLevel, OBJID idFocusObj, SKILLUSETYPE sutType = SUT_NORMAL, const int nCastingTime = 0 );		// dwSkill/nLevel만 가지고도 사용할 수 있는 버전.
@@ -1468,7 +1475,7 @@ public:
 	void			BalloonMoveProcess();
 #endif //__EVE_BALLOON
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	void			OnAttackSFX( OBJID	idTarget, int nMagicPower, DWORD dwSkill, int nDmgCnt, float	fDmgAngle, float fDmgPower,  DWORD dwAtkFlags, BOOL bControl );
 #else // __VER >= 8 // __S8_PK
 	void			OnAttackSFX( OBJID	idTarget, int nMagicPower, DWORD dwSkill, int nDmgCnt, float	fDmgAngle, float fDmgPower,  DWORD dwAtkFlags );
@@ -1490,7 +1497,7 @@ public:
 #endif
 
 #if defined(__WORLDSERVER)
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	void			UpgradeKarma();
 #endif // __VER < 8 // __S8_PK
 	BOOL			IsPVPInspection( CMover* pMover, int nFlag = 0 );
@@ -1504,7 +1511,7 @@ public:
 //	BOOL			IsResourceMonster() { return m_nResource != -1; }		// 자원몬스터냐? -1이면 자원몬스터가 아니다. 0 ~ 자원몬스터라는 뜻.
 	void			ArrowDown( int nCount );
 	int				GetQueueCastingTime();
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	BOOL			DoUseSkill( int nType, int nIdx, OBJID idFocusObj, SKILLUSETYPE sutType, BOOL bControl );
 	float			SubDieDecExp( BOOL bTransfer = TRUE, DWORD dwDestParam = 0, BOOL bResurrection = FALSE  );	// 죽었을때 겸치 깎는 부분.
 #else // __VER >= 8 // __S8_PK
@@ -1515,7 +1522,7 @@ public:
 	void			SubAroundExp( CMover *pAttacker, float fRange );		// this를 중심으로 fRange범위안에 있는 유저에게 경험치를 배분한다.
 	void			AddPartyMemberExperience( CUser * pUser, EXPINTEGER nExp, int nFxp );
 	void			GetDieDecExp( int nLevel, FLOAT& fRate, FLOAT& fDecExp, BOOL& bPxpClear, BOOL& bLvDown );
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	void			GetDieDecExpRate( FLOAT& fDecExp, DWORD dwDestParam, BOOL bResurrection );
 #else // __VER >= 8 // __S8_PK
 	void			GetDieDecExpRate( FLOAT& fDecExp, DWORD dwDestParam, int nSlaughter );
@@ -1532,7 +1539,7 @@ public:
 #else	// __LAYER_1015
 	BOOL			Replace( u_long uIdofMulti, DWORD dwWorldID, D3DXVECTOR3 & vPos, REPLACE_TYPE type );
 #endif	// __LAYER_1015
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	int				ChangeSlaughter( CHANGE_SLAUGHTER_TYPE type, CMover* pDefender, int nSetCarmaPoint = 0 );
 	int				IncSlaughterPoint2( CMover *pDead );
 	int				IncSlaughterPoint( CMover *pDead );
@@ -1579,7 +1586,7 @@ public:
 	void			PlayCombatMusic();
 	BOOL			IsLoot( CItem *pItem ) { return TRUE; }
 	LPCTSTR			GetFameName();						// 명성 이름 얻기
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	LPCTSTR			GetSlaughterName();					// 슬러터이름 얻기
 #endif // __VER < 8 // __S8_PK
 	LPCTSTR			GetJobString();						// 직업 이름 얻기 
@@ -1604,7 +1611,7 @@ public:
 	void			RenderPVPCount( LPDIRECT3DDEVICE9 pd3dDevice );
 	void			RenderQuestEmoticon( LPDIRECT3DDEVICE9 pd3dDevice );
 	void			RenderGuildNameLogo( LPDIRECT3DDEVICE9 pd3dDevice, CD3DFont* pFont, DWORD dwColor );
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	BOOL			DoUseSkill( int nType, int nIdx, OBJID idFocusObj, SKILLUSETYPE sutType, BOOL bControl, const int nCastingTime, DWORD dwSkill = 0, DWORD dwLevel = 0 );
 #else // __VER >= 8 // __S8_PK
 	BOOL			DoUseSkill( int nType, int nIdx, OBJID idFocusObj, SKILLUSETYPE sutType, const int nCastingTime, DWORD dwSkill = 0, DWORD dwLevel = 0 );

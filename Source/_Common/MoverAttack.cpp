@@ -1694,7 +1694,7 @@ void CMover::OnAttacked( CMover* pAttacker, int nDamage, BOOL bTarget, int nRefl
 	{
 	case HITTYPE_PK:
 		{
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			if( nReflect )
 				break;
 			
@@ -1749,7 +1749,7 @@ void CMover::OnAttacked( CMover* pAttacker, int nDamage, BOOL bTarget, int nRefl
 
 // 좋은 버프일때만 여기 들어옴
 // return HITTYPE_GENERIC이면 안드러감
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 HITTYPE	CMover::GetHitType2( CMover* pMover, BOOL bTarget, BOOL bGood )
 #else // __VER >= 8 // __S8_PK
 HITTYPE	CMover::GetHitType2( CMover* pMover, BOOL bTarget )
@@ -1786,7 +1786,7 @@ HITTYPE	CMover::GetHitType2( CMover* pMover, BOOL bTarget )
 
 		if( g_eLocal.GetState( EVE_PK ) )
 		{
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			if( bGood )		// 선한 마법이면 모두 들어가게 하자
 				return HITTYPE_FAIL;
 			else if( GetLevel() <= prj.m_PKSetting.nLimitLevel || pMover->GetLevel() <= prj.m_PKSetting.nLimitLevel )
@@ -1856,7 +1856,7 @@ HITTYPE	CMover::GetHitType( CMover* pMover, BOOL bTarget, int nReflect )
 		DWORD dwAttr	= GetPKPVPRegionAttr();		
 		if( dwAttr == RA_SAFETY || dwAttr != pMover->GetPKPVPRegionAttr() )
 			return HITTYPE_FAIL;
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 		if( m_idparty > 0 && m_idparty == pMover->m_idparty )	
 			return HITTYPE_FAIL;
 		if( m_idGuild > 0 && m_idGuild == pMover->m_idGuild )
@@ -1874,7 +1874,7 @@ HITTYPE	CMover::GetHitType( CMover* pMover, BOOL bTarget, int nReflect )
 		
 		if( g_eLocal.GetState( EVE_PK ) )
 		{
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			if( GetLevel() <= prj.m_PKSetting.nLimitLevel || pMover->GetLevel() <= prj.m_PKSetting.nLimitLevel )
 				return HITTYPE_FAIL;
 #else // __VER >= 8 // __S8_PK
@@ -2058,7 +2058,7 @@ void CMover::SetDamagedMotion( CMover* pAttacker, DWORD dwAtkFlags )
 // 아이템의 효능 곱하기 팩터를 구한다.
 float CMover::GetItemMultiplier( CItemElem* pItemElem )
 {
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	if( IsChaotic() == FALSE && (pItemElem->GetProp()->nEvildoing < 0) )
 		return 0.0f;	// 선한자가 카오 아이템을 사용하면 효능이 없다.
 #endif // __VER < 8 // __S8_PK
@@ -2168,7 +2168,7 @@ void CMover::OnAttackSFX( OBJID	idTarget, int nMagicPower, DWORD dwSkill, int nD
 //	if( dwSkill == SI_MAG_FIRE_HOTAIR )		// 康	// 06-10-23
 //		return;
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	SFXHIT_INFO si	= 
 		{ idTarget, nMagicPower, dwSkill, nDmgCnt, fDmgAngle, fDmgPower, dwAtkFlags, bControl };
 #else // __VER >= 8 // __S8_PK
@@ -2277,7 +2277,7 @@ BOOL AttackBySFX( CMover* pAttacker, SFXHIT_INFO & info )
 			BOOL bSuccess	= pAttacker->GetSkillProp( &pSkillProp, &pAddSkillProp, info.dwSkill, pSkill->dwLevel, "OnSfxHit" );
 		#endif	// __SKILL0517
 			if( bSuccess )
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 				pAttacker->DoApplySkill( pTarget, pSkillProp, pAddSkillProp, false, nParam, FALSE, info.bControl );
 #else // __VER >= 8 // __S8_PK
 				pAttacker->DoApplySkill( pTarget, pSkillProp, pAddSkillProp, false, nParam );

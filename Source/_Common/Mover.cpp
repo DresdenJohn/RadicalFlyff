@@ -342,7 +342,7 @@ void CMover::Init()
 	m_idMurderer		= NULL_ID;
 	m_tmActionPoint		= timeGetTime();
 	m_nDead				= 0;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	m_dwPKTime			= 0;
 	m_nPKValue			= 0;
 	m_dwPKPropensity	= 0;
@@ -2454,7 +2454,7 @@ int	CMover::DoDropItemRandom( BOOL bExcludeEquip, CMover* pAttacker, BOOL bOnlyE
 		if( pItemElem->IsCharged() )	// 유료 상품아이템 제외
 			continue;
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		if( pItemElem->IsEatPet()
 #if __VER >= 9	// __PET_0410
 			|| IsUsing( pItemElem )
@@ -2489,7 +2489,7 @@ int	CMover::DoDropItemRandom( BOOL bExcludeEquip, CMover* pAttacker, BOOL bOnlyE
 		pItemElem = pElemBuff[ nIdx ];		// 아이템 리스트에서 랜덤으로 하나를 뽑아옴
 
 		int nPartBuf = -1;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		CItemElem* pItemElemLWepon = m_Inventory.GetEquip( PARTS_LWEAPON );
 		CItemElem* pItemElemRWepon = m_Inventory.GetEquip( PARTS_RWEAPON );
 		if( pItemElem == pItemElemLWepon )
@@ -5073,7 +5073,7 @@ void CMover::RemoveEnemy( OBJID objid )
 		}
 
 	#ifdef __WORLDSERVER
-		#if __VER < 8 // __S8_PK
+		#ifdef __OLDPKSYS // __S8_PK
 			// PK세션을 종료시키기 위해서 플레이어간의 적대관계 종료를 보낸다.
 			if( IsPlayer() )	
 			{
@@ -5495,7 +5495,7 @@ void	CMover::DoPVPEnd( CCtrl *pAttackCtrl, bool bWinner , DWORD dwMsg )
 
 #ifdef __WORLDSERVER
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 int CMover::ChangeSlaughter( CHANGE_SLAUGHTER_TYPE type, CMover* pDefender, int nSetCarmaPoint )
 {
 	int nVal = 0;
@@ -5557,7 +5557,7 @@ int	CMover::SubPK( CMover *pAttacker, int nReflect )
 		)
 		return 1;
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	if( GetWorld()->GetID() == WI_WORLD_GUILDWAR && g_GuildCombatMng.m_nState != CGuildCombat::CLOSE_STATE )
 		return 1;
 
@@ -5810,7 +5810,7 @@ void CMover::SubPVP( CMover *pAttacker, int nReflect )
 	case PVP_MODE_GUILDWAR:
 		SubWar( pAttacker );
 		break;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	case PVP_MODE_NONE:
 #endif // __VER >= 8 // __S8_PK
 	case PVP_MODE_PK:
@@ -6645,7 +6645,7 @@ BOOL CMover::IsPKAttackAble( CMover* pMover )
 
 BOOL CMover::IsPKInspection( CMover* pOther )
 {
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	if( g_Party.IsMember( pOther->m_idPlayer ) )
 		return FALSE;
 
@@ -6663,7 +6663,7 @@ BOOL CMover::IsPKInspection( CMover* pOther )
 	if( nDefenderPK = pOther->IsPKPVPInspectionBase( dwRegionAttr, FALSE ) )
 		bAble	= FALSE;
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	if( bAble == FALSE && ( pOther->IsChaotic() || (GetAsyncKeyState(VK_CONTROL) & 0x8000)) )
 	{
 		if(GetWorld() && GetWorld()->GetID() == WI_WORLD_GUILDWAR && IsGuildCombatTarget( pOther ) )	// 길드대전 중인 유저에게는 메세지가 안나오게 하자
@@ -6706,7 +6706,7 @@ BOOL CMover::IsPKInspection( CMover* pOther )
 				{
 					;
 				}
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 				else if( !pOther->IsChaotic() )
 				{
 					bAble	= FALSE;
@@ -6875,7 +6875,7 @@ int CMover::IsPKPVPInspectionBase( DWORD dwRegionAttr, BOOL bPVP )
 			return 3;
 	}
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	if( !bPVP && GetLevel() <= prj.m_PKSetting.nLimitLevel )	// PK
 		return 5;
 #endif // __VER >= 8 // __S8_PK
@@ -7025,7 +7025,7 @@ int CMover::IsSteal( CMover *pTarget )
 		return 0;		// 얘들은 이벤트몹이므로 아무나 스틸 가능
 		
 	// 플레이어만 여기로 들어온다.
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	if( pTarget->IsNPC() )	// 공격자:플레이어, 맞는자:NPC 
 #else // __VER >= 8 // __S8_PK
 	if( pTarget->IsNPC() || (pTarget->IsPlayer() && pTarget->IsChaotic() == FALSE) )	// 공격자:플레이어, 맞는자:NPC 혹은 착한사람. (슬로터는 다구리당해도 된다).
@@ -7123,7 +7123,7 @@ void  CMover::GetDieDecExp( int nLevel, FLOAT& fRate, FLOAT& fDecExp, BOOL& bPxp
 	else					{ fRate	= 0.3f; fDecExp = 0.03f; bPxpClear = TRUE ; bLvDown = TRUE;  }	
 #endif //  __VER >= 8  
 }
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 void CMover::GetDieDecExpRate( FLOAT& fDecExp, DWORD dwDestParam, BOOL bResurrection )
 {
 	// 로드스타/라이트로 부활한것은 경험치 하락.
@@ -7159,7 +7159,7 @@ void CMover::GetDieDecExpRate( FLOAT& fDecExp, DWORD dwDestParam, int nSlaughter
 }
 #endif // __VER >= 8 // __S8_PK
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 float CMover::SubDieDecExp( BOOL bTransfer, DWORD dwDestParam, BOOL bResurrection )
 #else // __VER >= 8 // __S8_PK
 float CMover::SubDieDecExp( BOOL bTransfer, DWORD dwDestParam )
@@ -7203,14 +7203,14 @@ float CMover::SubDieDecExp( BOOL bTransfer, DWORD dwDestParam )
 			m_nDeathLevel = m_nLevel;	// 현재 레벨 기록 
 		}
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		GetDieDecExpRate( fDecExp, dwDestParam, bResurrection );
 #else // __VER >= 8 // __S8_PK
 		GetDieDecExpRate( fDecExp, dwDestParam, m_nSlaughter );
 #endif // __VER >= 8 // __S8_PK
 
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		if( bResurrection == FALSE && IsSMMode( SM_REVIVAL ) )
 			((CUser*)this)->SetSMMode( SM_REVIVAL, 0 );
 
@@ -8177,7 +8177,7 @@ void CMover::ProcessRecovery()
 
 	DWORD dwCurTick = g_tmCurrent;
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	// 일정시간마다 카르마 회복 
 	KarmaProp* pProp = prj.GetKarmaProp( m_nSlaughter );
 	if( pProp->dwKarmaRecoverPoint )
@@ -9623,7 +9623,8 @@ int __IsEndQuestCondition( CMover* pMover, int nQuestId )
 		}
 #endif // __CAMPUS
 		// 총합이 17 + MAX_QUESTCONDITEM면 퀘스트 조건 성립 
-#if __VER >= 8 // __S8_PK
+
+#ifdef __OLDPKSYS //__S8_PK
 	#if __VER >= 9	// __PET_0410
 		#if __VER >= 10 // __LEGEND	//	10차 전승시스템	Neuz, World, Trans
 #if __VER >= 15 // __CAMPUS
@@ -9859,15 +9860,34 @@ int __IsBeginQuestCondition( CMover* pMover, int nQuestId )
 					nResult++;
 			}
 		}
-#if __VER >= 8 // __S8_PK
+
+#ifdef __OLDPKSYS //__S8_PK
 		// PK Value 19
-		if( pQuestProp->m_nBeginCondPKValue == 0 )
+
+		if( pQuestProp->m_nBeginCondKarmaPoint == 0 )
 			nResult++;
 		else
 		{
-			if( pQuestProp->m_nBeginCondPKValue <= pMover->GetPKValue() )			
-				nResult++;
+
+			if( pQuestProp->m_nBeginCondKarmaComp == 0 )
+			{
+				if( pMover->GetKarma() == pQuestProp->m_nBeginCondKarmaPoint )
+					nResult++;
+			}
+			else
+			if( pQuestProp->m_nBeginCondKarmaComp == -1 )
+			{
+				if( pMover->GetKarma() < pQuestProp->m_nBeginCondKarmaPoint )
+					nResult++;
+			}
+			else
+			if( pQuestProp->m_nBeginCondKarmaComp == 1 )
+			{
+				if( pMover->GetKarma() > pQuestProp->m_nBeginCondKarmaPoint )
+					nResult++;
+			}
 		}
+
 		// 아이템이 없는것 검사 MAX_QUESTCONDITEM
 		if( pQuestProp->m_nBeginCondNotItemNum == 0 )
 			nResult += MAX_QUESTCONDITEM;
@@ -9905,39 +9925,55 @@ int __IsBeginQuestCondition( CMover* pMover, int nQuestId )
 			else
 				nResult++;
 		}
-#else // __VER >= 8 // __S8_PK
-		// 카르마 19
-		if( pQuestProp->m_nBeginCondKarmaPoint == 0 )
+
+
+#elif defined(__NEWPKSYS) //V6PK
+		// PK Value 19
+		if( pQuestProp->m_nBeginCondPKValue == 0 )
 			nResult++;
 		else
 		{
-			if( pQuestProp->m_nBeginCondKarmaComp == 0 )
-			{
-				if( pMover->GetKarma() == pQuestProp->m_nBeginCondKarmaPoint )
-					nResult++;
-			}
-			else
-			if( pQuestProp->m_nBeginCondKarmaComp == -1 )
-			{
-				if( pMover->GetKarma() < pQuestProp->m_nBeginCondKarmaPoint )
-					nResult++;
-			}
-			else
-			if( pQuestProp->m_nBeginCondKarmaComp == 1 )
-			{
-				if( pMover->GetKarma() > pQuestProp->m_nBeginCondKarmaPoint )
-					nResult++;
-			}
-		}
-		// 카오틱 20
-		if( pQuestProp->m_nBeginCondChaotic == 0 )
-			nResult++;
-		else
-		{
-			if( pQuestProp->m_nBeginCondChaotic == 1 && pMover->IsChaotic() )
+			if( pQuestProp->m_nBeginCondPKValue <= pMover->GetPKValue() )			
 				nResult++;
+		}
+
+		
+
+		// 아이템이 없는것 검사 MAX_QUESTCONDITEM
+		if( pQuestProp->m_nBeginCondNotItemNum == 0 )
+			nResult += MAX_QUESTCONDITEM;
+		else
+		for( int i = 0; i < MAX_QUESTCONDITEM; i++ )
+		{
+			if( i < pQuestProp->m_nBeginCondNotItemNum )
+			{
+				QuestPropItem* pBeginCondItem = &pQuestProp->m_paBeginCondNotItem[ i ];
+				if( pBeginCondItem->m_nSex == -1 || pBeginCondItem->m_nSex == pMover->GetSex() )
+				{
+					if( pBeginCondItem->m_nType == 0 )
+					{
+						if( pBeginCondItem->m_nJobOrItem == -1 || pBeginCondItem->m_nJobOrItem == pMover->GetJob() )
+						{
+							if( pBeginCondItem->m_nItemIdx == 0 || pMover->GetItemNum( pBeginCondItem->m_nItemIdx ) < pBeginCondItem->m_nItemNum ) 
+								nResult++;
+						}
+						else
+							nResult++;
+					}
+					else
+					if( pBeginCondItem->m_nType == 1 )
+					{
+						if( pBeginCondItem->m_nJobOrItem == -1 || pMover->GetItemNum( pBeginCondItem->m_nJobOrItem ) )
+						{
+							if( pBeginCondItem->m_nItemIdx == 0 || pMover->GetItemNum( pBeginCondItem->m_nItemIdx ) < pBeginCondItem->m_nItemNum ) 
+								nResult++;
+						}
+						else
+							nResult++;
+					}
+				}
+			}
 			else
-			if( pQuestProp->m_nBeginCondChaotic == 2 && pMover->IsChaotic() == FALSE )
 				nResult++;
 		}
 #endif // __VER >= 8 // __S8_PK
@@ -10226,15 +10262,32 @@ int __IsNextLevelQuest( CMover* pMover, int nQuestId )
 					nResult++;
 			}
 		}
-#if __VER >= 8 // __S8_PK
+#ifdef __OLDPKSYS //__S8_PK
 		// PK Value 19
-		if( pQuestProp->m_nBeginCondPKValue == 0 )
+
+		if( pQuestProp->m_nBeginCondKarmaPoint == 0 )
 			nResult++;
 		else
 		{
-			if( pQuestProp->m_nBeginCondPKValue <= pMover->GetPKValue() )			
-				nResult++;
+			if( pQuestProp->m_nBeginCondKarmaComp == 0 )
+			{
+				if( pMover->GetKarma() == pQuestProp->m_nBeginCondKarmaPoint )
+					nResult++;
+			}
+			else
+			if( pQuestProp->m_nBeginCondKarmaComp == -1 )
+			{
+				if( pMover->GetKarma() < pQuestProp->m_nBeginCondKarmaPoint )
+					nResult++;
+			}
+			else
+			if( pQuestProp->m_nBeginCondKarmaComp == 1 )
+			{
+				if( pMover->GetKarma() > pQuestProp->m_nBeginCondKarmaPoint )
+					nResult++;
+			}
 		}
+
 		// 아이템이 없는것 검사 MAX_QUESTCONDITEM
 		if( pQuestProp->m_nBeginCondNotItemNum == 0 )
 			nResult += MAX_QUESTCONDITEM;
@@ -10272,39 +10325,51 @@ int __IsNextLevelQuest( CMover* pMover, int nQuestId )
 			else
 				nResult++;
 		}
-#else // __VER >= 8 // __S8_PK
-		// 카르마 19
-		if( pQuestProp->m_nBeginCondKarmaPoint == 0 )
+#elif defined(__NEWPKSYS) //V6PK
+		// PK Value 19
+		if( pQuestProp->m_nBeginCondPKValue == 0 )
 			nResult++;
 		else
 		{
-			if( pQuestProp->m_nBeginCondKarmaComp == 0 )
-			{
-				if( pMover->GetKarma() == pQuestProp->m_nBeginCondKarmaPoint )
-					nResult++;
-			}
-			else
-			if( pQuestProp->m_nBeginCondKarmaComp == -1 )
-			{
-				if( pMover->GetKarma() < pQuestProp->m_nBeginCondKarmaPoint )
-					nResult++;
-			}
-			else
-			if( pQuestProp->m_nBeginCondKarmaComp == 1 )
-			{
-				if( pMover->GetKarma() > pQuestProp->m_nBeginCondKarmaPoint )
-					nResult++;
-			}
-		}
-		// 카오틱 20
-		if( pQuestProp->m_nBeginCondChaotic == 0 )
-			nResult++;
-		else
-		{
-			if( pQuestProp->m_nBeginCondChaotic == 1 && pMover->IsChaotic() )
+			if( pQuestProp->m_nBeginCondPKValue <= pMover->GetPKValue() )			
 				nResult++;
+		}
+
+		// 아이템이 없는것 검사 MAX_QUESTCONDITEM
+		if( pQuestProp->m_nBeginCondNotItemNum == 0 )
+			nResult += MAX_QUESTCONDITEM;
+		else
+		for( int i = 0; i < MAX_QUESTCONDITEM; i++ )
+		{
+			if( i < pQuestProp->m_nBeginCondNotItemNum )
+			{
+				QuestPropItem* pBeginCondItem = &pQuestProp->m_paBeginCondNotItem[ i ];
+				if( pBeginCondItem->m_nSex == -1 || pBeginCondItem->m_nSex == pMover->GetSex() )
+				{
+					if( pBeginCondItem->m_nType == 0 )
+					{
+						if( pBeginCondItem->m_nJobOrItem == -1 || pBeginCondItem->m_nJobOrItem == pMover->GetJob() )
+						{
+							if( pBeginCondItem->m_nItemIdx == 0 || pMover->GetItemNum( pBeginCondItem->m_nItemIdx ) < pBeginCondItem->m_nItemNum ) 
+								nResult++;
+						}
+						else
+							nResult++;
+					}
+					else
+					if( pBeginCondItem->m_nType == 1 )
+					{
+						if( pBeginCondItem->m_nJobOrItem == -1 || pMover->GetItemNum( pBeginCondItem->m_nJobOrItem ) )
+						{
+							if( pBeginCondItem->m_nItemIdx == 0 || pMover->GetItemNum( pBeginCondItem->m_nItemIdx ) < pBeginCondItem->m_nItemNum ) 
+								nResult++;
+						}
+						else
+							nResult++;
+					}
+				}
+			}
 			else
-			if( pQuestProp->m_nBeginCondChaotic == 2 && pMover->IsChaotic() == FALSE )
 				nResult++;
 		}
 #endif // __VER >= 8 // __S8_PK
@@ -10407,7 +10472,8 @@ int __IsNextLevelQuest( CMover* pMover, int nQuestId )
 }
 #endif // __IMPROVE_QUEST_INTERFACE
 
-#if __VER >= 8 // __S8_PK
+
+#ifdef __NEWPKSYS // __S8_PK
 void CMover::SetPKValue( int nValue )
 {
 	if( nValue >= 0 )	// overflow!!
@@ -11488,8 +11554,11 @@ void	CMover::CheckHonorStat()
 
 
 	nIdx = CTitleManager::Instance()->GetIdx(HS_PK_COUNT,HI_COUNT_CHECK);
+#ifdef __NEWPKSYS // __S8_PK
+	SetHonorCount(nIdx,m_nNumKill);
+#else // __OLDPKSYS
 	SetHonorCount(nIdx,m_nPKValue);
-
+#endif // __S8_PK
 
 	nIdx = CTitleManager::Instance()->GetIdx(HS_LORD,HI_EARN_TITLE);
 	if( CSLord::Instance()->IsLord( m_idPlayer ) )

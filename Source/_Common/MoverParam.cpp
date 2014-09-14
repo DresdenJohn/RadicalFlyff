@@ -583,7 +583,7 @@ void CMover::IncFatiguePoint(int nVal)
 	SetPointParam( DST_FP, m_nFatiguePoint + nVal );
 }
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 SLAUGHTER_GRADE CMover::GetSlaughterGrade()
 {
 	return prj.GetSlaughterGrade( m_nSlaughter );		// project.h
@@ -612,7 +612,7 @@ PK_TYPE GetPKCase( CMover *pAttacker, CMover *pDefender )
 
 #ifdef __WORLDSERVER
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 // PK시도에 의한 m_nSlaughter(=카르마 수치) 변경  
 // nDead : 죽은자, return : 증감량.
 int CMover::IncSlaughterPoint2( CMover *pDead )
@@ -634,7 +634,9 @@ int CMover::IncSlaughterPoint2( CMover *pDead )
 		break;
 	case NORMAL_AND_CHAO:
 		break;
-
+	case NORMAL_AND_POS:
+		m_nSlaughter -= 100;
+		break;
 	case SEMI_AND_NORMAL:		// 준카오와 일반 유저 
 		m_nSlaughter -= 30;
 		break;
@@ -642,12 +644,26 @@ int CMover::IncSlaughterPoint2( CMover *pDead )
 		break;
 	case SEMI_AND_CHAO:
 		break;
-
+	case SEMI_AND_POS:
+		m_nSlaughter -= 60;
+		break;
 	case CHAO_AND_NORMAL:		// 카오와 일반 유저 
 		break;
 	case CHAO_AND_SEMI:
 		break;
 	case CHAO_AND_CHAO:
+		break;
+	case CHAO_AND_POS:
+		break;
+	case POS_AND_NORMAL:
+		m_nSlaughter -= 50;
+		break;
+	case POS_AND_SEMI:
+		break;
+	case POS_AND_POS:
+		m_nSlaughter -= 100;
+		break;
+	case POS_AND_CHAO:
 		break;
 	}
 	return ( m_nSlaughter - nOld );
@@ -673,21 +689,23 @@ int CMover::IncSlaughterPoint( CMover *pDead )
 			m_nSlaughter -= 50;
 		break;
 	case NORMAL_AND_SEMI:
+		if( IsRegionAttr( RA_PENALTY_PK ) )
+			m_nSlaughter += 5;
+		else if( IsRegionAttr( RA_PK ) )
+			m_nSlaughter += 3;
 		break;
 	case NORMAL_AND_CHAO:
-		{
-			if( pDead->IsAfterDeath() == FALSE )
-			{
-				// 절대값의 차가 큰 경우만 카르마 포인트를 얻는다.
-				int nGradeA = prj.GetKarmaProp( m_nSlaughter )->nGrade;
-				int nGradeB = prj.GetKarmaProp( pDead->m_nSlaughter )->nGrade;
-				int nDelta = abs(nGradeB) - abs(nGradeA);
-				if( nDelta > 0 )
-					m_nSlaughter += nDelta;
-			}
-		}	
+		if( IsRegionAttr( RA_PENALTY_PK ) )
+			m_nSlaughter += 100;
+		else if( IsRegionAttr( RA_PK ) )
+			m_nSlaughter += 50;
 		break;
-
+	case NORMAL_AND_POS:
+		if( IsRegionAttr( RA_PENALTY_PK ) )
+			m_nSlaughter -= 3000;
+		else if( IsRegionAttr( RA_PK ) )
+			m_nSlaughter -= 1500;
+		break;
 	case SEMI_AND_NORMAL:		// 준카오와 일반 유저 
 		if( IsRegionAttr( RA_PENALTY_PK ) )
 			m_nSlaughter -= 2000;
@@ -695,26 +713,84 @@ int CMover::IncSlaughterPoint( CMover *pDead )
 			m_nSlaughter -= 50;
 		break;
 	case SEMI_AND_SEMI:
+		if( IsRegionAttr( RA_PENALTY_PK ) )
+			m_nSlaughter += 10;
+		else if( IsRegionAttr( RA_PK ) )
+			m_nSlaughter += 5;
 		break;
 
 	case SEMI_AND_CHAO:
+		if( IsRegionAttr( RA_PENALTY_PK ) )
+			m_nSlaughter += 70;
+		else if( IsRegionAttr( RA_PK ) )
+			m_nSlaughter += 20;
 		break;
-
+	case SEMI_AND_POS:
+		if( IsRegionAttr( RA_PENALTY_PK ) )
+			m_nSlaughter -= 3000;
+		else if( IsRegionAttr( RA_PK ) )
+			m_nSlaughter -= 1500;
+		break;
 	case CHAO_AND_NORMAL:		// 카오와 일반 유저 
 		if( IsRegionAttr( RA_PENALTY_PK ) )
 		{
 			int nGrade = prj.GetKarmaProp( m_nSlaughter )->nGrade;
 			switch( nGrade )
 			{
-			case -4: m_nSlaughter -= 5; break;
-			case -5: m_nSlaughter -= 3; break;
-			case -6: m_nSlaughter -= 1; break;
+			case -4: m_nSlaughter -= 50; break;
+			case -5: m_nSlaughter -= 30; break;
+			case -6: m_nSlaughter -= 10; break;
 			}
 		}
 		break;
 	case CHAO_AND_SEMI:
+		if( IsRegionAttr( RA_PENALTY_PK ) )
+			m_nSlaughter += 10;
+		else if( IsRegionAttr( RA_PK ) )
+			m_nSlaughter += 5;
 		break;
 	case CHAO_AND_CHAO:
+		if( IsRegionAttr( RA_PENALTY_PK ) )
+			m_nSlaughter += 100;
+		else if( IsRegionAttr( RA_PK ) )
+			m_nSlaughter += 50;
+		break;
+	case CHAO_AND_POS:
+		{
+			int nGrade = prj.GetKarmaProp( m_nSlaughter )->nGrade;
+			switch( nGrade )
+			{
+			case -4: m_nSlaughter -= 100; break;
+			case -5: m_nSlaughter -= 60; break;
+			case -6: m_nSlaughter -= 20; break;
+			}
+		}
+		break;
+	case POS_AND_CHAO:		// 카오와 일반 유저 
+		if( IsRegionAttr( RA_PENALTY_PK ) )
+		{
+			int nGrade = prj.GetKarmaProp( m_nSlaughter )->nGrade;
+			switch( nGrade )
+			{
+			case 3: m_nSlaughter += 50; break;
+			case 4: m_nSlaughter += 30; break;
+			case 5: m_nSlaughter += 10; break;
+			}
+		}
+		break;
+	case POS_AND_SEMI:
+		if( IsRegionAttr( RA_PENALTY_PK ) )
+			m_nSlaughter += 10;
+			
+		break;
+	case POS_AND_NORMAL:
+			if(m_nSlaughter >= 5000)
+				m_nSlaughter -=5000;
+			else
+				m_nSlaughter = 0;
+		break;
+	case POS_AND_POS:
+				m_nSlaughter = -50;
 		break;
 	}
 
@@ -1297,7 +1373,7 @@ BOOL CMover::AddExperience( EXPINTEGER nExp, BOOL bFirstCall, BOOL bMultiPly, BO
 	
 	if( bFirstCall )
 	{
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 #ifdef __WORLDSERVER
 		if( bMonster && IsChaotic() )
 		{
@@ -3109,7 +3185,7 @@ LPCTSTR CMover::GetFameName( void )
 	return "";
 }
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 // 슬로터 이름을 스트링으로 돌려준다.
 LPCTSTR CMover::GetSlaughterName( void )
 {
@@ -3164,7 +3240,7 @@ int CMover::GetStr()
 {
 	int nResult = m_nStr + GetParam( DST_STR, 0 );
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	// 시련모드이고 시련제한상태이면 페널티 적용
 	if( IsMode( RECOVERCHAO_MODE ) && IsSMMode(SM_STR_DOWN) )
 	{
@@ -3185,7 +3261,7 @@ int CMover::GetDex()
 {
 	int nResult = m_nDex + GetParam( DST_DEX, 0 );
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	// 시련모드이고 시련제한상태이면 페널티 적용
 	if( IsMode( RECOVERCHAO_MODE ) && IsSMMode(SM_DEX_DOWN) )
 	{
@@ -3206,7 +3282,7 @@ int CMover::GetInt()
 {
 	int nResult = m_nInt + GetParam( DST_INT, 0 );
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	// 시련모드이고 시련제한상태이면 페널티 적용
 	if( IsMode( RECOVERCHAO_MODE ) && IsSMMode(SM_INT_DOWN) )
 	{
@@ -3227,7 +3303,7 @@ int CMover::GetSta()
 {
 	int nResult = m_nSta + GetParam( DST_STA, 0 );
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	// 시련모드이고 시련제한상태이면 페널티 적용
 	if( IsMode( RECOVERCHAO_MODE ) && IsSMMode(SM_STA_DOWN) )
 	{
