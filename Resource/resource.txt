@@ -1,7 +1,7 @@
 version "V0.01"
 encryptionKey 0x57
 
-resource 1 "R:\RadicalFlyff\Client\data.res"
+resource 1 "R:\Source\RadicalFlyff\Client\data.res"
 {
 	file "credit.txt"
 	file "ContinentDef.h"
@@ -67,7 +67,7 @@ resource 1 "R:\RadicalFlyff\Client\data.res"
 	file	"accessory.inc"
 }
 
-resource 1 "R:\RadicalFlyff\Client\dataSub1.res"
+resource 1 "R:\Source\RadicalFlyff\Client\dataSub1.res"
 {
 	wildcard "character*.inc"
 	file "etc.inc"
@@ -89,7 +89,7 @@ resource 1 "R:\RadicalFlyff\Client\dataSub1.res"
 	file	"layer.inc"
 }
 
-resource 1 "R:\RadicalFlyff\Client\dataSub2.res"
+resource 1 "R:\Source\RadicalFlyff\Client\dataSub2.res"
 {
 	file "propItem.txt"
 	file	"propItem.txt.txt"
