@@ -835,7 +835,7 @@ void CDbManager::LogPkPvp( CQuery* qry, LPDB_OVERLAPPED_PLUS lpDbOverlappedPlus 
 	int iServer_No, iLoseServer_No;
 	int nLevel, nLoseLevel;
 	int nPoint;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	int nPKValue, nLosePKValue;
 	DWORD dwPKPropensity, dwLosePKPropensity;
 #else // __VER >= 8 // __S8_PK
@@ -857,7 +857,7 @@ void CDbManager::LogPkPvp( CQuery* qry, LPDB_OVERLAPPED_PLUS lpDbOverlappedPlus 
 		arRead >> nLoseLevel;
 		arRead >> vLosePos;
 		arRead >> nLoseFame;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		arRead >> nLosePKValue;
 		arRead >> dwLosePKPropensity;
 #else // __VER >= 8 // __S8_PK
@@ -873,7 +873,7 @@ void CDbManager::LogPkPvp( CQuery* qry, LPDB_OVERLAPPED_PLUS lpDbOverlappedPlus 
 		arRead >> nLevel;
 		arRead >> vPos;
 		arRead >> nFame;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		arRead >> nPKValue;
 		arRead >> dwPKPropensity;
 #else // __VER >= 8 // __S8_PK
@@ -883,7 +883,7 @@ void CDbManager::LogPkPvp( CQuery* qry, LPDB_OVERLAPPED_PLUS lpDbOverlappedPlus 
 	}
 
 	char szQuery[QUERY_SIZE]	= { 0,};
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	if( nSendBuf == 3 )
 	{
 		DBQryLog( szQuery, "LA", uidPlayer, g_appInfo.dwSys, nLoseLevel, nLevel, nPoint, dwPKPropensity, nPKValue,

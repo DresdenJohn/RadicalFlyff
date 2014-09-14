@@ -1030,7 +1030,7 @@ public:
 		char* szLicenseSkill = '\0', char* aJobLv = '\0', DWORD dwExpertLv = 0, int nidMarkingWorld = 0, float vMarkingPos_x = 0.0f,
 		float vMarkingPos_y = 0.0f, float vMarkingPos_z = 0.0f, int nRemainGP = 0, int nRemainLP = 0, int nFlightLv = 0,
 		int nFxp = 0, int nTxp = 0, char* szQuestCntArray = '\0', char szAuthority = 'F', DWORD dwMode = 0,
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		int nidparty = 0, int nidMuerderer = 0, int nFame = 0,
 #else // __VER >= 8 // __S8_PK
 		int nidparty = 0, int nNumKill = 0, int nidMuerderer = 0, int nSlaughter = 0, int nFame = 0,
@@ -1044,7 +1044,7 @@ public:
 		, char* m_aCompleteQuest = '\0'
 		, char* ExtInven = '\0', char* PirecingInven = '\0', char* ExtBank = '\0', char* PirecingBank = '\0'
 		, DWORD dwReturnWorldID = 0, float fReturnPosX  = 0.0f, float fReturnPosY = 0.0f, float fReturnPosZ = 0.0f
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		, int nPKValue = 0, DWORD dwPKPropensity = 0, DWORD dwPKExp	= 0
 #endif // __VER >= 8 // __S8_PK
 #if __VER >= 8 //__CSC_VER8_5

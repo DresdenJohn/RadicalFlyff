@@ -119,7 +119,7 @@ void CDbManager::SavePlayer( CQuery *qry, CQuery* pQueryLog, CMover* pMover, cha
 	#else	// __EVENT_1101
 					  "?,?,?"
 	#endif	// __EVENT_1101
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 					  ",?"
 #endif // __VER >= 8 // __S8_PK
 #if __VER >= 8 // __CSC_VER8_5
@@ -167,7 +167,7 @@ int MAX_SAVEPARAM = 88;
 #ifdef __EVENT_1101
 		MAX_SAVEPARAM += 3;
 #endif // __EVENT_1101
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	MAX_SAVEPARAM += 1;
 #endif // __VER >= 8 // __S8_PK
 #if __VER >= 8 // __CSC_VER8_5
@@ -199,7 +199,7 @@ int MAX_SAVEPARAM = 88;
 
 //////////////////////////////////////////////////////////////////////////////////////
 	
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	int nNumSkill = 0;
 	int nSlaughter = 0;
 #endif // __VER >= 8 // __S8_PK
@@ -262,11 +262,11 @@ int MAX_SAVEPARAM = 88;
 	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_CHAR,  SQL_CHAR,     1, 0, szAuthority, 0, 0 );
 	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &pMover->m_dwMode, 0, 0 );
 	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &pMover->m_idparty, 0, 0 );
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &pMover->m_nNumKill, 0, 0 );
 #endif // __VER < 8 // __S8_PK
 	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &pMover->m_idMurderer, 0, 0 );
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &pMover->m_nSlaughter, 0, 0 );
 #endif // __VER < 8 // __S8_PK
 	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &pMover->m_nFame, 0, 0 );
@@ -284,8 +284,8 @@ int MAX_SAVEPARAM = 88;
 	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &pMover->m_Messenger.m_dwMyState, 0, 0 );
 #endif	// __RT_1025
 	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &nTotalPlayTime, 0, 0 );
-#if __VER >= 8 // __S8_PK
-	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &pMover->m_nPKValue, 0, 0 );
+#ifdef __NEWPKSYS // __S8_PK
+	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &pMover->m_nPKValue, 0, 0 );//55
 	// 5
 	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &pMover->m_dwPKPropensity, 0, 0 );
 	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &pMover->m_dwPKExp, 0, 0 );

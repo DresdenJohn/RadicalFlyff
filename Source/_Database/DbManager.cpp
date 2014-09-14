@@ -574,7 +574,7 @@ void CDbManager::SendPlayerList( CQuery* qry, LPDB_OVERLAPPED_PLUS lpDbOverlappe
 			mover.m_nSta = qry->GetInt( "m_nSta");
 			mover.m_nDex = qry->GetInt( "m_nDex");
 			mover.m_nInt = qry->GetInt( "m_nInt");
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 			mover.m_nSlaughter = qry->GetInt( "m_nSlaughter");
 #endif // __VER < 8 // __S8_PK
 
@@ -651,7 +651,7 @@ void CDbManager::SendPlayerList( CQuery* qry, LPDB_OVERLAPPED_PLUS lpDbOverlappe
 			arbuf << mover.m_nSta;
 			arbuf << mover.m_nDex;
 			arbuf << mover.m_nInt;
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 			arbuf << mover.m_nSlaughter;
 #endif // __VER < 8 // __S8_PK
 			arbuf << mover.m_dwMode;
@@ -5354,7 +5354,7 @@ void CDbManager::DBQryCharacter( char* qryCharacter, char* Gu, u_long idPlaeyr, 
 								char* szLicenseSkill, char* aJobLv, DWORD dwExpertLv, int nidMarkingWorld, float vMarkingPos_x,
 								float vMarkingPos_y, float vMarkingPos_z, int nRemainGP, int nRemainLP, int nFlightLv,
 								int nFxp, int nTxp, char* szQuestCntArray, char szAuthority, DWORD dwMode,
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 								int nidparty, int nidMuerderer, int nFame,
 #else // __VER >= 8 // __S8_PK
 								int nidparty, int nNumKill, int nidMuerderer, int nSlaughter, int nFame,
@@ -5368,7 +5368,7 @@ void CDbManager::DBQryCharacter( char* qryCharacter, char* Gu, u_long idPlaeyr, 
 								, char* m_aCompleteQuest
 								, char* ExtInven, char* PirecingInven, char* ExtBank, char* PirecingBank
 								, DWORD dwReturnWorldID, float fReturnPosX, float fReturnPosY, float fReturnPosZ
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 								, int nPKValue, DWORD dwPKPropensity, DWORD dwPKExp	
 #endif // __VER >= 8 // __S8_PK
 #if __VER >= 8 //__CSC_VER8_5
@@ -5398,15 +5398,41 @@ void CDbManager::DBQryCharacter( char* qryCharacter, char* Gu, u_long idPlaeyr, 
 	sprintf( qryCharacter, "CHARACTER_STR '%s'", Gu );
 	char strCharacter[40960];
 
+#ifdef __SECURITY_FIXES
+	CString strAccount	= szAccount;
+	strAccount.Replace( "-", "" );
+	strAccount.Replace( ";", "" );
+	strAccount.Replace( "'", "" );
+	strAccount.Replace( "\"", " " );
+
+#endif //__SECURITY_FIXES
 	sprintf( strCharacter, ",@im_idPlayer='%07d',@iserverindex='%02d',@iaccount='%s'",
+#ifdef __SECURITY_FIXES
+		idPlaeyr, nserverindex, strAccount );
+#else
 		idPlaeyr, nserverindex, szAccount );
+#endif
+
 	strncat( qryCharacter, strCharacter, sizeof(strCharacter) );
 
 	if( Gu[0] == 'S' && Gu[1] == '8' )
 		return;
 	
+#ifdef __SECURITY_FIXES
+	CString strName	= szName;
+	strName.Replace( "-", "" );
+	strName.Replace( ";", "" );
+	strName.Replace( "'", "" );
+	strName.Replace( "\"", " " );
+
+#endif //__SECURITY_FIXES
 	sprintf( strCharacter, ",@im_szName='%s',@iplayerslot=%d,@idwWorldID=%d,@im_dwIndex=%d,@im_vPos_x=%f,@im_vPos_y=%f",
+#ifdef __SECURITY_FIXES
+		strName, nPlayerslot, dwWorldID, dwIndex, vPos_x, vPos_y );
+#else
 		szName, nPlayerslot, dwWorldID, dwIndex, vPos_x, vPos_y );
+#endif
+		
 	strncat( qryCharacter, strCharacter, sizeof(strCharacter) );
 
 	sprintf( strCharacter, ",@im_vPos_z=%f,@im_szCharacterKey='%s',@im_dwSkinSet=%d,@im_dwHairMesh=%d,@im_dwHairColor=%d,@im_dwHeadMesh=%d,@im_dwSex=%d,@im_vScale_x=%f,@im_dwMotion=%d,@im_fAngle=%f",
@@ -5425,7 +5451,7 @@ void CDbManager::DBQryCharacter( char* qryCharacter, char* Gu, u_long idPlaeyr, 
 		vMarkingPos_y, vMarkingPos_z, nRemainGP, nRemainLP,	nFlightLv, nFxp, nTxp, szQuestCntArray, szAuthority, dwMode );
 	strncat( qryCharacter, strCharacter, sizeof(strCharacter) );
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	sprintf( strCharacter, ",@im_idparty=%d,@im_idMuerderer=%d,@im_nFame=%d,@im_nDeathExp=%I64d,@im_nDeathLevel=%d,@im_dwFlyTime=%d,@im_nMessengerState=%d,@iTotalPlayTime=%d",
 		nidparty, nidMuerderer, nFame, nDeathExp, nDeathLevel, dwFlyTime, dwMessengerState, nTotalPlayTime );
 #else // __VER >= 8 // __S8_PK
@@ -5461,7 +5487,7 @@ void CDbManager::DBQryCharacter( char* qryCharacter, char* Gu, u_long idPlaeyr, 
 		                     dwReturnWorldID, fReturnPosX, fReturnPosY, fReturnPosZ );
 	strncat( qryCharacter, strCharacter, sizeof(strCharacter) );
 	
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	sprintf( strCharacter, ",@im_nPKValue=%d,@im_dwPKPropensity=%d,@im_dwPKExp=%d",
 							nPKValue, dwPKPropensity, dwPKExp );
 	strncat( qryCharacter, strCharacter, sizeof(strCharacter) );

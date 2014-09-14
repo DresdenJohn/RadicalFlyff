@@ -1044,7 +1044,7 @@ void CDbManager::GetBaseCharacter( CMover* pMover, CQuery *qry, LPDB_OVERLAPPED_
 	pMover->SetGold( qry->GetInt("m_dwGold") );
 	pMover->m_nJob			= (LONG)qry->GetInt( "m_nJob" );
 	pMover->m_idparty		= (u_long)qry->GetInt( "m_idparty" );
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	pMover->m_nPKValue			= qry->GetInt( "m_nPKValue" );
 	pMover->m_dwPKPropensity	= qry->GetInt( "m_dwPKPropensity" );
 	pMover->m_dwPKExp			= qry->GetInt( "m_dwPKExp" );
