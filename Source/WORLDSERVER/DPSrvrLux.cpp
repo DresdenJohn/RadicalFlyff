@@ -37,7 +37,7 @@ void CDPSrvr::OnUseSkill( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf,
 	int	 nUseType = 0;
 
 	ar >> wType >> wId >> objid >> nUseType;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	BOOL bControl;
 	ar >> bControl;
 #endif // __VER >= 8 // __S8_PK
@@ -74,7 +74,7 @@ void CDPSrvr::OnUseSkill( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf,
 		if( dwLevel == 0 || dwLevel > pSkillProp->dwExpertMax )
 			return;
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		BOOL fSuccess	= pUser->DoUseSkill( wType, nIdx, objid, (SKILLUSETYPE)nUseType, bControl );
 #else // __VER >= 8 // __S8_PK
 		BOOL fSuccess	= pUser->DoUseSkill( wType, nIdx, objid, (SKILLUSETYPE)nUseType );

@@ -152,7 +152,7 @@ void CMover::ProcessMoveArrival( CCtrl *pObj )
 						}
 					}
 					
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 					// 카오에게 좋은 스킬을 사용할때는 Control 키를 눌러야 함
 					if( g_eLocal.GetState( EVE_PK ) )
 					{
@@ -166,7 +166,7 @@ void CMover::ProcessMoveArrival( CCtrl *pObj )
 #endif // __VER >= 8 // __S8_PK
 					
 					TRACE( "OBJACT_USESKILL %d\n", nSkillIdx );
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 					BOOL bControl = ((GetAsyncKeyState(VK_CONTROL) & 0x8000)? TRUE:FALSE);
 					g_DPlay.SendUseSkill( 0, nSkillIdx, idTarget, sutType, bControl );	// 목표지점에 도착하면 스킬쓴다고 알림.
 #else // __VER >= 8 // __S8_PK
@@ -312,7 +312,7 @@ void CMover::ProcessMoveArrival( CCtrl *pObj )
 				break;
 			}
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			BOOL bSuccess = DoUseSkill( 0, nSkillIdx, idTarget, sutType, FALSE );		// 목표지점에 도착하면 스킬 사용시작.
 #else // __VER >= 8 // __S8_PK
 			BOOL bSuccess = DoUseSkill( 0, nSkillIdx, idTarget, sutType );		// 목표지점에 도착하면 스킬 사용시작.

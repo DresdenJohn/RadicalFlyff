@@ -109,7 +109,7 @@ void CWndVendor::OnInitialUpdate()
 	}
 #endif // __S_SERVER_UNIFY
 	
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	if( g_pPlayer->IsChaotic() )
 	{
 		CHAO_PROPENSITY Propensity = prj.GetPropensityPenalty( g_pPlayer->GetPKPropensity() );

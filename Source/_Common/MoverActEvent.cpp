@@ -76,7 +76,7 @@ BOOL CMover::OnMeleeSkill( int nType, int nCount )
 	int		nSkill = GetActParam( 0 );
 	OBJID	idTarget = GetActParam( 1 );
 	DWORD	dwLevel	= GetActParam( 3 );
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	BOOL	bControl = GetActParam( 4 );
 #endif // __VER >= 8 // __S8_PK
 
@@ -125,7 +125,7 @@ BOOL CMover::OnMeleeSkill( int nType, int nCount )
 		if( pSkillProp->dwDmgShift != NULL_ID )
 			fDmgPower	= (int)pSkillProp->dwDmgShift * 0.2f;
 //		for( int nDmgCnt = 0; nDmgCnt < nMaxDmgCnt; nDmgCnt++ )
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			OnAttackSFX( pFocusObj->GetId(), pAddSkillProp->dwSkillLvl, pSkillProp->dwID, 0, GetAngle(), fDmgPower, ( pSkillProp->dwSkillType == KT_SKILL? AF_MELEESKILL: AF_MAGICSKILL ), bControl );
 #else // __VER >= 8 // __S8_PK
 			OnAttackSFX( pFocusObj->GetId(), pAddSkillProp->dwSkillLvl, pSkillProp->dwID, 0, GetAngle(), fDmgPower, ( pSkillProp->dwSkillType == KT_SKILL? AF_MELEESKILL: AF_MAGICSKILL ) );
@@ -136,7 +136,7 @@ BOOL CMover::OnMeleeSkill( int nType, int nCount )
 	else
 	{
 		// 적용범위 처리. 내부에서 ApplySkill()을 호출.
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		nDamage = DoApplySkill( pFocusObj, pSkillProp, pAddSkillProp, false, 0, FALSE, bControl );
 #else // __VER >= 8 // __S8_PK
 		nDamage = DoApplySkill( pFocusObj, pSkillProp, pAddSkillProp );
@@ -480,7 +480,7 @@ BOOL CMover::OnMagicSkill( int nType, int nCount )
 	int			nSkill = GetActParam(0);
 	OBJID		idTarget = GetActParam(1);
 	DWORD		dwLevel = GetActParam( 3 );
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	BOOL	bControl = GetActParam( 4 );
 #endif // __VER >= 8 // __S8_PK
 
@@ -517,7 +517,7 @@ BOOL CMover::OnMagicSkill( int nType, int nCount )
 		if( pSkillProp->dwDmgShift != NULL_ID )
 			fDmgPower	= (int)pSkillProp->dwDmgShift * 0.2f;
 //		for( int nDmgCnt = 0; nDmgCnt < nMaxDmgCnt; nDmgCnt++ )
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			OnAttackSFX( pFocusObj->GetId(), pAddSkillProp->dwSkillLvl, pSkillProp->dwID, 0, GetAngle(), fDmgPower, ( pSkillProp->dwSkillType == KT_SKILL? AF_MELEESKILL: AF_MAGICSKILL ), bControl );
 #else // __VER >= 8 // __S8_PK
 			OnAttackSFX( pFocusObj->GetId(), pAddSkillProp->dwSkillLvl, pSkillProp->dwID, 0, GetAngle(), fDmgPower, ( pSkillProp->dwSkillType == KT_SKILL? AF_MELEESKILL: AF_MAGICSKILL ) );
@@ -528,7 +528,7 @@ BOOL CMover::OnMagicSkill( int nType, int nCount )
 	else
 	{
 		// 적용범위 처리. 내부에서 ApplySkill()을 호출.
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		int nDamage = DoApplySkill( pFocusObj, pSkillProp, pAddSkillProp, false, 0, FALSE, bControl );
 #else // __VER >= 8 // __S8_PK
 		int nDamage = DoApplySkill( pFocusObj, pSkillProp, pAddSkillProp );
@@ -594,7 +594,7 @@ BOOL CMover::OnMagicSkill( int nType, int nCount )
 
 				if( IsChaotic() )
 				{
-		#if __VER >= 8 // __S8_PK
+		#ifdef __NEWPKSYS // __S8_PK
 					if( pWorld->GetID() != pWorld->m_dwIdWorldRevival && pWorld->m_dwIdWorldRevival != 0 )
 						pRgnElem	= g_WorldMng.GetRevivalPosChao( pWorld->m_dwIdWorldRevival, pWorld->m_szKeyRevival );
 					if( NULL == pRgnElem )	// Find near revival pos
@@ -674,7 +674,7 @@ BOOL	CMover::OnAttackRange()
 	int		idTarget = GetActParam( 0 );
 	DWORD	dwItemID = GetActParam( 1 );		// 사용할 아이템 아이디 (player이면 충전레벨)
 	int		idSfxHit = GetActParam( 2 );		// 몬스터가 사용한것이면 여기에 서버로부터 받은값이 들어있다.
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	BOOL	bControl = FALSE;
 #endif // __VER >= 8 // __S8_PK
 
@@ -741,7 +741,7 @@ BOOL	CMover::OnAttackRange()
 		dwAtkFlags |= AF_RANGE;
 
 #ifdef __WORLDSERVER
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	OnAttackSFX( pHit->GetId(), ( IsPlayer()? dwItemID: 0 ), NULL_ID, 0, 0, 0, dwAtkFlags, bControl );
 #else // __VER >= 8 // __S8_PK
 	OnAttackSFX( pHit->GetId(), ( IsPlayer()? dwItemID: 0 ), NULL_ID, 0, 0, 0, dwAtkFlags );
@@ -774,7 +774,7 @@ BOOL	CMover::OnAttackMagic()
 {
 	int		idTarget = GetActParam( 0 );
 	int		nMagicPower = GetActParam( 1 );
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	BOOL	bControl = GetActParam( 4 );
 #endif // __VER >= 8 // __S8_PK
 
@@ -784,7 +784,7 @@ BOOL	CMover::OnAttackMagic()
 		return FALSE;		// 클릭했을당시는 있었으나 발사되기전에 삭제되었다.
 
 #ifdef __WORLDSERVER
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	OnAttackSFX( pHit->GetId(), nMagicPower, NULL_ID, 0, 0, 0, AF_MAGIC, bControl );
 #else // __VER >= 8 // __S8_PK
 	OnAttackSFX( pHit->GetId(), nMagicPower, NULL_ID, 0, 0, 0, AF_MAGIC );

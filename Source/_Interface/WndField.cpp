@@ -4278,7 +4278,7 @@ void CWndCharacter::OnInitialUpdate()
 	lpTapCtrl->InsertItem( 1, &tabTabItem );
 	//lpTapCtrl->InsertTexture( 1 ,MakePath( DIR_THEME, "TabCharacter2.bmp" ) );
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	tabTabItem.pszText = prj.GetText(TID_GAME_CHARACTTER_PVP0);//"PVP";
 #else // __VER >= 8 // __S8_PK
 	tabTabItem.pszText = prj.GetText(TID_APP_PVP);//"PVP";

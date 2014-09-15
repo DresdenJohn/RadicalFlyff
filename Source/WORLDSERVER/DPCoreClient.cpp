@@ -482,13 +482,13 @@ void CDPCoreClient::OnLoadWorld( CAr & ar, DPID, DPID, OBJID )
 		g_eLocal.SetState( EVE_EVENT0214, 1 );
 	}
 	
-	char szMsg[512] = "";
+	char szMsg[2048] = "";
 	for( list<CJurisdiction*>::iterator i = desc.m_lspJurisdiction.begin(); i != desc.m_lspJurisdiction.end(); ++i )
 	{
 		CJurisdiction* pJurisdiction = *i;
 		
 		LPWORLD lpWorld	= g_WorldMng.GetWorldStruct( pJurisdiction->m_dwWorldID );
-		if( strlen( szMsg ) + strlen( lpWorld->m_szFileName ) < 512 )
+		if( strlen( szMsg ) + strlen( lpWorld->m_szFileName ) < 2048 )
 		{
 			strcat( szMsg, lpWorld->m_szFileName );
 			strcat( szMsg, " " );
@@ -1829,7 +1829,7 @@ void CDPCoreClient::OnDestroyGuild( CAr & ar, DPID, DPID, OBJID )
 							{
 								if( pUserIk3[cou]->IsChaotic() )
 								{
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 									if( pWorld->GetID() != pWorld->m_dwIdWorldRevival && pWorld->m_dwIdWorldRevival != 0 )
 										pRgnElem	= g_WorldMng.GetRevivalPosChao( pWorld->m_dwIdWorldRevival, pWorld->m_szKeyRevival );
 									if( !pRgnElem )	// Find near revival pos
@@ -1956,7 +1956,7 @@ void CDPCoreClient::OnRemoveGuildMember( CAr & ar, DPID, DPID, OBJID )
 						{
 							if( pUser->IsChaotic() )
 							{
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 								if( pWorld->GetID() != pWorld->m_dwIdWorldRevival && pWorld->m_dwIdWorldRevival != 0 )
 									pRgnElem	= g_WorldMng.GetRevivalPosChao( pWorld->m_dwIdWorldRevival, pWorld->m_szKeyRevival );
 								if( !pRgnElem )	// Find near revival pos

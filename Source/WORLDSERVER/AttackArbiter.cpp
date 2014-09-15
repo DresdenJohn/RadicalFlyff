@@ -127,7 +127,7 @@ int CAttackArbiter::OnDamageMsgW()
 	if( !CheckValidDamageMsg() )
 	{
 /*	불필요한 코드
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		if( m_pAttacker->IsPlayer() && m_pDefender->IsPlayer() )
 		{
 			HITTYPE type = m_pAttacker->GetHitType( m_pDefender, m_bTarget, m_nReflect );
@@ -390,7 +390,7 @@ int CAttackArbiter::OnAfterDamage( ATTACK_INFO* pInfo, int nDamage )
 #endif	// __SKILL0517
 				}
 			}
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			pDefender->DoUseSkill( SI_GEN_ATK_COUNTER, nLevel, pAttacker->GetId(), SUT_NORMAL, FALSE, 0 );
 #else // __VER >= 8 __S8_PK
 			pDefender->DoUseSkill( SI_GEN_ATK_COUNTER, nLevel, pAttacker->GetId(), SUT_NORMAL, 0 );
@@ -406,7 +406,7 @@ int CAttackArbiter::OnAfterDamage( ATTACK_INFO* pInfo, int nDamage )
 		if( pDefender->IsRangeObj( pAttacker->GetPos(), 3.0f ) )
 		{
 			pDefender->RemoveChrStateBuffs( CHS_DMG_COUNTERATTACK );
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			pDefender->DoUseSkill( SI_GEN_ATK_COUNTER, pInfo->GetSkillLevel(), pAttacker->GetId(), SUT_NORMAL, FALSE, 0 );	
 #else // __VER >= 8 __S8_PK
 			pDefender->DoUseSkill( SI_GEN_ATK_COUNTER, pInfo->GetSkillLevel(), pAttacker->GetId(), SUT_NORMAL, 0 );	
@@ -790,7 +790,7 @@ void CAttackArbiter::OnDied()
 	
 	m_pDefender->DropItemByDied( m_pAttacker );
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 #ifdef __JEFF_11_4
 	BOOL bArena		= m_pDefender->GetWorld() && m_pDefender->GetWorld()->IsArena();
 #endif	// __JEFF_11_4

@@ -247,7 +247,7 @@ BOOL	CCtrl::GetSkillProp( ItemProp **ppSkillProp, AddSkillProp **ppAddSkillProp,
 //
 // 경우에따라 pAddSkillProp은 NULL일수도 있다.  아이템에서 사용할수도 있기때문. 아이템은 애드스킬프롭이 없다.
 // pCenter : 광역 지속스킬의 타겟. NULL일수도 있다
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 void	CCtrl::ApplySkillRegion( const D3DXVECTOR3 &vPos, int nApplyType, ItemProp *pSkillProp, AddSkillProp *pAddSkillProp, bool bIgnoreProb, BOOL bOnlyDmg, CCtrl* pCenter, BOOL bControl )
 #else // __VER >= 8 // __S8_PK
 void	CCtrl::ApplySkillRegion( const D3DXVECTOR3 &vPos, int nApplyType, ItemProp *pSkillProp, AddSkillProp *pAddSkillProp, bool bIgnoreProb, BOOL bOnlyDmg, CCtrl* pCenter )
@@ -303,7 +303,7 @@ void	CCtrl::ApplySkillRegion( const D3DXVECTOR3 &vPos, int nApplyType, ItemProp 
 				if( pAttacker->IsPlayer() )			// 공격자가 플레이어냐
 				{
 					bApply = TRUE;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 					CMover *pDefender = (CMover *)pObj;
 					if( pDefender->IsPlayer() )
 					{
@@ -412,7 +412,7 @@ void	CCtrl::ApplySkillRegion( const D3DXVECTOR3 &vPos, int nApplyType, ItemProp 
 //
 // 경우에따라 pAddSkillProp은 NULL일수도 있다.  아이템에서 사용할수도 있기때문. 아이템은 애드스킬프롭이 없다.
 // fRangeCustom에 값이 있을경우에는 프로퍼티 nRange값을 무시하고 fRangeCustom으로 바뀐다.
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 void	CCtrl::ApplySkillAround( CCtrl *pSrc, int nApplyType, ItemProp *pSkillProp, AddSkillProp *pAddSkillProp, bool bIgnoreProb, BOOL bOnlyDmg, FLOAT fRangeCustom, BOOL bControl )
 #else // __VER >= 8 // __S8_PK
 void	CCtrl::ApplySkillAround( CCtrl *pSrc, int nApplyType, ItemProp *pSkillProp, AddSkillProp *pAddSkillProp, bool bIgnoreProb, BOOL bOnlyDmg, FLOAT fRangeCustom )
@@ -469,7 +469,7 @@ void	CCtrl::ApplySkillAround( CCtrl *pSrc, int nApplyType, ItemProp *pSkillProp,
 				if( pAttacker->IsPlayer() )			// 공격자가 플레이어냐
 				{
 					bApply	= TRUE;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 					CMover *pDefender = (CMover *)pObj;
 					if( pDefender->IsPlayer() )
 					{
@@ -578,7 +578,7 @@ void	CCtrl::ApplySkillAround( CCtrl *pSrc, int nApplyType, ItemProp *pSkillProp,
 // nAttackID : 스킬이나 아이템 ID
 // fWidth, fHeight, fDepth : 폭, 높이, 길이.
 // this == Attacker
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 void	CCtrl::ApplySkillLine( int nApplyType, ItemProp *pSkillProp, AddSkillProp *pAddSkillProp, float fWidth, float fHeight, float fDepth, bool bIgnoreProb, BOOL bControl )
 #else // __VER >= 8 // __S8_PK
 void	CCtrl::ApplySkillLine( int nApplyType, ItemProp *pSkillProp, AddSkillProp *pAddSkillProp, float fWidth, float fHeight, float fDepth, bool bIgnoreProb )
@@ -636,7 +636,7 @@ void	CCtrl::ApplySkillLine( int nApplyType, ItemProp *pSkillProp, AddSkillProp *
 				if( pAttacker->IsPlayer() )			// 공격자가 플레이어냐
 				{
 					bApply = TRUE;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 					CMover *pDefender = (CMover *)pObj;
 					if( pDefender->IsPlayer() )
 					{
@@ -1096,7 +1096,7 @@ void	CCtrl::ApplySkill( CCtrl *pSrc, ItemProp *pSkillProp, AddSkillProp *pAddSki
 	{
 		if( ((CMover *)this)->IsDie() == FALSE )
 		{
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			if( pSkillProp->nEvildoing < 0 )													// 나쁜마법은
 				if( ((CMover *)pSrc)->GetHitType2(((CMover *)this), bTarget, FALSE ) == HITTYPE_FAIL )  	// 평화적인상대에게
 					return;																			// 적용안됨
@@ -1445,13 +1445,13 @@ int		CCtrl::TargetSelecter( CCtrl *pTarget )
 	return nApplyType;
 }
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 int		CCtrl::DoApplySkill( CCtrl *pTarget, ItemProp *pSkillProp, AddSkillProp *pAddSkillProp, bool bIgnoreProb, int nParam, BOOL bOnlyDmg, BOOL bControl )
 #else // __VER >= 8 // __S8_PK
 int		CCtrl::DoApplySkill( CCtrl *pTarget, ItemProp *pSkillProp, AddSkillProp *pAddSkillProp, bool bIgnoreProb, int nParam, BOOL bOnlyDmg )
 #endif // __VER >= 8 // __S8_PK
 {
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	int nResult = DoApplySkillEx( pTarget, pSkillProp, pAddSkillProp, bIgnoreProb, nParam, bOnlyDmg, bControl );
 #else // __VER >= 8 // __S8_PK
 	int nResult = DoApplySkillEx( pTarget, pSkillProp, pAddSkillProp, bIgnoreProb, nParam, bOnlyDmg );
@@ -1477,7 +1477,7 @@ int		CCtrl::DoApplySkill( CCtrl *pTarget, ItemProp *pSkillProp, AddSkillProp *pA
 // 여기서는 SpellRegion에 따라 적용대상을 분류만 하고 실제 효과적용은
 // ApplySkill에서 처리한다.
 // bOnlyDmg : 오직 데미지적용시키는것만 한다.  광역 지속데미지개체에서 사용함.
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 int		CCtrl::DoApplySkillEx( CCtrl *pTarget, ItemProp *pSkillProp, AddSkillProp *pAddSkillProp, bool bIgnoreProb, int nParam, BOOL bOnlyDmg, BOOL bControl )
 #else // __VER >= 8 // __S8_PK
 int		CCtrl::DoApplySkillEx( CCtrl *pTarget, ItemProp *pSkillProp, AddSkillProp *pAddSkillProp, bool bIgnoreProb, int nParam, BOOL bOnlyDmg )
@@ -1499,7 +1499,7 @@ int		CCtrl::DoApplySkillEx( CCtrl *pTarget, ItemProp *pSkillProp, AddSkillProp *
 			{
 				int nApplyType = 0;
 				nApplyType = pSrc->TargetSelecter( pTarget );
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 				pTarget->ApplySkillAround( this, nApplyType, pSkillProp, pAddSkillProp, bIgnoreProb, bOnlyDmg, 0.0f, bControl );
 #else // __VER >= 8 // __S8_PK
 				pTarget->ApplySkillAround( this, nApplyType, pSkillProp, pAddSkillProp, bIgnoreProb, bOnlyDmg );
@@ -1553,7 +1553,7 @@ int		CCtrl::DoApplySkillEx( CCtrl *pTarget, ItemProp *pSkillProp, AddSkillProp *
 					pDmgCtrl->m_idSrc = pSrc->GetId();
 					pDmgCtrl->m_idTarget = pTarget->GetId();
 					pDmgCtrl->SetPos( pTarget->GetPos() );		// 중심이 되는 타겟의 좌표로...
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 					pDmgCtrl->m_bControl = bControl;
 #endif // __VER >= 8 // __S8_PK
 					// chipi - 범위 ctrl 생성 스킬로 인해 듀얼 종료 후 카오되는 현상 수정
@@ -1570,7 +1570,7 @@ int		CCtrl::DoApplySkillEx( CCtrl *pTarget, ItemProp *pSkillProp, AddSkillProp *
 		{
 			int nApplyType = 0;
 			nApplyType = pSrc->TargetSelecter( pTarget );
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			ApplySkillLine( nApplyType, pSkillProp, pAddSkillProp, 2.5f, 2.5f, (float)pAddSkillProp->dwSkillRange, bIgnoreProb, bControl );
 #else // __VER >= 8 // __S8_PK
 			ApplySkillLine( nApplyType, pSkillProp, pAddSkillProp, 2.5f, 2.5f, (float)pAddSkillProp->dwSkillRange, bIgnoreProb );
@@ -1607,8 +1607,9 @@ int		CCtrl::DoApplySkillEx( CCtrl *pTarget, ItemProp *pSkillProp, AddSkillProp *
 							((CCommonCtrl *)pObj)->m_pSkillProp = pSkillProp;
 							((CCommonCtrl *)pObj)->m_pAddSkillProp = pAddSkillProp;
 							((CCommonCtrl *)pObj)->m_idAttacker = GetId();
+#ifdef __NEWPKSYS
 							((CCommonCtrl *)pObj)->m_bControl = bControl;
-
+#endif //__NEWPKSYS
 							GetWorld()->ADDOBJ( pObj, TRUE, GetLayer() );
 							pUser->m_pWall[i] = pObj;
 							bCreate = TRUE;
@@ -1665,7 +1666,7 @@ int		CCtrl::DoApplySkillEx( CCtrl *pTarget, ItemProp *pSkillProp, AddSkillProp *
 	if( pSkillProp->dwActiveSkill != NULL_ID )
 	{
 		if( pSkillProp->dwActiveSkillRate == NULL_ID || xRandom(100) <= pSkillProp->dwActiveSkillRate )	// 발동확률에 걸렸는가.
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			pSrc->DoActiveSkill( pSkillProp->dwActiveSkill, 1, pTarget, false, bControl );		// dwActiveSkill Lv1이 발동됨.
 #else // __VER >= 8 // __S8_PK
 			pSrc->DoActiveSkill( pSkillProp->dwActiveSkill, 1, pTarget );		// dwActiveSkill Lv1이 발동됨.
@@ -1678,7 +1679,7 @@ int		CCtrl::DoApplySkillEx( CCtrl *pTarget, ItemProp *pSkillProp, AddSkillProp *
 
 // nLevel의 dwSkill이 pTarget을 향하여 발동됨.  어태커는 this
 // bIgnoreProb이 TRUE이면 내부에서 확률계산을 무시하고 100% 실행되게 한다.
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 void CCtrl::DoActiveSkill( DWORD dwSkill, int nLevel, CCtrl *pTarget, bool bIgnoreProb, BOOL bControl )
 #else // __VER >= 8 // __S8_PK
 void CCtrl::DoActiveSkill( DWORD dwSkill, int nLevel, CCtrl *pTarget, bool bIgnoreProb )
@@ -1694,7 +1695,7 @@ void CCtrl::DoActiveSkill( DWORD dwSkill, int nLevel, CCtrl *pTarget, bool bIgno
 		nRet = ShootSkill( pTarget, pSkillProp, pAddSkillProp );
 	else
 	{
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		nRet = DoApplySkill( pTarget, pSkillProp, pAddSkillProp, bIgnoreProb, 0, FALSE, bControl );
 #else // __VER >= 8 // __S8_PK
 		nRet = DoApplySkill( pTarget, pSkillProp, pAddSkillProp, bIgnoreProb );

@@ -212,7 +212,7 @@ CMover* CAIInterface::ScanTarget( CObj* pObjCenter, int nRangeMeter, int nJobCon
 				// 100 = 카오유저, 101 = 비카오
 				if( nChao == 100 )
 				{
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 					if( pTarget->IsChaotic() )
 #else // __VER >= 8 // __S8_PK
 					if( pTarget->IsGuardReactionChao() )
@@ -221,7 +221,7 @@ CMover* CAIInterface::ScanTarget( CObj* pObjCenter, int nRangeMeter, int nJobCon
 				}
 				else if( nChao == 101 )
 				{
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 					if( !pTarget->IsChaotic() )
 #else // __VER >= 8 // __S8_PK
 					if( pTarget->IsGuardReactionNormal() )
