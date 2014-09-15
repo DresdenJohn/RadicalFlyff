@@ -197,7 +197,7 @@ int CAttackArbiter::OnDamageMsgW()
 	if( m_pAttacker->IsPlayer() && m_pDefender->IsPlayer() )
 	{
 		nDamage -= (nDamage * m_pDefender->GetParam( DST_PVP_DMG_RATE, 0) / 100);
-#if __VER >= 9 // __CHAO_DMGDEC
+#ifdef __CHAO_DMGDEC
 		if( !m_pAttacker->IsGuildCombatTarget( m_pDefender ) )
 		{
 			int nDamageDecRate = m_pAttacker->GetPKValue() * 5;

@@ -2218,7 +2218,7 @@ void CDPDatabaseClient::SendLogPkPvp( CMover* pUser, CMover* pLose, int nPoint, 
 		ar << pLose->GetLevel();
 		ar << pLose->GetPos();
 		ar << pLose->m_nFame;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		ar << pLose->m_nPKValue;
 		ar << pLose->m_dwPKPropensity;
 #else // __VER >= 8 // __S8_PK
@@ -2234,7 +2234,7 @@ void CDPDatabaseClient::SendLogPkPvp( CMover* pUser, CMover* pLose, int nPoint, 
 		ar << pUser->GetLevel();
 		ar << pUser->GetPos();
 		ar << pUser->m_nFame;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		ar << pUser->m_nPKValue;
 		ar << pUser->m_dwPKPropensity;
 #else // __VER >= 8 // __S8_PK

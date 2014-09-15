@@ -1245,65 +1245,83 @@ void CMover::RenderName( LPDIRECT3DDEVICE9 pd3dDevice, CD3DFont* pFont, DWORD dw
 		}
 		// 명성에 따른 색표시.
 #if __VER >= 13 // __HONORABLE_TITLE
-		if( IsChaotic() )
-			dwColor = prj.m_PKSetting.dwChaoColor;
-		else if( IsPKPink() )
-			dwColor = prj.m_PKSetting.dwReadyColor;
-		else if( m_dwAuthorization >= AUTH_ADMINISTRATOR ) // GM / Admin colors
-			dwColor = COLOR_ADMINISTRATOR;
-		else if( m_dwAuthorization >= AUTH_GAMEMASTER )
-			dwColor = COLOR_GAMEMASTER;
-		else
-			dwColor = prj.m_PKSetting.dwGeneralColor;
-		
-		CString strFameName = GetTitle();
-		if( strFameName.IsEmpty() == FALSE )
+
+		KarmaProp* pKarmaProp = prj.GetKarmaProp(m_nSlaughter);
+		if( pKarmaProp )
 		{
-			CString strName;
-			strName = "[";
-			strName += strFameName;
-			strName += "] ";
-			strName += m_szName;
-			strcpy( szName, (LPCTSTR)strName );
-		}		
+		dwColor = pKarmaProp->dwColor;
+		CString strFameName = GetTitle();
+		}
 
 		// GM / Admin tag
-		/* //rev1
+
+		CString strFameName = GetFameName();
 		if(m_dwAuthorization >= AUTH_GAMEMASTER)
 		{
+			CString strFameName = GetTitle();
 			CString strName;
 			strName = szName;
-			if(m_dwAuthorization >= AUTH_ADMINISTRATOR)
+/*			if(m_dwAuthorization >= AUTH_DEVELOPER)
 			{
-				strName += " [Admin]";
+				strName += " [Developer]";
+			}
+			else*/ if(m_dwAuthorization >= AUTH_ADMINISTRATOR)
+			{	
+				if( strFameName.IsEmpty() == FALSE )
+				{
+					strName = "[";
+					strName += strFameName;
+					strName += "] ";
+					strName += m_szName;
+					strName += " [Admin]";
+					dwColor = COLOR_ADMINISTRATOR;
+					strcpy( szName, (LPCTSTR)strName );
+				}
+				else 
+				{
+					strName += " [Admin]";
+					dwColor = COLOR_ADMINISTRATOR;
+					strcpy( szName, (LPCTSTR)strName );
+				}
 			}
 			else
-			{
-				strName += " [GM]";
+			{	
+				if( strFameName.IsEmpty() == FALSE )
+				{
+					strName = "[";
+					strName += strFameName;
+					strName += "] ";
+					strName += m_szName;
+					strName += " [GM]";
+					dwColor = COLOR_GAMEMASTER;
+					strcpy( szName, (LPCTSTR)strName );
+				}
+				else
+				{
+					strName += " [GM]";
+					dwColor = COLOR_GAMEMASTER;
+					strcpy( szName, (LPCTSTR)strName );
+				}
 			}
-			strcpy( szName, (LPCTSTR)strName );
 		}
-		*/
-#else
-#if __VER >= 8 // __S8_PK
-		if( IsChaotic() )
-			dwColor = prj.m_PKSetting.dwChaoColor;
-		else if( IsPKPink() )
-			dwColor = prj.m_PKSetting.dwReadyColor;
 		else
-			dwColor = prj.m_PKSetting.dwGeneralColor;
-		
-		CString strFameName = GetFameName();
-		if( strFameName.IsEmpty() == FALSE )
 		{
+			CString strFameName = GetTitle();
 			CString strName;
-			strName = "[";
-			strName += strFameName;
-			strName += "] ";
-			strName += m_szName;
-			strcpy( szName, (LPCTSTR)strName );
+			strName = szName;
+			if( strFameName.IsEmpty() == FALSE )
+			{
+				CString strName;
+				strName = "[";
+				strName += strFameName;
+				strName += "] ";
+				strName += m_szName;
+				strcpy( szName, (LPCTSTR)strName );
+			}	
 		}
-#else // __VER >= 8 // __S8_PK
+
+#else // #if __VER < 13
+
 		KarmaProp* pKarmaProp = prj.GetKarmaProp(m_nSlaughter);
 		if( pKarmaProp )
 		{
@@ -1320,7 +1338,6 @@ void CMover::RenderName( LPDIRECT3DDEVICE9 pd3dDevice, CD3DFont* pFont, DWORD dw
 			}		
 		}
 #endif // __VER >= 8 // __S8_PK
-#endif
 	}
 
 	// 월드 좌표를 스크린 좌표로 프로젝션 한다.
