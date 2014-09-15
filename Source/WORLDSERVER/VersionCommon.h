@@ -14,9 +14,9 @@
 #define __OLDPKSYS //V6 PK, remember to comment __PKSERVER_USE_ANGEL
 //#define __NEWPKSYS
 
-#define __LODELIGHT
+#define __OLDLODELIGHT
 #define __SAVEPLAYER
-
+#define __WORLD_CMD_ARGUMENT //0 for S1 and 1 for S2 PK
 #define __SECURITY_FIXES
 #define	__NO_SPEEDHACK
 #define	__DUPE_FIX

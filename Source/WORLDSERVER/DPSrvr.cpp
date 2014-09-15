@@ -1192,7 +1192,7 @@ void CDPSrvr::OnRevivalLodestar( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE
 
 void CDPSrvr::OnRevivalLodelight( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
 {
-#ifdef __LODELIGHT
+#ifdef __OLDLODELIGHT
 	CWorld* pWorld;
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) && ( pWorld = pUser->GetWorld() ) )

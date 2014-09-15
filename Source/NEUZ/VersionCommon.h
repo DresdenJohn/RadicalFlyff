@@ -14,6 +14,7 @@
 #define __OLDPKSYS //V6 PK, remember to comment __PKSERVER_USE_ANGEL
 //#define __NEWPKSYS
 
+#define __OLDLODELIGHT
 #define __RES_ENCRYPT
 #define __SECURITY_FIXES
 #define	__NO_SPEEDHACK

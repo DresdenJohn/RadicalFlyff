@@ -84,11 +84,8 @@ static char			s_szAccountAddr[16];
 #endif	
 */
 
-#ifdef __IDC
-static char  		g_szINI[] = "..\\script\\WorldServer.ini";
-#else	
-static char  		g_szINI[] = "WorldServer.ini";
-#endif	
+
+static const char*  		g_szINI;
 
 extern	CGuildMng			g_GuildMng;
 extern	CGuildWarMng		g_GuildWarMng;
@@ -177,6 +174,25 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 
 	//_CrtSetBreakAlloc( 628278 );	// memory leak Å½Áö
 	// Initialize global strings
+#ifdef __WORLD_CMD_ARGUMENT
+	if( strcmpi(lpCmdLine,"1") == 0 )
+		{
+			g_szINI = "..\\script\\WorldServer.ini";
+		}
+	else if ( strcmpi(lpCmdLine,"2") == 0 ) 
+		{
+			g_szINI = "..\\script\\PKWorldServer.ini";
+		}
+	else 
+		{
+			MessageBox(0, "Use argument 1 for non-PK and 2 for PK", "WorldServer Cannot Start", MB_OK);
+			return FALSE; 
+		}
+
+#else	
+static char  		g_szINI[] = "..\\script\\WorldServer.ini";
+#endif	
+
 	LoadString(hInstance, IDS_APP_TITLE, g_szTitle, MAX_LOADSTRING);
 	LoadString(hInstance, IDC_WORLDSERVER, g_szWindowClass, MAX_LOADSTRING);
 	MyRegisterClass(hInstance);

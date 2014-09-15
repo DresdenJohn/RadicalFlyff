@@ -12135,13 +12135,13 @@ void CWndRevival::OnInitialUpdate()
 	m_pLodeStar = (CWndButton*)GetDlgItem( WIDC_REVIVAL_TO_LODESTAR );
 	m_pRevival = (CWndButton*)GetDlgItem( WIDC_REVIVAL_STAND );
 #if __VER >= 9 // __S_9_ADD
-	m_pShop = (CWndButton*)GetDlgItem( WIDC_REVIVAL_SHOP );
+//	m_pShop = (CWndButton*)GetDlgItem( WIDC_REVIVAL_SHOP );
 #endif // __S_9_ADD
 	m_pLodeLight->m_strToolTip = _T( prj.GetText(TID_GAME_TOOLTIP_LODELIGHT) );//"로드라이트는 여행자가 직접 지정한 부활 위치입니다." );
 	m_pLodeStar->m_strToolTip = _T( prj.GetText(TID_GAME_TOOLTIP_LODESTAR) );//"로드스타는 인근 마을의 부활 위치입니다." );
 	m_pRevival->m_strToolTip = _T( prj.GetText(TID_GAME_TOOLTIP_OGNPOINT) );
 #if __VER >= 9 // __S_9_ADD
-	m_pShop->m_strToolTip = _T( prj.GetText(TID_GAME_TOOLTIP_SHOP) );
+//	m_pShop->m_strToolTip = _T( prj.GetText(TID_GAME_TOOLTIP_SHOP) );
 #endif // __S_9_ADD
 
 #ifdef __JEFF_11_4
@@ -12174,7 +12174,9 @@ void CWndRevival::OnInitialUpdate()
 #endif // __NEW_WEB_BOX
 
 	m_wndTitleBar.SetVisible( FALSE );
-
+#ifdef __OLDLODELIGHT
+	m_pLodeLight->EnableWindow( TRUE );
+#else
 #if __VER >= 9 // __S_9_ADD
 	if( m_pLodeLight )
 	{
@@ -12199,6 +12201,7 @@ void CWndRevival::OnInitialUpdate()
 //		crect.bottom -= 31;
 //		SetWndRect( crect, TRUE );
 	}
+#endif // __OLDLODELIGHT
 #endif // __S_9_ADD
 	
 	// 게이지 위쪽으로 나오게 하기
