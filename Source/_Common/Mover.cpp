@@ -5602,6 +5602,23 @@ int	CMover::SubPK( CMover *pAttacker, int nReflect )
 		}				
 	}
 
+#ifdef __OLDPKSYS	
+	if( pAttacker->IsPlayer() )
+    {
+        m_idMurderer = pAttacker->m_idPlayer;
+            
+
+        CWorld* pWorld = GetWorld();
+        if( pWorld )
+        {
+            char szFormat[256];
+            strcpy( szFormat, pAttacker->GetName() );
+            strcat( szFormat, prj.GetText( TID_PK_REWARDNOTICE ) );
+            g_DPCoreClient.SendWCWantedReward( m_idPlayer, pAttacker->m_idPlayer, szFormat, pWorld->GetID(), GetPos(), GetLayer() );
+        }
+    }
+#endif // __OLDPKSYS
+
 	if( !pAttacker->IsPlayer() || IsNPC() )
 		return 1;
 
@@ -5645,7 +5662,7 @@ if(!pAttacker->IsPlayer())
 		((CUser*)pAttacker)->SetHonorAdd(HS_PK_COUNT,HI_COUNT_CHECK);
 #endif	// __HONORABLE_TITLE			// 달인
 	}
-#else // __VER >= 8 // __S8_PK
+//#else // __VER >= 8 // __S8_PK
 	BOOL bChaotic = IsChaotic();
 
 	m_idMurderer = pAttacker->m_idPlayer;	// 날 마지막으로 죽인놈의 플레이어아이디를 저장해둠.
@@ -11554,9 +11571,10 @@ void	CMover::CheckHonorStat()
 
 
 	nIdx = CTitleManager::Instance()->GetIdx(HS_PK_COUNT,HI_COUNT_CHECK);
-#ifdef __NEWPKSYS // __S8_PK
+
+#ifdef __OLDPKSYS // __S8_PK
 	SetHonorCount(nIdx,m_nNumKill);
-#else // __OLDPKSYS
+#else // __NEWPKSYS
 	SetHonorCount(nIdx,m_nPKValue);
 #endif // __S8_PK
 

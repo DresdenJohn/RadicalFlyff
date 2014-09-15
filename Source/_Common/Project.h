@@ -1103,7 +1103,7 @@ public:
 #if __VER >= 8  
 	BOOL			LoadScriptDiePenalty( LPCTSTR lpszFileName );
 #endif //  __VER >= 8  
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	BOOL			LoadScriptPK( LPCTSTR lpszFileName );
 #else // __VER >= 8 // __S8_PK
 	BOOL			LoadPropKarma( LPCTSTR lpszFileName );
@@ -1131,7 +1131,7 @@ public:
 	BOOL			SetPlayerID( u_long idPlayer, const CHAR* lpszPlayer );
 	BOOL			RemovePlayerID( u_long idPlayer );
 #endif	// __SYS_PLAYER_DATA
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	DWORD			GetLevelExp( int nLevel );
 	CHAO_PROPENSITY GetPropensityPenalty( DWORD dwPropensity );
 #else // __VER >= 8 // __S8_PK

@@ -654,6 +654,8 @@ public:
 #else // __VER >= 8 // __S8_PK
 	int				m_nNumKill;					/// 킬수
 	DWORD			m_dwKarmaTick;				/// 카르마 포인트 자연 회복용 타이머 
+
+	
 	int				m_nSlaughter;				/// 카르마포인트(카오 수치)
 #endif // __VER >= 8 // __S8_PK
 #if __VER >= 8 //__CSC_VER8_5

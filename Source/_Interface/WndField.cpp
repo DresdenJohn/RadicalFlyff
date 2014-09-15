@@ -3421,7 +3421,7 @@ void CWndCharInfo::OnDraw(C2DRender* p2DRender)
 	p2DRender->TextOut( 100+gap1, y, szBuff  , dwColor ); y += nNext;
 	y += 4;
 	p2DRender->TextOut( 100+gap2, y, g_pPlayer->m_nFame	, dwColor ); y += nNext;
-#if __VER >= 8 // __S8_PK
+#if __NEWPKSYS // __S8_PK
 	y += 20;
 	p2DRender->TextOut( 100+gap2, y, g_pPlayer->GetPKValue()	, dwColor ); y += nNext;
 	y += 4;

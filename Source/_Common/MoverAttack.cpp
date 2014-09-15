@@ -2158,7 +2158,8 @@ float CMover::GetResist( SAI79::ePropType type )
 	return GetResistSpell( n ) / 100.0f;
 }
 
-#if __VER >= 8 // __S8_PK
+
+#ifdef __NEWPKSYS // __S8_PK
 void CMover::OnAttackSFX( OBJID	idTarget, int nMagicPower, DWORD dwSkill, int nDmgCnt, float	fDmgAngle, float fDmgPower,  DWORD dwAtkFlags, BOOL bControl )
 #else // __VER >= 8 // __S8_PK
 void CMover::OnAttackSFX( OBJID	idTarget, int nMagicPower, DWORD dwSkill, int nDmgCnt, float	fDmgAngle, float fDmgPower,  DWORD dwAtkFlags )

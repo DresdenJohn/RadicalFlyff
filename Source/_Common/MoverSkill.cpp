@@ -2119,8 +2119,6 @@ int	CMover::DoUseItemSystem( ItemProp *pItemProp, CItemElem* pItemElem, int nPar
 		}
 		break;
 	case II_CHR_SYS_SCR_ACTIVITION:
-	case II_SYS_SYS_EVE_CHRISTMASTEA01:
-	case II_CHR_SYS_SCR_NEWACTIVITION:
 		{
 			if( !( IsSMMode( SM_ACTPOINT ) ) )
 				SetSMMode( SM_ACTPOINT, pItemProp->dwCircleTime );
