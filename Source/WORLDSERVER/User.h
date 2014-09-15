@@ -471,7 +471,7 @@ public:
 	void			AddSetActionPoint( int nAP );	
 	void			AddSetTarget( OBJID idTarget );
 	void			AddSetDuel( CMover* pMover );
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	void			AddPKValue();
 #else // __VER >= 8 // __S8_PK
 	void			UpdatePlayerEnemy( BYTE byType, OBJID objid );
@@ -777,7 +777,9 @@ public:
 
 };
 
-#define	SEC_SAVEPLAYER	900
+#ifdef __SAVEPLAYER
+#define	SEC_SAVEPLAYER	60 //900
+#endif //__SAVEPLAYER
 
 class CDPSrvr;
 #if __VER >= 12 // __LORD
@@ -802,9 +804,13 @@ public:
 	void			DestroyPlayer( CUser* pUser );
 	LONG			GetCount()	{	return m_lCount;	}
 	void			RemoveAllUsers();
+#ifdef __SAVEPLAYER
+	void			SaveAllPlayers();
+#endif //__SAVEPLAYER
 	CUser*			AddUser( DPID dpidCache, DPID dpidUser, DPID dpidSocket );
 	void			RemoveUser( DWORD dwSerial );
 	CUser*			GetUser( DPID dpidCache, DPID dpidUser );
+
 	CUser*			GetUserByPlayerID( u_long idPlayer );
 //	void			Notify();
 #ifdef __LAYER_1015
@@ -865,7 +871,7 @@ public:
 	void			AddNearSetChangeJob( CMover* pMover, int nJob, LPSKILL lpSkill );
 	void			AddModifyMode( CUser* pUser );
 	void			AddStateMode( CUser* pUser, BYTE nFlag );
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	void			AddSetSlaughterPoint( CMover* pMover, int nVal, int nNumKill );
 #endif // __VER < 8 // __S8_PK
 	void			AddSetFame( CMover* pMover, int nFame );
@@ -971,7 +977,7 @@ public:
 
 	void			AddMotionArrive( CMover* pMover, OBJMSG objmsg );
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	void			AddPKPink( CMover* pMover, BYTE byPink );
 	void			AddPKPropensity( CMover* pMover );
 #endif // __VER >= 8 // __S8_PK

@@ -976,7 +976,7 @@ void CDPSrvr::OnRevival( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 		{
 			pUser->m_nDead = PROCESS_COUNT * 5;		// 죽은 후 5초간은 무적
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			if( pUser->IsChaotic() )
 			{
 				pUser->SubDieDecExp( TRUE, 0, TRUE );		// 죽어서 부활하면 겸치 깎임,.
@@ -1158,13 +1158,20 @@ void CDPSrvr::OnRevivalLodestar( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE
 #endif	// __JEFF_11_4
 			)
 		{
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			if( pWorld->GetID() != pWorld->m_dwIdWorldRevival && pWorld->m_dwIdWorldRevival != 0 )
 				pRgnElem	= g_WorldMng.GetRevivalPosChao( pWorld->m_dwIdWorldRevival, pWorld->m_szKeyRevival );
 			if( NULL == pRgnElem )	// Find near revival pos
 				pRgnElem	= g_WorldMng.GetNearRevivalPosChao( pWorld->GetID(), pUser->GetPos() );	
 #else // __VER >= 8 // __S8_PK
-			pRgnElem	= g_WorldMng.GetNearRevivalPosChao( pWorld->GetID(), pUser->GetPos() );
+			if( IsValidObj( pUser ) )
+			{
+			//	pRgnElem	= g_WorldMng.GetNearRevivalPosChao( pWorld->GetID(), pUser->GetPos() );
+			pRgnElem = g_WorldMng.GetRevivalPos(WI_WORLD_KEBARAS, "spawn");
+			pUser->Replace( g_uIdofMulti, pRgnElem->m_dwWorldId, pRgnElem->m_vPos, REPLACE_NORMAL, nDefaultLayer );
+			}
+			else
+				return;
 #endif // __VER >= 8 // __S8_PK
 		}
 		else
@@ -1185,6 +1192,151 @@ void CDPSrvr::OnRevivalLodestar( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE
 
 void CDPSrvr::OnRevivalLodelight( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
 {
+#ifdef __LODELIGHT
+	CWorld* pWorld;
+	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
+	if( IsValidObj( pUser ) && ( pWorld = pUser->GetWorld() ) )
+	{
+		pUser->m_Resurrection_Data.bUseing = FALSE;
+
+		if( pUser->IsDie() == FALSE )
+		{
+			// 이리로 들어오는 경우가 생긴다. 생각엔 이미 한번 여길 들어왔다가 렉 걸린동안 
+			// 로드스타를 또 누르면 들어오는게 아닌가 싶다.
+			return;
+		}
+
+		CCommonCtrl* pCtrl	= CreateExpBox( pUser );
+		if( pCtrl )
+		{
+			pCtrl->AddItToGlobalId();
+			pWorld->ADDOBJ( pCtrl, FALSE, pUser->GetLayer() );
+			g_dpDBClient.SendLogExpBox( pUser->m_idPlayer, pCtrl->GetId(), pCtrl->m_nExpBox );
+		}
+		
+		BOOL bGuildCombat = FALSE;
+		
+		g_dpDBClient.SendLogLevelUp( (CMover*)pUser, 9 );	// 로드스타로 부활 로그
+
+		pUser->m_nDead = PROCESS_COUNT * 5;		// 죽은 후 5초간은 무적
+		float fRate		= pUser->SubDieDecExp();		// 죽어서 부활하면 겸치 깎임,.
+		pUser->m_pActMover->ClearState();
+
+		if( pWorld->GetID() == WI_WORLD_GUILDWAR )
+			fRate = 1.0f;
+#if __VER >= 11 // __GUILD_COMBAT_1TO1
+		else if( g_GuildCombat1to1Mng.IsPossibleUser( pUser ) )
+			fRate = 1.0f;
+#endif // __GUILD_COMBAT_1TO1
+#if __VER >= 9 // __S_9_ADD
+		else
+			fRate = 0.2f;
+#endif // __S_9_ADD
+		
+#if __VER < 9 // __S_9_ADD	// 아래에서 채워주고 패킷까지 보내버리는 것으로 수정
+		pUser->SetHitPoint( (int)(pUser->GetMaxHitPoint() * fRate) );	// hp 회복
+		
+		int nVal	= (int)(pUser->GetMaxManaPoint() * fRate);			// mp 회복
+		if( pUser->GetManaPoint() < nVal )
+			pUser->SetManaPoint( nVal );
+		
+		nVal	= (int)(pUser->GetMaxFatiguePoint() * fRate);			// fp 회복
+		if( pUser->GetFatiguePoint() < nVal )
+			pUser->SetFatiguePoint( nVal );
+#endif // __S_9_ADD
+
+		if( pWorld->GetID() == WI_WORLD_GUILDWAR )
+		{
+			g_UserMng.AddHdr( pUser, SNAPSHOTTYPE_REVIVAL );
+			g_GuildCombatMng.JoinObserver( pUser );
+		}
+		else
+		{
+			g_UserMng.AddHdr( pUser, SNAPSHOTTYPE_REVIVAL_TO_LODELIGHT );
+		}		
+
+#if __VER >= 9 // __S_9_ADD
+		pUser->SetPointParam( DST_HP, (int)(pUser->GetMaxHitPoint() * fRate) );	// hp 회복
+		
+		int nVal	= (int)(pUser->GetMaxManaPoint() * fRate);			// mp 회복
+		//if( pUser->GetManaPoint() < nVal )
+			pUser->SetPointParam( DST_MP, nVal );
+		
+		nVal	= (int)(pUser->GetMaxFatiguePoint() * fRate);			// fp 회복
+		//if( pUser->GetFatiguePoint() < nVal )
+			pUser->SetPointParam( DST_FP, nVal );
+			
+
+		#endif // __S_9_ADD
+
+		if( pWorld->GetID() == WI_WORLD_GUILDWAR )
+			return;
+
+#if __VER >= 12 // __SECRET_ROOM
+		if( CSecretRoomMng::GetInstance()->IsInTheSecretRoom( pUser ) )
+		{
+			pUser->REPLACE( g_uIdofMulti, WI_WORLD_MADRIGAL, CSecretRoomMng::GetInstance()->GetRevivalPos( pUser ), REPLACE_NORMAL, nDefaultLayer );
+			return;
+		}
+#endif // __SECRET_ROOM
+		
+		// 보스몹 맵에서 죽었다...
+		// 그러면 부활은 마을에서...
+		if( pWorld->GetID() == WI_DUNGEON_MUSCLE || pWorld->GetID() == WI_DUNGEON_KRRR || pWorld->GetID() == WI_DUNGEON_BEAR )
+		{			
+			pUser->REPLACE( g_uIdofMulti, WI_WORLD_MADRIGAL, D3DXVECTOR3( 6968.0f, 0.0f, 3328.8f ), REPLACE_NORMAL, nDefaultLayer );
+			return;
+		}
+//FLOWS LODELIGHT ADD
+		if( pUser->m_idMarkingWorld != 0 && !pUser->IsChaotic() )
+		{
+			pUser->REPLACE( g_uIdofMulti, pUser->m_idMarkingWorld, pUser->m_vMarkingPos, REPLACE_FORCE, nDefaultLayer );
+//			pUser->AddDefinedText(TID_GAME_LODELIGHT, "");
+//			pUser->AddDefinedText(TID_GAME_LODELIGHT, "");
+			return;
+		}
+
+		PRegionElem	pRgnElem	= NULL;
+		if( pUser->IsChaotic()
+#ifdef __JEFF_11_4
+			&& !pWorld->IsArena()
+#endif	// __JEFF_11_4
+			)
+		{
+#ifdef __NEWPKSYS // __S8_PK
+			if( pWorld->GetID() != pWorld->m_dwIdWorldRevival && pWorld->m_dwIdWorldRevival != 0 )
+				pRgnElem	= g_WorldMng.GetRevivalPosChao( pWorld->m_dwIdWorldRevival, pWorld->m_szKeyRevival );
+			if( NULL == pRgnElem )	// Find near revival pos
+				pRgnElem	= g_WorldMng.GetNearRevivalPosChao( pWorld->GetID(), pUser->GetPos() );	
+#else // __VER >= 8 // __S8_PK
+			if( IsValidObj( pUser ) )
+			{
+			//	pRgnElem	= g_WorldMng.GetNearRevivalPosChao( pWorld->GetID(), pUser->GetPos() );
+			pRgnElem = g_WorldMng.GetRevivalPos(WI_WORLD_KEBARAS, "spawn");
+			pUser->Replace( g_uIdofMulti, pRgnElem->m_dwWorldId, pRgnElem->m_vPos, REPLACE_NORMAL, nDefaultLayer );
+			}
+			else
+				return;
+#endif // __VER >= 8 // __S8_PK
+		}
+		else
+		{
+			if( pUser->m_idMarkingWorld = 0){
+				if( pWorld->GetID() != pWorld->m_dwIdWorldRevival && pWorld->m_dwIdWorldRevival != 0 ){
+					pRgnElem	= g_WorldMng.GetRevivalPos( pWorld->m_dwIdWorldRevival, pWorld->m_szKeyRevival );
+				}
+				if( NULL == pRgnElem ){	// Find near revival pos
+					pRgnElem	= g_WorldMng.GetNearRevivalPos( pWorld->GetID(), pUser->GetPos() );	
+				}
+			}
+		}
+
+		if( pRgnElem ) 
+			pUser->REPLACE( g_uIdofMulti, pRgnElem->m_dwWorldId, pRgnElem->m_vPos, REPLACE_FORCE, nRevivalLayer );
+		else 
+			pUser->REPLACE( g_uIdofMulti, pWorld->GetID(), pUser->GetPos(), REPLACE_FORCE, pUser->GetLayer() );
+	}
+#endif //__LODELIGHT
 }
 
 void CDPSrvr::OnSetLodelight( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
@@ -1192,8 +1344,10 @@ void CDPSrvr::OnSetLodelight( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lp
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
+#ifndef __LODELIGHT
 		if( !CNpcChecker::GetInstance()->IsCloseNpc( MMI_MARKING, pUser->GetWorld(), pUser->GetPos() ) )
 			return;
+#endif //__LODELIGHT
 		pUser->SetMarkingPos();
 		pUser->AddDefinedText( TID_GAME_LODELIGHT, "" );
 	}
@@ -2758,7 +2912,7 @@ void CDPSrvr::OnOpenShopWnd( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 			if( pVendor->IsNPC() == FALSE )		// 대상이 NPC가 아니면?
 				return;
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			if( pUser->IsChaotic() )
 			{
 				CHAO_PROPENSITY Propensity = prj.GetPropensityPenalty( pUser->GetPKPropensity() );
@@ -2859,7 +3013,7 @@ void CDPSrvr::OnBuyItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 		nCost = (int)( prj.m_EventLua.GetShopBuyFactor() * nCost );
 #endif // __SHOP_COST_RATE
 		
-#if __VER < 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		// 직위에 따른 상점가격 변동
 		KarmaProp* pProp = prj.GetKarmaProp( pUser->m_nSlaughter );
 		if( pProp )
@@ -3176,16 +3330,17 @@ void CDPSrvr::OnSellItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf,
 		OnLogItem( aLogItem, pItemElem, nNum );
 		int nCost	= (int)pItemElem->GetCost() / 4;
 
-#if __VER < 8 // __S8_PK
-		KarmaProp* pProp = prj.GetKarmaProp( pUser->m_nSlaughter );
-		if( pProp )
+#ifdef __OLDPKSYS // __S8_PK
+		KarmaProp* pProp1 = prj.GetKarmaProp( pUser->m_nSlaughter );
+		if( pProp1 )
+
 		{
-			if( pProp->nGrade == -6 )
+			if( pProp1->nGrade == -6 )
 				return;
 
-			if( pProp->fSellPenaltyRate != 0.0f )
+			if( pProp1->fSellPenaltyRate != 0.0f )
 			{
-				nCost = (int)( nCost * pProp->fSellPenaltyRate );
+				nCost = (int)( nCost * pProp1->fSellPenaltyRate );
 			}
 		}
 #endif // __VER < 8 // __S8_PK
@@ -3218,7 +3373,7 @@ void CDPSrvr::OnOpenBankWnd( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 	{
 		if( dwId == NULL_ID && !CNpcChecker::GetInstance()->IsCloseNpc( MMI_BANKING, pUser->GetWorld(), pUser->GetPos() ) )
 			return;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		if( pUser->IsChaotic() )
 		{
 			CHAO_PROPENSITY Propensity = prj.GetPropensityPenalty( pUser->GetPKPropensity() );
@@ -8968,7 +9123,7 @@ void CDPSrvr::OnPVendorOpen( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 		if( pUser->m_pActMover->IsFly() )
 			return;
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		if( pUser->IsChaotic() )
 		{
 			CHAO_PROPENSITY Propensity = prj.GetPropensityPenalty( pUser->GetPKPropensity() );
@@ -10092,7 +10247,7 @@ CCommonCtrl* CreateExpBox( CUser* pUser )
 	pMover->GetDieDecExp( nLevel, fRate, fDecExp, bPxpClear, bLvDown );
 	if( fDecExp )
 	{
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 		pMover->GetDieDecExpRate( fDecExp, 0, FALSE );
 #else // __VER >= 8 // __S8_PK
 		pMover->GetDieDecExpRate( fDecExp, 0, pMover->m_nSlaughter );

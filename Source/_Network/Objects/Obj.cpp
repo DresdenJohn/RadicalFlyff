@@ -190,7 +190,7 @@ CMover::CMover()
 	m_idparty = 0;
 	m_idGuild	= 0;
 	m_idWar	= 0;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS
 	m_dwPKTime			= 0;			/// 핑크 상태 시간
 	m_nPKValue			= 0;			/// PK 수치
 	m_dwPKPropensity	= 0;			/// PK 성향
@@ -778,7 +778,7 @@ void CMover::Copy( CMover * pMover, BOOL bAll )
 		SetGold( pMover->GetGold() );
 		m_nJob	= pMover->m_nJob;
 		m_idparty	= pMover->m_idparty;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS
 		m_dwPKTime			= pMover->m_dwPKTime;
 		m_nPKValue			= pMover->m_nPKValue;
 		m_dwPKPropensity	= pMover->m_dwPKPropensity;

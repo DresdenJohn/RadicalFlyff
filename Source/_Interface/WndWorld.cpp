@@ -2912,15 +2912,17 @@ void CWndWorld::RenderSelectObj( C2DRender* p2DRender, CObj* pObj )
 						}
 					}
 					// 운영자라면 선택된 캐릭터의 최대HP와 현재 남은 HP를 표시해준다.
-					if( g_pPlayer->IsAuthHigher( AUTH_GAMEMASTER ) )
+					if( g_pPlayer->IsAuthHigher( AUTH_GENERAL ) )
 					{
 						CString string;
-						if( pMover->IsPlayer() )
+						if( pMover->IsPlayer() && g_pPlayer->IsAuthHigher( AUTH_GAMEMASTER ) )
 #if __VER >= 8 // __S8_PK
 							string.Format( prj.GetText( TID_GAME_SELECT_OBJECT_INFORMATION_PLAYER ), pMover->GetHitPoint(), pMover->GetMaxHitPoint(), pMover->GetGold(), (float)pMover->GetExpPercent()/100.0f, pMover->GetExp1(), pMover->GetMaxExp1() );
 #else // __VER >= 8 // __S8_PK
 							string.Format( "HP(%d/%d),Gold(%d),Karma(%d)", pMover->GetHitPoint(), pMover->GetMaxHitPoint(), pMover->GetGold(), pMover->GetKarma() );
 #endif // __VER >= 8 // __S8_PK
+						else if ( pMover-> IsPlayer() )
+							string.Format("");
 						else
 							string.Format( prj.GetText( TID_GAME_SELECT_OBJECT_INFORMATION_MONSTER ), pMover->GetHitPoint(), pMover->GetMaxHitPoint() );
 						strTemp += string;

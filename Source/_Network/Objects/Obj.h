@@ -1012,7 +1012,7 @@ public:
 	u_long			m_idparty;
 	u_long			m_idGuild;
 	u_long			m_idWar;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS
 	DWORD			m_dwPKTime;					/// 핑크 상태 시간
 	int				m_nPKValue;					/// PK 수치
 	DWORD			m_dwPKPropensity;			/// PK 성향

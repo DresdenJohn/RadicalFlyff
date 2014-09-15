@@ -543,7 +543,7 @@ void CUser::Process()
 	}
 
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	if( IsPKPink() && GetTickCount() > GetPKPink() )
 	{
 		SetPKPink( 0 );
@@ -2573,7 +2573,7 @@ void CUser::AddSetDuel( CMover* pMover )
 	
 }
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 void CUser::AddPKValue()
 {
 	if( IsDelete() )	return;
@@ -3920,6 +3920,20 @@ CUser* CUserMng::GetUser( DPID dpidCache, DPID dpidUser )
 		return NULL;
 }
 
+#ifdef __SAVEPLAYER
+void CUserMng::SaveAllPlayers()
+{
+	map<DWORD, CUser*>::iterator it;
+	CWorld* pWorld;
+	for( it = m_users.begin(); it != m_users.end(); ++it )
+	{
+		pWorld = it->second->GetWorld();
+		g_dpDBClient.SavePlayer( it->second, pWorld->GetID(), it->second->GetPos(), it->second->GetLayer() );
+		DestroyPlayer( it->second );
+	}
+
+}
+#endif
 CUser* CUserMng::GetUserByPlayerID( u_long idPlayer )
 {
 	return (CUser*)prj.GetUserByID( idPlayer );
@@ -4023,7 +4037,7 @@ void CUserMng::DestroyPlayer( CUser* pUser )
 			PRegionElem pRgnElem	= NULL;
 			if( pUser->IsChaotic() )
 			{
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 				if( pWorld->GetID() != pWorld->m_dwIdWorldRevival && pWorld->m_dwIdWorldRevival != 0 )
 					pRgnElem	= g_WorldMng.GetRevivalPosChao( pWorld->m_dwIdWorldRevival, pWorld->m_szKeyRevival );
 				
@@ -5018,7 +5032,7 @@ void CUserMng::AddMotionArrive( CMover* pMover, OBJMSG objmsg )
 	NEXT_VISIBILITYRANGE( pMover )
 }
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 void CUserMng::AddPKPink( CMover* pMover, BYTE byPink )
 {
 	CAr ar;
@@ -5144,7 +5158,7 @@ void CUserMng::AddStateMode( CUser* pUser, BYTE nFlag )
 	NEXT_VISIBILITYRANGE( pUser )
 }
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 void CUserMng::AddSetSlaughterPoint( CMover* pMover, int nVal, int nNumKill )
 {
 	CAr ar;

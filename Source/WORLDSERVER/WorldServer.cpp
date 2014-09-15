@@ -430,6 +430,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 void ExitInstance( void )
 {
+#ifdef __SAVEPLAYER
+	g_UserMng.SaveAllPlayers();
+#endif //__SAVEPLAYER
 	CRunObject::GetInstance()->Close();
 	/*
 #ifdef __GIFTBOX0213
@@ -610,6 +613,7 @@ BOOL Script( LPCSTR lpszFileName )
 		}			
 		else if( s.Token == "SCHOOL" )
 		{
+			//NEVER RE-COMMENT THIS. THIS BREAKS EVERYTHING.
 			//g_eLocal.SetState( EVE_SCHOOL, 1 );
 		}
 		else if( s.Token == "GUILDCOMBAT")
@@ -622,7 +626,7 @@ BOOL Script( LPCSTR lpszFileName )
 		}
 		else if( s.Token == "respawn" )
 		{
-			g_eLocal.SetState( EVE_RESPAWN, (BYTE)s.GetNumber() );
+			g_eLocal.SetState( EVE_RESPAWN, 1 );
 		}
 #ifdef __S_RECOMMEND_EVE
 		else if( s.Token == "RECOMMEND" )
@@ -644,6 +648,13 @@ BOOL Script( LPCSTR lpszFileName )
 			g_eLocal.SetState( EVE_ARENA, 1 );
 		}
 #endif // __JEFF_11_4
+
+#ifdef __OLDPKSYS
+		else if( s.Token == "BOUNTY" )
+		{
+			g_eLocal.SetState( EVE_BOUNTY, 1 );
+		}
+#endif // __OLDPKSYS
 
 #if __VER >= 12 // __SECRET_ROOM
 		else if( s.Token == "SECRETROOM" )
