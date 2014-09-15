@@ -137,7 +137,7 @@ void CWndConfirmSell::OnDraw( C2DRender* p2DRender )
 //	TCHAR szNumberGold[ 64 ];
 	CString szNumberGold;
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	KarmaProp* pProp = prj.GetKarmaProp( g_pPlayer->m_nSlaughter );
 	if( pProp && pProp->fSellPenaltyRate != 0 )
 		BuyGold *= pProp->fSellPenaltyRate;
@@ -196,7 +196,7 @@ BOOL CWndConfirmSell::Initialize( CWndBase* pWndParent, DWORD dwWndId )
 #if __VER >= 12 // __TAX
 	BuyGold -= ( static_cast<DWORD>(BuyGold * CTax::GetInstance()->GetSalesTaxRate( g_pPlayer )) );
 #endif // __TAX
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	KarmaProp* pProp = prj.GetKarmaProp( g_pPlayer->m_nSlaughter );
 	if( pProp && pProp->fSellPenaltyRate != 0 )
 		BuyGold *= pProp->fSellPenaltyRate;
@@ -309,7 +309,7 @@ void CWndConfirmBuy::OnChangeBuyCount( DWORD dwBuy )
 
 	DWORD dwTotalBuy = 0;
 	DWORD dwCost = 0;
-#if __VER >= 8 // __S8_PK
+//#ifdef __NEWPKSYS // __S8_PK
 #if __VER >= 11 // __CSC_VER11_3
 	if(m_nBuyType == 0)
 	{
@@ -346,7 +346,7 @@ void CWndConfirmBuy::OnChangeBuyCount( DWORD dwBuy )
 	
 	szString.Format("%u", dwTotalBuy);
 //	_itot( dwTotalBuy, szString, 10 );	// integer to string
-#else // 
+/*#else // 
 	KarmaProp* pProp = prj.GetKarmaProp( g_pPlayer->m_nSlaughter );
 	if( pProp )
 	{
@@ -364,7 +364,7 @@ void CWndConfirmBuy::OnChangeBuyCount( DWORD dwBuy )
 //		_itot( dwTotalBuy, szString, 10 );	// integer to string
 		szString.Format("%u", dwTotalBuy);
 	}
-#endif // __VER < 8 // __S8_PK
+#endif // __VER < 8 // __S8_PK*/
 	m_pStaticGold->SetTitle( szString );
 }
 
@@ -386,6 +386,7 @@ BOOL CWndConfirmBuy::Initialize( CWndBase* pWndParent, DWORD dwWndId )
 	
 #if __VER >= 11 // __CSC_VER11_3
 	DWORD dwCost;
+	Error( "buytype %i", m_nBuyType );
 	if(m_nBuyType == 0)
 	{
 		dwCost = m_pItemElem->GetCost();

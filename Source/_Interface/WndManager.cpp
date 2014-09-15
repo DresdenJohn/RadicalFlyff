@@ -5693,12 +5693,12 @@ void CWndMgr::PutItemGold( CMover* pMover, CItemElem* pItemElem, CEditString* pE
 			int nCost = pItemElem->GetCost();
 #endif //__CSC_VER11_3
 			nCost = (int)(nCost * prj.m_fShopCost );
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 			KarmaProp* pProp = prj.GetKarmaProp( pMover->m_nSlaughter );
 			if( pProp )
 			{
 				if( pProp->fDiscountRate != 0 )
-					nCost = nCost  * pProp->fDiscountRate;
+					nCost = (int)(nCost  * pProp->fDiscountRate);
 			}
 #endif // __VER < 8 // __S8_PK
 #if __VER >= 11 // __MA_VER11_02
@@ -5760,7 +5760,7 @@ void CWndMgr::PutItemGold( CMover* pMover, CItemElem* pItemElem, CEditString* pE
 				if( CTax::GetInstance()->IsApplyTaxRate( g_pPlayer, pItemElem ) )
 					dwCostTem -= ( static_cast<DWORD>(dwCostTem * CTax::GetInstance()->GetSalesTaxRate( g_pPlayer )) );
 			#endif // __TAX
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 				KarmaProp* pProp = prj.GetKarmaProp( pMover->m_nSlaughter );
 				if( pProp && pProp->fSellPenaltyRate != 0 )
 					dwCostTem *= pProp->fSellPenaltyRate;

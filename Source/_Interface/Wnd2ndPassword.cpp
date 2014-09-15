@@ -126,7 +126,7 @@ BOOL CWnd2ndPassword::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 					CNetwork::GetInstance().OnEvent( CACHE_CONNECTED );
 					if( m_nSelectCharacter != -1 && g_Neuz.m_apPlayer[ m_nSelectCharacter ] )
 					{
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 						// 한국은 2005/11/1 PK서버가 없어지고, 아래의 코드가 있으면 카오인 유저는 모든 서버에 접속 할 수 없으므로 막는다.
 						if( ::GetLanguage() != LANG_KOR )		
 						{

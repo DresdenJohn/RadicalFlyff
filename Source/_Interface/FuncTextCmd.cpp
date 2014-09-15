@@ -2466,6 +2466,23 @@ BOOL TextCmd_Teleport( CScanner& scanner )
 #endif // __WORLDSERVER
 	return TRUE;
 }
+BOOL TextCmd_TeleportPK( CScanner& scanner )        
+{  
+#ifdef __WORLDSERVER
+	#ifdef __OLDPKSYS
+	CUser* pUser = (CUser*)scanner.dwValue;
+	
+	if( IsValidObj( pUser ) )
+	{
+		PRegionElem pRgnElem = NULL;
+		pRgnElem = g_WorldMng.GetRevivalPos(WI_WORLD_KEBARAS, "spawn");
+		pUser->Replace( g_uIdofMulti, pRgnElem->m_dwWorldId, pRgnElem->m_vPos, REPLACE_NORMAL, nDefaultLayer );
+	}
+	#endif
+	return TRUE;
+#endif
+	return TRUE;
+}
 BOOL TextCmd_Out( CScanner& scanner )              
 { 
 #ifdef __WORLDSERVER
@@ -4058,24 +4075,53 @@ BOOL TextCmd_RemoveCompleteQuest( CScanner & s )
 #endif
 	return TRUE;
 }
-
-BOOL TextCmd_PvpParam( CScanner& scanner )
+BOOL TextCmd_DuelPoint( CScanner& scanner )
 {
 #if defined(__WORLDSERVER)
 	CUser* pUser	= (CUser*)scanner.dwValue;
 	int	nFame       = scanner.GetNumber();
-	int nSlaughter  = scanner.GetNumber();
+//	int nSlaughter  = scanner.GetNumber();
 
 	pUser->m_nFame  = nFame;
 	g_UserMng.AddSetFame( pUser, nFame );
 
-#if __VER < 8 // __S8_PK
+/*#ifdef __OLDPKSYS // __S8_PK
 	pUser->ChangeSlaughter( CHANGE_SLAUGHTER_SET, NULL, nSlaughter );
-#endif // __VER < 8 // __S8_PK
+
+
+#endif // __VER < 8 // __S8_PK*/
 #endif
 	return TRUE;
 }
-#if __VER >= 8 // __S8_PK
+
+
+#ifdef __OLDPKSYS //V6PK
+BOOL TextCmd_KarmaPoint( CScanner& scanner )
+{
+#ifdef __WORLDSERVER
+	CUser*	pUser			= (CUser*)scanner.dwValue;
+//	int		nNumKill		= scanner.GetNumber();
+	int		nSlaughter		= scanner.GetNumber();
+
+/*	if( nNumKill >= 0 )
+	{
+		pUser->ChangeNumkill( nNumKill );
+#if __VER >= 13 // __HONORABLE_TITLE			// 달인
+		pUser->CheckHonorStat();
+		pUser->AddHonorListAck();
+		g_UserMng.AddHonorTitleChange( pUser, pUser->m_nHonor);
+#endif	// __HONORABLE_TITLE			// 달인
+	}*/
+
+//	if( nSlaughter >= 0 )
+//	{
+		pUser->ChangeSlaughter( CHANGE_SLAUGHTER_SET, NULL, nSlaughter );
+//	}
+#endif // __WORLDSERVER
+	return TRUE;
+}
+#endif
+#ifdef __NEWPKSYS //__S8_PK
 BOOL TextCmd_PKParam( CScanner& scanner )
 {
 #ifdef __WORLDSERVER
@@ -4103,6 +4149,22 @@ BOOL TextCmd_PKParam( CScanner& scanner )
 	return TRUE;
 }
 #endif // __VER >= 8 // __S8_PK
+BOOL TextCmd_PvpParam( CScanner& scanner )
+{
+#if defined(__WORLDSERVER)
+	CUser* pUser	= (CUser*)scanner.dwValue;
+	int	nFame       = scanner.GetNumber();
+	int nSlaughter  = scanner.GetNumber();
+
+	pUser->m_nFame  = nFame;
+	g_UserMng.AddSetFame( pUser, nFame );
+
+#ifdef __OLDPKSYS // __S8_PK
+	pUser->ChangeSlaughter( CHANGE_SLAUGHTER_SET, NULL, nSlaughter );
+#endif // __VER < 8 // __S8_PK
+#endif
+	return TRUE;
+}
 
 #ifdef _DEBUG
 BOOL TextCmd_TransyItemList( CScanner& scanner )
@@ -4187,6 +4249,10 @@ BOOL TextCmd_GuildCombatOpen( CScanner& scanner )
 		pUser->AddText( chMessage );
 		return TRUE;
 	}
+	else
+	{
+		pUser->AddText( "Siege is being opened." );
+	}
 
 	g_GuildCombatMng.GuildCombatOpen();
 #endif // __WORLDSERVER
@@ -4215,7 +4281,11 @@ BOOL TextCmd_GuildCombatClose( CScanner& scanner )
 		pUser->AddText( chMessage );
 		return TRUE;
 	}
-
+	else
+	{
+		pUser->AddText( "Siege is being closed." );
+	}
+	
 	if( nClose == 0 )
 		g_GuildCombatMng.SetGuildCombatClose( TRUE );
 	else
@@ -4234,6 +4304,10 @@ BOOL TextCmd_GuildCombatNext( CScanner& scanner )
 		sprintf( chMessage, "Not GuildCombat Close :: Is CLOSE_STATE" );
 		pUser->AddText( chMessage );
 		return TRUE;
+	}
+	else
+	{
+		pUser->AddText( "Siege forced to continue. [Next]" );
 	}
 	
 	g_GuildCombatMng.m_dwTime = GetTickCount();
@@ -5192,14 +5266,20 @@ BEGINE_TEXTCMDFUNC_MAP
 	ON_TEXTCMDFUNC( TextCmd_GuildRanking,          "GuildRanking",       "ranking",        "길랭",           "길랭",    TCM_SERVER, AUTH_GAMEMASTER2   , "" )
 	ON_TEXTCMDFUNC( TextCmd_FallSnow,              "FallSnow",           "fs",             "눈와라",         "눈와",    TCM_SERVER, AUTH_GAMEMASTER2   , "눈 내리기 토글" )
 	ON_TEXTCMDFUNC( TextCmd_StopSnow,              "StopSnow",           "ss",             "눈그만",         "눈끝",    TCM_SERVER, AUTH_GAMEMASTER2   , "눈 내리기 못하게 토글" )
-	ON_TEXTCMDFUNC( TextCmd_FallRain,              "FallRain",           "frain",          "비와라",         "비와",    TCM_SERVER, AUTH_GAMEMASTER2   , "비 내리기 토글" )
+	ON_TEXTCMDFUNC( TextCmd_FallRain,              "FallRain",           "fr",          "비와라",         "비와",    TCM_SERVER, AUTH_GAMEMASTER2   , "비 내리기 토글" )
 	ON_TEXTCMDFUNC( TextCmd_StopRain,              "StopRain",           "sr",             "비그만",         "비끝",    TCM_SERVER, AUTH_GAMEMASTER2   , "비 내리기 못하게 토글" )
 	ON_TEXTCMDFUNC( TextCmd_System,                "system",             "sys",            "알림",           "알",      TCM_SERVER, AUTH_GAMEMASTER2   , "시스템 메시지" )
 
 	// GM_LEVEL_3
-	ON_TEXTCMDFUNC( TextCmd_PvpParam,              "PvpParam",           "p_Param",        "PVP설정",        "피설",    TCM_SERVER, AUTH_GAMEMASTER3, "PVP(카오)설정" )
-#if __VER >= 8 // __S8_PK
-	ON_TEXTCMDFUNC( TextCmd_PKParam,			   "PKParam",			 "pkparam",		   "PK설정",		 "pk설정",  TCM_SERVER, AUTH_GAMEMASTER3, "카오설정" )
+	ON_TEXTCMDFUNC( TextCmd_PvpParam,              "PvpParam",           "p_Param",        "PVP설정",        "피설",    TCM_SERVER, AUTH_ADMINISTRATOR, "PVP(카오)설정" )
+
+	ON_TEXTCMDFUNC( TextCmd_DuelPoint,              "DuelPoint",           "duelp",        "PVP설정",        "피설",    TCM_SERVER, AUTH_ADMINISTRATOR, "PVP(카오)설정" )
+#ifdef __NEWPKSYS //__S8_PK
+	ON_TEXTCMDFUNC( TextCmd_PKParam,			   "PKParam",			 "pkparam",		   "PK설정",		 "pk설정",  TCM_SERVER, AUTH_ADMINISTRATOR, "카오설정" )
+#endif
+
+#ifdef __OLDPKSYS //V6PK
+	ON_TEXTCMDFUNC( TextCmd_KarmaPoint,              "KarmaPoint",           "kp",        "PVP설정",        "피설",    TCM_SERVER, AUTH_GAMEMASTER3, "PVP(카오)설정" )
 #endif // __VER >= 8 // __S8_PK
 	ON_TEXTCMDFUNC( TextCmd_Undying,               "undying",            "ud",             "무적",           "무",      TCM_BOTH  , AUTH_GAMEMASTER3   , "무적" )
 	ON_TEXTCMDFUNC( TextCmd_Undying2,              "undying2",           "ud2",            "반무적",         "반무",    TCM_BOTH  , AUTH_GAMEMASTER3   , "반무적" )

@@ -601,7 +601,7 @@ void CWndQuest::UpdateText()
 						strCond += strTemp + "\n";
 					}
 				}
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 				if( pQuestProp->m_nEndCondKarmaPoint ) 
 				{
 					if( pQuestProp->m_nEndCondKarmaComp == 0 )
@@ -779,7 +779,7 @@ void CWndQuest::UpdateText()
 					}
 				}
 				//////////////////////////////////////////////////////
-#if __VER >= 8 // __S8_PK
+//#ifdef __NEWPKSYS //( defined(__NEWPKSYS) || defined(__OLDPKSYS) ) // __S8_PK
 				CString strEndCondOneItem;
 				CString strEndCondOneItemComplete;
 				for( i = 0; i < pQuestProp->m_nEndCondOneItemNum; i++ )
@@ -868,7 +868,7 @@ void CWndQuest::UpdateText()
 					strCond += strEndCondOneItemComplete + strTemp + "#ns#nc\n";
 					strCond += strEndCondOneItem;
 				}
-#else // __VER >= 8 // __S8_PK
+//#else // __VER >= 8 // __S8_PK
 				if( pQuestProp->m_nEndCondChaotic ) 
 				{
 					if( pQuestProp->m_nEndCondChaotic == 1 )
@@ -889,7 +889,7 @@ void CWndQuest::UpdateText()
 							strCond += strTemp + "\n";
 					}
 				}
-#endif // __VER < 8 // __S8_PK
+//#endif // __VER < 8 // __S8_PK
 				if( pQuestProp->m_szEndCondDlgCharKey[ 0 ] )
 				{
 					LPCHARACTER lpCharacter = prj.GetCharacter( pQuestProp->m_szEndCondDlgCharKey );
@@ -1025,13 +1025,13 @@ void CWndQuest::UpdateText()
 			strTemp.Format( GETTEXT( TID_QUEST_SKILLPOINT ) );
 			strReward += strTemp + "\n";
 		}
-#if __VER >= 8 // __S8_PK
+//#ifdef __NEWPKSYS // __S8_PK
 		if( pQuestProp->m_nEndRewardPKValueMin )
 		{
 			strTemp.Format( GETTEXT( TID_QUEST_PK_REWARD_PKVALUE ) );
 			strReward += strTemp + "\n";
 		}
-#else // __VER >= 8 // __S8_PK
+//#else // __VER >= 8 // __S8_PK
 		if( pQuestProp->m_nEndRewardKarmaStyle )
 		{
 			if( pQuestProp->m_bEndRewardHide == FALSE || bComplete == TRUE )
@@ -1050,7 +1050,7 @@ void CWndQuest::UpdateText()
 			}
 			strReward += strTemp + "\n";
 		}
-#endif // __VER < 8 // __S8_PK
+//#endif // __VER < 8 // __S8_PK
 		pTextReward->SetString( strReward );
 	}
 	else
@@ -1845,13 +1845,13 @@ void CWndQuestDetail::UpdateQuestDetailText( DWORD dwQuestID, LPQUEST lpQuest, B
 		strTemp.Format( GETTEXT( TID_QUEST_SKILLPOINT ) );
 		strReward += strTemp + "\n";
 	}
-#if __VER >= 8 // __S8_PK
+//#ifdef __NEWPKSYS // __S8_PK
 	if( pQuestProp->m_nEndRewardPKValueMin )
 	{
 		strTemp.Format( GETTEXT( TID_QUEST_PK_REWARD_PKVALUE ) );
 		strReward += strTemp + "\n";
 	}
-#else // __VER >= 8 // __S8_PK
+//#else // __VER >= 8 // __S8_PK
 	if( pQuestProp->m_nEndRewardKarmaStyle )
 	{
 		if( pQuestProp->m_bEndRewardHide == FALSE || bComplete == TRUE )
@@ -1870,7 +1870,7 @@ void CWndQuestDetail::UpdateQuestDetailText( DWORD dwQuestID, LPQUEST lpQuest, B
 		}
 		strReward += strTemp + "\n";
 	}
-#endif // __VER < 8 // __S8_PK
+//#endif // __VER < 8 // __S8_PK
 	pTextReward->SetString( strReward );
 }
 //-----------------------------------------------------------------------------
@@ -2018,7 +2018,7 @@ void MakeQuestConditionItems( DWORD dwQuestID, CWndTreeCtrl* pWndTreeCtrl, BOOL 
 				pWndTreeCtrl->InsertItem( lpTreeElem, strTemp, 0, TRUE, FALSE, dwCompleteColor, dwSelectColor );
 			}
 		}
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 		if( pQuestProp->m_nEndCondKarmaPoint ) 
 		{
 			if( pQuestProp->m_nEndCondKarmaComp == 0 )
@@ -2190,7 +2190,8 @@ void MakeQuestConditionItems( DWORD dwQuestID, CWndTreeCtrl* pWndTreeCtrl, BOOL 
 			}
 		}
 		//////////////////////////////////////////////////////
-#if __VER >= 8 // __S8_PK
+
+//#ifdef __NEWPKSYS //( defined(__NEWPKSYS) || defined(__OLDPKSYS) )  // __S8_PK
 		CString strEndCondOneItem;
 		CString strEndCondOneItemComplete;
 		for( i = 0; i < pQuestProp->m_nEndCondOneItemNum; i++ )
@@ -2274,7 +2275,7 @@ void MakeQuestConditionItems( DWORD dwQuestID, CWndTreeCtrl* pWndTreeCtrl, BOOL 
 			strTemp.Format( GETTEXT( TID_QUEST_COND_ITEM ) );
 			pWndTreeCtrl->InsertItem( lpTreeElem, strEndCondOneItemComplete + strTemp + "#ns#nc" + strEndCondOneItem, 0, TRUE, FALSE, dwEndColor, dwSelectColor );
 		}
-#else // __VER >= 8 // __S8_PK
+//#elif defined(__OLDPKSYS)  // __VER >= 8 // __S8_PK
 		if( pQuestProp->m_nEndCondChaotic )
 		{
 			if( pQuestProp->m_nEndCondChaotic == 1 )
@@ -2288,7 +2289,7 @@ void MakeQuestConditionItems( DWORD dwQuestID, CWndTreeCtrl* pWndTreeCtrl, BOOL 
 				pWndTreeCtrl->InsertItem( lpTreeElem, MakeString( strTemp, g_pPlayer->IsChaotic() == FALSE ), 0, TRUE, FALSE, dwEndColor, dwSelectColor );
 			}
 		}
-#endif // __VER < 8 // __S8_PK
+//#endif // __VER < 8 // __S8_PK
 		if( pQuestProp->m_szEndCondDlgCharKey[ 0 ] )
 		{
 			LPCHARACTER lpCharacter = prj.GetCharacter( pQuestProp->m_szEndCondDlgCharKey );

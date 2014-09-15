@@ -41,7 +41,7 @@ void CWndPvp::OnDraw( C2DRender* p2DRender )
 	strcpy( szBuff, g_pPlayer->GetFameName() );
 	if( IsEmpty(szBuff) ) {	szBuff[0] = '-'; szBuff[1] = NULL; }
 	p2DRender->TextOut( 90, y, szBuff, dwColor); y += nNext;
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	strcpy( szBuff, g_pPlayer->GetSlaughterName() );
 	if( IsEmpty(szBuff) ) {	szBuff[0] = '-'; szBuff[1] = NULL; }
 	p2DRender->TextOut( 90, y, szBuff  , dwColor ); y += nNext;
@@ -51,7 +51,7 @@ void CWndPvp::OnDraw( C2DRender* p2DRender )
 //	p2DRender->TextOut( 90, y, g_pPlayer->GetSlaughterName()  , dwColor ); y += nNext;
 	y = 58;
 	p2DRender->TextOut( 100, y, g_pPlayer->m_nFame	, dwColor ); y += nNext;
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	p2DRender->TextOut( 100, y, g_pPlayer->m_nSlaughter	, dwColor ); y += nNext;
 	p2DRender->TextOut( 100, y, g_pPlayer->m_nNumKill	, dwColor ); y += nNext;
 #endif // __VER < 8 // __S8_PK
@@ -148,7 +148,7 @@ void CWndPvpBase::OnDraw(C2DRender* p2DRender)
 	p2DRender->TextOut( 100+gap1, y, szBuff  , dwColor ); y += nNext;
 	y = 33;
 	p2DRender->TextOut( 100+gap2, y, g_pPlayer->m_nFame	, dwColor ); y += nNext;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	y += 20;
 	p2DRender->TextOut( 100+gap2, y, g_pPlayer->GetPKValue()	, dwColor ); y += nNext;
 	y += 4;
@@ -165,7 +165,7 @@ void CWndPvpBase::OnDraw(C2DRender* p2DRender)
 	y = 13;
 	nNext = 19;
 	dwColor = D3DCOLOR_ARGB(255, 0, 0, 180);
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	p2DRender->TextOut( 15, y, prj.GetText(TID_GAME_CHARACTTER_PVP1), dwColor ); y += nNext;
 	p2DRender->TextOut( 15, y, prj.GetText(TID_GAME_CHARACTTER_PVP2), dwColor ); y += nNext;
 	y += 20;

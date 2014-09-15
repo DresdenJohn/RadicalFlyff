@@ -9624,7 +9624,7 @@ int __IsEndQuestCondition( CMover* pMover, int nQuestId )
 #endif // __CAMPUS
 		// 총합이 17 + MAX_QUESTCONDITEM면 퀘스트 조건 성립 
 
-#ifdef __OLDPKSYS //__S8_PK
+//#ifdef __OLDPKSYS //__S8_PK
 	#if __VER >= 9	// __PET_0410
 		#if __VER >= 10 // __LEGEND	//	10차 전승시스템	Neuz, World, Trans
 #if __VER >= 15 // __CAMPUS
@@ -9642,9 +9642,9 @@ int __IsEndQuestCondition( CMover* pMover, int nQuestId )
 		if( nResult == 17+ MAX_QUESTCONDITEM + MAX_QUESTCONDITEM ) 
 		#endif	//__LEGEND	//	10차 전승시스템	Neuz, World, Trans
 	#endif	//__PET_0410
-#else	// __VER >= 8 // __S8_PK
-		if( nResult == 17+ MAX_QUESTCONDITEM ) 
-#endif	// __VER >= 8 // __S8_PK
+//#else	// __VER >= 8 // __S8_PK
+//		if( nResult == 17+ MAX_QUESTCONDITEM ) 
+//#endif	// __VER >= 8 // __S8_PK
 		{
 			// 모든 조건 달성 순간에 타이머 카운트 중지 시키기 
 			// 이후에 인벤토리가 부족해서 퀘스트를 완료 못시키더라도 시간은 정지된다.
