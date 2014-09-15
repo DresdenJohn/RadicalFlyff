@@ -597,7 +597,7 @@ void CDPClient::OnSnapshot( CAr & ar )
 			case SNAPSHOTTYPE_RETURNSAY:	OnReturnSay( objid, ar ); break;
 			case SNAPSHOTTYPE_CLEAR_USESKILL:	OnClearUseSkill( objid );	break;
 //			case SNAPSHOTTYPE_CRIME:	OnCrime( objid );	break;
-#if __VER < 8 //__S8_PK
+#ifdef __OLDPKSYS //__S8_PK
 			case SNAPSHOTTYPE_SET_SLAUGHTER_POINT:	OnSetSlaughterPoint( objid, ar );	break;
 #endif // __VER < 8 __S8_PK
 			case SNAPSHOTTYPE_SETFAME:	OnSetFame( objid, ar );	break;
@@ -637,7 +637,7 @@ void CDPClient::OnSnapshot( CAr & ar )
 			case SNAPSHOTTYPE_RESETBUFFSKILL:	OnResetBuffSkill( objid, ar );	break;
 			case SNAPSHOTTYPE_RESURRECTION_MESSAGE:	OnResurrectionMessage();	break;
 			case SNAPSHOTTYPE_SETDUEL:	OnSetDuel( objid, ar );	break;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 			case SNAPSHOTTYPE_PK_RELATION: OnPKRelation( objid, ar ); break;
 #else // __VER >= 8 __S8_PK
 			case SNAPSHOTTYPE_UPDATE_PLAYER_ENEMY: OnUpdatePlayerEnemy( objid, ar ); break;
@@ -3855,7 +3855,7 @@ void CDPClient::OnUseSkill( OBJID objid, CAr & ar )
 	if( IsValidObj( (CObj*)pMover ) )
 	{
 		pMover->m_dwReqFlag &= (~REQ_USESKILL);	// 응답 받았음.
-#if __VER >= 8 //__S8_PK
+#ifdef __NEWPKSYS
 		BOOL bSuccess = pMover->DoUseSkill( 0, -1, id, (SKILLUSETYPE)nUseType, FALSE, nCastingTime, dwSkill, dwLevel );
 #else // __VER >= 8 __S8_PK
 		BOOL bSuccess = pMover->DoUseSkill( 0, -1, id, (SKILLUSETYPE)nUseType, nCastingTime, dwSkill, dwLevel );
@@ -3914,7 +3914,7 @@ void CDPClient::OnClearUseSkill( OBJID objid )
 	}
 }
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 void CDPClient::OnSetSlaughterPoint( OBJID objid, CAr & ar )
 {
 	int nVal;
@@ -9791,7 +9791,7 @@ void CDPClient::SendRangeAttack( OBJMSG dwAtkMsg, OBJID objid, DWORD dwItemID, i
 	SEND( ar, this, DPID_SERVERPLAYER );
 }
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 void CDPClient::SendUseSkill( WORD wType, WORD wId, OBJID objid, int nUseSkill, BOOL bControl )
 #else // __VER >= 8 __S8_PK
 void CDPClient::SendUseSkill( WORD wType, WORD wId, OBJID objid, int nUseSkill )
@@ -9799,7 +9799,7 @@ void CDPClient::SendUseSkill( WORD wType, WORD wId, OBJID objid, int nUseSkill )
 {
 	BEFORESENDSOLE( ar, PACKETTYPE_USESKILL, DPID_UNKNOWN );
 	ar << wType << wId << objid << nUseSkill;
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	ar << bControl;
 #endif // __VER >= 8 __S8_PK
 	SEND( ar, this, DPID_SERVERPLAYER );
@@ -15386,7 +15386,7 @@ void CDPClient::OnSetDuel( OBJID objid, CAr & ar )
 	}
 }
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 void CDPClient::OnPKRelation( OBJID objid, CAr& ar )
 {
 	BYTE byType;

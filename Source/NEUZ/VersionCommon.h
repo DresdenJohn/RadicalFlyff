@@ -11,6 +11,9 @@
 //////////////////////////// Rad Fly ///////////////////////////////////////
 /**************************************************************************/
 
+#define __OLDPKSYS //V6 PK
+//#define __NEWPKSYS
+
 #define __RES_ENCRYPT
 #define __SECURITY_FIXES
 #define	__NO_SPEEDHACK

@@ -900,7 +900,7 @@
 #define	SNAPSHOTTYPE_SETSKILLLEVEL	(WORD)0x0026
 #define	SNAPSHOTTYPE_RESURRECTION_MESSAGE	(WORD)0x0027
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 #define	SNAPSHOTTYPE_SET_SLAUGHTER_POINT	(WORD)0x0028
 #endif // __VER < 8 // __S8_PK
 
@@ -974,7 +974,7 @@
 #define SNAPSHOTTYPE_ENVIRONMENTSNOW	(WORD)0x0061
 #define SNAPSHOTTYPE_ENVIRONMENTRAIN	(WORD)0x0062
 #define SNAPSHOTTYPE_ENVIRONMENTALL		(WORD)0x0063
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 #define SNAPSHOTTYPE_PK_RELATION		(WORD)0x0065
 #else // __VER >= 8 // __S8_PK
 #define SNAPSHOTTYPE_UPDATE_PLAYER_ENEMY	(WORD)0x0065
@@ -1495,7 +1495,7 @@ const BYTE COMMONPLACE_QUAKE	= 0x02;
 const BYTE CT_WANTED_REQ_LIST   = 0x00;		// Core->Trans 리스트 요청 
 const BYTE CT_WANTED_SET		= 0x01;		// Core->Trans 현상금 설정 
 
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 const BYTE ADD_PLAYER_ENEMY  = 0x00;		// 플레이어 적 추가 
 const BYTE DEL_PLAYER_ENEMY  = 0x01;		// 플레이어 적 제거 
 #endif // __VER < 8 // __S8_PK

@@ -149,7 +149,7 @@ public:
 	void	SendDropGold( DWORD dwGold, const D3DXVECTOR3 & vPlayerPos, const D3DXVECTOR3 & vPos );
 	void	SendConfirmPKPVP( u_long uidPlayer );
 	void	OnSetDuel( OBJID objid, CAr & ar );
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	void	OnPKRelation( OBJID objid, CAr & ar );
 	void	OnPKPink( OBJID objid, CAr & ar );
 	void	OnPKPropensity( OBJID objid, CAr& ar );
@@ -218,7 +218,7 @@ public:
 	void	SendMagicAttack( OBJMSG dwAtkMsg, OBJID objid, int nParam2, int nParam3, int nMagicPower, int idSfxHit );
 	void	SendRangeAttack( OBJMSG dwAtkMsg, OBJID objid, DWORD dwItemID, int idSfxHit );
 
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 	void	SendUseSkill( WORD wType, WORD wId, OBJID objid, int nUseType = 0, int bControl = FALSE );
 #else // __VER >= 8 __S8_PK
 	void	SendUseSkill( WORD wType, WORD wId, OBJID objid, int nUseType = 0 );
@@ -827,7 +827,7 @@ public:
 	void	OnStateMode( OBJID objid, CAr & ar );
 	void	OnReturnSay( OBJID objid, CAr & ar );
 	void	OnClearUseSkill( OBJID objid );
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 	void	OnSetSlaughterPoint( OBJID objid, CAr & ar );
 #endif // __VER < 8 __S8_PK
 	void	OnSetFame( OBJID objid, CAr & ar );

@@ -5337,7 +5337,7 @@ BOOL CWndWorld::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase )
 			#endif//__THAI_0525VER
 					break;
 				}
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 				KarmaProp* pProp = prj.GetKarmaProp( g_pPlayer->m_nSlaughter );
 				if( pProp )
 				{
@@ -5360,7 +5360,7 @@ BOOL CWndWorld::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase )
 				{
 					if( g_pPlayer->m_vtInfo.GetOther() == NULL )
 					{
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 						if( g_pPlayer->IsChaotic() )
 						{
 							CHAO_PROPENSITY Propensity = prj.GetPropensityPenalty( g_pPlayer->GetPKPropensity() );
@@ -5520,7 +5520,7 @@ BOOL CWndWorld::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase )
 					break;
 				}
 #endif //__CSC_VER8_5
-#if __VER >= 8 // __S8_PK
+#ifdef __NEWPKSYS // __S8_PK
 				if( g_pPlayer->IsChaotic() )
 				{
 					CHAO_PROPENSITY Propensity = prj.GetPropensityPenalty( g_pPlayer->GetPKPropensity() );

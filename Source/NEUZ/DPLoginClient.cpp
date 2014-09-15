@@ -468,7 +468,7 @@ void CDPLoginClient::OnPlayerList( CAr & ar )
 		ar >> g_Neuz.m_apPlayer[slot]->m_nDex;
 		ar >> g_Neuz.m_apPlayer[slot]->m_nInt;
 		g_Neuz.m_apPlayer[slot]->SetHairColor( g_Neuz.m_apPlayer[slot]->m_dwHairColor );
-#if __VER < 8 // __S8_PK
+#ifdef __OLDPKSYS // __S8_PK
 		ar >> g_Neuz.m_apPlayer[slot]->m_nSlaughter;
 #endif // __VER < 8 __S8_PK
 		ar >> g_Neuz.m_apPlayer[slot]->m_dwMode;
@@ -484,7 +484,10 @@ void CDPLoginClient::OnPlayerList( CAr & ar )
 			ar >> dwItemId;
 			pItemProp	= prj.GetItemProp( dwItemId );
 			if( pItemProp == NULL)
+			{
 				Error( "CDPLoginClient::OnPlayerList : %d아이템 프로퍼티 없음", dwItemId );
+				continue;
+			}
 
 			nParts = (int)pItemProp->dwParts;
 			// 오른손 무기장착할 차례인데 이미 오른손에 뭔가 장착되어 있으면 
