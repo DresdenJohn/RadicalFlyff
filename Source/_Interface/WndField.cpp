@@ -34,6 +34,9 @@ extern	CDPClient	g_DPlay;
 #include "GuildHouse.h"
 #endif
 
+#ifdef __PETFILTER
+#include "defineFilter.h"
+#endif //__PETFILTER
 extern int g_nSkillCurSelect;
 extern float g_fHairLight;
 
@@ -10147,7 +10150,17 @@ void CWndNavigator::OnRButtonDown(UINT nFlags, CPoint point)
 
 void CWndNavigator::OnLButtonUp(UINT nFlags, CPoint point)
 {
+#ifdef __LEVEL_BOT_FIX
+	CWorld* pWorld = g_WorldMng();
+	CObj* pObj	= pWorld->GetObjFocus();
+	if( IsValidObj( pObj ) && pObj->GetType() == OT_MOVER && ( (CMover*)pObj )->IsNPC() )
+	{
+		pWorld->SetObjFocus(  NULL );
+		g_pPlayer->ClearDest();
+	}
+#endif // __LEVEL_BOT_FIX
 }
+
 void CWndNavigator::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	CRect rect = GetClientRect();
@@ -25629,3 +25642,262 @@ BOOL CWndCampusSeveranceConfirm::OnChildNotify( UINT message, UINT nID, LRESULT*
 }
 //-----------------------------------------------------------------------------
 #endif // __CAMPUS
+
+#ifdef __PETFILTER
+
+CWndPetfilter::CWndPetfilter() 
+{ 
+	dwPetfilter = 0;
+} 
+CWndPetfilter::~CWndPetfilter() 
+{ 
+} 
+void CWndPetfilter::OnDraw( C2DRender* p2DRender ) 
+{ 
+} 
+void CWndPetfilter::OnInitialUpdate() 
+{ 
+	CWndNeuz::OnInitialUpdate(); 
+
+	dwPetfilter = g_Option.m_dwPetfilter;
+
+	SetButtonStatus();
+
+	MoveParentCenter();
+
+} 
+void CWndPetfilter::SetButtonStatus()
+{
+	CWndButton* pWndCheck1 = (CWndButton*)GetDlgItem( WIDC_PF_HPFOOD );
+	CWndButton* pWndCheck2 = (CWndButton*)GetDlgItem( WIDC_PF_MPFOOD );
+	CWndButton* pWndCheck3 = (CWndButton*)GetDlgItem( WIDC_PF_FPFOOD );
+	CWndButton* pWndCheck4 = (CWndButton*)GetDlgItem( WIDC_PF_BWEAPON );
+	CWndButton* pWndCheck5 = (CWndButton*)GetDlgItem( WIDC_PF_GWEAPON );
+	CWndButton* pWndCheck6 = (CWndButton*)GetDlgItem( WIDC_PF_BSET );
+	CWndButton* pWndCheck7 = (CWndButton*)GetDlgItem( WIDC_PF_GSET );
+	CWndButton* pWndCheck8 = (CWndButton*)GetDlgItem( WIDC_PF_NECKLACE );
+	CWndButton* pWndCheck9 = (CWndButton*)GetDlgItem( WIDC_PF_EARRING );
+	CWndButton* pWndCheck10 = (CWndButton*)GetDlgItem( WIDC_PF_RING );
+	CWndButton* pWndCheck11 = (CWndButton*)GetDlgItem( WIDC_PF_EGG );
+	CWndButton* pWndCheck12 = (CWndButton*)GetDlgItem( WIDC_PF_SUNSTONE );
+	CWndButton* pWndCheck13 = (CWndButton*)GetDlgItem( WIDC_PF_MOONSTONE );
+	CWndButton* pWndCheck14 = (CWndButton*)GetDlgItem( WIDC_PF_QUESTS );
+	CWndButton* pWndCheck15 = (CWndButton*)GetDlgItem( WIDC_PF_ELECARD );
+	CWndButton* pWndCheck16 = (CWndButton*)GetDlgItem( WIDC_PF_4PCARD );
+	CWndButton* pWndCheck17 = (CWndButton*)GetDlgItem( WIDC_PF_7PCARD );
+	CWndButton* pWndCheck18 = (CWndButton*)GetDlgItem( WIDC_PF_BPIECARD );
+	CWndButton* pWndCheck19 = (CWndButton*)GetDlgItem( WIDC_PF_APIECARD );
+
+	if( dwPetfilter & FILTER_HPFOOD		) pWndCheck1->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_MPFOOD		) pWndCheck2->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_FPFOOD		) pWndCheck3->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_BWEAPON	) pWndCheck4->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_GWEAPON	) pWndCheck5->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_GOLD		) pWndCheck6->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_GSET		) pWndCheck7->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_NECKLACE	) pWndCheck8->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_EARRING	) pWndCheck9->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_RING		) pWndCheck10->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_EGG		) pWndCheck11->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_SUNSTONE	) pWndCheck12->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_MOONSTONE	) pWndCheck13->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_QUESTITEM	) pWndCheck14->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_ELECARDS	) pWndCheck15->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_4PCARD		) pWndCheck16->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_7PCARD		) pWndCheck17->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_BPIECARD	) pWndCheck18->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_APIECARD	) pWndCheck19->SetCheck( TRUE );
+
+}
+// 처음 이 함수를 부르면 윈도가 열린다.
+BOOL CWndPetfilter::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
+{ 
+	// Daisy에서 설정한 리소스로 윈도를 연다.
+	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_PETFILTER, WBS_MOVE, CPoint( 0, 0 ), pWndParent );
+
+} 
+
+BOOL CWndPetfilter::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase ) 
+{ 
+	return CWndNeuz::OnCommand( nID, dwMessage, pWndBase ); 
+} 
+void CWndPetfilter::OnSize( UINT nType, int cx, int cy ) \
+{ 
+	CWndNeuz::OnSize( nType, cx, cy ); 
+} 
+void CWndPetfilter::OnLButtonUp( UINT nFlags, CPoint point ) 
+{ 
+} 
+void CWndPetfilter::OnLButtonDown( UINT nFlags, CPoint point ) 
+{ 
+} 
+BOOL CWndPetfilter::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult ) 
+{ 
+	CWndButton* pWndCheck1 = (CWndButton*)GetDlgItem( WIDC_PF_HPFOOD );
+	CWndButton* pWndCheck2 = (CWndButton*)GetDlgItem( WIDC_PF_MPFOOD );
+	CWndButton* pWndCheck3 = (CWndButton*)GetDlgItem( WIDC_PF_FPFOOD );
+	CWndButton* pWndCheck4 = (CWndButton*)GetDlgItem( WIDC_PF_BWEAPON );
+	CWndButton* pWndCheck5 = (CWndButton*)GetDlgItem( WIDC_PF_GWEAPON );
+	CWndButton* pWndCheck6 = (CWndButton*)GetDlgItem( WIDC_PF_BSET );
+	CWndButton* pWndCheck7 = (CWndButton*)GetDlgItem( WIDC_PF_GSET );
+	CWndButton* pWndCheck8 = (CWndButton*)GetDlgItem( WIDC_PF_NECKLACE );
+	CWndButton* pWndCheck9 = (CWndButton*)GetDlgItem( WIDC_PF_EARRING );
+	CWndButton* pWndCheck10 = (CWndButton*)GetDlgItem( WIDC_PF_RING );
+	CWndButton* pWndCheck11 = (CWndButton*)GetDlgItem( WIDC_PF_EGG );
+	CWndButton* pWndCheck12 = (CWndButton*)GetDlgItem( WIDC_PF_SUNSTONE );
+	CWndButton* pWndCheck13 = (CWndButton*)GetDlgItem( WIDC_PF_MOONSTONE );
+	CWndButton* pWndCheck14 = (CWndButton*)GetDlgItem( WIDC_PF_QUESTS );
+	CWndButton* pWndCheck15 = (CWndButton*)GetDlgItem( WIDC_PF_ELECARD );
+	CWndButton* pWndCheck16 = (CWndButton*)GetDlgItem( WIDC_PF_4PCARD );
+	CWndButton* pWndCheck17 = (CWndButton*)GetDlgItem( WIDC_PF_7PCARD );
+	CWndButton* pWndCheck18 = (CWndButton*)GetDlgItem( WIDC_PF_BPIECARD );
+	CWndButton* pWndCheck19 = (CWndButton*)GetDlgItem( WIDC_PF_APIECARD );
+
+	switch( nID )
+	{
+	case WIDC_BUTTON1:
+		{
+			g_Option.m_dwPetfilter = dwPetfilter;
+			g_Option.Save( "Client.ini" );
+			g_DPlay.SendPlayerPetfilter( dwPetfilter );
+			Destroy();
+		}
+	case WIDC_PF_HPFOOD :
+		if( pWndCheck1->GetCheck() )
+			dwPetfilter |= FILTER_HPFOOD;
+		else
+			dwPetfilter &= ~FILTER_HPFOOD;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_MPFOOD :
+		if( pWndCheck2->GetCheck() )
+			dwPetfilter |= FILTER_MPFOOD;
+		else
+			dwPetfilter &= ~FILTER_MPFOOD;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_FPFOOD :
+		if( pWndCheck3->GetCheck() )
+			dwPetfilter |= FILTER_FPFOOD;
+		else
+			dwPetfilter &= ~FILTER_FPFOOD;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_BWEAPON :
+		if( pWndCheck4->GetCheck() )
+			dwPetfilter |= FILTER_BWEAPON;
+		else
+			dwPetfilter &= ~FILTER_BWEAPON;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_GWEAPON :
+		if( pWndCheck5->GetCheck() )
+			dwPetfilter |= FILTER_GWEAPON;
+		else
+			dwPetfilter &= ~FILTER_GWEAPON;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_BSET :
+		if( pWndCheck6->GetCheck() )
+			dwPetfilter |= FILTER_GOLD;
+		else
+			dwPetfilter &= ~FILTER_GOLD;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_GSET :
+		if( pWndCheck7->GetCheck() )
+			dwPetfilter |= FILTER_GSET;
+		else
+			dwPetfilter &= ~FILTER_GSET;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_NECKLACE :
+		if( pWndCheck8->GetCheck() )
+			dwPetfilter |= FILTER_NECKLACE;
+		else
+			dwPetfilter &= ~FILTER_NECKLACE;
+		SetButtonStatus();
+		break;		
+	case WIDC_PF_EARRING :
+		if( pWndCheck9->GetCheck() )
+			dwPetfilter |= FILTER_EARRING;
+		else
+			dwPetfilter &= ~FILTER_EARRING;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_RING :
+		if( pWndCheck10->GetCheck() )
+			dwPetfilter |= FILTER_RING;
+		else
+			dwPetfilter &= ~FILTER_RING;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_EGG :
+		if( pWndCheck11->GetCheck() )
+			dwPetfilter |= FILTER_EGG;
+		else
+			dwPetfilter &= ~FILTER_EGG;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_SUNSTONE :
+		if( pWndCheck12->GetCheck() )
+			dwPetfilter |= FILTER_SUNSTONE;
+		else
+			dwPetfilter &= ~FILTER_SUNSTONE;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_MOONSTONE :
+		if( pWndCheck13->GetCheck() )
+			dwPetfilter |= FILTER_MOONSTONE;
+		else
+			dwPetfilter &= ~FILTER_MOONSTONE;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_QUESTS :
+		if( pWndCheck14->GetCheck() )
+			dwPetfilter |= FILTER_QUESTITEM;
+		else
+			dwPetfilter &= ~FILTER_QUESTITEM;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_ELECARD :
+		if( pWndCheck15->GetCheck() )
+			dwPetfilter |= FILTER_ELECARDS;
+		else
+			dwPetfilter &= ~FILTER_ELECARDS;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_4PCARD :
+		if( pWndCheck16->GetCheck() )
+			dwPetfilter |= FILTER_4PCARD;
+		else
+			dwPetfilter &= ~FILTER_4PCARD;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_7PCARD :
+		if( pWndCheck17->GetCheck() )
+			dwPetfilter |= FILTER_7PCARD;
+		else
+			dwPetfilter &= ~FILTER_7PCARD;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_BPIECARD :
+		if( pWndCheck18->GetCheck() )
+			dwPetfilter |= FILTER_BPIECARD;
+		else
+			dwPetfilter &= ~FILTER_BPIECARD;
+		SetButtonStatus();
+		break;
+	case WIDC_PF_APIECARD :
+		if( pWndCheck19->GetCheck() )
+			dwPetfilter |= FILTER_APIECARD;
+		else
+			dwPetfilter &= ~FILTER_APIECARD;
+		SetButtonStatus();
+		break;
+
+	}
+
+	return CWndNeuz::OnChildNotify( message, nID, pLResult ); 
+} 
+#endif //__PETFILTER

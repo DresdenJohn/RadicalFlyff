@@ -16,10 +16,12 @@
 
 #define __OLDLODELIGHT
 #define __RES_ENCRYPT
+//#define __PETFILTER
 #define __SAVEPLAYER
 #define __WORLD_CMD_ARGUMENT //0 for S1 and 1 for S2 PK
 #define __SECURITY_FIXES
 #define	__NO_SPEEDHACK
+#define	__SWAP_FIX
 #define	__DUPE_FIX
 #define	__RESTAT_BUG
 #define	__SAVE_AFTER_TRADE

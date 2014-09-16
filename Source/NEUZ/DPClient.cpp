@@ -2445,6 +2445,17 @@ void CDPClient::OnDoEquip( OBJID objid, CAr & ar )
 				CMover::UpdateParts( pPlayer->GetSex(), pPlayer->m_dwSkinSet, pPlayer->m_dwFace, pPlayer->m_dwHairMesh, pPlayer->m_dwHeadMesh, pPlayer->m_aEquipInfo, g_WndMng.m_pWndBeautyShop->m_pModel, &pPlayer->m_Inventory );
 			}
 			
+#ifdef __SWAP_FIX
+                if( pPlayer->GetHitPoint() >  pPlayer->GetMaxHitPoint() )
+                     pPlayer->SetHitPoint( pPlayer->GetMaxHitPoint());
+
+                if( pPlayer->GetManaPoint() >  pPlayer->GetMaxManaPoint() )
+                     pPlayer->SetManaPoint( pPlayer->GetMaxManaPoint() );
+
+                if( pPlayer->GetFatiguePoint() >  pPlayer->GetMaxFatiguePoint() )
+                     pPlayer->SetFatiguePoint( pPlayer->GetMaxFatiguePoint() );
+#endif // __QUGET_SWAP_FIX
+			
 			CWndInventory* pWndInventory	= (CWndInventory*)g_WndMng.GetWndBase( APP_INVENTORY );
 			if(pWndInventory && pWndInventory->GetModel())
 			{
@@ -19245,4 +19256,20 @@ void CDPClient::SendGuildHouseTenderJoin( OBJID objGHId, int nTenderPerin, int n
 }
 #endif // __GUILD_HOUSE_MIDDLE
 
+#ifdef __PETFILTER
+void CDPClient::SendPlayerPetfilter( DWORD dwPetfilter )
+{
+	BEFORESENDSOLE( ar, PACKETTYPE_PETFILTER, DPID_UNKNOWN );
+	ar << dwPetfilter;
+	SEND( ar, this, DPID_SERVERPLAYER );
+}
+#endif //__PETFILTER
+#ifdef __PERIN_CONVERTER
+void CDPClient::GetPerin( u_long idPlayer )
+{
+	BEFORESENDSOLE( ar, PACKETTYPE_GETPERIN, DPID_UNKNOWN );
+	ar << idPlayer;
+	SEND( ar, this, DPID_SERVERPLAYER );
+}
+#endif
 CDPClient	g_DPlay;

@@ -514,6 +514,9 @@ CDPSrvr::CDPSrvr()
 	ON_MSG( PACKETTYPE_QUIZ_ENTRANCE, OnQuizEventEntrance );
 	ON_MSG( PACKETTYPE_QUIZ_TELEPORT, OnQuizEventTeleport );
 #endif // __QUIZ
+#ifdef __PETFILTER
+	ON_MSG( PACKETTYPE_PETFILTER, OnSetPetfilter );
+#endif //__PETFILTER
 #if __VER >= 15 // __PETVIS
 	ON_MSG( PACKETTYPE_VISPET_REMOVEVIS, OnRemoveVis );
 	ON_MSG( PACKETTYPE_VISPET_SWAPVIS, OnSwapVis );
@@ -742,6 +745,16 @@ void CDPSrvr::OnDoEquip( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 		return;
 
 	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
+#ifdef __SWAP_FIX
+                if( pUser->GetHitPoint() >  pUser->GetMaxHitPoint() )
+                     pUser->SetHitPoint( pUser->GetMaxHitPoint());
+
+                if( pUser->GetManaPoint() >  pUser->GetMaxManaPoint() )
+                     pUser->SetManaPoint( pUser->GetMaxManaPoint() );
+
+                if( pUser->GetFatiguePoint() >  pUser->GetMaxFatiguePoint() )
+                     pUser->SetFatiguePoint( pUser->GetMaxFatiguePoint() );
+#endif // __SWAP_FIX
 	if( IsValidObj( pUser ) == FALSE )
 		return;
 
@@ -12590,3 +12603,16 @@ void CDPSrvr::OnGuildHouseTenderJoin( CAr & ar, DPID dpidCache, DPID dpidUser, L
 	}
 }
 #endif // __GUILD_HOUSE_MIDDLE
+
+#ifdef __PETFILTER
+void CDPSrvr::OnSetPetfilter( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
+{
+	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
+	if( IsValidObj( pUser ) == TRUE )
+	{
+		DWORD dwPetFilter;
+		ar >> dwPetFilter;
+		pUser->m_dwPetfilter = dwPetFilter;
+	}
+}
+#endif //__PETFILTER

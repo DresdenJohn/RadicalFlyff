@@ -358,6 +358,10 @@ public:
 	CWndChangeWeapon* m_pWndChangeWeapon;
 	CWndPetStatus* m_pWndPetStatus;
 
+#ifdef __PETFILTER
+	CWndPetfilter* m_pWndPetfilter;
+#endif //__PETFILTER
+
 	CWndFoodConfirm* m_pWndFoodConfirm;
 	CWndPetMiracle* m_pWndPetMiracle;
 	CWndPetFoodMill* m_pWndPetFoodMill;

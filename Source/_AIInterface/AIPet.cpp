@@ -7,6 +7,10 @@
 #include "User.h"
 #include "dpcoreclient.h"
 
+#ifdef __PETFILTER
+#include "defineFilter.h"
+#endif //__PETFILTER
+
 extern	CUserMng		g_UserMng;
 extern	CDPCoreClient	g_DPCoreClient;
 
@@ -137,14 +141,105 @@ BOOL CAIPet::SubItemLoot( void )
 			{
 				if( pItemProp )
 				{
+//			#ifdef __WORLDSERVER
+				#ifdef __PETFILTER
+					BOOL b1 = TRUE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_HPFOOD) && pItem->GetProp()->dwItemKind2 == IK2_FOOD )
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_MPFOOD) && pItem->GetProp()->dwItemKind3 == IK3_REFRESHER )
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_FPFOOD) && pItem->GetProp()->dwItemKind2 == IK2_POTION)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_FPFOOD) && pItem->GetProp()->dwItemKind1 == IK3_DRINK)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_BWEAPON) && pItem->GetProp()->dwReferStat1 == WEAPON_GENERAL )
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_GWEAPON) && pItem->GetProp()->dwReferStat1 == WEAPON_UNIQUE )
+							b1 = FALSE;
+//						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_GOLD) && pItem->GetProp()->dwReferStat1 == ARMOR_GEN	)
+//							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_GSET) && pItem->GetProp()->dwReferStat1 == ARMOR_SET )
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_NECKLACE) && pItem->GetProp()->dwItemKind3 == IK3_NECKLACE )
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_EARRING) && pItem->GetProp()->dwItemKind3 == IK3_EARRING )
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_RING) && pItem->GetProp()->dwItemKind3 == IK3_RING )
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_EGG) && pItem->GetProp()->dwID == II_PET_EGG )
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_SUNSTONE) && pItem->GetProp()->dwID == II_GEN_MAT_ORICHALCUM01)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_SUNSTONE) && pItem->GetProp()->dwID == II_GEN_MAT_ORICHALCUM02)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_SUNSTONE) && pItem->GetProp()->dwID == II_GEN_MAT_ORICHALCUM01_1)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_SUNSTONE) && pItem->GetProp()->dwID == II_SYS_SYS_SCR_SCRAPORICHALCUM)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_MOONSTONE) && pItem->GetProp()->dwID == II_GEN_MAT_MOONSTONE)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_MOONSTONE) && pItem->GetProp()->dwID == II_GEN_MAT_MOONSTONE_1)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_MOONSTONE) && pItem->GetProp()->dwID == II_SYS_SYS_SCR_SCRAPMOONSTONE)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_QUESTITEM) && pItem->GetProp()->dwItemKind2 == IK2_GEM)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_QUESTITEM) && pItem->GetProp()->dwItemKind2 == IK3_GEM)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_ELECARDS) && pItem->GetProp()->dwItemKind3 == IK3_ELECARD )
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_4PCARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_MAGMA)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_4PCARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_FLOOD)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_4PCARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_STORM)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_4PCARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_THUNDER)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_4PCARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_MOUNTAIN)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_7PCARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_EARTHQUAKE)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_7PCARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_LIGHTING)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_7PCARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_VACCUM)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_7PCARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_OCEAN)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_7PCARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_VOLCANO)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_BPIECARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_CANDLEB)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_BPIECARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_RAINATKB)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_BPIECARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_BREEZEATKB)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_BPIECARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_SPARKATKB)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_BPIECARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_SANDATKB)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_APIECARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_SANDATKA)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_APIECARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_SPARKATKA)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_APIECARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_BREEZEATKA)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_APIECARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_RAINATKA)
+							b1 = FALSE;
+						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_APIECARD) && pItem->GetProp()->dwID == II_GEN_MAT_ELE_CANDLEA)
+							b1 = FALSE;
 					
-					if( pOwner->IsLoot( pItem, TRUE ) )	// 루팅되는아이템인지 검사함.
+
+					if( pOwner->IsLoot( pItem, TRUE ) && b1 )// 루팅되는아이템인지 검사함.
+#else //__PETFILTER
+					if( pOwner->IsLoot( pItem, TRUE) )
+#endif //__PETFILTER
 					{
 						vDist = pObj->GetPos() - pMover->GetPos();
 						fDistSq = D3DXVec3LengthSq( &vDist );		// 거리 구함.
 						if( fDistSq < 15 * 15 && fDistSq < fMinDist )	// 10미터 이내고... 가장 거리가 가까운 아템을 찾음.
 							pMinObj = pObj;
-					}
+					}						
 				}
 			}
 		}

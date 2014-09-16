@@ -115,6 +115,11 @@ public:
 #if __VER >= 11 // __ADD_ZOOMOPT
 	BOOL	m_bZoomLimit;		// ¡‹ ¡¶«— ø©∫Œ
 #endif
+
+#ifdef __PETFILTER
+	DWORD m_dwPetfilter;
+#endif //__PETFILTER
+
 	COption();
 	~COption();
 	

@@ -851,6 +851,9 @@
 #define PACKETTYPE_QUERYMAILBOX_REQ					(DWORD)0x88100240
 #define PACKETTYPE_QUERYMAILBOX_COUNT				(DWORD)0x88100241
 
+#ifdef __PETFILTER
+#define PACKETTYPE_PETFILTER								(DWORD)0x88100242
+#endif //__PETFILTER
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 

@@ -18,9 +18,12 @@
 
 #define __OLDLODELIGHT
 #define __RES_ENCRYPT
+//#define	__PETFILTER
 #define __SECURITY_FIXES
 #define	__NO_SPEEDHACK
+#define	__SWAP_FIX
 #define	__DUPE_FIX
+#define __LEVEL_BOT_FIX
 #define	__RESTAT_BUG
 #define	__SAVE_AFTER_TRADE
 #define __CASTBREAKFIX
