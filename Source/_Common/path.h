@@ -17,17 +17,29 @@ void MakePath( TCHAR* lpszFullPath, LPCTSTR lpszDirName, LPCTSTR lpszFileName );
 #define DIR_WORLD        _T( "World\\"   )
 #define DIR_WORLD_GUILDCOMBAT  _T( "World\\WdGuildWar\\"   )
 #define DIR_WORLDPLAY    _T( "World\\Play\\"  )
+#ifdef __ONLY_TEXTUREMID
+#define DIR_WORLDTEX     _T( "World\\TextureMid\\"  ) 
+#define DIR_WORLDTEXMID  _T( "World\\TextureMid\\"  ) 
+#define DIR_WORLDTEXLOW  _T( "World\\TextureMid\\"  ) 
+#else
 #define DIR_WORLDTEX     _T( "World\\Texture\\"  ) 
 #define DIR_WORLDTEXMID  _T( "World\\TextureMid\\"  ) 
 #define DIR_WORLDTEXLOW  _T( "World\\TextureLow\\"  ) 
+#endif // __ONLY_TEXTUREMID
 #define DIR_WORLDTILE    _T( "World\\Tile\\"   )
 #define DIR_TEXTURE      _T( "Texture\\" )
 #define DIR_FONT         _T( "Font\\"    )
 #define DIR_MODEL        _T( "Model\\"   )
 #define DIR_ASE		     _T( "ModeL\\Ase\\"   )
+#ifdef __ONLY_TEXTUREMID
+#define DIR_MODELTEX     _T( "Model\\TextureMid\\"   )
+#define DIR_MODELTEXMID  _T( "Model\\TextureMid\\"   )
+#define DIR_MODELTEXLOW  _T( "Model\\TextureMid\\"   )
+#else
 #define DIR_MODELTEX     _T( "Model\\Texture\\"   )
 #define DIR_MODELTEXMID  _T( "Model\\TextureMid\\"   )
 #define DIR_MODELTEXLOW  _T( "Model\\TextureLow\\"   )
+#endif // __ONLY_TEXTUREMID
 #define DIR_ICON         _T( "Icon\\" )
 #define DIR_ITEM         _T( "Item\\" )
 #define DIR_EFFECT       _T( "Effect\\" )

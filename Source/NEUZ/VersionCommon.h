@@ -14,6 +14,7 @@
 #define __OLDPKSYS //V6 PK, remember to comment __PKSERVER_USE_ANGEL
 //#define __NEWPKSYS
 #define __PRISON //No blinkwings while in prison
+#define __ONLY_TEXTUREMID //No texturelow or texture in model and world folders
 
 #define __OLDLODELIGHT
 #define __RES_ENCRYPT

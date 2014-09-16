@@ -15,6 +15,7 @@
 //#define __NEWPKSYS
 
 #define __OLDLODELIGHT
+#define __RES_ENCRYPT
 #define __SAVEPLAYER
 #define __WORLD_CMD_ARGUMENT //0 for S1 and 1 for S2 PK
 #define __SECURITY_FIXES
