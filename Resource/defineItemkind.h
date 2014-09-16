@@ -234,6 +234,7 @@
 #define WEAPON_ULTIMATE			2	// 얼터멋 무기
 
 #define ARMOR_SET				3	// 세트 방어구
+#define ARMOR_GEN				4
 
 #define PET_VIS					1	// VisPet
 #endif

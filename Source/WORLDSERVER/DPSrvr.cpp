@@ -514,6 +514,9 @@ CDPSrvr::CDPSrvr()
 	ON_MSG( PACKETTYPE_QUIZ_ENTRANCE, OnQuizEventEntrance );
 	ON_MSG( PACKETTYPE_QUIZ_TELEPORT, OnQuizEventTeleport );
 #endif // __QUIZ
+#ifdef __PETFILTER
+	ON_MSG( PACKETTYPE_PETFILTER, OnSetPetfilter );
+#endif //__PETFILTER
 #if __VER >= 15 // __PETVIS
 	ON_MSG( PACKETTYPE_VISPET_REMOVEVIS, OnRemoveVis );
 	ON_MSG( PACKETTYPE_VISPET_SWAPVIS, OnSwapVis );
@@ -12590,3 +12593,16 @@ void CDPSrvr::OnGuildHouseTenderJoin( CAr & ar, DPID dpidCache, DPID dpidUser, L
 	}
 }
 #endif // __GUILD_HOUSE_MIDDLE
+
+#ifdef __PETFILTER
+void CDPSrvr::OnSetPetfilter( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
+{
+	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
+	if( IsValidObj( pUser ) == TRUE )
+	{
+		DWORD dwPetFilter;
+		ar >> dwPetFilter;
+		pUser->m_dwPetfilter = dwPetFilter;
+	}
+}
+#endif //__PETFILTER
