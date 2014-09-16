@@ -5,6 +5,7 @@
 # Resource Files
 *.res
 *.res_original
+*.rf
 
 # 3D Files
 *.ani
@@ -13,6 +14,9 @@
 
 # Textures
 *.dds
+*.tga
+*.bmp
+*.jpg
 
 # World Files
 *.dyo
