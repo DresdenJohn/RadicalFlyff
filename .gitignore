@@ -51,6 +51,8 @@ Resource/Char
 Source/Output
 Client/
 Output/
+Program/*.exe
+## Bye bye exe again.
 
 
 #################
