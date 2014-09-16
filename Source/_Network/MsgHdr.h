@@ -853,6 +853,9 @@
 
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+#ifdef __PETFILTER
+#define PACKETTYPE_PETFILTER								(DWORD)0x88100242
+#endif //__PETFILTER
 
 #define SNAPSHOTTYPE_CHAT	(WORD)0x0001
 #define SNAPSHOTTYPE_ACTMSG	(WORD)0x0002

@@ -19245,4 +19245,21 @@ void CDPClient::SendGuildHouseTenderJoin( OBJID objGHId, int nTenderPerin, int n
 }
 #endif // __GUILD_HOUSE_MIDDLE
 
+#ifdef __PETFILTER
+void CDPClient::SendPlayerPetfilter( DWORD dwPetfilter )
+{
+	BEFORESENDSOLE( ar, PACKETTYPE_PETFILTER, DPID_UNKNOWN );
+	ar << dwPetfilter;
+	SEND( ar, this, DPID_SERVERPLAYER );
+}
+#endif //__PETFILTER
+
+#ifdef __PERIN_CONVERTER
+void CDPClient::GetPerin( u_long idPlayer )
+{
+	BEFORESENDSOLE( ar, PACKETTYPE_GETPERIN, DPID_UNKNOWN );
+	ar << idPlayer;
+	SEND( ar, this, DPID_SERVERPLAYER );
+}
+#endif
 CDPClient	g_DPlay;

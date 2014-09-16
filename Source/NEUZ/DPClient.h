@@ -1224,6 +1224,9 @@ public:
 	void	SendGuildHouseTenderJoin( OBJID objGHId, int nTenderPerin, int nTenderPenya );
 #endif // __GUILD_HOUSE_MIDDLE
 
+#ifdef __PETFILTER
+	void	SendPlayerPetfilter( DWORD m_dwPetfilter );
+#endif //__PETFILTER
 //________________________________________________________________________________
 //	Operator commands
 	void	OnShout( CAr & ar );

@@ -140,6 +140,9 @@ BOOL CWnd2ndPassword::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 #endif // __VER < 8 // __S8_PK
 						g_Neuz.m_dwTempMessage = 1;
 						g_Neuz.m_timerConnect.Set( SEC( 1 ) );
+#ifdef __PETFILTER
+						g_DPlay.SendPlayerPetfilter( g_Option.m_dwPetfilter );
+#endif //__PETFILTER					
 					}
 				}
 				else

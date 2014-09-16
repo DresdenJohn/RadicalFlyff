@@ -257,6 +257,11 @@ CWndMgr::CWndMgr()
 #if __VER >= 8 //__CSC_VER8_5
 	m_pWndSummonAngel = NULL;
 #endif //__CSC_VER8_5
+
+#ifdef __PETFILTER
+	m_pWndPetfilter = NULL;
+#endif //__PETFILTER
+
 	m_pWndDropConfirm = NULL;
 	m_nAlphaCount = m_nAlpha;
 	m_pWndBank = NULL;
@@ -699,6 +704,10 @@ void CWndMgr::Free()
 	SAFE_DELETE( m_pWndShop );
 	SAFE_DELETE( m_pWndRevival );
 
+#ifdef __PETFILTER
+	SAFE_DELETE( m_pWndPetfilter );
+#endif //__PETFILTER
+
 	SAFE_DELETE(m_pReWanted);
 	SAFE_DELETE(m_pWanted);
 	SAFE_DELETE(m_pWndResurrectionConfirm);
@@ -1116,6 +1125,15 @@ void CWndMgr::OnDestroyChildWnd( CWndBase* pWndChild )
 		pWndChild = NULL;
 	}	
 #endif //__EVE_MINIGAME
+
+#ifdef __PETFILTER
+	if( m_pWndPetfilter == pWndChild )
+	{
+		SAFE_DELETE( m_pWndPetfilter );
+		pWndChild = NULL;
+	}
+#endif //__PETFILTER
+
 #if __VER >= 9 // __CSC_VER9_1
 	else if(m_pWndSmeltMixJewel == pWndChild)
 	{
@@ -7746,6 +7764,12 @@ void CWndMgr::ClearAllWnd()
 			pWndQuestQuickInfo->SetVisible( FALSE );
 #endif // __IMPROVE_QUEST_INTERFACE
 
+#ifdef __PETFILTER
+		CWndPetfilter* pWndPetfilter = (CWndPetfilter*)g_WndMng.GetWndBase( APP_PETFILTER );
+		if(pWndPetfilter!= NULL)
+			pWndPetfilter->SetVisible(FALSE);
+#endif //__PETFILTER
+
 #if __VER >= 12 // __SECRET_ROOM
 		CWndSecretRoomQuick* pWndSecretRoomQuick = (CWndSecretRoomQuick*)g_WndMng.GetWndBase( APP_SECRETROOM_QUICK );
 		if(pWndSecretRoomQuick != NULL)
@@ -7798,6 +7822,12 @@ void CWndMgr::RestoreWnd()
 			pWndBuffPetStatus->SetVisible(TRUE);
 #endif
 #endif //__CSC_VER9_1
+
+#ifdef __PETFILTER
+		CWndPetfilter* pWndPetfilter = (CWndPetfilter*)g_WndMng.GetWndBase( APP_PETFILTER );
+		if(pWndPetfilter!= NULL)
+			pWndPetfilter->SetVisible(TRUE);
+#endif //_PETFILTER
 
 #if __VER >= 12 // __SECRET_ROOM
 		CWndSecretRoomQuick* pWndSecretRoomQuick = (CWndSecretRoomQuick*)g_WndMng.GetWndBase( APP_SECRETROOM_QUICK );

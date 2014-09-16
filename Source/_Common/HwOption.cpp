@@ -261,6 +261,9 @@ void COption::Init()
 #if __VER >= 11 // __ADD_ZOOMOPT
 	m_bZoomLimit = TRUE;
 #endif
+#ifdef __PETFILTER
+	m_dwPetfilter = 0;
+#endif //__PETFILTER
 }
 
 #if defined( _DEBUG) && !defined(__MINIMIZE_USE_OPTION)
@@ -1037,6 +1040,12 @@ int COption::Load( LPCTSTR szFileName )
 		m_bViewMask = scan.GetNumber();
 	}
 #endif
+#ifdef __PETFILTER
+	else if(scan.Token == _T("Petfilter") )
+	{
+		m_dwPetfilter = scan.GetNumber();
+	}
+#endif //__PETFILTER
 	} while( scan.tok != FINISHED );
 
 #if __VER >= 9 // __CSC_VER9_RESOLUTION
@@ -1155,6 +1164,9 @@ int	COption::Save( LPCTSTR szFileName )
 #if __VER >= 12 // __UPDATE_OPT
 	_ftprintf(fp, _T( "VIEWMASK %d\n" ), m_bViewMask );
 #endif
+#ifdef __PETFILTER
+	_ftprintf(fp, _T( "Petfilter %d\n" ), m_dwPetfilter );
+#endif //__PETFILTER
 	fclose(fp);
 	return 1;
 }
