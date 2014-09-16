@@ -534,7 +534,7 @@ resource 0 "R:\ResClient\Model\Skl.rf"
 }
 //
 
-/*
+
 ///////////////////
 // Model texture //
 //    texture	 //
@@ -704,7 +704,7 @@ resource 0 "R:\ResClient\Model\texture\part_Npc.rf"
 { 
 	wildcard "Model\texture\part_Npc*.*" 
 }
-*/
+
 /////////////////
 // texture mid //
 resource 0 "R:\ResClient\Model\textureMid\CtrlTex.rf"
@@ -858,7 +858,7 @@ resource 0 "R:\ResClient\Model\textureMid\part_Npc.rf"
 { 
 	wildcard "Model\textureMid\part_Npc*.*" 
 }
-/*
+
 // texture low
 resource 0 "R:\ResClient\Model\textureLow\CtrlTex.rf"
 { wildcard "Model\textureLow\Ctrl_*.*" }
@@ -1011,7 +1011,7 @@ resource 0 "R:\ResClient\Model\textureLow\part_Npc.rf"
 { 
 	wildcard "Model\textureLow\part_Npc*.*"
 }
-*/
+
 // sfx ////////////////////////////////////////////////////////////////////////
 resource 0 "R:\ResClient\Sfx\sfx.rf"
 {
