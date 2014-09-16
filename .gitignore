@@ -32,6 +32,12 @@
 *.lnd
 *.rgn
 
+#error files
+error_*.txt
+
+#Archive
+*.rar
+
 Resource/Model
 Resource/World
 Resource/Icon
@@ -45,7 +51,7 @@ Resource/Char
 Source/Output
 Client/
 Output/
-*.rar
+
 
 #################
 ## Eclipse
@@ -263,5 +269,5 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-error_20140913.txt
+
 Resource/resource.old.txt

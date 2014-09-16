@@ -68,7 +68,8 @@
 				HeaderFileName=""/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy .\..\..\Output\Neuz.exe .\..\..\Client\"/>
+				CommandLine="copy .\..\..\Output\Neuz.exe .\..\..\Client\
+copy .\..\..\Output\Neuz.exe .\..\..\..\..\ResClient\"/>
 			<Tool
 				Name="VCPreBuildEventTool"/>
 			<Tool
