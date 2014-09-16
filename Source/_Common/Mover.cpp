@@ -8636,6 +8636,16 @@ BOOL CMover::IsItemRedyTime( ItemProp* pItemProp, OBJID dwObjid, BOOL bItemFind 
 				return FALSE;
 			}
 #endif // __S_9_ADD
+#ifdef __PRISON
+			//CWorld* pWorld = g_WorldMng.Get();
+			if( (pItemProp->dwItemKind2 == IK2_BLINKWING  || pItemProp->dwItemKind3 == IK3_TICKET)
+				&& m_pActMover->GetWorld()->GetID() == WI_WORLD_KEBARASP)
+			{
+				( (CUser*)this )->AddText("You cannot blinkwing or use a ticked in prison");
+				return FALSE;
+			}
+
+#endif
 			m_nReadyTime = timeGetTime() + pItemProp->dwSkillReadyType;
 			m_dwUseItemId = dwObjid;
 			m_bItemFind = bItemFind;

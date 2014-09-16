@@ -12,6 +12,14 @@
 *.03d
 *.chr
 
+# Music
+*.ogg
+*.mp3
+*.wav
+
+# SFX
+*.sfx
+
 # Textures
 *.dds
 *.tga
@@ -26,6 +34,14 @@
 
 Resource/Model
 Resource/World
+Resource/Icon
+Resuorce/Item
+Resource/Theme
+Resource/Weather
+Resource/SFX
+Resource/Music
+Resource/Client
+Resource/Char
 Source/Output
 Client/
 Output/
@@ -248,3 +264,4 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 error_20140913.txt
+Resource/resource.old.txt

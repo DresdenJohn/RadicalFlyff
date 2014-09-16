@@ -640,7 +640,7 @@ BOOL Script( LPCSTR lpszFileName )
 		{
 			g_eLocal.SetState( EVE_WORMON, 1 );
 		}
-		else if( s.Token == "respawn" )
+		else if( s.Token == "RESPAWN" )
 		{
 			g_eLocal.SetState( EVE_RESPAWN, 1 );
 		}

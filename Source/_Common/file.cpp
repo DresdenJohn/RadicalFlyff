@@ -101,7 +101,11 @@ BOOL CResFile::Close( void )
 	}
 }
 
-
+#ifdef __RES_ENCRYPT
+#define ENCR_KEY 0x79
+#define ENCR_MARKER1 0x69
+#define ENCR_MARKER2 0x90
+#endif // __RES_ENCRYPT
 
 void CResFile::AddResource( TCHAR* lpszResName )
 {
@@ -113,7 +117,11 @@ void CResFile::AddResource( TCHAR* lpszResName )
 	int nFileSize = 0;
 	int nFilePosition = 0;
 	BYTE byEncryptionKey;
+#ifdef __RES_ENCRYPT
+	bool bEncryption = false;
+#else
 	bool bEncryption;
+#endif // __RES_ENCRYPT
 	TCHAR szFullFileName[ MAX_PATH ];
 	TCHAR drive[_MAX_DRIVE], dir[_MAX_DIR], name[ _MAX_FNAME ], ext[_MAX_EXT];
 	_splitpath( lpszResName, drive, dir, name, ext );
@@ -123,6 +131,18 @@ void CResFile::AddResource( TCHAR* lpszResName )
 		return;
 	file.Read( &byEncryptionKey, sizeof( byEncryptionKey ) );
 	file.Read( &bEncryption, sizeof( bEncryption ) );
+#ifdef __RES_ENCRYPT
+	if((BYTE)bEncryption == ENCR_MARKER1)
+	{
+		byEncryptionKey = byEncryptionKey ^ ENCR_KEY;
+		bEncryption = false;
+	}
+	else if((BYTE)bEncryption == ENCR_MARKER2)
+	{
+		byEncryptionKey = byEncryptionKey ^ ENCR_KEY;
+		bEncryption = true;
+	}
+#endif // __RES_ENCRYPT
 	file.Read( &nFileHeaderSize, sizeof( int ) );
 	
 	char *pHeader = new char[ nFileHeaderSize ];
@@ -155,22 +175,7 @@ void CResFile::AddResource( TCHAR* lpszResName )
 		memcpy( &nFileNameLength, &pHeader[ nHeaderPosition ], sizeof( short ) ); nHeaderPosition += sizeof( short );
 		memcpy( szFileName, &pHeader[ nHeaderPosition ], nFileNameLength ); nHeaderPosition += nFileNameLength;
 		memcpy( &nFileSize, &pHeader[ nHeaderPosition ], sizeof( int ) ); nHeaderPosition += sizeof( int );
-
-#ifdef __RES_ENCRYPT
-		if( strcmp( lpszResName, "data.res" ) == 0 ||
-			strcmp( lpszResName, "datasub1.res" ) == 0 ||
-			strcmp( lpszResName, "datasub2.res" ) == 0 )
-		{
-#endif // __RES_ENCRYPT
 		memcpy( &time_, &pHeader[ nHeaderPosition ], sizeof( time_t ) ); nHeaderPosition += sizeof( time_t );
-#ifdef __RES_ENCRYPT
-		}
-		else
-		{
-			memcpy( &time_, &pHeader[ nHeaderPosition ], sizeof( time_t ) ); nHeaderPosition += sizeof( time_t );
-		}
-#endif // __RES_ENCRYPT
-
 		memcpy( &nFilePosition, &pHeader[ nHeaderPosition ], sizeof( int ) ); nHeaderPosition += sizeof( int );
 		RESOURCE* lpRes = new RESOURCE;
 		ZeroMemory( lpRes, sizeof( RESOURCE ) );
@@ -257,6 +262,12 @@ void CResFile::ScanResource( LPCTSTR lpszRootPath )
 					strcat( szPath, "\\" );
 					ScanResource( szPath );
 				}
+			}
+			else
+			if( CompareExt( c_file.name, ".rf" ) )
+			{
+				strcat( szPath, c_file.name );
+				AddResource( szPath  );
 			}
 			else
 			//if( strstr( c_file.name, ".res" ) != 0 )

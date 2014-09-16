@@ -1734,6 +1734,14 @@ BOOL CMover::DoUseItemBlinkWing( ItemProp *pItemProp, CItemElem* pItemElem, BOOL
 #ifdef __WORLDSERVER
 	if( m_pActMover->IsSit() ) // 2005.12.08 raiders 앉아 있으면 안되게 
 		return FALSE;
+		
+#ifdef __PRISON
+		if(GetWorld()->GetID() == WI_WORLD_KEBARAS)
+		{
+			//AddText("You cannot blinkwing or use a ticked in prison");
+			return FALSE;
+		}
+#endif
 
 	if( IsStateMode( STATE_BASEMOTION_MODE ) ) 
 		return FALSE;
