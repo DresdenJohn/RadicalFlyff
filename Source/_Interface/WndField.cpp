@@ -25683,7 +25683,7 @@ void CWndPetfilter::SetButtonStatus()
 	if( dwPetfilter & FILTER_FPFOOD		) pWndCheck3->SetCheck( TRUE );
 	if( dwPetfilter & FILTER_BWEAPON	) pWndCheck4->SetCheck( TRUE );
 	if( dwPetfilter & FILTER_GWEAPON	) pWndCheck5->SetCheck( TRUE );
-	if( dwPetfilter & FILTER_GOLD		) pWndCheck6->SetCheck( TRUE );
+	if( dwPetfilter & FILTER_BSET		) pWndCheck6->SetCheck( TRUE );
 	if( dwPetfilter & FILTER_GSET		) pWndCheck7->SetCheck( TRUE );
 	if( dwPetfilter & FILTER_NECKLACE	) pWndCheck8->SetCheck( TRUE );
 	if( dwPetfilter & FILTER_EARRING	) pWndCheck9->SetCheck( TRUE );
@@ -25699,10 +25699,8 @@ void CWndPetfilter::SetButtonStatus()
 	if( dwPetfilter & FILTER_APIECARD	) pWndCheck19->SetCheck( TRUE );
 
 }
-// 처음 이 함수를 부르면 윈도가 열린다.
 BOOL CWndPetfilter::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_PETFILTER, WBS_MOVE, CPoint( 0, 0 ), pWndParent );
 
 } 
@@ -25748,7 +25746,7 @@ BOOL CWndPetfilter::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 	case WIDC_BUTTON1:
 		{
 			g_Option.m_dwPetfilter = dwPetfilter;
-			g_Option.Save( "Client.ini" );
+			g_Option.Save( "neuz.ini" );
 			g_DPlay.SendPlayerPetfilter( dwPetfilter );
 			Destroy();
 		}
@@ -25789,9 +25787,9 @@ BOOL CWndPetfilter::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 		break;
 	case WIDC_PF_BSET :
 		if( pWndCheck6->GetCheck() )
-			dwPetfilter |= FILTER_GOLD;
+			dwPetfilter |= FILTER_BSET;
 		else
-			dwPetfilter &= ~FILTER_GOLD;
+			dwPetfilter &= ~FILTER_BSET;
 		SetButtonStatus();
 		break;
 	case WIDC_PF_GSET :

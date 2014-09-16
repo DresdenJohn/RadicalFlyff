@@ -703,6 +703,9 @@
 				RelativePath="couplehelper.h">
 			</File>
 			<File
+				RelativePath="..\..\Resource\defineFilter.h">
+			</File>
+			<File
 				RelativePath="..\_common\dialogmsg.h">
 			</File>
 			<File

@@ -851,11 +851,12 @@
 #define PACKETTYPE_QUERYMAILBOX_REQ					(DWORD)0x88100240
 #define PACKETTYPE_QUERYMAILBOX_COUNT				(DWORD)0x88100241
 
+#ifdef __PETFILTER
+#define PACKETTYPE_PETFILTER						(DWORD)0x88100249
+#endif //__PETFILTER
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-#ifdef __PETFILTER
-#define PACKETTYPE_PETFILTER								(DWORD)0x88100242
-#endif //__PETFILTER
+
 
 #define SNAPSHOTTYPE_CHAT	(WORD)0x0001
 #define SNAPSHOTTYPE_ACTMSG	(WORD)0x0002

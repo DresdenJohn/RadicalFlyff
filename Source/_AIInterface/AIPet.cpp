@@ -156,8 +156,8 @@ BOOL CAIPet::SubItemLoot( void )
 							b1 = FALSE;
 						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_GWEAPON) && pItem->GetProp()->dwReferStat1 == WEAPON_UNIQUE )
 							b1 = FALSE;
-						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_GOLD) && pItem->GetProp()->dwReferStat1 == ARMOR_GEN	)
-							b1 = FALSE;
+//						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_GOLD) && pItem->GetProp()->dwReferStat1 == ARMOR_GEN	)
+//							b1 = FALSE;
 						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_GSET) && pItem->GetProp()->dwReferStat1 == ARMOR_SET )
 							b1 = FALSE;
 						if( (((CUser*)pOwner)->m_dwPetfilter & FILTER_NECKLACE) && pItem->GetProp()->dwItemKind3 == IK3_NECKLACE )
@@ -230,12 +230,11 @@ BOOL CAIPet::SubItemLoot( void )
 							b1 = FALSE;
 					
 
-					if( pOwner->IsLoot( pItem, TRUE ) && b1 )// 루팅되는아이템인지 검사함.
+					if( pOwner->IsLoot( pItem, TRUE ) && b1 )
 #else //__PETFILTER
 					if( pOwner->IsLoot( pItem, TRUE) )
 #endif //__PETFILTER
-	//		#endif
-					if( pOwner->IsLoot( pItem, TRUE ) && b1 )	// 루팅되는아이템인지 검사함.
+					if( pOwner->IsLoot( pItem, TRUE) )// 루팅되는아이템인지 검사함.
 					{
 						vDist = pObj->GetPos() - pMover->GetPos();
 						fDistSq = D3DXVec3LengthSq( &vDist );		// 거리 구함.
