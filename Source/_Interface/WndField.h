@@ -2662,26 +2662,6 @@ private:
 	CString m_strTargetName;
 };
 #endif // __CAMPUS
-#ifdef __PETFILTER
-class CWndPetfilter : public CWndNeuz 
-{ 
-public: 
-	CWndPetfilter(); 
-	~CWndPetfilter(); 
-
-	DWORD dwPetfilter;
-
-	virtual void SetButtonStatus();
-	virtual BOOL Initialize( CWndBase* pWndParent = NULL, DWORD nType = MB_OK ); 
-	virtual BOOL OnChildNotify( UINT message, UINT nID, LRESULT* pLResult ); 
-	virtual void OnDraw( C2DRender* p2DRender ); 
-	virtual	void OnInitialUpdate(); 
-	virtual BOOL OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase ); 
-	virtual void OnSize( UINT nType, int cx, int cy ); 
-	virtual void OnLButtonUp( UINT nFlags, CPoint point ); 
-	virtual void OnLButtonDown( UINT nFlags, CPoint point ); 
-}; 
-#endif //__PETFILTER
 
 #endif // !defined(AFX_WNDFIELD_H__A93F3186_63D6_43C1_956F_EC8691E0C7D9__INCLUDED_)
 

@@ -90,9 +90,7 @@ public:
 	DWORD			m_dwTimeout4Save;					/// db 저장용 타이머 
 	DWORD			m_dwLeavePenatyTime;				/// 종료요청 시각 	
 	DWORD			m_dwDestroyTime;					/// Destory예약 시각 
-	#ifdef __PETFILTER
-	DWORD			m_dwPetfilter;						/// Pet Filter
-	#endif // __PETFILTER
+
 	DWORD			m_dwAuthKey;						/// 인증용 key
 	PLAY_ACCOUNT	m_playAccount;						/// Account정보 
 	CUserTaskBar	m_playTaskBar;						/// player의 taskbar class(큇슬롯)

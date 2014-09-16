@@ -59,9 +59,6 @@
    
 
 
-#ifdef __PETFILTER
-DECLAREAPPLET( AppMain_WndPetfilter	   , new CWndPetfilter    );
-#endif //__PETFILTER
 
 DECLAREAPPLET( AppMain_WndNavigator    , new CWndNavigator   );
 DECLAREAPPLET( AppMain_WndCharacter    , new CWndCharacter   );
@@ -213,10 +210,6 @@ void CWndMgr::AddAllApplet()
 	AddAppletFunc( AppMain_WndQuest        , APP_QUEST                   , _T( "WndQuest"     )    , _T( "Icon_Quest.dds"     )    , GETTEXT( TID_TIP_QUEST          ), g_Neuz.Key.chQuest );
 #endif // __IMPROVE_QUEST_INTERFACE
 	AddAppletFunc( AppMain_WndParty        , APP_PARTY                   , _T( "WndParty"     )    , _T( "Icon_Troupe.dds"    )    , GETTEXT( TID_TIP_PARTY          ),  'P' );
-
-#ifdef __PETFILTER
-	AddAppletFunc( AppMain_WndPetfilter	   , APP_PETFILTER				 , _T( "WndPetfilter" )	   , _T( "Icon_Applet.dds"    )	   , _T( "PetFilter" ),  'U' );
-#endif //__PETFILTER
 
 	AddAppletFunc( AppMain_WndGuild        , APP_GUILD                   , _T( "WndGuild"     )    , _T( "Icon_Troupe.dds"    )    , GETTEXT( TID_TIP_COMPANY          ),  'G' );
 

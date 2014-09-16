@@ -69,7 +69,6 @@ resource 1 "R:\ResClient\data.rf"
 	//file	"propMapComboBoxData.inc"
 	//file	"propMapComboBoxData.txt.txt"
 	file	"defineMapComboBoxData.h"
-	file	"defineFilter.h"
 }
 
 resource 1 "R:\ResClient\dataSub1.rf"

@@ -857,7 +857,6 @@
 #define APP_SEAL_CHAR_SELECT                                            2019
 #define APP_SEAL_CHAR_SEND                                              2020
 #define APP_SEAL_CHAR_SET                                               2021
-#define APP_PETFILTER							2024
 
 // Control Id
 #define WIDC_STATIC_2ND_PASSWORD_CONFIRM866000000000000000000000000000000000000000000000000
@@ -1587,24 +1586,5 @@
 #define WIDC_BTN_TELEPORTER             1332
 #define WIDC_BTN_UPKEEP                 1333
 #define WIDC_STATIC611                  1336
-#define WIDC_PF_GSET                    1351
-#define WIDC_PF_ELECARD                 1352
-#define WIDC_PF_4PCARD                  1353
-#define WIDC_PF_7PCARD                  1354
-#define WIDC_PF_FPFOOD                  1355
-#define WIDC_PF_NECKLACE                1356
-#define WIDC_PF_RING                    1357
-#define WIDC_PF_EARRING                 1358
-#define WIDC_PF_BWEAPON                 1359
-#define WIDC_PF_MPFOOD                  1360
-#define WIDC_PF_HPFOOD                  1361
-#define WIDC_PF_GWEAPON                 1362
-#define WIDC_PF_BSET                    1363
-#define WIDC_PF_BPIECARD                1364
-#define WIDC_PF_APIECARD                1365
-#define WIDC_PF_EGG                     1366
-#define WIDC_PF_SUNSTONE                1367
-#define WIDC_PF_MOONSTONE               1368
-#define WIDC_PF_QUESTS                  1369
 
 #endif
