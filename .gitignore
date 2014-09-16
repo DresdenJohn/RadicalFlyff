@@ -45,6 +45,7 @@ Resource/Char
 Source/Output
 Client/
 Output/
+*.rar
 
 #################
 ## Eclipse

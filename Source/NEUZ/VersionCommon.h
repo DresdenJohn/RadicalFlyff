@@ -18,7 +18,7 @@
 
 #define __OLDLODELIGHT
 #define __RES_ENCRYPT
-//#define	__PETFILTER
+#define	__PETFILTER
 #define __SECURITY_FIXES
 #define	__NO_SPEEDHACK
 #define	__SWAP_FIX
