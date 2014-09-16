@@ -45,7 +45,6 @@ Resource/Char
 Source/Output
 Client/
 Output/
-*.exe
 
 #################
 ## Eclipse
