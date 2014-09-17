@@ -37,6 +37,7 @@ error_*.txt
 
 #Archive
 *.rar
+*.exe
 
 Resource/Model
 Resource/World
