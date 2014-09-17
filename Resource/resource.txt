@@ -161,6 +161,13 @@ resource 1 "R:\ResClient\client\client.rf"
 	wildcard "Client\*.*"
 }
 
+//Item Folder
+resource 1 "R:\ResClient\Item\item.rf"
+{
+	wildcard "Item\Item_*.dds"
+	wildcard "Item\Itm_*.dds"
+}
+
 //Icon Folder
 resource 0 "R:\ResClient\Icon\icon_a.rf"
 { wildcard "Icon\icon_A*.*" }

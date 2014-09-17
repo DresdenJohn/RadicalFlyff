@@ -16,6 +16,7 @@
 #define __PRISON //No blinkwings while in prison
 //#define __ONLY_TEXTUREMID //No texturelow or texture in model and world folders
 
+//#define __PERIN_CONVERTER
 #define __OLDLODELIGHT
 #define __RES_ENCRYPT
 #define	__PETFILTER

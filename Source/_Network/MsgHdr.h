@@ -855,6 +855,9 @@
 #define PACKETTYPE_PETFILTER						(DWORD)0x88100249
 #endif //__PETFILTER
 
+#ifdef __PERIN_CONVERTER 
+#define PACKETTYPE_GETPERIN									(DWORD)0xDD000018
+#endif // __PERIN_CONVERTER
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 

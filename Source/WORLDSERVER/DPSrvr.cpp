@@ -118,6 +118,9 @@ BOOL CanAdd( DWORD dwGold, int nPlus )
 CDPSrvr::CDPSrvr()
 {
 	BEGIN_MSG;
+#ifdef __PERIN_CONVERTER
+	ON_MSG( PACKETTYPE_GETPERIN, OnGetPerin );
+#endif
 
 	ON_MSG( PACKETTYPE_JOIN, OnAddUser );
 	ON_MSG( PACKETTYPE_LEAVE, OnRemoveUser );
@@ -12606,3 +12609,44 @@ void CDPSrvr::OnSetPetfilter( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lp
 	}
 }
 #endif //__PETFILTER
+
+#ifdef __PERIN_CONVERTER
+void CDPSrvr::OnGetPerin( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long )
+{
+	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
+	u_long idPlayer;
+	if( IsValidObj( pUser ) )
+	{
+		ar >> idPlayer;
+		if( idPlayer != pUser->m_idPlayer )
+			return;
+
+		if( pUser->m_Inventory.GetEmptyCount() > 0 )
+		{
+			if( pUser->GetGold() >= PERIN_VALUE )
+			{
+				CItemElem item;
+				item.m_nItemNum = 1;
+				item.m_dwItemId = II_SYS_SYS_SCR_PERIN;
+				if( pUser->CreateItem( &item ) )
+				{
+					pUser->AddGold( -PERIN_VALUE );
+					pUser->AddText("Perin hinzugefugt!");
+				}
+				else
+					pUser->AddText("ERROR");
+			}
+			else
+			{
+				pUser->AddText("Nicht genug Penya.");
+				return;
+			}
+		}
+		else
+		{
+			pUser->AddText("Kein Platz im Inventar.");
+			return;
+		}
+	}
+}
+#endif

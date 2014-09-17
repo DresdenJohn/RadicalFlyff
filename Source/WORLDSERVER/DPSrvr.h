@@ -475,6 +475,9 @@ private:
 #ifdef __PETFILTER
 	void	OnSetPetfilter( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize );
 #endif //__PETFILTER
+#ifdef __PERIN_CONVERTER
+	void	OnGetPerin( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long );
+#endif
 private:
 	DPID	m_dpidCache;		// 캐쉬서버 DPID
 };

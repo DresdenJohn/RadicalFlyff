@@ -1231,6 +1231,14 @@ void CWndInventory::OnDraw(C2DRender* p2DRender)
 	if( !pMover )
 		return;
 
+#ifdef __PERIN_CONVERTER
+	CWndButton* pPerin = (CWndButton*)GetDlgItem( WIDC_BUTTON1 );
+	if( pMover->GetGold() >= PERIN_VALUE )
+		pPerin->SetVisible( TRUE );
+	else
+		pPerin->SetVisible( FALSE );
+#endif
+
 	LPDIRECT3DDEVICE9 pd3dDevice = p2DRender->m_pd3dDevice;
 
 	// 뷰포트 세팅 
@@ -1717,6 +1725,10 @@ BOOL CWndInventory::Process()
 
 BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 {
+#ifdef __PERIN_CONVERTER
+	if( nID == WIDC_BUTTON1 )
+		g_DPlay.GetPerin( g_pPlayer->m_idPlayer );
+#endif
 	// 인벤토리로 아이템이 Drop되었다. 어디서 왔는지 확인한후 적절히 대응하라.
 	if( message == WIN_ITEMDROP )
 	{
