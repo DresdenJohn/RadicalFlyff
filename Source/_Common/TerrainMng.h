@@ -31,7 +31,7 @@ typedef struct tagWaterTexList
 }WaterTexList, *LPWATERTEXLIST;
 
 #define MAX_WATER	10
-#define MAX_TERRAIN 256
+#define MAX_TERRAIN 1024
 
 class CTerrainMng
 {

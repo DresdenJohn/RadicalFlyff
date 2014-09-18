@@ -694,8 +694,8 @@ public:
 };
 #endif	// __WORLDSERVER
 
-#define	MAX_ITEM_PER_PACK	16
-#define	MAX_PACKITEM		512
+#define	MAX_ITEM_PER_PACK	512
+#define	MAX_PACKITEM		1024
 
 typedef	struct	_PACKITEMELEM
 {
