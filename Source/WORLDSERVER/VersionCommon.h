@@ -14,7 +14,7 @@
 #define __OLDPKSYS //V6 PK, remember to comment __PKSERVER_USE_ANGEL
 //#define __NEWPKSYS
 
-//#define __PERIN_CONVERTER
+#define __PERIN_CONVERTER
 #define __OLDLODELIGHT
 #define __RES_ENCRYPT
 #define	__PETFILTER
