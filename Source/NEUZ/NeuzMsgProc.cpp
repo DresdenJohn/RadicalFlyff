@@ -405,7 +405,9 @@ BOOL InitApp()
 
 	g_Neuz.LoadOption(); // Neuz.ini¸¦ ·Îµù
 
-	lstrcpy( g_Neuz.m_lpCertifierAddr, "127.0.0.1" );
+	lstrcpy( g_Neuz.m_lpCertifierAddr, "198.204.232.58"); // DEDI
+	
+	// lstrcpy( g_Neuz.m_lpCertifierAddr, "127.0.0.1" ); // LOCALHOST
 
 	TestNetLib( g_Neuz.m_lpCertifierAddr, PN_CERTIFIER );
 
