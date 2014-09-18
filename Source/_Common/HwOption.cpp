@@ -1113,7 +1113,7 @@ int	COption::Save( LPCTSTR szFileName )
 	_ftprintf(fp, _T( "Server %d %d\n" ), m_nSer, m_nMSer );
 
 	if( m_nToggleScreen )
-		_ftprintf(fp, _T( "sunkist %d\n" ), m_nToggleScreen );
+		_ftprintf(fp, _T( "okgoogle %d\n" ), m_nToggleScreen );
 
 	_ftprintf(fp, _T( "Sound %d %.1f %.1f\n" ), m_bVoice, m_fEffectVolume, m_fBGMVolume );
 	_ftprintf(fp, _T( "Guide %d\n" ), m_nGuide1 );

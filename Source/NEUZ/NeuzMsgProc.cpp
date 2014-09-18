@@ -281,8 +281,26 @@ BOOL ParseCmdLine( LPCTSTR lpCmdLine )
 #ifndef __MAINSERVER
 	g_Neuz.m_bEncryptPWD	= TRUE;
 #else	// __INTERNALSERVER
-//	if( strcmpi( szArg1, "sunkist" ) )	//rev1
-//		return FALSE;
+
+	if( strcmpi(szArg1,"okgoogle"))
+		{
+			return false;
+		}
+		
+#ifdef	__NEUZ_CMD_ARGUMENT
+	if( strcmpi(szArg2,"1"))
+		{
+			lstrcpy( g_Neuz.m_lpCertifierAddr, "198.204.232.58"); // DEDI
+		}
+	else if( strcmpi(szArg2,""))
+		{
+			lstrcpy( g_Neuz.m_lpCertifierAddr, "127.0.0.1" ); // LOCALHOST
+		}
+#else
+			lstrcpy( g_Neuz.m_lpCertifierAddr, "127.0.0.1" ); // LOCALHOST
+#endif //	__NEUZ_CMD_ARGUMENT
+
+
 	if( ::GetLanguage() == LANG_KOR )
 	{
 		if( strcmpi( szArg2, "localhost" ) )
@@ -295,14 +313,18 @@ BOOL ParseCmdLine( LPCTSTR lpCmdLine )
 #ifdef __THROUGHPORTAL0810
 	char	szPortal[LANG_MAX][3][100]	=
 		{
-			"localhost",	"",	"",		// LANG_KOR
+			"",	"",	"",		// LANG_KOR
 			"",	"",	"",		// LANG_ENG
-			"hangame.co.jp",	"",	"",		// LANG_JAP
+			"",	"",	"",		// LANG_JAP
 			"",	"",	"",		// LANG_CHI
-			"flyffonline.ini3.co.th",	"",	"",		// LANG_THA
-			"www.omg.com.tw/fff/", "", "",		// LANG_TWN
+
+
+			"",	"",	"",		// LANG_THA
+			"", "", "",		// LANG_TWN
 			"",	"",	"",		// LANG_GER
-			"http://www.zoomby.net/",	"",	"",		// LANG_SPA
+
+
+			"",	"",	"",		// LANG_SPA
 			"",	"",	"",		// LANG_FRE
 			"",	"",	"",		// LANG_HK
 			"",	"",	"",		// LANG_POR
@@ -338,7 +360,9 @@ BOOL ParseCmdLine( LPCTSTR lpCmdLine )
 		g_Neuz.SetAccountInfo( szArg3, szArg4 ); // account, password
 	}
 #endif	// __THROUGHPORTAL0810
-	
+
+
+		
 	GetIPFromFile( szArg1, szArg2 );
 
 	return TRUE;
@@ -368,7 +392,7 @@ BOOL InitApp()
 //	temp.Format("Os Ver : %d, VGA Vendor Id : %d", versionInfo.dwMajorVersion, Identifier.VendorId);
 //	AfxMessageBox(temp, MB_OK);
 
-	//ATI계열 카드의 Vista드라이버에서 Floating Point Exception이 발생하여 Vista & ATI가 아닐 경우만 Enable함
+	//ATI & Vista - Floating Point Exception
 	if( bGetOsVr && hres == S_OK && versionInfo.dwMajorVersion != 6 && Identifier.VendorId != 4098 )
 		EnableFloatException();
 
@@ -404,10 +428,6 @@ BOOL InitApp()
 	#endif
 
 	g_Neuz.LoadOption(); // Neuz.ini를 로딩
-
-	lstrcpy( g_Neuz.m_lpCertifierAddr, "198.204.232.58"); // DEDI
-	
-	// lstrcpy( g_Neuz.m_lpCertifierAddr, "127.0.0.1" ); // LOCALHOST
 
 	TestNetLib( g_Neuz.m_lpCertifierAddr, PN_CERTIFIER );
 
