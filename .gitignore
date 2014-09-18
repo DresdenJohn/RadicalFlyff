@@ -36,7 +36,7 @@
 error_*.txt
 
 #Archive
-*.rar
+#*.rar
 *.exe
 
 Resource/Model
@@ -52,8 +52,6 @@ Resource/Char
 Source/Output
 Client/
 Output/
-Program/*.exe
-## Bye bye exe again.
 
 
 #################
