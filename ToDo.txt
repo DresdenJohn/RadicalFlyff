@@ -1,0 +1,3 @@
+* Proprender needs proper colored names
+* Salt needs added/fixed
+* John needs to create website
