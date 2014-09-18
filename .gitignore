@@ -272,3 +272,11 @@ pip-log.txt
 .mr.developer.cfg
 
 Resource/resource.old.txt
+Program/1.AccountServer.exe
+Program/1.AccountServer.exe
+Program/2.DatabaseServer.exe
+Program/3.CoreServer.exe
+Program/4.Certifier.exe
+Program/5.LoginServer.exe
+Program/6.CacheServer.exe
+Program/7.WorldServer.exe

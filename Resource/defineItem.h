@@ -5025,7 +5025,7 @@
 #define	II_SYS_SYS_SCR_BXDRAGON				26584
 #define	II_SYS_SYS_SCR_BXSMELTING02			26585
 
-#define	II_SYS_SYS_SCR_BXMVAGRANT01			26586 //Radical Vagrant Items
+#define	II_SYS_SYS_SCR_BXMVAGRANT01			26586
 #define	II_SYS_SYS_SCR_BXFVAGRANT01			26587
 
 #define II_RID_RID_STI_BIKE3				26588 // 클락 바이크(오렌지)
@@ -5279,8 +5279,8 @@
 #define II_SYS_SYS_SCR_BXWOODSET01	26807	//통나무가구셋
 #define II_SYS_SYS_SCR_BXHEARTSET01	26808	//하트가구셋
 
-#define II_SYS_SYS_SCR_BXMVWANDER01	26809	//불햄, 리프레셔, 활력X, 방랑자(남)
-#define II_SYS_SYS_SCR_BXFVWANDER01	26810	//불햄, 리프레셔, 활력X, 방랑자(여)
+#define II_SYS_SYS_SCR_BXMVWANDER01	26809	//Radical Flyff Vag Male
+#define II_SYS_SYS_SCR_BXFVWANDER01	26810	// Vag Female
 
 #define	II_VIETNAM_BUFF01		26811   // 베트남 누적 접속 시간 확인용 버프
 
@@ -6195,6 +6195,7 @@
 //Rad
 #define II_SYS_SYS_SCR_BX_PET7			100000
 #define II_SYS_SYS_SCR_BX_VAG_AMP		100001
+#define II_CHR_SYS_SCR_SHOUTFULL7		100002
 
 //7 Day pets
 #define II_SYS_SYS_SCR_BX_PET_SOCCERBALL_7					200000	

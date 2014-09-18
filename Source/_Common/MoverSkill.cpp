@@ -2033,6 +2033,14 @@ int	CMover::DoUseItemSystem( ItemProp *pItemProp, CItemElem* pItemElem, int nPar
 			break;
 		}
 #endif	// __SYS_COLLECTING
+	case II_CHR_SYS_SCR_SHOUTFULL7:
+		{
+			if( !IsShoutFull() )
+				SetSMMode( SM_SHOUT7, pItemProp->dwCircleTime );
+			else
+				nResult = 2;
+		}
+		break;
 	case II_CHR_SYS_SCR_SHOUTFULL15:
 		{
 			if( !IsShoutFull() )
