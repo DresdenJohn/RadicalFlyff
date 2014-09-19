@@ -1,3 +1,11 @@
+Flyff Development
 * Proprender needs proper colored names
-* Salt needs added/fixed
-* John needs to create website
+
+To Do Before Release List
+* Password Salt must be updated
+* MSGVER must be updated
+* Patcher must be completed (Include .rf encryption)
+
+Website
+* Finish styling
+* Add voting reward system
