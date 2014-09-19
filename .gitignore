@@ -279,3 +279,5 @@ pip-log.txt
 .mr.developer.cfg
 
 Resource/resource.old.txt
+*.exe
+Program/1.AccountServer.exe
