@@ -250,12 +250,7 @@ void CResFile::ScanResource( LPCTSTR lpszRootPath )
 		{
 			strlwr( c_file.name );
 			strcpy( szPath, lpszRootPath );
-			if( CompareExt( c_file.name, ".rf" ) )
-			{
-				strcat( szPath, c_file.name );
-				AddResource( szPath  );
-			}
-			else if( c_file.attrib & _A_SUBDIR )//if( CFile::GetStatus( name, fileStatus) == TRUE )
+			if( c_file.attrib & _A_SUBDIR )//if( CFile::GetStatus( name, fileStatus) == TRUE )
 			{
 				if( strcmp( c_file.name, "." ) && strcmp( c_file.name, ".." ) 
 #ifdef __INTERNALSERVER
@@ -267,6 +262,19 @@ void CResFile::ScanResource( LPCTSTR lpszRootPath )
 					strcat( szPath, "\\" );
 					ScanResource( szPath );
 				}
+			}
+			else
+			if( CompareExt( c_file.name, ".rf" ) )
+			{
+				strcat( szPath, c_file.name );
+				AddResource( szPath  );
+			}
+			else
+			//if( strstr( c_file.name, ".res" ) != 0 )
+			if( CompareExt( c_file.name, ".res" ) )
+			{
+				strcat( szPath, c_file.name );
+				AddResource( szPath  );
 			}
 		}
 		while( _findnext( hFile, &c_file ) == 0 );
