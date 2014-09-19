@@ -84,6 +84,10 @@ LANG_ENG	1	// eng
 {
 	ItemProp
 	{
+		II_CHR_SYS_SCR_SHOUTFULL3
+		{
+			dwLimitLevel1	= 20;
+		}
 		II_CHR_SYS_SCR_SHOUTFULL7
 		{
 			dwLimitLevel1	= 20;

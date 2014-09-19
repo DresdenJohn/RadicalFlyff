@@ -12233,19 +12233,19 @@ void CDPClient::OnModifyMode( OBJID objid, CAr & ar )
 			}
 			if( pPlayer->IsMode( OBSERVE_MODE ) )
 			{
-				str += "관전";
+				str += "Obsreve Mode";
 			}
 			if( pPlayer->IsMode( ITEM_MODE ) )
 			{
-				str += "아이템";
+				str += "Item Mode";
 			}
 			if( pPlayer->IsMode( NO_ATTACK_MODE ) )
 			{
-				str += "공격";
+				str += "No attack mode";
 			}
 			if( pPlayer->IsMode( COMMUNITY_MODE ) )
 			{
-				str += "커뮤니티";
+				str += "Community Mode";
 			}
 			if( pPlayer->m_dwMode & ONEKILL_MODE )
 			{
@@ -12254,15 +12254,15 @@ void CDPClient::OnModifyMode( OBJID objid, CAr & ar )
 
 			if( pPlayer->IsMode( SAYTALK_MODE ) )
 			{
-				str += "귓속말할수 없는";
+				str += "Saytalk Mode";
 			}
 			if( pPlayer->IsMode( TALK_MODE ) )
 			{
-				str += "채팅할수 없는";
+				str += "Talk Mode";
 			}
 			if( pPlayer->IsMode( SHOUTTALK_MODE ) )
 			{
-				str += "외치기할수 없는";
+				str += "Shouttalk Mode";
 			}
 			if( pPlayer->m_dwMode & DONMOVE_MODE )
 			{

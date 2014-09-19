@@ -11792,7 +11792,7 @@ CItemElem*	CMover::GetTicket( void )
 
 BOOL CMover::IsShoutFull( void )
 {
-	return	( IsSMMode( SM_SHOUT7 ) || IsSMMode( SM_SHOUT15 ) || IsSMMode( SM_SHOUT30 ) || IsSMMode( SM_SHOUT001 ) );
+	return	( IsSMMode( SM_SHOUT15 ) || IsSMMode( SM_SHOUT30 ) || IsSMMode( SM_SHOUT001 ) || IsSMMode( SM_SHOUT3 ) || IsSMMode( SM_SHOUT7 ) );
 }
 
 BOOL CMover::IsCommBank( void )
