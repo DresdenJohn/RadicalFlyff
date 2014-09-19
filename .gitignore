@@ -60,6 +60,7 @@ Program/4.Certifier.exe
 Program/5.LoginServer.exe
 Program/6.CacheServer.exe
 Program/7.WorldServer.exe
+*.exe
 
 #################
 ## Eclipse
