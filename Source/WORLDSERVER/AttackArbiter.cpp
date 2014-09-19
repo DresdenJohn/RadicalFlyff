@@ -533,7 +533,11 @@ int CAttackArbiter::PostAsalraalaikum()
 	int nMP = m_pAttacker->GetManaPoint();						// 일단 받아놓고
 	if( m_pAttacker->IsPlayer() && m_pAttacker->IsSMMode( SM_MAINTAIN_MP ) == FALSE )		// MP 유료아이템 먹었을때는 MP닳면 안된다.
 		m_pAttacker->SetPointParam( DST_MP, 0 );				// 0으로 만듬.
+#ifdef __ASAL_NERF
+	return ( ( ( m_pAttacker->GetStr() / 10 ) * dwSkillLevel ) * ( 5 + m_pAttacker->GetInt() / 10 ) + nAddDmg );
+#else
 	return ( ( ( m_pAttacker->GetStr() / 10 ) * dwSkillLevel ) * ( 5 + nMP / 10 ) + nAddDmg );
+#endif // __ASAL_NERF
 }
 
 //

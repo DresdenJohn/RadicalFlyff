@@ -7,6 +7,8 @@ To Do Before Release List
 * Password Salt must be updated
 * MSGVER must be updated
 * Patcher must be completed (Include .rf encryption)
++ Weapon and Armor nerf
++ Asal Nerf //Rev1 in worldserver, replacing MP with INT. May need formula changed. AttackArbiter.cpp -> Line 537
 
 Website
 * Finish styling

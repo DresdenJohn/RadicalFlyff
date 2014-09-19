@@ -173,7 +173,7 @@ resource 0 "R:\ResClient\Icon\icon_a.rf"
 { wildcard "Icon\icon_A*.*" }
 resource 0 "R:\ResClient\Icon\icon_b.rf"
 { wildcard "Icon\icon_B*.*" }
-resource 0 "R:\ResClient\Icon\icon_C.rf"
+resource 0 "R:\ResClient\Icon\icon_c.rf"
 { wildcard "Icon\icon_C*.*" }
 resource 0 "R:\ResClient\Icon\icon_d.rf"
 { wildcard "Icon\icon_D*.*" }
@@ -201,7 +201,7 @@ resource 0 "R:\ResClient\Icon\icon_o.rf"
 { wildcard "Icon\icon_O*.*" }
 resource 0 "R:\ResClient\Icon\icon_p.rf"
 { wildcard "Icon\icon_P*.*" }
-resource 0 "R:\ResClient\Icon\icon_w.rf"
+resource 0 "R:\ResClient\Icon\icon_q.rf"
 { wildcard "Icon\icon_Q*.*" }
 resource 0 "R:\ResClient\Icon\icon_r.rf"
 { wildcard "Icon\icon_R*.*" }
