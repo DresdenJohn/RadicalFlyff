@@ -9,6 +9,7 @@ To Do Before Release List
 * Patcher must be completed (Include .rf encryption)
 + Weapon and Armor nerf
 + Asal Nerf //Rev1 in worldserver, replacing MP with INT. May need formula changed. AttackArbiter.cpp -> Line 537
++ Need auto job change
 
 Website
 * Finish styling
