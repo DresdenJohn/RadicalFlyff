@@ -1,5 +1,7 @@
 Flyff Development
 * Proprender needs proper colored names
++ Need to make one folder texture to reduce client size
++ Debug stats next to charater window
 
 To Do Before Release List
 * Password Salt must be updated

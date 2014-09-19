@@ -1039,6 +1039,7 @@ resource 0 "R:\ResClient\Theme\default\default.rf"
 	wildcard "theme\default\*.tga"
 	wildcard "theme\default\*.dds"
 	wildcard "theme\default\*.inc"
+	wildcard "theme\default\*.thm"
 }
 
 resource 0 "R:\ResClient\Theme\Chinese\Chinese.rf"
