@@ -10,6 +10,10 @@ To Do Before Release List
 + Weapon and Armor nerf
 + Asal Nerf //Rev1 in worldserver, replacing MP with INT. May need formula changed. AttackArbiter.cpp -> Line 537
 + Need auto job change
++ Quget eel bug/hack fixes
++ KSing big monsters. mover.cpp -> meteo from old source
++ guild seige multiple times a week
+
 
 Website
 * Finish styling
