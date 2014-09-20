@@ -12,7 +12,6 @@ To Do Before Release List
 + Need auto job change
 + Quget eel bug/hack fixes
 + KSing big monsters. mover.cpp -> meteo from old source
-+ guild seige multiple times a week
 
 
 Website
