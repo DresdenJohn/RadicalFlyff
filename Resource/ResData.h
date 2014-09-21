@@ -858,6 +858,7 @@
 #define APP_SEAL_CHAR_SEND                                              2020
 #define APP_SEAL_CHAR_SET                                               2021
 #define APP_PETFILTER							2024
+#define APP_INSTANTJOBCHANGE						907
 
 // Control Id
 #define WIDC_STATIC_2ND_PASSWORD_CONFIRM866000000000000000000000000000000000000000000000000

@@ -1789,6 +1789,17 @@ BOOL CMover::SetExperience( EXPINTEGER nExp1, int nLevel )
 	if( IsInvalidObj(this) )
 		return 0;
 
+#ifdef __CLIENT
+#ifdef __INSTANT_JOBCHANGE
+	if( (GetLevel() == 120 || GetLevel() == 129) && GetExpPercent() == 9999 )
+	{
+		SAFE_DELETE( g_WndMng.m_pJobChangeEx );
+		g_WndMng.m_pJobChangeEx = new CWndJobChangeEx;
+		g_WndMng.m_pJobChangeEx->Initialize();
+	}
+#endif //__INSTANT_JOBCHANGE
+#endif
+
 	if( nLevel > m_nLevel )
 	{
 #ifdef __CLIENT
@@ -1865,6 +1876,16 @@ BOOL CMover::SetExperience( EXPINTEGER nExp1, int nLevel )
 				if( GetLevel() != 1 )
 					pWndWorld->m_pWndGuideSystem->GuideStart(FALSE);
 			#endif
+
+#ifdef __INSTANT_JOBCHANGE
+			if( GetLevel() == 15 || GetLevel() == 60 /*|| ((GetLevel() == 120 || GetLevel() == 129) && GetExpPercent() >= 9900 ) */)
+			{
+				SAFE_DELETE( g_WndMng.m_pJobChangeEx );
+				g_WndMng.m_pJobChangeEx = new CWndJobChangeEx;
+				g_WndMng.m_pJobChangeEx->Initialize();
+			}
+#endif //__INSTANT_JOBCHANGE
+
 				switch(GetLevel())
 				{
 			#if __VER >= 12 // __MOD_TUTORIAL

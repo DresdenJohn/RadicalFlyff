@@ -69,7 +69,8 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				CommandLine="copy .\..\..\Output\Neuz.exe .\..\..\Client\
-copy .\..\..\Output\Neuz.exe .\..\..\..\..\ResClient\"/>
+copy .\..\..\Output\Neuz.exe .\..\..\..\..\ResClient\
+"/>
 			<Tool
 				Name="VCPreBuildEventTool"/>
 			<Tool
@@ -1138,6 +1139,12 @@ copy .\..\..\Output\Neuz.exe .\..\..\..\..\ResClient\"/>
 					</File>
 					<File
 						RelativePath="..\_interface\WndChangeFace.h">
+					</File>
+					<File
+						RelativePath=".\WndChangeJobEx.cpp">
+					</File>
+					<File
+						RelativePath=".\WndChangeJobEx.h">
 					</File>
 					<File
 						RelativePath="..\_Interface\WndChangeName.cpp">

@@ -53,6 +53,9 @@ public:
 	void	OnQueryPVendorItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize );
 	void	OnBuyPVendorItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize );
 	void	OnEnchant( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize);
+#ifdef __INSTANT_JOBCHANGE
+ 	void	OnUpdateJob( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long );
+#endif //__INSTANT_JOBCHANGE
 #if __VER >= 14 // __SMELT_SAFETY
 	void	OnSmeltSafety( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize);
 #endif // __SMELT_SAFETY

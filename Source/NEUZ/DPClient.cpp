@@ -19254,6 +19254,14 @@ void CDPClient::SendPlayerPetfilter( DWORD dwPetfilter )
 }
 #endif //__PETFILTER
 
+#ifdef __INSTANT_JOBCHANGE
+void CDPClient::UpdateJob( int nJob, int nLevel )
+{
+	BEFORESENDSOLE( ar, PACKETTYPE_UPDATE_JOB, DPID_UNKNOWN );
+	ar << nJob << nLevel;
+	SEND( ar, this, DPID_SERVERPLAYER );
+}
+#endif //__INSTANT_JOBCHANGE
 #ifdef __PERIN_CONVERTER
 void CDPClient::GetPerin( u_long idPlayer )
 {

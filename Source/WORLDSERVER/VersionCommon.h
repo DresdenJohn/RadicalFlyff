@@ -14,6 +14,9 @@
 #define __OLDPKSYS //V6 PK, remember to comment __PKSERVER_USE_ANGEL
 //#define __NEWPKSYS
 
+#define __INSTANT_JOBCHANGE
+//#define __NEW_CLASSES //3rd jobs, not finished yet
+#define __NO_STEAL //No stealing from bosses
 #define __ASAL_NERF
 #define __PERIN_CONVERTER
 #define __OLDLODELIGHT

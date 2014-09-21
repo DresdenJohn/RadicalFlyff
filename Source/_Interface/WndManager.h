@@ -66,6 +66,10 @@
 #include "WndHelp.h"
 #endif //__HELP_BUG_FIX
 
+#ifdef __INSTANT_JOBCHANGE
+#include "WndChangeJobEx.h"
+#endif //__INSTANT_JOBCHANGE
+
 #if __VER >= 13 // __RAINBOW_RACE
 #include "WndRainbowRace.h"
 #endif //__RAINBOW_RACE
@@ -510,6 +514,9 @@ public:
 #endif //__EXT_ENCHANT
 
 	CWndReSkillWarning*			  m_pWndReSkillWarning;	
+#ifdef __INSTANT_JOBCHANGE
+	CWndJobChangeEx*			m_pJobChangeEx;
+#endif //__INSTANT_JOBCHANGE
 	CWndFontEdit*				  m_pWndFontEdit;
 
 	CWndPartyChangeName* m_pWndPartyChangeName;

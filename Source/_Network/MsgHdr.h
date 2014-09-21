@@ -858,6 +858,10 @@
 #ifdef __PERIN_CONVERTER 
 #define PACKETTYPE_GETPERIN									(DWORD)0xDD000018
 #endif // __PERIN_CONVERTER
+
+#ifdef __INSTANT_JOBCHANGE
+#define PACKETTYPE_UPDATE_JOB						(DWORD)0x88100245
+#endif //__INSTANT_JOBCHANGE
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 

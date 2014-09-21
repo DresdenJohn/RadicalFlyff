@@ -149,6 +149,10 @@ public:
 	void	SendDropGold( DWORD dwGold, const D3DXVECTOR3 & vPlayerPos, const D3DXVECTOR3 & vPos );
 	void	SendConfirmPKPVP( u_long uidPlayer );
 	void	OnSetDuel( OBJID objid, CAr & ar );
+#ifdef __INSTANT_JOBCHANGE
+ 	void	UpdateJob( int nJob, int nLevel );
+#endif //__INSTANT_JOBCHANGE
+
 #ifdef __NEWPKSYS // __S8_PK
 	void	OnPKRelation( OBJID objid, CAr & ar );
 	void	OnPKPink( OBJID objid, CAr & ar );

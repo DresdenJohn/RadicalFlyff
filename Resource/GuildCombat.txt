@@ -81,18 +81,21 @@ GCSENDITEM	10	II_ARM_S_CLO_CLO_DRAGON1	1
 // 1~7 == 일~토
 AUTO_OPEN_IDC
 {
-	7	18	30   // 요일	시(24시간형식으로 입력)	      분
+	1	12	30   // SUNDAY 12:30PM, EURO
+	4	06	30   // WEDNESDAY 6:30AM, ASIA
+	6	18	30   // FRIDAY 6:30PM, US
+	
 }
 
 AUTO_OPEN_TEST
 {
-	1	17	00   // 요일	시(24시간형식으로 입력)	      분
-	2	17	00   // 요일	시(24시간형식으로 입력)	      분
-	3	17	00   // 요일	시(24시간형식으로 입력)	      분
-	4	17	00   // 요일	시(24시간형식으로 입력)	      분
-	5	17	00   // 요일	시(24시간형식으로 입력)	      분
-	6	17	00   // 요일	시(24시간형식으로 입력)	      분
-	7	17	00   // 요일	시(24시간형식으로 입력)	      분
+	1	17	00   // SUNDAY 5PM
+	2	17	00   // MONDAY 5PM
+	3	17	00   // TUESDAY 5PM
+	4	17	00   // WEDNESDAY 5PM
+	5	17	00   // THURSDAY 5PM
+	6	17	00   // FRIDAY 5PM
+	7	17	00   // SATURDAY 5PM
 }
 
 OPEN	14 // 오픈 시간

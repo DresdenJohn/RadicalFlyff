@@ -16,6 +16,9 @@
 #define __PRISON //No blinkwings while in prison
 //#define __ONLY_TEXTUREMID //No texturelow or texture in model and world folders
 
+#define __NO_STEAL //No stealing from bosses
+#define __INSTANT_JOBCHANGE
+//#define __NEW_CLASSES //3rd jobs, not finished yet
 #define __NEUZ_CMD_ARGUMENT //Add 1 in arg for local or no arg for dedi
 #define __PERIN_CONVERTER
 #define __OLDLODELIGHT
