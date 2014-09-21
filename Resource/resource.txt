@@ -165,7 +165,8 @@ resource 1 "..\Client\client\client.rf"
 resource 1 "..\Client\Item\item.rf"
 {
 	wildcard "Item\Item_*.dds"
-	wildcard "Item\Itm_*.dds"
+	wildcard "Item\Itm_*.dds"	
+	wildcard "Item\skill*.*"
 }
 
 //Icon Folder
@@ -186,7 +187,11 @@ resource 1 "..\Client\Icon\icon_g.rf"
 resource 1 "..\Client\Icon\icon_h.rf"
 { wildcard "Icon\icon_H*.*" }
 resource 1 "..\Client\Icon\icon_i.rf"
-{ wildcard "Icon\icon_I*.*" }
+{ 
+	wildcard "Icon\icon_I*.*" 
+
+}
+
 resource 1 "..\Client\Icon\icon_j.rf"
 { wildcard "Icon\icon_J*.*" }
 resource 1 "..\Client\Icon\icon_k.rf"
@@ -194,7 +199,10 @@ resource 1 "..\Client\Icon\icon_k.rf"
 resource 1 "..\Client\Icon\icon_l.rf"
 { wildcard "Icon\icon_L*.*" }
 resource 1 "..\Client\Icon\icon_m.rf"
-{ wildcard "Icon\icon_M*.*" }
+	{ 
+		wildcard "Icon\icon_M*.*" 
+		wildcard "Icon\M*.*"
+	}
 resource 1 "..\Client\Icon\icon_n.rf"
 { wildcard "Icon\icon_N*.*" }
 resource 1 "..\Client\Icon\icon_o.rf"
@@ -202,11 +210,16 @@ resource 1 "..\Client\Icon\icon_o.rf"
 resource 1 "..\Client\Icon\icon_p.rf"
 { wildcard "Icon\icon_P*.*" }
 resource 1 "..\Client\Icon\icon_q.rf"
-{ wildcard "Icon\icon_Q*.*" }
+	{ 
+		wildcard "Icon\icon_Q*.*" 
+		wildcard "Icon\Q*.*"
+	}
 resource 1 "..\Client\Icon\icon_r.rf"
 { wildcard "Icon\icon_R*.*" }
 resource 1 "..\Client\Icon\icon_s.rf"
-{ wildcard "Icon\icon_S*.*" }
+{ 
+	wildcard "Icon\icon_S*.*"
+}
 resource 1 "..\Client\Icon\icon_t.rf"
 { wildcard "Icon\icon_T*.*" }
 resource 1 "..\Client\Icon\icon_u.rf"

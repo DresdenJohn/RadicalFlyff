@@ -3,19 +3,20 @@ To Do Before Release List
 Flyff Development
 * Party Finder System
 * Proprender needs proper colored names
-* Need to make one folder texture to reduce client size
 * Debug stats next to charater window
 * Password Salt must be updated
 * MSGVER must be updated
 * Patcher must be completed (Include .rf encryption)
 * Weapon and Armor nerf
-
-* Need auto job change
 * Quget eel bug/hack fixes
 
 Needs Tested
 * Asal Nerf //Rev1 in worldserver, replacing MP with INT. May need formula changed. AttackArbiter.cpp -> Line 537
 * Item steal from METEO/CW
+
+
+Finished/Buggy
+* Need to make one folder texture to reduce client size 
 
 Website
 * Finish styling
