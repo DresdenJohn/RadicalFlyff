@@ -53,3 +53,5 @@ Client/
 Output/
 
 *.exe
+*.ncb
+*.suo
