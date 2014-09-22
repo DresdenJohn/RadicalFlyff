@@ -1984,23 +1984,21 @@ void CMover::InitLevelJobChange( int nJob, LONG nLevel, BOOL bGamma )
 		{
 			m_nRemainGP = ( m_nSta - 15 ) + ( m_nStr - 15 ) + ( m_nDex - 15 ) + ( m_nInt - 15 ) + m_nRemainGP;
 			m_nStr = m_nSta = m_nDex = m_nInt = 15;
+			
 		}
-/*
-		if( nJob == JOB_MENTALIST_HERO || nJob == JOB_FORCEMASTER_HERO )
+
+		if( m_nLevel >= 15 && m_nLevel <= 59)
 		{
 			CItemElem itemelem;
 			itemelem.m_nItemNum = 1;
 			itemelem.m_bCharged = TRUE;
 			BYTE nID;
 
-			if( nJob == JOB_MENTALIST_HERO )
-				itemelem.m_dwItemId = II_WEA_BOOK_BOKROMAIN;
-			if( nJob == JOB_FORCEMASTER_HERO )
-				itemelem.m_dwItemId = II_ARM_ARM_SHI_ZEMBATO;
+			itemelem.m_dwItemId = II_SYS_SYS_SCR_RECCURENCE_LINK;
 
 			( ( CUser*)this)->CreateItem( &itemelem, &nID );
 		}
-*/
+
 		g_UserMng.AddSetLevel( this, (WORD)m_nLevel );
 		( (CUser*)this )->AddSetGrowthLearningPoint( m_nRemainGP );
 		( (CUser*)this )->AddSetExperience( GetExp1(), (WORD)m_nLevel, m_nSkillPoint, m_nSkillLevel );
