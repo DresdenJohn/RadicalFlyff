@@ -3,7 +3,6 @@ To Do Before Release List
 Flyff Development
 * Party Finder System
 * Proprender needs proper colored names
-* Debug stats next to charater window
 * Password Salt must be updated
 * MSGVER must be updated
 * Patcher must be completed (Include .rf encryption)
@@ -17,6 +16,7 @@ Needs Tested
 
 Finished/Buggy
 * Need to make one folder texture to reduce client size. Commented for now.
+* Debug stats next to charater window. No Player online count. Seems almost impossible to code in.
 
 Website
 * Finish styling
