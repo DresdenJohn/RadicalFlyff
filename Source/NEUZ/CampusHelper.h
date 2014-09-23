@@ -12,9 +12,11 @@
 #if __VER >= 15 // __CAMPUS
 #include "Campus.h"
 
+
 class CCampusHelper  
 {
 public:
+
 	CCampusHelper();
 	~CCampusHelper();
 

@@ -14,6 +14,7 @@
 #include "..\_UnhandledException\ExceptionHandler.h"
 #include "guild.h"
 
+
 #include "WorldMap.h"
 #include "Commonctrl.h"
 
@@ -735,12 +736,43 @@ void CWndWorld::OnDraw( C2DRender* p2DRender )
 	
 #endif
 
-	if( g_pPlayer && m_bRenderFPS )
+
+#ifdef __DEBUG_STATS
+	if( g_pPlayer )
 	{
+			//FPS
 		TCHAR strFPS[32];
 		_stprintf( strFPS, "%.02f FPS", g_Neuz.m_fFPS );
-		p2DRender->TextOut( 5,  105 , strFPS, D3DCOLOR_ARGB( 255, 0, 255, 255 ) );				
+		p2DRender->TextOut( 5,  120 , strFPS, D3DCOLOR_ARGB( 255, 255, 255, 255 ) );
+		
+			//Ping
+		TCHAR strPing[32];
+		_stprintf( strPing, "Ping(%d ms)", g_Neuz.m_dwPingTime );
+		p2DRender->TextOut( 5, 135, strPing, D3DCOLOR_ARGB( 255, 255, 255, 255 ) );
+
+			//Game Time
+		TCHAR strGameTime[32];
+		_stprintf( strGameTime, "Madrigal Time - %d:%d\n", g_GameTimer.m_nHour, g_GameTimer.m_nMin );
+		p2DRender->TextOut( 5, 150, strGameTime, D3DCOLOR_ARGB( 255, 255, 255, 255 ) );	
+
+			//Players Online
+/*#ifdef __WORLDSERVER
+	CUser* pUser	= (CUser*)scanner.dwValue;
+	g_DPCoreClient.SendGetPlayerCount( pUser->m_idPlayer );
+
+	char szCount[128]	= { 0, };
+	sprintf( szCount, "Players online: %d", g_UserMng.GetCount() );
+	pUser->AddText( szCount );
+#endif	// __WORLDSERVER*/
+
+#ifdef __WORLDSERVER
+		TCHAR szCount[32];
+		_stprintf( szCount, "Players online: %d", g_UserMng.GetCount() );
+		p2DRender->TextOut( 5, 105, szCount, D3DCOLOR_ARGB( 255, 0, 255, 255 ) );
+#endif	// __WORLDSERVER	
 	}
+#endif //__DEBUG_STATS
+
 
 /*
 #ifdef _DEBUG

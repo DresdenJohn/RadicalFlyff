@@ -16,7 +16,7 @@ Needs Tested
 
 
 Finished/Buggy
-* Need to make one folder texture to reduce client size 
+* Need to make one folder texture to reduce client size. Commented for now.
 
 Website
 * Finish styling

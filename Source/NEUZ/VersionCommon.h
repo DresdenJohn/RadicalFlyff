@@ -16,6 +16,7 @@
 #define __PRISON //No blinkwings while in prison
 //#define __ONLY_TEXTUREMID //No texturelow or texture in model and world folders
 
+#define __DEBUG_STATS
 #define __NO_STEAL //No stealing from bosses
 #define __INSTANT_JOBCHANGE
 //#define __NEW_CLASSES //3rd jobs, not finished yet
