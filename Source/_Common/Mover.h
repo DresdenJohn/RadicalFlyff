@@ -32,8 +32,8 @@ typedef	MemPooler<CMover>	CMoverPool;
 #define	MAX_NAME				64
 
 #define	COLOR_PLAYER			0xffffffff
-#define COLOR_GAMEMASTER        0xff2D7CAE	//0xff2D7CAE	//rev1
-#define COLOR_ADMINISTRATOR     0xffAE2D2D	//0xffAE2D2D	//" "
+#define COLOR_GAMEMASTER        0xff00D936	//0xff2D7CAE	//rev1
+#define COLOR_ADMINISTRATOR     0xff00BFFF	//0xffAE2D2D	//" "
 #define	COLOR_NPC				0xffa0a0ff  
 #define	COLOR_MONSTER			0xffffffa0
 #define	COLOR_PARTY				0xff70f070
