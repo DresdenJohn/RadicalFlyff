@@ -53,12 +53,10 @@ Client/
 Output/
 
 *.exe
-<<<<<<< HEAD
 *.bak
 *.ncb
 *.suo
 *.old*
-=======
 *.ncb
 *.suo
->>>>>>> 2956cae465719aef3f45fb8cc7dc29a489d80013
+
