@@ -4558,7 +4558,7 @@ DWORD CWndMgr::PutItemName( CItemElem* pItemElem, CEditString* pEdit )
 	CString strTemp;
 	DWORD dwColorbuf = dwItemColor[g_Option.m_nToolTipText].dwName0;
 
-#if __VER >= 9 //__CSC_VER9_1
+
 	if( pItemElem->GetProp()->dwReferStat1 == WEAPON_GENERAL )
 		dwColorbuf = dwItemColor[g_Option.m_nToolTipText].dwName0;
 	else if( pItemElem->GetProp()->dwReferStat1 == WEAPON_UNIQUE )
@@ -4567,12 +4567,12 @@ DWORD CWndMgr::PutItemName( CItemElem* pItemElem, CEditString* pEdit )
 		dwColorbuf = dwItemColor[g_Option.m_nToolTipText].dwName3;
 	else if( pItemElem->GetProp()->dwReferStat1 == ARMOR_SET )
 		dwColorbuf = dwItemColor[g_Option.m_nToolTipText].dwName1;	
-#else //__CSC_VER9_1
+#ifdef __V6_BROWNS
 	if( pItemElem->GetProp()->dwItemRare == 200 )
 		dwColorbuf = dwItemColor[g_Option.m_nToolTipText].dwName1;
 	else if( pItemElem->GetProp()->dwItemRare == 300 )
 		dwColorbuf = dwItemColor[g_Option.m_nToolTipText].dwName2;
-#endif //__CSC_VER9_1
+#endif // __V6_BROWNS
 	if( pItemElem->IsFlag( CItemElem::binds ) 
 		&& (pItemElem->m_dwItemId != II_GEN_MAT_ORICHALCUM01_1 && pItemElem->m_dwItemId != II_GEN_MAT_MOONSTONE_1)
 #if __VER >= 14 // __EQUIP_BIND
