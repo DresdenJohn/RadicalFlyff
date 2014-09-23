@@ -2,12 +2,20 @@ To Do Before Release List
 
 Flyff Development
 * Party Finder System
-* Proprender needs proper colored names
 * Password Salt must be updated
 * MSGVER must be updated
 * Patcher must be completed (Include .rf encryption)
-* Weapon and Armor nerf
+* Weapon and Armor nerf 
+* Change items from 3 stats to 5 stats
 * Quget eel bug/hack fixes
+* Items for being online for a few hours
+* Weapon piercing to 6 from 10
+* Buff pet is able to buff people
+* Collectinf field to have A/S/G/XProtects, Revs, Pet Revs
+* Turn off debug stats with CTRL+F
+* /gmlist to see GMs Online
+* Couple leveling. Needs faster leveling and higher stats
+* Custom emotes
 
 Needs Tested
 * Asal Nerf //Rev1 in worldserver, replacing MP with INT. May need formula changed. AttackArbiter.cpp -> Line 537
