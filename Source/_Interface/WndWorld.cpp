@@ -747,7 +747,7 @@ void CWndWorld::OnDraw( C2DRender* p2DRender )
 		
 			//Ping
 		TCHAR strPing[32];
-		_stprintf( strPing, "Ping(%d ms)", g_Neuz.m_dwPingTime );
+		_stprintf( strPing, "Ping: %dms", g_Neuz.m_dwPingTime );
 		p2DRender->TextOut( 5, 135, strPing, D3DCOLOR_ARGB( 255, 255, 255, 255 ) );
 
 			//Game Time
