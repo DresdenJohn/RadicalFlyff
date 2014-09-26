@@ -164,6 +164,10 @@ public:
 //	Attributes
 	int		GetSize( void );
 	int		FindMember( u_long uPlayerId );
+	
+#ifdef __PARTY_FINDER
+	BOOL	m_bAllowEnter;
+#endif // __PARTY_FINDER
 private:
 
 
@@ -215,6 +219,10 @@ public:
 	u_long	NewParty( u_long uLeaderId, LONG nLeaderLevel, LONG nLeaderJob, BYTE nLeaderSex, LPSTR szLeaderName, u_long uMemberId, LONG nMemberLevel, LONG nMemberJob, BYTE nMemberSex, LPSTR szMembername, u_long uPartyId = 0 );
 	BOOL	DeleteParty( u_long uPartyId );
 	CParty*	GetParty( u_long uPartyId );
+#ifdef __PARTY_FINDER
+	CParty* GetPartyFree();
+#endif // __PARTY_FINDER
+
 #if !defined(__WORLDSERVER) && !defined(__CLIENT)
 	void	Lock( void )	{	m_AddRemoveLock.Enter();	}
 	void	Unlock( void )	{	m_AddRemoveLock.Leave();	}

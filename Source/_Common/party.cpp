@@ -54,6 +54,9 @@ CParty::CParty()
 	m_nKindTroup = 0;							// ´Ü¸·±Ø´Ü
 	m_nReferens = 0;
 	m_nGetItemPlayerId = 0;
+#ifdef __PARTY_FINDER
+	m_bAllowEnter = TRUE;
+#endif //__PARTY_FINDER
 	for( int i = 0 ; i < MAX_PARTYMODE ; i++ )
 	{
 		m_nModeTime[i] = 0;
@@ -78,6 +81,9 @@ void CParty::InitParty()
 	m_nTroupsShareExp = m_nTroupeShareItem = 0;
 	m_nKindTroup = 0;							// ´Ü¸·±Ø´Ü
 	m_nReferens = 0;	
+#ifdef __PARTY_FINDER
+	m_bAllowEnter = TRUE;
+#endif //__PARTY_FINDER
 	for( int i = 0 ; i < MAX_PTMEMBER_SIZE ; i++ )
 	{
 		m_aMember[i].m_uPlayerId	= 0;
@@ -972,6 +978,32 @@ CParty* CPartyMng::GetParty( u_long uPartyId )
 		return i->second;
 	return NULL;
 }
+
+#ifdef __PARTY_FINDER
+CParty* CPartyMng::GetPartyFree()
+{
+	CParty* pParty, *pPartyTmp = NULL;
+	if(  !m_2PartyPtr.begin()->second )
+		return NULL;
+	BOOL bRan = FALSE;
+	DWORD dwRand = 0;
+	if( m_2PartyPtr.end()->first >= 1 )
+		DWORD dwRand = xRandom( m_2PartyPtr.end()->first );
+
+	for( C2PartyPtr::iterator i = m_2PartyPtr.begin(); i != m_2PartyPtr.end(); ++i )
+	{
+		pParty = (CParty*)i->second;
+		if( pParty && pParty->GetSizeofMember() < 8 && pParty->m_bAllowEnter )
+		{
+			if( i->first > dwRand )
+				return pParty;
+			else
+				pPartyTmp = pParty;
+		}
+	}
+	return pPartyTmp;
+}
+#endif //__PARTY_FINDER
 
 void CPartyMng::Serialize( CAr & ar )
 {

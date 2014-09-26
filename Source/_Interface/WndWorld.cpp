@@ -740,20 +740,21 @@ void CWndWorld::OnDraw( C2DRender* p2DRender )
 #ifdef __DEBUG_STATS
 	if( g_pPlayer )
 	{
-			//FPS
-		TCHAR strFPS[32];
-		_stprintf( strFPS, "%.02f FPS", g_Neuz.m_fFPS );
-		p2DRender->TextOut( 5,  120 , strFPS, D3DCOLOR_ARGB( 255, 255, 255, 255 ) );
+	
+				//FPS
+			TCHAR strFPS[32];
+			_stprintf( strFPS, "%.02f FPS", g_Neuz.m_fFPS );
+			p2DRender->TextOut( 5,  120 , strFPS, D3DCOLOR_ARGB( 255, 255, 255, 255 ) );
 		
-			//Ping
-		TCHAR strPing[32];
-		_stprintf( strPing, "Ping: %dms", g_Neuz.m_dwPingTime );
-		p2DRender->TextOut( 5, 135, strPing, D3DCOLOR_ARGB( 255, 255, 255, 255 ) );
+				//Ping
+			TCHAR strPing[32];
+			_stprintf( strPing, "Ping: %dms", g_Neuz.m_dwPingTime );
+			p2DRender->TextOut( 5, 135, strPing, D3DCOLOR_ARGB( 255, 255, 255, 255 ) );
 
-			//Game Time
-		TCHAR strGameTime[32];
-		_stprintf( strGameTime, "Madrigal Time - %d:%d\n", g_GameTimer.m_nHour, g_GameTimer.m_nMin );
-		p2DRender->TextOut( 5, 150, strGameTime, D3DCOLOR_ARGB( 255, 255, 255, 255 ) );	
+				//Game Time
+			TCHAR strGameTime[32];
+			_stprintf( strGameTime, "Madrigal Time - %d:%d\n", g_GameTimer.m_nHour, g_GameTimer.m_nMin );
+			p2DRender->TextOut( 5, 150, strGameTime, D3DCOLOR_ARGB( 255, 255, 255, 255 ) );	
 
 			//Players Online
 /*#ifdef __WORLDSERVER

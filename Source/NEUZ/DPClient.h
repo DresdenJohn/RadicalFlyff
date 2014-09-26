@@ -390,6 +390,10 @@ public:
 	void	OnRequestGuildRank( CAr & ar );
 	void	SendActionPoint( int nAP );
 		
+#ifdef __PARTY_FINDER
+	void	OnPartyAllowJoin( CAr& ar );
+	void	SendAllowParty( u_long idLeader, u_long idParty, BOOL bAllow );
+#endif //__PARTY_FINDER
 //________________________________________________________________________________
 
 	void	SendDoUseItem( DWORD dwItemId, OBJID objid, int nPart = -1 , BOOL bResult = TRUE );

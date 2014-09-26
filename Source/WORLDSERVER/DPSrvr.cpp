@@ -556,6 +556,9 @@ CDPSrvr::CDPSrvr()
 #ifdef __INSTANT_JOBCHANGE
 	ON_MSG( PACKETTYPE_UPDATE_JOB, OnUpdateJob );
 #endif //__INSTANT_JOBCHANGE
+#ifdef __PARTY_FINDER
+	ON_MSG( PACKETTYPE_ALLOW_PARTY, OnAllowParty );
+#endif //__PARTY_FINDER
 }
 
 CDPSrvr::~CDPSrvr()
@@ -1622,7 +1625,11 @@ void CDPSrvr::OnPartyRequest( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lp
 
 	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) && pUser->m_idPlayer == uLeaderid )
+#ifdef __PARTY_FINDER
+		InviteParty( uLeaderid, uMemberid, bTroup, FALSE );
+#else
 		InviteParty( uLeaderid, uMemberid, bTroup );
+#endif //__PARTY_FINDER
 }
 
 void CDPSrvr::OnPartyRequestCancle( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
@@ -10012,7 +10019,11 @@ void CDPSrvr::OnExchange( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf,
 }
 #endif // __TRADESYS
 
+#ifdef __PARTY_FINDER
+void CDPSrvr::InviteParty( u_long uLeaderid, u_long uMemberid, BOOL bTroup, BOOL bPartyFind )
+#else
 void CDPSrvr::InviteParty( u_long uLeaderid, u_long uMemberid, BOOL bTroup )
+#endif //__PARTY_FINDER
 {
 	CUser* pUser = g_UserMng.GetUserByPlayerID( uMemberid );
 	CUser* pLeaderUser = g_UserMng.GetUserByPlayerID( uLeaderid );
@@ -10056,7 +10067,11 @@ void CDPSrvr::InviteParty( u_long uLeaderid, u_long uMemberid, BOOL bTroup )
 				if( pUser->IsAttackMode() )
 					pLeaderUser->AddDefinedText( TID_GAME_BATTLE_NOTPARTY, "" );
 				else
+#ifdef __PARTY_FINDER
+					pUser->AddPartyRequest( pLeaderUser, pUser, bTroup, bPartyFind );
+#else
 					pUser->AddPartyRequest( pLeaderUser, pUser, bTroup );
+#endif //__PARTY_FINDER
 			}
 		}
 	}
@@ -10605,6 +10620,34 @@ void CDPSrvr::OnFeedPocketInactive( CAr & ar, DPID dpidCache, DPID dpidUser, LPB
 	}
 }
 #endif	// __PET_0410
+
+#ifdef __PARTY_FINDER
+void CDPSrvr::OnAllowParty( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long )
+{
+	CUser *pUser = g_UserMng.GetUser( dpidCache, dpidUser );
+	if( IsValidObj( pUser ) )
+	{
+		u_long idLeader, idParty;
+		BOOL bAllow;
+		ar >> idLeader >> idParty >> bAllow;
+		if( idLeader != pUser->m_idPlayer )
+			return;
+		CParty *pParty = g_PartyMng.GetParty( idParty );
+		if( pParty && pParty->IsLeader( idLeader ) )
+			pParty->m_bAllowEnter = bAllow;
+		else
+			return;
+
+		CUser *pMember;
+		for( int i = 0; i < pParty->m_nSizeofMember; i++ )
+		{
+			pMember		= (CUser*)prj.GetUserByID( pParty->m_aMember[i].m_uPlayerId );
+			if( IsValidObj( (CObj*)pMember ) )
+				pMember->AddPartyAllowJoin( pParty->m_bAllowEnter );
+		}
+	}
+}
+#endif //__PARTY_FINDER
 
 #if __VER >= 9 // __CSC_VER9_2
 void CDPSrvr::OnModifyStatus( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )

@@ -1350,7 +1350,11 @@ void CUser::AddPartyChangeTroup( const char * szPartyName )
 	
 }
 
+#ifdef __PARTY_FINDER
+void CUser::AddPartyRequest( CUser * pLeader, CUser * pMember, BOOL bTroup, BOOL bPartyFind )
+#else
 void CUser::AddPartyRequest( CUser * pLeader, CUser * pMember, BOOL bTroup )
+#endif //__PARTY_FINDER
 {
 	if( IsDelete() )	return;
 	
@@ -1360,7 +1364,11 @@ void CUser::AddPartyRequest( CUser * pLeader, CUser * pMember, BOOL bTroup )
 	m_Snapshot.ar << pLeader->m_idPlayer << pLeader->m_nLevel << pLeader->m_nJob << pLeader->GetSex();
 	m_Snapshot.ar << pMember->m_idPlayer << pMember->m_nLevel << pMember->m_nJob << pMember->GetSex();
 	m_Snapshot.ar.WriteString( pLeader->m_szName );
-	m_Snapshot.ar << bTroup;
+	m_Snapshot.ar << bTroup
+#ifdef __PARTY_FINDER
+		<< bPartyFind
+#endif //__PARTY_FINDER
+		;
 	
 }
 
@@ -8992,4 +9000,15 @@ void CUser::AddGuildHouseTenderResult( OBJID objGHId, BOOL bResult )
 }
 #endif // __GUILD_HOUSE_MIDDLE
 
+#ifdef __PARTY_FINDER
+void CUser::AddPartyAllowJoin( BOOL bAllow )
+{
+	if( IsDelete() ) return;
+
+	m_Snapshot.cb++;
+	m_Snapshot.ar << GetId();
+	m_Snapshot.ar << SNAPSHOTTYPE_PARTYALLOW;
+	m_Snapshot.ar << bAllow;
+}
+#endif //__PARTY_FINDER
 

@@ -368,7 +368,12 @@ public:
 	void	QueryDestroyPlayer( DPID dpidCache, DPID dpidUser, DWORD dwAuthKey, u_long idPlayer );
 	void	PutCreateItemLog( CUser* pUser, CItemElem* pItemElem, const char* szAction, const char* recv ) ;
 	void	OnLogItem( LogItemInfo & info, CItemElem* pItemElem = NULL, int nItemCount = 0 );
+#ifdef __PARTY_FINDER
+	void	InviteParty( u_long uLeaderid, u_long uMemberid, BOOL bTroup, BOOL bPartyFind );
+	void	OnAllowParty( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long );
+#else
 	void	InviteParty( u_long uLeaderid, u_long uMemberid, BOOL bTroup );
+#endif //__PARTY_FINDER
 	void	InviteCompany( CUser* pUser, OBJID objid );
 	void	UpdateGuildBank(CGuild* p_GuildBank, int p_Mode, BYTE cbUpdate = 0, u_long idPlayer = 0, CItemElem* pItemElem = NULL, DWORD dwPenya = 0, short nItemCount = 0 );
 	BOOL	ClosePVendor( CUser* pUser, OBJID objidVendor );

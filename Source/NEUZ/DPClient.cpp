@@ -855,6 +855,9 @@ void CDPClient::OnSnapshot( CAr & ar )
 			case SNAPSHOTTYPE_GUILDHOUSE_TENDER_INFOWND:	OnGuildHouseTenderInfoWnd( ar ); break;
 			case SNAPSHOTTYPE_GUILDHOUSE_TENDER_RESULT:		OnGuildHouseTenderResult( ar ); break;
 #endif // __GUILD_HOUSE_MIDDLE
+#ifdef __PARTY_FINDER
+			case SNAPSHOTTYPE_PARTYALLOW: OnPartyAllowJoin( ar ); break;
+#endif // __PARTY_FINDER
 			default:
 				{
 					ASSERT( 0 );
@@ -4486,14 +4489,22 @@ void CDPClient::OnPartyRequest( CAr & ar )
 {
 	u_long uLeader, uMember;
 
-	BOOL bTroup;
+	BOOL bTroup
+#ifdef __PARTY_FINDER
+		, bPartyFind
+#endif// __PARTY_FINDER
+		;
 	LONG nLeaderLevel, nMemberLevel, nLeaderJob, nMemberJob;
 	BYTE byLeaderSex, byMemberSex;
 	char szLeaderName[MAX_PLAYER] = {0,};
 	ar >> uLeader >> nLeaderLevel >> nLeaderJob >> byLeaderSex;
 	ar >> uMember >> nMemberLevel >> nMemberJob >> byMemberSex;
 	ar.ReadString( szLeaderName, MAX_PLAYER );
-	ar >> bTroup;
+	ar >> bTroup
+#ifdef __PARTY_FINDER
+		>> bPartyFind;
+#endif //__PARTY_FINDER
+		;
 	
 	if( g_Option.m_bParty == FALSE )
 	{
@@ -4513,11 +4524,32 @@ void CDPClient::OnPartyRequest( CAr & ar )
 		SendBlock( 7, g_pPlayer->GetName(), szLeaderName );
 		return;
 	}
-
+#ifdef __PARTY_FINDER
+	if( bPartyFind )
+	{
+		SendAddPartyMember( uLeader, nLeaderLevel, nLeaderJob, byLeaderSex, uMember, nMemberLevel, nMemberJob, byMemberSex );
+	}else
+	{
+		g_WndMng.m_pWndPartyConfirm = new CWndPartyConfirm;
+		g_WndMng.m_pWndPartyConfirm->SetMember( uLeader, nLeaderLevel, nLeaderJob, byLeaderSex, uMember, nMemberLevel, nMemberJob, byMemberSex, szLeaderName, bTroup );
+		g_WndMng.m_pWndPartyConfirm->Initialize();
+	}
+#else
 	g_WndMng.m_pWndPartyConfirm = new CWndPartyConfirm;
 	g_WndMng.m_pWndPartyConfirm->SetMember( uLeader, nLeaderLevel, nLeaderJob, byLeaderSex, uMember, nMemberLevel, nMemberJob, byMemberSex, szLeaderName, bTroup );
 	g_WndMng.m_pWndPartyConfirm->Initialize();
+#endif //__PARTY_FINDER
 }
+
+#ifdef __PARTY_FINDER
+void CDPClient::SendAllowParty( u_long idLeader, u_long idParty, BOOL bAllow )
+{
+	BEFORESENDSOLE( ar, PACKETTYPE_ALLOW_PARTY, DPID_UNKNOWN );
+	ar << idLeader << idParty << bAllow;
+	SEND( ar, this, DPID_SERVERPLAYER );
+
+}
+#endif //__PARTY_FINDER
 
 void CDPClient::OnPartyRequestCancel( CAr & ar )
 {
@@ -19262,6 +19294,12 @@ void CDPClient::UpdateJob( int nJob, int nLevel )
 	SEND( ar, this, DPID_SERVERPLAYER );
 }
 #endif //__INSTANT_JOBCHANGE
+#ifdef __PARTY_FINDER
+void CDPClient::OnPartyAllowJoin( CAr & ar )
+{
+	ar >> g_Party.m_bAllowEnter;
+}
+#endif // __PARTY_FINDER
 #ifdef __PERIN_CONVERTER
 void CDPClient::GetPerin( u_long idPlayer )
 {

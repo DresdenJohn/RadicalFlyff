@@ -323,7 +323,12 @@ public:
 #else	// __SYS_PLAYER_DATA
 	void			AddPartyMember( CParty *pParty, u_long uPlayerId = 0 );
 #endif	// __SYS_PLAYER_DATA
+#ifdef __PARTY_FINDER
+	void			AddPartyAllowJoin( BOOL bAllow );
+	void			AddPartyRequest( CUser * pLeader, CUser * pMember, BOOL bTroup, BOOL bPartyFind );
+#else
 	void			AddPartyRequest( CUser * pLeader, CUser * pMember, BOOL bTroup );
+#endif //__PARTY_FINDER
 	void			AddPartyRequestCancel( u_long uLeaderid, u_long uMemberid, int nMode = 0 );
 	void			AddPartyExpLevel( int Exp, int Level, int nPoint );
 #if __VER < 11 // __SYS_PLAYER_DATA

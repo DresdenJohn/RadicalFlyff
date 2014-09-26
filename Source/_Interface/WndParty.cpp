@@ -87,6 +87,15 @@ void CWndParty::OnDraw( C2DRender* p2DRender )
 	}
 #endif	// __PARTY_DEBUG_0129		// ±ÿ¥‹¿Â ∆®±‚¥¬ «ˆªÛ µπˆ±Î neuz
 
+#ifdef __PARTY_FINDER
+	CWndButton *chk = (CWndButton*)GetDlgItem( WIDC_CHECK1 );
+	if( g_Party.IsLeader( g_pPlayer->m_idPlayer ) )
+		chk->EnableWindow( TRUE );
+	else
+		chk->EnableWindow( FALSE );
+	chk->SetCheck( !g_Party.m_bAllowEnter );
+#endif // __PARTY_FINDER
+
 	if( g_Party.GetLevel() >= 10 && g_Party.IsLeader( g_pPlayer->m_idPlayer ) )
 		m_pWndChange->EnableWindow( TRUE );
 	else
@@ -350,6 +359,17 @@ BOOL CWndParty::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 			m_wndPartyInfo.m_nSelected=-1;
 		}
 	}
+#ifdef __PARTY_FINDER
+	else if( nID == WIDC_CHECK1 )
+	{
+		if( g_Party.IsLeader( g_pPlayer->m_idPlayer ) )
+		{
+			CWndButton *chk = (CWndButton*)GetDlgItem( WIDC_CHECK1 );
+			g_Party.m_bAllowEnter = chk->GetCheck();
+			g_DPlay.SendAllowParty( g_pPlayer->m_idPlayer, g_Party.m_uPartyId, g_Party.m_bAllowEnter );
+		}
+	}
+#endif //__PARTY_FINDER
 	// ±ÿ¥‹¿Â ¿Œ∞Ë.
 	else if( nID==WIDC_BUTTON1 )
 	{

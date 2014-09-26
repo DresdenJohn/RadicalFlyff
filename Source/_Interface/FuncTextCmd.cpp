@@ -3037,6 +3037,31 @@ BOOL TextCmd_ExpUpStop( CScanner& scanner )
 	
 	return TRUE;
 }
+
+#ifdef __PARTY_FINDER
+BOOL TextCmd_getparty( CScanner& scanner )
+{
+#ifdef __WORLDSERVER
+	CUser *pUser = (CUser*)scanner.dwValue;
+	if( pUser->m_idparty > 0 )
+	{
+		pUser->AddText( "You are already in a party" );
+		return TRUE;
+	}
+	CParty *pParty;
+	pParty = g_PartyMng.GetPartyFree();
+	if( pParty )
+	{
+		g_DPSrvr.InviteParty( pParty->GetLeader()->m_idPlayer, pUser->m_idPlayer, FALSE, TRUE );
+	}else
+	{
+		pUser->AddText( "Sorry, but there is no party for you" );
+	}
+#endif
+	return TRUE;
+}
+#endif //__PARTY_FINDER
+
 BOOL TextCmd_PartyInvite( CScanner& scanner )
 {
 #ifdef __WORLDSERVER
@@ -3052,7 +3077,11 @@ BOOL TextCmd_PartyInvite( CScanner& scanner )
 	{
 		CUser* pUser2	= g_UserMng.GetUserByPlayerID( uidPlayer );	
 		if( IsValidObj( pUser2 ) )
+#ifdef __PARTY_FINDER
+			g_DPSrvr.InviteParty( pUser->m_idPlayer, pUser2->m_idPlayer, FALSE, FALSE );
+#else
 			g_DPSrvr.InviteParty( pUser->m_idPlayer, pUser2->m_idPlayer, FALSE );
+#endif //__PARTY_FINDER
 		else
 			pUser->AddDefinedText( TID_DIAG_0060, "\"%s\"", scanner.Token );
 	}
@@ -5214,6 +5243,10 @@ BOOL TextCmd_InvenRemove( CScanner& scanner )
 
 
 BEGINE_TEXTCMDFUNC_MAP
+/* New Commands - Begin */
+#ifdef __PARTY_FINDER
+	ON_TEXTCMDFUNC( TextCmd_getparty,				"getParty",			"gp",			"",					"",			TCM_SERVER,	AUTH_GENERAL	,"" )
+#endif //__PARTY_FINDER
 ////////////////////////////////////////////////// AUTH_GENERAL begin/////////////////////////////////////////////////////
 	ON_TEXTCMDFUNC( TextCmd_whisper,               "whisper",           "w",              "귓속말",         "귓",      TCM_SERVER, AUTH_GENERAL      , "귓속말 [/명령 아이디 내용]" )
 	ON_TEXTCMDFUNC( TextCmd_say,                   "say",               "say",            "말",             "말",      TCM_SERVER, AUTH_GENERAL      , "속삭임 [/명령 아이디 내용]" )
