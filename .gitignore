@@ -51,6 +51,7 @@ Resource/Char
 Source/Output
 Client/
 Output/
+Program/
 
 *.exe
 *.bak
