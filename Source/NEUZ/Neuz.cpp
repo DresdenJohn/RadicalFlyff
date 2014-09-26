@@ -24,6 +24,11 @@
 #include "defineSound.h"
 #include "ClientMsg.h"
 
+#ifdef __LOADER_SPLASH
+#include "loadersplash.h"
+SPLASHLOAD NeuzLoad;
+#endif
+
 #if __VER >= 12 // __MOD_TUTORIAL
 #include "WndBase.h"
 #include "WndGuideSystem.h"
@@ -166,8 +171,28 @@ DeleteFile( "TSearch.exe");
 
 	m_dwCreationWidth  = FULLSCREEN_WIDTH;
 	m_dwCreationHeight = FULLSCREEN_HEIGHT - GetSystemMetrics( SM_CYMENU );
+#ifdef __RANDOM_TITLE
+srand( time(NULL) );
+int Random = rand() % 10;
 
-	m_strWindowTitle  = _T( "FLYFF" );
+switch( Random )
+{
+case 0: m_strWindowTitle = _T( "Radical Flyff - Goes best with milk!" ) ; break;
+case 1: m_strWindowTitle = _T( "Radical Flyff - Check the forums daily!" ); break;
+case 2: m_strWindowTitle = _T( "Radical Flyff - I'm just a window title!" ); break;
+case 3: m_strWindowTitle = _T( "Radical Flyff - Nyan!" ); break;
+case 4: m_strWindowTitle = _T( "Radical Flyff - Enjoy your stay!" ); break;
+case 5: m_strWindowTitle = _T( "Radical Flyff - Remember never give your password out!" ); break;
+case 6: m_strWindowTitle = _T( "Radical Flyff - Is this title annoying yet?" ); break;
+case 7: m_strWindowTitle = _T( "Radical Flyff - Help! I'm stuck inside this window!" ); break;
+case 8: m_strWindowTitle = _T( "Radical Flyff - Have a cookie!" ); break;
+case 9: m_strWindowTitle = _T( "Radical Flyff - Maintained by Swift Gaming Network" ); break;
+case 10: m_strWindowTitle = _T( "Radical Flyff - Btw, The Game." ); break;
+default: Error( "CNeuzApp::CNeuzApp (%d): Create Title Error.", __LINE__ ); break;
+}
+#else
+	m_strWindowTitle  = _T( "Radical Flyff" );
+#endif
 	g_pD3dApp = this;
 
 	m_bLButtonDown = FALSE;
@@ -1998,6 +2023,13 @@ void __cdecl LoadProperty( void* p )
 void CNeuzApp::WaitLoading()
 {
 	OutputDebugString("WaitLoading start\n");
+	#ifdef __LOADER_SPLASH
+
+		NeuzLoad.Load(m_hInstance,ID_PRELOADER);
+
+		NeuzLoad.Active(); // like splash :p
+
+	#endif
 	if( m_hThread != INVALID_HANDLE_VALUE )
 	{
 		WaitForSingleObject( m_hThread, INFINITE );
@@ -2008,6 +2040,13 @@ void CNeuzApp::WaitLoading()
 
 void CNeuzApp::BeginLoadThread()
 {
+
+	#ifdef __LOADER_SPLASH
+
+	ShowWindow( m_hWnd, SW_HIDE ); // Et hop tu te casse <3
+
+	#endif
+	
 	CResFile::ScanResource( "" );
 
 	prj.LoadPreFiles();
@@ -2206,6 +2245,15 @@ HRESULT CNeuzApp::InitDeviceObjects()
 	TexturePool::Get()->Init( m_pd3dDevice );
 #endif	//__BS_CHANGING_ENVIR
 
+#ifdef __LOADER_SPLASH
+
+    ShowWindow( m_hWnd, SW_SHOW ); // reviens mon pti coeur <3
+
+    if(NeuzLoad.SHOW)
+
+        NeuzLoad.exit(); // now c'est bon tu peu aller dormir :3
+
+#endif
 	PlayMusic( BGM_TITLE, 0 );
 
 	return S_OK;

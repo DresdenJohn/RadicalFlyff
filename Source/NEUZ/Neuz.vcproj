@@ -269,6 +269,12 @@ copy .\..\..\Output\Neuz.exe .\..\..\..\..\ResClient\
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\loadersplash.cpp">
+			</File>
+			<File
+				RelativePath=".\loadersplash.h">
+			</File>
+			<File
 				RelativePath="..\_Common\lord.cpp">
 				<FileConfiguration
 					Name="Release|Win32">

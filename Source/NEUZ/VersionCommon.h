@@ -42,6 +42,10 @@
 #define __IP_CRYPTION
 #define __AUTO_SKILL_MAX
 
+// Shit by John (I'm Helping!)
+#define __LOADER_SPLASH // Splash Screen on Loading
+#define __RANDOM_TITLE // Random title bar on client 
+// #define __FLYFF_INITPAGE_EXT // Map load on login screen (Currently Crashes)
 /**************************************************************************/
 ////////////////////////////////////////////////////////////////////////////
 /**************************************************************************/

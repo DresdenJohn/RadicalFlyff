@@ -80,6 +80,7 @@
 #define IDM_TOGGLED3DX                  40011
 #define IDM_HELP                        40012
 #define IDM_TOGGLEALLHITS               40013
+#define ID_PRELOADER 					40020
 
 // Next default values for new objects
 // 

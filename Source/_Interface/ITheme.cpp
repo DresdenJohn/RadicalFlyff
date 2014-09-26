@@ -541,22 +541,26 @@ void CTheme::ReadTitleWorld()
 			{
 				if(m_pTitleWorld->InitDeviceObjects( m_pd3dDevice ) == S_OK)
 				{
-					if(m_pTitleWorld->OpenWorld( MakePath( DIR_WORLD, "WdArena" ), TRUE ))
+					if(m_pTitleWorld->OpenWorld( MakePath( DIR_WORLD, "WdMadrigal" ), TRUE )) //lolxdfly
 					{
-						D3DXVECTOR3 vecWorld(128.0f, 128.0f, 128.0f);
+						//D3DXVECTOR3 vecWorld(128.0f, 128.0f, 128.0f); start position?
+						D3DXVECTOR3 vecWorld(6976.0f, 132.0f, 3479.0f);
 						m_pTitleWorld->ReadWorld(vecWorld);
 
 						D3DXVECTOR3 vecPos(149.0f, 105.0f, 170.0f);
-						D3DXVECTOR3 vecLookat(213.0f, 116.0f, 184.0f);
+						D3DXVECTOR3 vecLookat(6959.2f, 102.0f, 3269.9f);
 						CCamera camera;
 						camera.SetPos(vecPos);
 						camera.m_vLookAt = vecLookat;
 						m_pTitleWorld->SetCamera(&camera);
 
-						m_pFlyffLogo = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "flyfftitletest.bmp" ) ), 0xffff00ff );
-						m_pGameGrade = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "gamegradetest.bmp" ) ), 0xffff00ff );
-						m_pAeonLogo = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "aeonsoftlogotest.bmp" ) ), 0xffff00ff );
-						m_pGalaLogo = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "galalogotest.bmp" ) ), 0xffff00ff );
+						//m_pFlyffLogo = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "flyfftitletest.bmp" ) ), 0xffff00ff );
+						//m_pGameGrade = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "gamegradetest.bmp" ) ), 0xffff00ff );
+						//m_pAeonLogo = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "aeonsoftlogotest.bmp" ) ), 0xffff00ff );
+						//m_pGalaLogo = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "galalogotest.bmp" ) ), 0xffff00ff );
+						
+						//m_pSwiftLogo = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Theme\\", _T("WndLoginLogo.tga" ) ), 0xffff00ff );
+						//m_pSwiftBackground = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Theme\\", _T( "SwiftLoginBack.bmp" ) ), 0xffff00ff );
 						
 						m_bRenderTitleWorld = TRUE;
 					}
@@ -654,8 +658,9 @@ void CTheme::RenderDesktop( C2DRender* p2DRender )
 	D3DVIEWPORT9 viewport;
 	viewport.X      = 0;
 	viewport.Y      = 0;
-	viewport.Width  = 1360;
-	viewport.Height = 768;
+	//lolxdflx res
+	viewport.Width  = 1920;
+	viewport.Height = 1080;
 	viewport.MinZ   = 0.0f;
 	viewport.MaxZ   = 1.0f;
 
@@ -673,38 +678,55 @@ void CTheme::RenderDesktop( C2DRender* p2DRender )
 	// 필드 출력 
 	if(m_pTitleWorld != NULL)
 	{
+		bool back = true;
 		//static float fCameraPositionX = 445.0f;
 		//static float fCameraPositionY = 160.0f;
 		//static float fCameraPositionY = 572.0f;
-		static const float START_X = 345.0f;
-		static const float END_X = 445.0f;
+		static const float START_X = 6948.0f;
+		static const float END_X = 7210.0f;
 		static const float START_TO_END_X = END_X - START_X;
-		static const float START_Y = 110.0f;
-		static const float END_Y = 160.0f;
+		static const float START_Y = 152.0f;
+		static const float END_Y = 100.0f;
 		static const float START_TO_END_Y = END_Y - START_Y;
-		static const float START_Z = 572.0f;
-		static const float END_Z = 572.0f;
+		static const float START_Z = 3320.0f;
+		static const float END_Z = 3500.0f;
 		static const float START_TO_END_Z = END_Z - START_Z;
-		static const float SPEED_RATE = 500.0f;
+		static const float SPEED_RATE = 1500.0f; //lower=>faster
 
 		static float fCameraPositionX = START_X;
 		static float fCameraSpeedX = START_TO_END_X / SPEED_RATE;
 		if( fCameraPositionX <= END_X )
 		{
 			fCameraPositionX += fCameraSpeedX;
+			back = false;
 		}
+		else if(back)
+		{
+			fCameraPositionX -= fCameraSpeedX;
+		}
+		else back = true;
 		static float fCameraPositionY = START_Y;
 		static float fCameraSpeedY = START_TO_END_Y / SPEED_RATE;
 		if( fCameraPositionY <= END_Y )
 		{
 			fCameraPositionY += fCameraSpeedY;
 		}
+		else if(back)
+		{
+			fCameraPositionY -= fCameraSpeedY;
+		}
+		else back = true;
 		static float fCameraPositionZ = START_Z;
 		static float fCameraSpeedZ = START_TO_END_Z / SPEED_RATE;
 		if( fCameraPositionZ <= END_Z )
 		{
 			fCameraPositionZ += fCameraSpeedZ;
 		}
+		else if(back)
+		{
+			fCameraPositionZ -= fCameraSpeedZ;
+		}
+		else back = true;
 		D3DXVECTOR3 vecPos( fCameraPositionX, fCameraPositionY, fCameraPositionZ );
 		D3DXVECTOR3 vecLookat(663.0f, 123.0f, 632.0f);
 		CCamera camera;

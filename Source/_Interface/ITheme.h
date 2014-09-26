@@ -35,7 +35,10 @@ public:
 	CTexture* m_pGameGrade;
 	CTexture* m_pAeonLogo;
 	CTexture* m_pGalaLogo;
-
+	
+	CTexture* m_pSwiftLogo;
+	CTexture* m_pSwiftBackground;
+	
 	DWORD m_dwTexturAlpha1;
 	DWORD m_dwTexturAlpha2;
 
