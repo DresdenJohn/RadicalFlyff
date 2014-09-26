@@ -1493,8 +1493,8 @@ BOOL CWndSelectChar::Process()
 				{
 					if( pModel->IsEndFrame() && pModel->m_nLoop == ANILOOP_1PLAY )
 					{
-						SetMotion( pModel, nMover, MTI_RUN, ANILOOP_LOOP, 0 );
-m_dwMotion[ i ] = MTI_RUN;
+						SetMotion( pModel, nMover, MTI_STAND, ANILOOP_LOOP, 0 );
+						m_dwMotion[ i ] = MTI_STAND;
 					}
 				}
 			}
