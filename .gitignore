@@ -38,6 +38,7 @@ error_*.txt
 #Archive
 *.rar
 
+#Ignored Folders
 Resource/Model
 Resource/World
 Resource/Icon
@@ -53,15 +54,14 @@ Client/
 Output/
 Program/
 
+#Get rid of unused files.
 *.exe
 *.bak
 *.ncb
 *.suo
 *.old*
-*.ncb
-*.suo
-all.ncb
-all.suo
+Source/__all/all.ncb
+Source/__all/all.suo
 Flyff.a
 Flyff.b
 
