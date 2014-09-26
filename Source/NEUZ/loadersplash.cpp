@@ -1,23 +1,17 @@
 //////////////////////////////////////////////////////////////////////
-
-//                                                                    //
-
-// loadersplash.cpp , Affichage du splatch pour flyff                //
-
-//                                                                    //
-
+//                                                                   //
+// Loadersplash.cpp, List splatch for flyff				             //
+//                                                                   //
 //////////////////////////////////////////////////////////////////////
 
-#include "stdafx.h"    // Prérequis
+#include "stdafx.h"    // Prerequisites
 
-#include "windows.h"    // Vu que on Cheat par windows
+#include "windows.h"    // Since we Cheat by windows
 
-#include "loadersplash.h"    // on appel notre .h
+#include "loadersplash.h"    // we call our .h
 
 //////////////////////////////////////////////////////////////////////
-
-// Construction/Destruction
-
+// Construction / Destruction
 //////////////////////////////////////////////////////////////////////
 
 #ifdef __LOADER_SPLASH
@@ -40,13 +34,13 @@ void SPLASHLOAD::Load(HINSTANCE hInstance,int resid)
 
 {
 
-hSplashWnd=CreateWindowEx(WS_EX_CLIENTEDGE,"STATIC","Chargement en Cours",
+hSplashWnd=CreateWindowEx(WS_EX_CLIENTEDGE,"STATIC","Loading",
 
-    WS_POPUP|WS_DLGFRAME|SS_BITMAP,301,301,550,300,NULL,NULL,hInstance,NULL); // 550 = länge , 300 = breite , in german for german :p
+    WS_POPUP|WS_DLGFRAME|SS_BITMAP,301,301,550,300,NULL,NULL,hInstance,NULL); // = 550 Large?, 300 = Small?, in german for german: p
 
 SendMessage(hSplashWnd,STM_SETIMAGE,IMAGE_BITMAP,(LPARAM)LoadBitmap(hInstance,MAKEINTRESOURCE(resid)));
 
-// on utilisera une fenetre avec du BMP en fond vu que je suis un gros faignant pour vous expliquer comment mettre une lib
+// A window should be used with BMP in the background as I am a big lazy to explain how to put a lib
 
 this->SHOW = FALSE;
 
@@ -70,9 +64,9 @@ void SPLASHLOAD::Active()
 
   POINT Ecran = {GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN)} ;
 
-  // on prend la taille de l'ecran - la fenaitre pour centrer
+  // Take the size of the screen - the fenaitre to center
 
-  tx = ((Ecran.x/2)-(x/2)); // Taille de ecran divisée par 2 moins taille de image divisée par 2 =  center
+  tx = ((Ecran.x/2)-(x/2)); // Screen size divided by 2 minus size image divided by 2 = center
 
   ty = ((Ecran.y/2)-(y/2));
 
@@ -82,8 +76,10 @@ void SPLASHLOAD::Active()
 
   EndDeferWindowPos(windefer);
 
-  ShowWindow(hSplashWnd,SW_SHOWNORMAL);
 
+  AnimateWindow(hSplashWnd, 200, AW_BLEND);
+  // ShowWindow(hSplashWnd,SW_SHOWNORMAL);
+  
   UpdateWindow(hSplashWnd);
 
   this->SHOW = TRUE;
@@ -94,11 +90,11 @@ void SPLASHLOAD::exit()
 
 {
 
-  ShowWindow(hSplashWnd,SW_HIDE);
+  ShowWindow(hSplashWnd, SW_HIDE);
 
-// si ta eu le courage de lire , c'est moi qui est pré-ecrit le discours de karles pour le cadeau :3 Oui moi :p
+// If t had the courage to read, it's me that is pre-written speech Karles for gift: 3 Yes me: p
 
-// Pourquoi sa te choque que moi , davedevils puis écrire des chose censée ?
+// Why its shocks you than me, then write davedevils meant something?
 
   this->SHOW = FALSE;
 

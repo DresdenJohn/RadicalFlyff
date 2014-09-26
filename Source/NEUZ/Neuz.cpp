@@ -2022,7 +2022,7 @@ void __cdecl LoadProperty( void* p )
 
 void CNeuzApp::WaitLoading()
 {
-	OutputDebugString("WaitLoading start\n");
+	OutputDebugString("Wait Loading start\n");
 	#ifdef __LOADER_SPLASH
 
 		NeuzLoad.Load(m_hInstance,ID_PRELOADER);
@@ -2043,8 +2043,8 @@ void CNeuzApp::BeginLoadThread()
 
 	#ifdef __LOADER_SPLASH
 
-	ShowWindow( m_hWnd, SW_HIDE ); // Et hop tu te casse <3
-
+	//ShowWindow( m_hWnd, SW_HIDE );
+	AnimateWindow(m_hWnd, 400, AW_BLEND);
 	#endif
 	
 	CResFile::ScanResource( "" );
@@ -2247,12 +2247,12 @@ HRESULT CNeuzApp::InitDeviceObjects()
 
 #ifdef __LOADER_SPLASH
 
-    ShowWindow( m_hWnd, SW_SHOW ); // reviens mon pti coeur <3
-
+    //ShowWindow( m_hWnd, SW_SHOW ); // reviens mon pti coeur <3
+	AnimateWindow(m_hWnd, 400, AW_BLEND);
     if(NeuzLoad.SHOW)
-
+	{
         NeuzLoad.exit(); // now c'est bon tu peu aller dormir :3
-
+	}
 #endif
 	PlayMusic( BGM_TITLE, 0 );
 
