@@ -60,4 +60,6 @@ Program/
 *.old*
 *.ncb
 *.suo
+Flyff.a
+Flyff.b
 
