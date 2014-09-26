@@ -186,7 +186,7 @@ case 5: m_strWindowTitle = _T( "Radical Flyff - Remember never give your passwor
 case 6: m_strWindowTitle = _T( "Radical Flyff - Is this title annoying yet?" ); break;
 case 7: m_strWindowTitle = _T( "Radical Flyff - Help! I'm stuck inside this window!" ); break;
 case 8: m_strWindowTitle = _T( "Radical Flyff - Have a cookie!" ); break;
-case 9: m_strWindowTitle = _T( "Radical Flyff - Maintained by Swift Gaming Network" ); break;
+case 9: m_strWindowTitle = _T( "Maintained by Radical Flyff" ); break;
 case 10: m_strWindowTitle = _T( "Radical Flyff - Btw, The Game." ); break;
 default: Error( "CNeuzApp::CNeuzApp (%d): Create Title Error.", __LINE__ ); break;
 }
