@@ -1,7 +1,7 @@
 To Do Before Release List
 
 Flyff Development
-* Party Finder System
+* Party Finder System, change lord "L" for usage.
 * Password Salt must be updated
 * MSGVER must be updated
 * Patcher must be completed (Include .rf encryption)
