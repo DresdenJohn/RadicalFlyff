@@ -36,6 +36,23 @@
 #define PARTY_MAP_SEC	10
 #define PARTY_MAP_LENGTH	10
 
+#ifdef __PMA_PARTYFINDER
+struct PARTYFINDER_LIST
+{
+	u_long	m_uPartyId;								// 극단 ID
+	TCHAR	m_sParty[33];							// 극단 명칭( 단막극단 : NO, 순회극단 : YES )
+	int		m_nSizeofMember;						// 극단원 숫자	( 2 ~ 8 )
+	LONG	m_nLevel,m_nPoint;				// 극단 레벨, 경험치, 포인트
+	u_long	m_nLeaderId;
+	TCHAR	m_sPartyList[33*MAX_PTMEMBER_SIZE_SPECIAL];
+
+	PARTYFINDER_LIST() {Init();};
+	~PARTYFINDER_LIST() {};
+
+	void Init() { memset( m_sParty, 0, sizeof(m_sParty) ); memset( m_sPartyList, 0, sizeof(m_sPartyList) ); m_nSizeofMember = m_nLevel = m_nPoint = m_nLeaderId = 0;};
+};
+#endif //__PMA_PARTYFINDER
+
 class CParty;
 extern	CParty		g_Party;
 
@@ -195,7 +212,7 @@ class CPartyMng
 private:
 	u_long		m_id;	// 새로 생성되는 파티에 순차적으로 아이디를 할당하기 위한 변수다.
 //	CMapParty	m_2Party;
-	C2PartyPtr	m_2PartyPtr;
+//	C2PartyPtr	m_2PartyPtr;
 #ifdef __WORLDSERVER
 	int			m_nSecCount;
 #endif // __WORLDSERVER
@@ -211,6 +228,7 @@ public:
 	STRING2ULONG	m_2PartyNameStringPtr;
 
 public:
+	C2PartyPtr	m_2PartyPtr;
 //	Constructions
 	CPartyMng();
 	~CPartyMng();

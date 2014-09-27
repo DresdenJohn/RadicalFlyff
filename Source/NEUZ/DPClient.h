@@ -1238,6 +1238,13 @@ public:
 #ifdef __PERIN_CONVERTER
 	void	GetPerin( u_long idPlayer );
 #endif
+
+#ifdef __PMA_PARTYFINDER
+	void	JoinParty( u_long nPartyId );
+	void	OnRefreshPartyList( CAr & ar );
+	void	SendPartyJoinAllow( int nMode );
+	void	OnPartyChangeJoin( CAr	& ar );
+#endif //__PMA_PARTYFINDER
 //________________________________________________________________________________
 //	Operator commands
 	void	OnShout( CAr & ar );

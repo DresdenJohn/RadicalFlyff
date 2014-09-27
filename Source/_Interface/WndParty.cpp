@@ -228,6 +228,12 @@ void CWndParty::OnInitialUpdate()
 	CWndNeuz::OnInitialUpdate(); 
 	// 여기에 코딩하세요
 	
+#ifdef __PMA_PARTYFINDER
+	CWndButton* pRadio7 = (CWndButton*)GetDlgItem( WIDC_RADIO7 );
+	if( pRadio7 && g_Party.GetLeader() )
+		pRadio7->SetCheck( g_Party.GetLeader()->m_bPartyJoin );
+#endif //__PMA_PARTYFINDER
+
 	m_pWndLeave = (CWndButton*)GetDlgItem( WIDC_LEAVE );
 	m_pWndChange = (CWndButton*)GetDlgItem( WIDC_CHANGE );
 	m_pWndTransfer = (CWndButton*)GetDlgItem( WIDC_BUTTON1 );
@@ -484,6 +490,18 @@ BOOL CWndParty::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 			g_WndMng.OpenMessageBox( _T( prj.GetText(TID_DIAG_0008) ) );
 //			g_WndMng.OpenMessageBox( "단장이 아니거나 순회극단이 아니므로 변경할수 없습니다." );
 	}
+
+#ifdef __PMA_PARTYFINDER
+		if( nID == WIDC_RADIO7 && g_Party.IsLeader(g_pPlayer->m_idPlayer) )
+		{
+			CWndButton* pWndButton = (CWndButton*)GetDlgItem( WIDC_RADIO7 );
+
+			pWndButton->SetCheck( !pWndButton->GetCheck() );
+
+			g_DPlay.SendPartyJoinAllow( pWndButton->GetCheck() );
+
+		}
+#endif //__PMA_PARTYFINDER
 
 	return CWndNeuz::OnChildNotify( message, nID, pLResult ); 
 }

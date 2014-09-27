@@ -547,6 +547,9 @@ void CMover::Init()
 	m_idCampus = 0;
 	m_nCampusPoint = 0;
 #endif // __CAMPUS
+#ifdef __PMA_PARTYFINDER
+	m_bPartyJoin = 1;
+#endif
 }
 
 // AI 매시지 보냄 : 객체의 행동 패턴, 현재 상태를 매시지로 제어함 

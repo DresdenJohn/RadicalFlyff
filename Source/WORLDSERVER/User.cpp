@@ -1316,6 +1316,18 @@ void CUser::AddPartyChangeItemMode( int nItemMode )
 	
 }
 
+#ifdef __PMA_PARTYFINDER
+void CUser::AddPartyChangeJoinMode( BOOL bPartyJoin )
+{
+	if( IsDelete() )	return;
+	
+	m_Snapshot.cb++;
+	m_Snapshot.ar << GetId();
+	m_Snapshot.ar << SNAPSHOTTYPE_PARTYALLOWJOIN;
+	m_Snapshot.ar << bPartyJoin;
+}
+#endif //__PMA_PARTYFINDER
+
 void CUser::AddPartyChangeExpMode( int nExpMode )
 {
 	if( IsDelete() )	return;
@@ -9012,3 +9024,22 @@ void CUser::AddPartyAllowJoin( BOOL bAllow )
 }
 #endif //__PARTY_FINDER
 
+#ifdef __PMA_PARTYFINDER
+void CUser::AddPartyList( vector<PARTYFINDER_LIST> vectmp, int nCount )
+{
+	if( IsDelete() )	return;
+	m_Snapshot.cb++;
+	m_Snapshot.ar << GetId();
+	m_Snapshot.ar << SNAPSHOTTYPE_PARTYFINDER_REFRESH;
+	m_Snapshot.ar << nCount;
+	for( DWORD i=0; i<vectmp.size(); i++ )
+	{
+		m_Snapshot.ar << vectmp[i].m_uPartyId;								// ±Ø´Ü ID
+		m_Snapshot.ar.WriteString( vectmp[i].m_sParty );							// ±Ø´Ü ¸íÄª( ´Ü¸·±Ø´Ü : NO, ¼øÈ¸±Ø´Ü : YES )
+		m_Snapshot.ar << vectmp[i].m_nSizeofMember;						// ±Ø´Ü¿ø ¼ýÀÚ	( 2 ~ 8 )
+		m_Snapshot.ar << vectmp[i].m_nLevel << vectmp[i].m_nPoint;				// ±Ø´Ü ·¹º§, °æÇèÄ¡, Æ÷ÀÎÆ®
+		m_Snapshot.ar << vectmp[i].m_nLeaderId;
+		m_Snapshot.ar.WriteString( vectmp[i].m_sPartyList );
+	}
+}
+#endif //__PMA_PARTYFINDER

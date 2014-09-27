@@ -16,7 +16,9 @@
 #define __PRISON //No blinkwings while in prison
 //#define __ONLY_TEXTUREMID //No texturelow or texture in model and world folders
 
-#define __PARTY_FINDER
+#define __INVISIBLE_FIX
+#define __PMA_PARTYFINDER //More advanced than current party finder
+//#define __PARTY_FINDER
 #define __V6_BROWNS
 #define __DEBUG_STATS
 #define __NO_STEAL //No stealing from bosses

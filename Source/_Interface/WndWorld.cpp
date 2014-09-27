@@ -738,7 +738,7 @@ void CWndWorld::OnDraw( C2DRender* p2DRender )
 
 
 #ifdef __DEBUG_STATS
-	if( g_pPlayer )
+	if( g_pPlayer && m_bRenderFPS )
 	{
 	
 				//FPS
@@ -2773,7 +2773,11 @@ void CWndWorld::RenderSelectObj( C2DRender* p2DRender, CObj* pObj )
 			BOOL bSkip = FALSE;
 
 			// 운영자이고 변신중이면 HP바 안그린다.
-			if( pMover->IsAuthHigher( AUTH_GAMEMASTER ) == TRUE )
+			 if( pMover->IsAuthHigher( AUTH_GAMEMASTER ) == TRUE 
+#ifdef __INVISIBLE_FIX
+				|| pMover->HasBuff( BUFF_SKILL, SI_ACR_SUP_DARKILLUSION ) || pMover->IsMode( TRANSPARENT_MODE ) 
+#endif // __INVISIBLE_FIX
+			   )
 			{
 				bSkip = TRUE;
 				
@@ -6559,7 +6563,11 @@ void CWndWorld::ShowMoverMenu( CMover* pTarget )
 #else // __IMPROVE_SYSTEM_VER15
 	if( (fDistSq < 20.0f * 20.0f) && m_bRButtonDown == FALSE )
 #endif // __IMPROVE_SYSTEM_VER15
-	{
+	{		
+#ifdef __INVISIBLE_FIX
+	if( !g_pPlayer->IsAuthHigher( AUTH_GAMEMASTER ) && ( pTarget->HasBuff( BUFF_SKILL, SI_ACR_SUP_DARKILLUSION ) || pTarget->IsMode( TRANSPARENT_MODE ) ) )
+	return;
+#endif // __INVISIBLE_FIX
 		g_pPlayer->ClearDest();
 		m_wndMenuMover.DeleteAllMenu();
 		m_wndMenuMover.SetLargeWidth( 0 );

@@ -40,6 +40,9 @@
 #ifdef __NEW_WEB_BOX
 #include "WndHelperWebBox.h"
 #endif // __NEW_WEB_BOX
+#ifdef __PMA_PARTYFINDER
+#include "WndPartyFinder.h"
+#endif //__PMA_PARTYFINDER
 /*
      여기서 정의된 애플랫 클래스는 테스크 매뉴에 추가될 수 있는 세팅을 포함한다.
 	 태스크 매뉴에 애플렛을 추가하기 위해서는 
@@ -68,6 +71,9 @@ DECLAREAPPLET( AppMain_WndCharacter    , new CWndCharacter   );
 DECLAREAPPLET( AppMain_WndSkill2       , new CWndSkillTreeEx );
 DECLAREAPPLET( AppMain_WndEmotion      , new CWndEmotion     );
 DECLAREAPPLET( AppMain_WndMotion       , new CWndMotion      );
+#ifdef __PMA_PARTYFINDER
+DECLAREAPPLET( AppMain_PartyFinder    , new CWndPartyFinder   );
+#endif //__PMA_PARTYFINDER
 DECLAREAPPLET( AppMain_WndTrade        , new CWndTrade       );
 DECLAREAPPLET( AppMain_WndVendor       , new CWndVendor );
 DECLAREAPPLET( AppMain_WndQuest        , new CWndQuest       );
@@ -275,4 +281,7 @@ void CWndMgr::AddAllApplet()
 #ifdef __NEW_WEB_BOX
 	AddAppletFunc( AppMain_WndHelperWebBox , APP_WEBBOX2              , _T( "HelperWebBox" )       , _T( "Icon_HelperHelp.dds" ) , GETTEXT( TID_GAME_HELPER_WEB_BOX_ICON_TOOLTIP ), 0 );
 #endif // __NEW_WEB_BOX
+#ifdef __PMA_PARTYFINDER
+	AddAppletFunc( AppMain_PartyFinder		, APP_PARTYFINDER                , _T( "WndPartyFinder" )       , _T( "Icon_Housing.dds"    )    , GETTEXT(TID_GAME_HOUSING_BOX), 'V' );
+#endif //__PMA_PARTYFINDER
 }

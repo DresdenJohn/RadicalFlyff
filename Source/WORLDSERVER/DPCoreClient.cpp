@@ -930,6 +930,19 @@ void CDPCoreClient::OnRemovePartyMember( CAr & ar, DPID, DPID, OBJID )
 			lstrcpy( pszMember, lpPlayer );
 #endif	// __SYS_PLAYER_DATA
 
+#ifdef __PMA_PARTYFINDER
+		if( pParty->GetLeader() )
+			if( !pParty->GetLeader()->m_bPartyJoin )
+			{
+				CUser* pUser = (CUser*)prj.GetUserByID( idMember );
+					if( pUser )
+					{
+						pUser->AddText("The leader is refusing Partyfinder joins now, so you might get kicked...");
+					}
+				
+							
+			}
+#endif //__PMA_PARTYFINDER
 		if( pParty->DeleteMember( idMember ) )
 		{
 			if( pParty->GetSizeofMember() < 2 )
@@ -2827,8 +2840,17 @@ void CDPCoreClient::OnPartyChangeLeader( CAr & ar, DPID, DPID, OBJID )
 		for( int i = 0; i < pParty->m_nSizeofMember; i++ )
 		{
 			pMember		= (CUser*)prj.GetUserByID( pParty->m_aMember[i].m_uPlayerId );
+#ifdef __PMA_PARTYFINDER
+			CUser* pLeader = (CUser*)pParty->GetLeader();
+			if( IsValidObj( pMember ) && IsValidObj( pLeader ) )
+			{
+				pMember->AddPartyChangeLeader( idChangeLeader );
+				pMember->AddPartyChangeJoinMode( pLeader->m_bPartyJoin );
+			}
+#else
 			if( IsValidObj( pMember ) )
 				pMember->AddPartyChangeLeader( idChangeLeader );
+#endif //__PMA_PARTYFINDER
 		}
 /*
 #if __VER >= 12 // __PARSKILL1001	//12차 파스킬 아이템 수정  world,core,neuz

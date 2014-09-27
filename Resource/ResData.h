@@ -858,6 +858,7 @@
 #define APP_SEAL_CHAR_SEND                                              2020
 #define APP_SEAL_CHAR_SET                                               2021
 #define APP_PETFILTER							2024
+#define APP_PARTYFINDER							2025
 #define APP_INSTANTJOBCHANGE						907
 
 // Control Id

@@ -338,6 +338,11 @@ public:
 	void			AddPartyMemberFlightLevel( int nMemberIndex, int nLevel);
 	void			AddPartyChangeTroup( const char * szPartyName );
 	void			AddPartyChangeName( const char * szPartyName );
+
+#ifdef __PMA_PARTYFINDER
+	void			AddPartyChangeJoinMode( BOOL bPartyJoin );
+#endif //__PMA_PARTYFINDER
+
 #if __VER >= 12 // __JHMA_VER12_1	//12차 극단유료아이템
 	void			AddSetPartyMode( int nMode, BOOL bOnOff, LONG nPoint , DWORD dwSkillTime );
 #else // //12차 극단유료아이템
@@ -768,6 +773,11 @@ public:
 	void	AddGuildHouseTenderResult( OBJID objGHId, BOOL bResult );
 #endif // __GUILD_HOUSE_MIDDLE
 
+
+#ifdef __PMA_PARTYFINDER
+public:
+	void	AddPartyList( vector<PARTYFINDER_LIST> vectmp, int nCount );
+#endif //__PMA_PARTYFINDER
 private:
 	u_long	m_idProposer;
 #if __VER >= 13 // __COUPLE_1202

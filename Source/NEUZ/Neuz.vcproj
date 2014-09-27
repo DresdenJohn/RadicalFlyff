@@ -769,6 +769,12 @@ copy .\..\..\Output\Neuz.exe .\..\..\..\..\ResClient\
 					RelativePath="..\_Interface\WndNeuz.h">
 				</File>
 				<File
+					RelativePath="..\_Interface\WndPartyFinder.cpp">
+				</File>
+				<File
+					RelativePath="..\_Interface\WndPartyFinder.h">
+				</File>
+				<File
 					RelativePath="..\_Interface\WndQuest.cpp">
 					<FileConfiguration
 						Name="Release|Win32">

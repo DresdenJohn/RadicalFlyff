@@ -559,6 +559,10 @@ CDPSrvr::CDPSrvr()
 #ifdef __PARTY_FINDER
 	ON_MSG( PACKETTYPE_ALLOW_PARTY, OnAllowParty );
 #endif //__PARTY_FINDER
+#ifdef __PMA_PARTYFINDER
+	ON_MSG( PACKETTYPE_PARTYALLOWJOIN, OnPartyAllowJoin );
+	ON_MSG( PACKETTYPE_JOIN_PARTY_REQ, OnPartyList );
+#endif //__PMA_PARTYFINDER
 }
 
 CDPSrvr::~CDPSrvr()
@@ -12728,3 +12732,97 @@ void CDPSrvr::OnUpdateJob( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_lo
     }
 }
 #endif //__INSTANT_JOBCHANGE
+
+#ifdef __PMA_PARTYFINDER
+void CDPSrvr::OnPartyAllowJoin( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
+{
+	 CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
+ if( pUser )
+ {
+	 int nMode;
+	 ar >> nMode;
+	CParty* pParty = g_PartyMng.GetParty( pUser->GetPartyId() );
+
+	if( pParty )
+	{
+		if( !pParty->IsLeader( pUser->m_idPlayer ) )
+			return;
+
+		 pUser->m_bPartyJoin = nMode;
+		pUser->AddPartyChangeJoinMode( pUser->m_bPartyJoin );
+
+		for( int i = 1; i < pParty->GetSizeofMember(); i++)
+		{
+			CUser* pMember	= (CUser*)prj.GetUserByID( pParty->m_aMember[i].m_uPlayerId );
+			if( IsValidObj( pMember ) )
+				pMember->AddPartyChangeJoinMode( pUser->m_bPartyJoin );
+		}
+	}
+ }
+}
+void CDPSrvr::OnPartyList( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
+{
+ DWORD idParty; 
+ CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
+ ar >> idParty;
+ if( pUser )
+ {
+
+  	vector<PARTYFINDER_LIST> vectmp;
+	int nCount = 0;
+	
+	for( C2PartyPtr::iterator i = g_PartyMng.m_2PartyPtr.begin(); i != g_PartyMng.m_2PartyPtr.end(); i++ )
+	{
+		if( vectmp.size() == 25 )
+		break;
+
+		 CParty* pParty = (CParty*)i->second;
+
+		if( !pParty )
+			continue;
+		
+
+		if( pParty->GetLeader() )
+			if( !pParty->GetLeader()->m_bPartyJoin )
+				continue;
+
+		 if( pParty->GetSizeofMember() < MAX_PTMEMBER_SIZE_SPECIAL )
+		 {
+			PARTYFINDER_LIST partytmp;
+
+			partytmp.m_uPartyId = pParty->m_uPartyId;								// ±Ø´Ü ID
+			strcpy( partytmp.m_sParty, pParty->m_sParty );							// ±Ø´Ü ¸íÄª( ´Ü¸·±Ø´Ü : NO, ¼øÈ¸±Ø´Ü : YES )
+			partytmp.m_nSizeofMember = pParty->m_nSizeofMember	;								// ±Ø´Ü¿ø ¼ýÀÚ	( 2 ~ 8 )
+			partytmp.m_nLevel = pParty->m_nLevel;				
+			partytmp.m_nPoint = pParty->m_nPoint;
+
+
+			PlayerData* pPlayerData	= CPlayerDataCenter::GetInstance()->GetPlayerData( pParty->m_aMember[0].m_uPlayerId );
+		if( pPlayerData )
+		{
+			partytmp.m_nLeaderId =  pParty->m_aMember[0].m_uPlayerId;
+			sprintf( partytmp.m_sPartyList, "%s, ", pPlayerData->szPlayer );
+		}
+		 else
+		    sprintf( partytmp.m_sPartyList, "N/A, " );
+
+			for( int i = 1; i < pParty->GetSizeofMember(); i++)
+			{
+				PlayerData* pPlayerData	= CPlayerDataCenter::GetInstance()->GetPlayerData( pParty->m_aMember[i].m_uPlayerId );
+				if(!pPlayerData)
+					continue;
+
+				strcat( partytmp.m_sPartyList, pPlayerData->szPlayer );
+				strcat( partytmp.m_sPartyList, ", ");
+			}
+			
+			vectmp.push_back( partytmp );
+			nCount++;
+		 }
+	}
+	pUser->AddPartyList( vectmp, nCount );
+
+  
+ }
+}
+#endif

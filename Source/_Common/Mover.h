@@ -937,6 +937,9 @@ public:
 	void	SetCampusPoint( int nMPPoint )		{	m_nCampusPoint = nMPPoint;	}
 #endif // __CAMPUS
 
+#ifdef __PMA_PARTYFINDER
+	BOOL	m_bPartyJoin;
+#endif //__PMA_PARTYFINDER
 protected:
 	int				m_nCount;					/// 무버가 범용으로 쓰는 순차적 카운터. 생성자 외엔 0으로 초기화 하지 말것.
 	DWORD			m_dwGold;					/// 페냐 

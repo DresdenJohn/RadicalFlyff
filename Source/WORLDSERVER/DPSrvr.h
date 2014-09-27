@@ -486,6 +486,11 @@ private:
 #ifdef __PERIN_CONVERTER
 	void	OnGetPerin( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long );
 #endif
+
+#ifdef __PMA_PARTYFINDER
+	void OnPartyList( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize );
+	void OnPartyAllowJoin( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize );
+#endif
 private:
 	DPID	m_dpidCache;		// 캐쉬서버 DPID
 };

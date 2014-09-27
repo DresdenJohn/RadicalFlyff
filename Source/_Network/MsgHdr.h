@@ -868,6 +868,10 @@
 #endif //__INSTANT_JOBCHANGE
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+#ifdef __PMA_PARTYFINDER
+#define PACKETTYPE_JOIN_PARTY_REQ                   		(DWORD)0x88100256
+#define PACKETTYPE_PARTYALLOWJOIN                   		(DWORD)0x88100257
+#endif //__PMA_PARTYFINDER
 
 #define SNAPSHOTTYPE_CHAT	(WORD)0x0001
 #define SNAPSHOTTYPE_ACTMSG	(WORD)0x0002
@@ -1325,6 +1329,10 @@
 
 #define	SNAPSHOTTYPE_QUERYMAILBOX_REQ				(WORD)0x8860
 
+#ifdef __PMA_PARTYFINDER
+#define SNAPSHOTTYPE_PARTYFINDER_REFRESH            (WORD)0x8863
+#define SNAPSHOTTYPE_PARTYALLOWJOIN                 (WORD)0x8864
+#endif //__PMA_PARTYFINDER
 ////////////////////////////////////////////////////////////////////////////
 //  ERROR define
 ////////////////////////////////////////////////////////////////////////////

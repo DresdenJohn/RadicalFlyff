@@ -25,6 +25,10 @@
 #include "definequest.h"
 #include "webbox.h"
 
+#ifdef __PMA_PARTYFINDER
+#include "WndPartyFinder.h"
+#include "WndParty.h"
+#endif	//__PMA_PARTYFINDER
 #ifdef __AZRIA_1023
 #include "ticket.h"
 #endif	// __AZRIA_1023
@@ -426,6 +430,9 @@ void CDPClient::OnSnapshot( CAr & ar )
 			case SNAPSHOTTYPE_REMOVEFRIEND:	OnRemoveFriend( ar ); break;
 			case SNAPSHOTTYPE_ADDFRIENDERROR: OnAddFriendError( ar ); break;
 			case SNAPSHOTTYPE_SETSKILLSTATE:	OnSetSkillState( ar ); break;
+#ifdef __PMA_PARTYFINDER
+			case SNAPSHOTTYPE_PARTYALLOWJOIN: OnPartyChangeJoin( ar ); break;
+#endif //__PMA_PARTYFINDER
 			case SNAPSHOTTYPE_ADDPARTYCHANGELEADER: OnPartyChangeLeader( ar ); break;
 			case SNAPSHOTTYPE_FLYFF_EVENT:	OnFlyffEvent( ar );	break;
 			case SNAPSHOTTYPE_SET_LOCAL_EVENT:	OnSetLocalEvent( ar );	break;
@@ -858,6 +865,9 @@ void CDPClient::OnSnapshot( CAr & ar )
 #ifdef __PARTY_FINDER
 			case SNAPSHOTTYPE_PARTYALLOW: OnPartyAllowJoin( ar ); break;
 #endif // __PARTY_FINDER
+#ifdef __PMA_PARTYFINDER
+			case SNAPSHOTTYPE_PARTYFINDER_REFRESH:		OnRefreshPartyList( ar ); break;
+#endif //__PMA_PARTYFINDER
 			default:
 				{
 					ASSERT( 0 );
@@ -4973,6 +4983,25 @@ void CDPClient::OnPartyExpLevel( CAr & ar )
 	}
 	g_Party.m_nLevel = nLevel;	
 }
+
+#ifdef __PMA_PARTYFINDER
+void CDPClient::OnPartyChangeJoin( CAr  & ar )
+{
+	BOOL bPartyJoin;
+	ar >> bPartyJoin;
+
+	if( g_Party.GetLeader())
+		g_Party.GetLeader()->m_bPartyJoin = bPartyJoin;
+
+	CWndParty* pWndParty = (CWndParty*)g_WndMng.GetApplet( APP_PARTY );
+
+	if( pWndParty )
+		if( (CWndButton*)pWndParty->GetDlgItem( WIDC_RADIO7 ) )
+			((CWndButton*)pWndParty->GetDlgItem( WIDC_RADIO7 ))->SetCheck( bPartyJoin );
+	
+
+}
+#endif //__PMA_PARTYFINDER
 
 void CDPClient::OnPartyChangeLeader( CAr  & ar )
 {
@@ -9455,6 +9484,15 @@ void CDPClient::SendChangeShareItem( int nItemMode )
 	ar << g_pPlayer->m_idPlayer << nItemMode;
 	SEND( ar, this, DPID_SERVERPLAYER );
 }
+
+#ifdef __PMA_PARTYFINDER
+void CDPClient::SendPartyJoinAllow( int nMode )
+{
+	BEFORESENDSOLE( ar, PACKETTYPE_PARTYALLOWJOIN, DPID_UNKNOWN );
+	ar << nMode;
+	SEND( ar, this, DPID_SERVERPLAYER );
+}
+#endif //__PMA_PARTYFINDER
 
 void CDPClient::SendChangeShareExp( int nExpMode )
 {
@@ -19308,4 +19346,45 @@ void CDPClient::GetPerin( u_long idPlayer )
 	SEND( ar, this, DPID_SERVERPLAYER );
 }
 #endif
+
+#ifdef __PMA_PARTYFINDER
+void CDPClient::JoinParty( u_long nPartyId )
+{
+    BEFORESENDSOLE( ar, PACKETTYPE_JOIN_PARTY_REQ, DPID_UNKNOWN );
+    ar << nPartyId;
+	SEND( ar, this, DPID_SERVERPLAYER );
+	return;
+}
+
+void CDPClient::OnRefreshPartyList( CAr & ar )
+{
+
+	int nCount;
+
+	CWndPartyFinder* pWndPartyFinder = (CWndPartyFinder*)g_WndMng.GetApplet( APP_PARTYFINDER );
+	if(!pWndPartyFinder)
+		return;
+	
+	pWndPartyFinder->m_mapItem.clear();
+
+
+	ar >> nCount;
+	for( int i=0; i<nCount; i++ )
+	{
+		PARTYFINDER_LIST tmplist;
+
+		ar >> tmplist.m_uPartyId;								// ±Ø´Ü ID
+		ar.ReadString( tmplist.m_sParty );							// ±Ø´Ü ¸íÄª( ´Ü¸·±Ø´Ü : NO, ¼øÈ¸±Ø´Ü : YES )
+		ar >> tmplist.m_nSizeofMember;						// ±Ø´Ü¿ø ¼ýÀÚ	( 2 ~ 8 )
+		ar >> tmplist.m_nLevel >> tmplist.m_nPoint;				// ±Ø´Ü ·¹º§, °æÇèÄ¡, Æ÷ÀÎÆ®
+		ar >> tmplist.m_nLeaderId;
+		ar.ReadString( tmplist.m_sPartyList );
+		pWndPartyFinder->m_mapItem.push_back( tmplist );
+		
+	}
+
+	pWndPartyFinder->RefreshItemList();
+	
+}
+#endif //__PMA_PARTYFINDER
 CDPClient	g_DPlay;
