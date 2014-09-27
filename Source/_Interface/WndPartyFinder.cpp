@@ -103,7 +103,7 @@ void CWndPartyFinder::OnDraw( C2DRender* p2DRender )
 		int nListFontHeight = pWndListBox->GetFontHeight() + 1;
 
 		pCustom = GetWndCtrl( WIDC_LISTBOX1 );
-		dwColor = D3DCOLOR_ARGB( 255, 255, 255, 255 );
+		dwColor = D3DCOLOR_ARGB(150, 000, 000, 000);
 
 		int nDrawCount = 0;
 		int nLine = 0;
@@ -113,7 +113,7 @@ void CWndPartyFinder::OnDraw( C2DRender* p2DRender )
 			if(m_nSelected != 0 && (m_nSelected - 1) == nLine)
 				dwColor = D3DCOLOR_ARGB( 255, 255, 0, 0 );
 			else
-				dwColor = D3DCOLOR_ARGB( 255, 255, 255, 255 );
+				dwColor = D3DCOLOR_ARGB(150, 000, 000, 000);
 
 			if(nLine < pWndListBox->GetScrollPos()) 
 			{
@@ -128,18 +128,16 @@ void CWndPartyFinder::OnDraw( C2DRender* p2DRender )
 
 			PlayerData* pPlayerData	= CPlayerDataCenter::GetInstance()->GetPlayerData( iter->m_nLeaderId );
 
-			p2DRender->TextOut( pCustom->rect.left + 5, pCustom->rect.top + 8 + (nIndex)*nListFontHeight, nLine+1, dwColor);
-
 		if( pPlayerData )
-			p2DRender->TextOut( pCustom->rect.left + 50, pCustom->rect.top + 8 + (nIndex)*nListFontHeight, pPlayerData->szPlayer, dwColor);
-
-
-			p2DRender->TextOut( pCustom->rect.left + 225, pCustom->rect.top + 8 + (nIndex)*nListFontHeight, iter->m_sParty, dwColor);
-
-			// 설치 여부
-			p2DRender->TextOut( pCustom->rect.left + 370, pCustom->rect.top + 8 + (nIndex)*nListFontHeight, iter->m_nSizeofMember, dwColor);
+			p2DRender->TextOut( pCustom->rect.left + 5, pCustom->rect.top + 8 + (nIndex)*nListFontHeight, iter->m_sParty, dwColor);		
+			
+			p2DRender->TextOut( pCustom->rect.left + 115, pCustom->rect.top + 8 + (nIndex)*nListFontHeight, pPlayerData->szPlayer, dwColor);
+	
+			TCHAR members[256] = { 0 };
+			sprintf( members, "%d/%d", iter->m_nSizeofMember, 8);
+			p2DRender->TextOut( pCustom->rect.left + 245, pCustom->rect.top + 8 + (nIndex)*nListFontHeight, members, dwColor);
 		
-			p2DRender->TextOut( pCustom->rect.left + 440, pCustom->rect.top + 8 + (nIndex)*nListFontHeight, iter->m_nPoint, dwColor);
+			p2DRender->TextOut( pCustom->rect.left + 340, pCustom->rect.top + 8 + (nIndex)*nListFontHeight, iter->m_nLevel, dwColor);
 
 			++nIndex;
 			++nDrawCount;

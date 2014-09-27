@@ -12796,12 +12796,11 @@ void CDPSrvr::OnPartyList( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf
 			partytmp.m_nLevel = pParty->m_nLevel;				
 			partytmp.m_nPoint = pParty->m_nPoint;
 
-
 			PlayerData* pPlayerData	= CPlayerDataCenter::GetInstance()->GetPlayerData( pParty->m_aMember[0].m_uPlayerId );
 		if( pPlayerData )
 		{
 			partytmp.m_nLeaderId =  pParty->m_aMember[0].m_uPlayerId;
-			sprintf( partytmp.m_sPartyList, "%s, ", pPlayerData->szPlayer );
+			sprintf( partytmp.m_sPartyList, "%s\n", pPlayerData->szPlayer);
 		}
 		 else
 		    sprintf( partytmp.m_sPartyList, "N/A, " );
@@ -12812,8 +12811,7 @@ void CDPSrvr::OnPartyList( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf
 				if(!pPlayerData)
 					continue;
 
-				strcat( partytmp.m_sPartyList, pPlayerData->szPlayer );
-				strcat( partytmp.m_sPartyList, ", ");
+				strcat( partytmp.m_sPartyList, pPlayerData->szPlayer);
 			}
 			
 			vectmp.push_back( partytmp );
