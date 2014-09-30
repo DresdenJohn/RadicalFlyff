@@ -1,0 +1,30 @@
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CProgressBar.resources
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CPatcher.resources
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.Resources.resources
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\obj\x86\Release\Open Source Patcher v3.vbproj.GenerateResource.Cache
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\bin\Release\FlyffStarter.exe
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\bin\Release\FlyffStarter.pdb
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\bin\Release\FlyffStarter.xml
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\obj\x86\Release\FlyffStarter.exe
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\obj\x86\Release\FlyffStarter.xml
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\obj\x86\Release\FlyffStarter.pdb
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\obj\x86\Release\FlyffStarter.exe
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\obj\x86\Release\FlyffStarter.xml
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\obj\x86\Release\FlyffStarter.pdb
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\bin\Release\FlyffStarter.exe
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\bin\Release\FlyffStarter.pdb
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\bin\Release\FlyffStarter.xml
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CProgressBar.resources
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CPatcher.resources
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.Resources.resources
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Open Source Patcher v3\obj\x86\Release\Open Source Patcher v3.vbproj.GenerateResource.Cache
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\FlyffStarter.exe
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\FlyffStarter.xml
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\FlyffStarter.pdb
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\bin\Release\FlyffStarter.exe
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\bin\Release\FlyffStarter.pdb
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\bin\Release\FlyffStarter.xml
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CProgressBar.resources
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CPatcher.resources
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.Resources.resources
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\Open Source Patcher v3.vbproj.GenerateResource.Cache

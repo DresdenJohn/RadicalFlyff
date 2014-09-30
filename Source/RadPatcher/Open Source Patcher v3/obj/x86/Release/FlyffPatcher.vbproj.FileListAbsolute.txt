@@ -1,0 +1,51 @@
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\FlyffStarter.exe
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\FlyffStarter.xml
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\FlyffStarter.pdb
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\bin\Release\FlyffStarter.exe
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\bin\Release\FlyffStarter.pdb
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\bin\Release\FlyffStarter.xml
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CProgressBar.resources
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CPatcher.resources
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.Resources.resources
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\FlyffPatcher.vbproj.GenerateResource.Cache
+C:\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\FlyffStarter.exe
+C:\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\FlyffStarter.xml
+C:\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\FlyffStarter.pdb
+C:\EditedPatcher\FlyffPatcher\Open Source Patcher v3\bin\Release\FlyffStarter.exe
+C:\EditedPatcher\FlyffPatcher\Open Source Patcher v3\bin\Release\FlyffStarter.pdb
+C:\EditedPatcher\FlyffPatcher\Open Source Patcher v3\bin\Release\FlyffStarter.xml
+C:\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CProgressBar.resources
+C:\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CPatcher.resources
+C:\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.Resources.resources
+C:\EditedPatcher\FlyffPatcher\Open Source Patcher v3\obj\x86\Release\FlyffPatcher.vbproj.GenerateResource.Cache
+C:\EditedPatcher\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CProgressBar.resources
+C:\EditedPatcher\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CPatcher.resources
+C:\EditedPatcher\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.Resources.resources
+C:\EditedPatcher\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\FlyffPatcher.vbproj.GenerateResource.Cache
+C:\EditedPatcher\SwiftPatcher\Open Source Patcher v3\bin\Release\SwiftStarter.exe
+C:\EditedPatcher\SwiftPatcher\Open Source Patcher v3\bin\Release\SwiftStarter.pdb
+C:\EditedPatcher\SwiftPatcher\Open Source Patcher v3\bin\Release\SwiftStarter.xml
+C:\EditedPatcher\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\SwiftStarter.exe
+C:\EditedPatcher\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\SwiftStarter.xml
+C:\EditedPatcher\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\SwiftStarter.pdb
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\SwiftStarter.exe
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\SwiftStarter.xml
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\SwiftStarter.pdb
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Open Source Patcher v3\bin\Release\SwiftStarter.exe
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Open Source Patcher v3\bin\Release\SwiftStarter.pdb
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Open Source Patcher v3\bin\Release\SwiftStarter.xml
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CProgressBar.resources
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CPatcher.resources
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.Resources.resources
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\FlyffPatcher.vbproj.GenerateResource.Cache
+C:\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\SwiftStarter.exe
+C:\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\SwiftStarter.xml
+C:\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\SwiftStarter.pdb
+C:\SwiftPatcher\Open Source Patcher v3\bin\Release\SwiftStarter.exe
+C:\SwiftPatcher\Open Source Patcher v3\bin\Release\SwiftStarter.pdb
+C:\SwiftPatcher\Open Source Patcher v3\bin\Release\SwiftStarter.xml
+C:\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CProgressBar.resources
+C:\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CPatcher.resources
+C:\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.Resources.resources
+C:\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\FlyffPatcher.vbproj.GenerateResource.Cache
+C:\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.Options.resources

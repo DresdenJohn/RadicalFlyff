@@ -1,0 +1,56 @@
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Updater\bin\Release\Updater.exe
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Updater\bin\Release\Updater.pdb
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Updater\bin\Release\Updater.xml
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Updater\obj\x86\Release\Updater.Resources.resources
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Updater\obj\x86\Release\Updater.vbproj.GenerateResource.Cache
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Updater\obj\x86\Release\Updater.exe
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Updater\obj\x86\Release\Updater.xml
+C:\Users\Jonathan\Downloads\Open Source Patcher v3.2 by Sedrika\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Updater\obj\x86\Release\Updater.pdb
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Updater\bin\Release\Updater.exe
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Updater\bin\Release\Updater.pdb
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Updater\bin\Release\Updater.xml
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Updater\obj\x86\Release\Updater.Resources.resources
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Updater\obj\x86\Release\Updater.vbproj.GenerateResource.Cache
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Updater\obj\x86\Release\Updater.exe
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Updater\obj\x86\Release\Updater.xml
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\Updater\obj\x86\Release\Updater.pdb
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Updater\bin\Release\Updater.exe
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Updater\bin\Release\Updater.pdb
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Updater\bin\Release\Updater.xml
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Updater\obj\x86\Release\Updater.Resources.resources
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Updater\obj\x86\Release\Updater.vbproj.GenerateResource.Cache
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Updater\obj\x86\Release\Updater.exe
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Updater\obj\x86\Release\Updater.xml
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\Updater\obj\x86\Release\Updater.pdb
+C:\EditedPatcher\FlyffPatcher\Updater\bin\Release\Updater.exe
+C:\EditedPatcher\FlyffPatcher\Updater\bin\Release\Updater.pdb
+C:\EditedPatcher\FlyffPatcher\Updater\bin\Release\Updater.xml
+C:\EditedPatcher\FlyffPatcher\Updater\obj\x86\Release\Updater.Resources.resources
+C:\EditedPatcher\FlyffPatcher\Updater\obj\x86\Release\Updater.vbproj.GenerateResource.Cache
+C:\EditedPatcher\FlyffPatcher\Updater\obj\x86\Release\Updater.exe
+C:\EditedPatcher\FlyffPatcher\Updater\obj\x86\Release\Updater.xml
+C:\EditedPatcher\FlyffPatcher\Updater\obj\x86\Release\Updater.pdb
+C:\EditedPatcher\SwiftPatcher\Updater\bin\Release\Updater.exe
+C:\EditedPatcher\SwiftPatcher\Updater\bin\Release\Updater.pdb
+C:\EditedPatcher\SwiftPatcher\Updater\bin\Release\Updater.xml
+C:\EditedPatcher\SwiftPatcher\Updater\obj\x86\Release\Updater.Resources.resources
+C:\EditedPatcher\SwiftPatcher\Updater\obj\x86\Release\Updater.vbproj.GenerateResource.Cache
+C:\EditedPatcher\SwiftPatcher\Updater\obj\x86\Release\Updater.exe
+C:\EditedPatcher\SwiftPatcher\Updater\obj\x86\Release\Updater.xml
+C:\EditedPatcher\SwiftPatcher\Updater\obj\x86\Release\Updater.pdb
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Updater\bin\Release\Updater.exe
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Updater\bin\Release\Updater.pdb
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Updater\bin\Release\Updater.xml
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Updater\obj\x86\Release\Updater.Resources.resources
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Updater\obj\x86\Release\Updater.vbproj.GenerateResource.Cache
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Updater\obj\x86\Release\Updater.exe
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Updater\obj\x86\Release\Updater.xml
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\Updater\obj\x86\Release\Updater.pdb
+C:\SwiftPatcher\Updater\bin\Release\Updater.exe
+C:\SwiftPatcher\Updater\bin\Release\Updater.pdb
+C:\SwiftPatcher\Updater\bin\Release\Updater.xml
+C:\SwiftPatcher\Updater\obj\x86\Release\Updater.Resources.resources
+C:\SwiftPatcher\Updater\obj\x86\Release\Updater.vbproj.GenerateResource.Cache
+C:\SwiftPatcher\Updater\obj\x86\Release\Updater.exe
+C:\SwiftPatcher\Updater\obj\x86\Release\Updater.xml
+C:\SwiftPatcher\Updater\obj\x86\Release\Updater.pdb

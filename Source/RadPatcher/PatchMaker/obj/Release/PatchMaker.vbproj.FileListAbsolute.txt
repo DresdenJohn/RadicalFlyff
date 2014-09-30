@@ -1,0 +1,48 @@
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\PatchMaker\bin\Release\PatchMaker.exe
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\PatchMaker\bin\Release\PatchMaker.pdb
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\PatchMaker\bin\Release\PatchMaker.xml
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\PatchMaker\obj\Release\PatchMaker.Resources.resources
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\PatchMaker\obj\Release\PatchMaker.vbproj.GenerateResource.Cache
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\PatchMaker\obj\Release\PatchMaker.exe
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\PatchMaker\obj\Release\PatchMaker.xml
+C:\Users\Jonathan\Downloads\EditedPatcher\Open Source Patcher v3 by Sedrika\Open Source Patcher v3\PatchMaker\obj\Release\PatchMaker.pdb
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\PatchMaker\obj\Release\PatchMaker.Resources.resources
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\PatchMaker\obj\Release\PatchMaker.vbproj.GenerateResource.Cache
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\PatchMaker\bin\Release\FlyffPatchmaker.exe
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\PatchMaker\bin\Release\FlyffPatchmaker.pdb
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\PatchMaker\bin\Release\FlyffPatchmaker.xml
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\PatchMaker\obj\Release\FlyffPatchmaker.exe
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\PatchMaker\obj\Release\FlyffPatchmaker.xml
+C:\Users\Jonathan\Downloads\EditedPatcher\FlyffPatcher\PatchMaker\obj\Release\FlyffPatchmaker.pdb
+C:\EditedPatcher\FlyffPatcher\PatchMaker\bin\Release\FlyffPatchmaker.exe
+C:\EditedPatcher\FlyffPatcher\PatchMaker\bin\Release\FlyffPatchmaker.pdb
+C:\EditedPatcher\FlyffPatcher\PatchMaker\bin\Release\FlyffPatchmaker.xml
+C:\EditedPatcher\FlyffPatcher\PatchMaker\obj\Release\PatchMaker.Resources.resources
+C:\EditedPatcher\FlyffPatcher\PatchMaker\obj\Release\PatchMaker.vbproj.GenerateResource.Cache
+C:\EditedPatcher\FlyffPatcher\PatchMaker\obj\Release\FlyffPatchmaker.exe
+C:\EditedPatcher\FlyffPatcher\PatchMaker\obj\Release\FlyffPatchmaker.xml
+C:\EditedPatcher\FlyffPatcher\PatchMaker\obj\Release\FlyffPatchmaker.pdb
+C:\EditedPatcher\SwiftPatcher\PatchMaker\bin\Release\FlyffPatchmaker.exe
+C:\EditedPatcher\SwiftPatcher\PatchMaker\bin\Release\FlyffPatchmaker.pdb
+C:\EditedPatcher\SwiftPatcher\PatchMaker\bin\Release\FlyffPatchmaker.xml
+C:\EditedPatcher\SwiftPatcher\PatchMaker\obj\Release\PatchMaker.Resources.resources
+C:\EditedPatcher\SwiftPatcher\PatchMaker\obj\Release\PatchMaker.vbproj.GenerateResource.Cache
+C:\EditedPatcher\SwiftPatcher\PatchMaker\obj\Release\FlyffPatchmaker.exe
+C:\EditedPatcher\SwiftPatcher\PatchMaker\obj\Release\FlyffPatchmaker.xml
+C:\EditedPatcher\SwiftPatcher\PatchMaker\obj\Release\FlyffPatchmaker.pdb
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\PatchMaker\bin\Release\FlyffPatchmaker.exe
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\PatchMaker\bin\Release\FlyffPatchmaker.pdb
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\PatchMaker\bin\Release\FlyffPatchmaker.xml
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\PatchMaker\obj\Release\PatchMaker.Resources.resources
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\PatchMaker\obj\Release\PatchMaker.vbproj.GenerateResource.Cache
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\PatchMaker\obj\Release\FlyffPatchmaker.exe
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\PatchMaker\obj\Release\FlyffPatchmaker.xml
+I:\1) Flyff Source\EditedPatcher\SwiftPatcher\PatchMaker\obj\Release\FlyffPatchmaker.pdb
+C:\SwiftPatcher\PatchMaker\bin\Release\FlyffPatchmaker.exe
+C:\SwiftPatcher\PatchMaker\bin\Release\FlyffPatchmaker.pdb
+C:\SwiftPatcher\PatchMaker\bin\Release\FlyffPatchmaker.xml
+C:\SwiftPatcher\PatchMaker\obj\Release\PatchMaker.Resources.resources
+C:\SwiftPatcher\PatchMaker\obj\Release\PatchMaker.vbproj.GenerateResource.Cache
+C:\SwiftPatcher\PatchMaker\obj\Release\FlyffPatchmaker.exe
+C:\SwiftPatcher\PatchMaker\obj\Release\FlyffPatchmaker.xml
+C:\SwiftPatcher\PatchMaker\obj\Release\FlyffPatchmaker.pdb
