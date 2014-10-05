@@ -46,3 +46,11 @@ C:\SwiftPatcher\PatchMaker\obj\Release\PatchMaker.vbproj.GenerateResource.Cache
 C:\SwiftPatcher\PatchMaker\obj\Release\FlyffPatchmaker.exe
 C:\SwiftPatcher\PatchMaker\obj\Release\FlyffPatchmaker.xml
 C:\SwiftPatcher\PatchMaker\obj\Release\FlyffPatchmaker.pdb
+C:\RadicalFlyff\Source\RadPatcher\PatchMaker\bin\Release\FlyffPatchmaker.exe
+C:\RadicalFlyff\Source\RadPatcher\PatchMaker\bin\Release\FlyffPatchmaker.pdb
+C:\RadicalFlyff\Source\RadPatcher\PatchMaker\bin\Release\FlyffPatchmaker.xml
+C:\RadicalFlyff\Source\RadPatcher\PatchMaker\obj\Release\PatchMaker.Resources.resources
+C:\RadicalFlyff\Source\RadPatcher\PatchMaker\obj\Release\PatchMaker.vbproj.GenerateResource.Cache
+C:\RadicalFlyff\Source\RadPatcher\PatchMaker\obj\Release\FlyffPatchmaker.exe
+C:\RadicalFlyff\Source\RadPatcher\PatchMaker\obj\Release\FlyffPatchmaker.xml
+C:\RadicalFlyff\Source\RadPatcher\PatchMaker\obj\Release\FlyffPatchmaker.pdb

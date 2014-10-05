@@ -3,7 +3,7 @@ Module CUpdater
 
     Public DebugMode As Boolean = False
 
-    Public PatcherName As String = "SwiftStarter"
+    Public PatcherName As String = "RadStarter"
 
     Sub Main()
         Dim Args() As String = Environment.GetCommandLineArgs

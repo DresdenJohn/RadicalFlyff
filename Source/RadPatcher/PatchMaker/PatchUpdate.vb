@@ -7,8 +7,8 @@ Module PatchUpdate
     Public version As String = "ver:2.4"
 
     Public useMerge As Boolean = False
-    Public mergeLocation As String = "C:\Server\Resource\"
-    Public mergeExeName As String = "1.Merge2.exe"
+    Public mergeLocation As String = "C:\RadicalFlyff\Resource\"
+    Public mergeExeName As String = "Merge3.exe"
 
     Public patchLocation As String = "C:\ResClient"
     Public gZipLocation As String = "C:\gZip.exe"
@@ -100,7 +100,7 @@ Module PatchUpdate
         Dim fiArr As FileInfo() = di.GetFiles()
 
         Dim startDate As New DateTime(1970, 1, 1)
-        Dim noOfSeconds As Long
+        'Dim noOfSeconds As Long
 
         Dim fri As FileInfo
         For Each fri In fiArr
