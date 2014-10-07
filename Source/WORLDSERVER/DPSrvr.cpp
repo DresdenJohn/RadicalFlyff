@@ -6562,7 +6562,7 @@ void CDPSrvr::OnRequestGuildRank( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYT
 		}
 	}
 }
-
+#ifndef __NEW_CS_SHOP
 void CDPSrvr::OnBuyingInfo( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
 {
 #ifndef __SECURITY_FIXES
@@ -6611,6 +6611,66 @@ void CDPSrvr::OnBuyingInfo( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBu
 
 #endif // __SECURITY_FIXES
 }
+#else
+void CDPSrvr::OnBuyingInfo( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
+{
+	BUYING_INFO2 bi2;
+	ar.Read( (void*)&bi2, sizeof(BUYING_INFO2) );
+
+	CWorld* pWorld;
+	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
+
+	/*
+		100 - Save Player
+		101 - Create Item
+	*/
+    
+    if( IsValidObj( pUser )  && ( pWorld = pUser->GetWorld() ) )
+    {
+		if( bi2.dwParam4 != 0000000 || bi2.dwParam5 != 0000000 )
+				return;
+		if( bi2.dwCommand == 100 ) // Save Player
+		{
+			g_dpDBClient.SavePlayer( pUser, pWorld->GetID(), pUser->GetPos(), pUser->GetLayer() );
+		}
+		else if( bi2.dwCommand == 101 ) // Create Item
+		{
+			SERIALNUMBER iSerialNumber	= 0;
+			CItemElem itemElem;
+			itemElem.m_dwItemId        = bi2.dwParam1;
+			itemElem.m_nItemNum        = (short)bi2.dwParam2;
+			itemElem.m_bCharged        = TRUE;
+			BYTE nId;
+			bi2.dwParam3    = pUser->CreateItem( &itemElem, &nId );
+			if( bi2.dwParam3 )
+			{
+				CItemElem* pItemElem    = pUser->m_Inventory.GetAtId( nId );
+				if( pItemElem )
+				{
+					iSerialNumber    = pItemElem->GetSerialNumber();
+					pItemElem->m_bCharged    = TRUE;
+					if( bi2.dwTargetId > 0 )
+						pUser->AddDefinedText( TID_EVE_REAPITEM, "\"%s\"", itemElem.GetName() );
+				}
+			}
+			else
+			{
+				LogItemInfo aLogItem;
+				aLogItem.Action = "S";
+				aLogItem.SendName = pUser->GetName();
+				aLogItem.WorldId = pUser->GetWorld()->GetID();
+				aLogItem.Gold = aLogItem.Gold2 = pUser->GetGold();
+
+				g_dpDBClient.SendQueryPostMail( pUser->m_idPlayer, 0, itemElem, 0, "WebShop", "" );
+				aLogItem.RecvName = "HOMEPAGE_SHOP";
+				g_DPSrvr.OnLogItem( aLogItem, &itemElem, itemElem.m_nItemNum );
+			}
+			g_dpDBClient.SendBuyingInfo( &bi2, iSerialNumber );
+			g_dpDBClient.SavePlayer( pUser, pWorld->GetID(), pUser->GetPos(), pUser->GetLayer() );
+		}
+	}
+}
+#endif // __NEW_CS_SHOP
 
 void CDPSrvr::OnEnterChattingRoom( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
 {
@@ -12810,8 +12870,8 @@ void CDPSrvr::OnPartyList( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf
 					continue;
 
 				strcat( partytmp.m_sPartyList, pPlayerData->szPlayer);
-				strcat( partytmp.m_sPartyList, pPlayerData->data.nLevel);
-				strcat( partytmp.m_sPartyList, pPlayerData->data.nJob);
+				// strcat( partytmp.m_sPartyList, pPlayerData->data.nLevel);
+				// strcat( partytmp.m_sPartyList, pPlayerData->data.nJob);
 				
 			}
 			

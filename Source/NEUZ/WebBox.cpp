@@ -72,7 +72,7 @@ void InitWebGlobalVar()
 		}
 		else 
 		{
-			WEB_ADDRESS_DEFAULT = "http://billing.gpotato.com/Charge/FlyffItemList.asp";
+			WEB_ADDRESS_DEFAULT = "http://localhost/shop/index.php";
 		}
 		WEB_POSTDATA = "user_id=%s&m_idPlayer=%d&server_index=%d&md5=%s&check=%s";
 		break;
@@ -599,6 +599,7 @@ void CWebBox::Render_BackImage()
 }
 */
 
+#ifndef __NEW_CS_SHOP
 void CWebBox::Refresh_Web()
 {
 	char address[512], postdata[WEB_STR_LEN], header[WEB_STR_LEN];
@@ -731,7 +732,24 @@ void CWebBox::Refresh_Web()
 	wsprintf( header, WEB_HEADER, lstrlen( postdata ) );
 	ChangeWebAddress( address, postdata, header );
 }
+#else
+void CWebBox::Refresh_Web()
+{
+	char address[512], postdata[WEB_STR_LEN], header[WEB_STR_LEN];
+	ZeroMemory( address, 512 );
+	wsprintf( address, GetAddress() );
+	char out[260]	= { 0, };
+	char in[260]	= { 0, };
+	CString hash = "gaajgussfdbfhjq";
+	sprintf( in, "%s%d%d%s", m_szUser, m_nPlayer, m_nServer, hash );
+	::md5( out, in );
+	wsprintf( postdata, WEB_POSTDATA, m_szUser, m_nPlayer, m_nServer, out, g_Neuz.m_szPassword );
+	wsprintf( header, WEB_HEADER, lstrlen( postdata ) );
+	ChangeWebAddress( address, postdata, header );
+}
+#endif // __NEW_CS_SHOP
 
+#ifndef __NEW_CS_SHOP
 bool CWebBox::Process(HWND hWnd,HINSTANCE hInstance, char* szUser, u_long nPlayer, DWORD nServer, int nLevel, int nJob, int nSex, const char* szName )
 {
 	char address[512], postdata[WEB_STR_LEN], header[WEB_STR_LEN];
@@ -898,6 +916,61 @@ bool CWebBox::Process(HWND hWnd,HINSTANCE hInstance, char* szUser, u_long nPlaye
 
 	return false;
 }
+#else
+bool CWebBox::Process(HWND hWnd,HINSTANCE hInstance, char* szUser, u_long nPlayer, DWORD nServer, int nLevel, int nJob, int nSex, const char* szName )
+{
+	char address[512], postdata[WEB_STR_LEN], header[WEB_STR_LEN];
+	ZeroMemory( address, 512 );
+	ZeroMemory( postdata, WEB_STR_LEN );
+	ZeroMemory( header, WEB_STR_LEN );
+
+	if( m_bStart && m_bStartWeb )
+	{
+		lstrcpy( m_szUser, szUser );
+		m_nPlayer	= nPlayer;
+		m_nServer	= nServer;
+		m_nLevel	= nLevel;
+		m_nJob	= nJob;
+		m_nSex	= nSex;
+		lstrcpy( m_szName, szName );
+
+		D3DDEVICE->SetDialogBoxMode( TRUE );
+		Start_WebBox( hWnd, hInstance, WEB_DEFAULT_X, WEB_DEFAULT_Y, NULL );
+
+		wsprintf( address, GetAddress() );
+		
+		char out[260]	= { 0, };
+		char in[260]	= { 0, };
+		CString hash = "gaajgussfdbfhjq";
+		sprintf( in, "%s%d%d%s", m_szUser, m_nPlayer, m_nServer, hash );
+			
+		::md5( out, in );
+		wsprintf( postdata, WEB_POSTDATA, m_szUser, m_nPlayer, m_nServer, out, g_Neuz.m_szPassword );
+		
+		wsprintf( header, WEB_HEADER, lstrlen( postdata ) );
+		ChangeWebAddress( address, postdata, header );
+		Show( TRUE );
+		m_bStart	= false;
+		m_bEnd	= false;
+		return true;
+	}
+	else if( m_bEnd )
+	{
+		End_WebBox();
+		m_bEnd	= false;
+		m_bStart	= false;
+		m_bStartWeb	= false;
+		return false;
+	}
+	else if( m_bStartWeb )
+	{
+		if( GetAsyncKeyState( VK_F5 ) )
+			Refresh_Web();
+	}
+
+	return false;
+}
+#endif // __NEW_CS_SHOP
 
 bool CWebBox::Get_Start()
 {
