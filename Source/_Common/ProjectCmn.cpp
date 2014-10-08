@@ -458,11 +458,18 @@ BOOL CProject::LoadPropItem( LPCTSTR lpszFileName, CFixedArray< ItemProp >* apOb
 		
 		// szIcon
 		scanner.GetToken();
-		scanner.GetToken();	
+		scanner.GetToken();
+#ifndef __NEW_CS_SHOP		
 	#ifdef __CLIENT		
 		_tcsncpy( prop.szIcon, scanner.token, sizeof(prop.szIcon)-1 );
 		prop.szCommand[sizeof(prop.szIcon)-1] = 0;
 	#endif 
+#else
+	#if defined(__CLIENT) || defined(__DBSERVER)	
+		_tcsncpy( prop.szIcon, scanner.token, sizeof(prop.szIcon)-1 );
+		prop.szCommand[sizeof(prop.szIcon)-1] = 0;
+	#endif
+#endif // __NEW_CS_SHOP
 
 #ifdef __VERIFY_0201
 		_tcsncpy( prop.szIcon, scanner.token, sizeof(prop.szIcon)-1 );
@@ -481,11 +488,18 @@ BOOL CProject::LoadPropItem( LPCTSTR lpszFileName, CFixedArray< ItemProp >* apOb
 		scanner.GetToken();
 
 		// szCommand
-		scanner.GetToken();		
+		scanner.GetToken();	
+#ifndef __NEW_CS_SHOP		
 	#ifdef __CLIENT		
 		_tcsncpy( prop.szCommand, scanner.token, sizeof(prop.szCommand)-1 );
 		prop.szCommand[sizeof(prop.szCommand)-1] = 0;
 	#endif // __CLIENT
+#else
+	#if defined(__CLIENT) || defined(__DBSERVER)	
+		_tcsncpy( prop.szCommand, scanner.token, sizeof(prop.szCommand)-1 );
+		prop.szCommand[sizeof(prop.szCommand)-1] = 0;
+	#endif
+#endif // __NEW_CS_SHOP
 
 	#ifdef __WORLDSERVER
 		#ifdef __INTERNALSERVER

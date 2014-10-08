@@ -33,6 +33,7 @@ void CDPAdbill::SysMessageHandler( LPDPMSG_GENERIC lpMsg, DWORD dwMsgSize, DPID 
 	}
 }
 
+#ifndef __NEW_CS_SHOP
 void CDPAdbill::UserMessageHandler( LPDPMSG_GENERIC lpMsg, DWORD dwMsgSize, DPID idFrom )
 {
 	PBUYING_INFO3 pbi3	= new BUYING_INFO3;
@@ -54,6 +55,19 @@ void CDPAdbill::UserMessageHandler( LPDPMSG_GENERIC lpMsg, DWORD dwMsgSize, DPID
 //	FILEOUT( "buyinginfo.txt", "dwServerIndex = %d\tdwPlayerId = %d\tdwItemId = %d\tdwItemNum = %d\n", 
 //		pbi3->dwServerIndex, pbi3->dwPlayerId, pbi3->dwItemId, pbi3->dwItemNum );
 }
+#else
+void CDPAdbill::UserMessageHandler( LPDPMSG_GENERIC lpMsg, DWORD dwMsgSize, DPID idFrom )
+{
+	PBUYING_INFO3 pbi3	= new BUYING_INFO3;
+	memcpy( (void*)pbi3, lpMsg, sizeof(BUYING_INFO) );
+	pbi3->dpid	= idFrom;
+	pbi3->dwKey	= m_dwKey++;
+	pbi3->dwTickCount	= GetTickCount();
+
+	CBuyingInfoMng::GetInstance()->Add( pbi3 );
+	g_dpDbSrvr.SendBuyingInfo( (PBUYING_INFO2)pbi3 );
+}
+#endif // __NEW_CS_SHOP
 
 CDPAdbill* CDPAdbill::GetInstance()
 {

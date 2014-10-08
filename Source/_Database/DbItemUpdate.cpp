@@ -52,6 +52,7 @@ void CDbManager::ItemUpdateThread( void )
 	SAFE_DELETE( pQuery );
 }
 
+#ifndef __NEW_CS_SHOP
 void CDbManager::ChangeItemUpdate( CQuery* pQuery )
 {
 	char szSQL[4096] = {0,};
@@ -126,6 +127,63 @@ void CDbManager::ChangeItemUpdate( CQuery* pQuery )
 	}	// for
 	TRACE( "ChangeItemUpdate Complete\n" );
 }
+#else
+void CDbManager::ChangeItemUpdate( CQuery* pQuery )
+{
+	char szSQL[4096] = {0,};
+	
+	sprintf( szSQL, "ITEM_STR 'D1'" );
+	
+	if( FALSE == pQuery->Exec( szSQL ) )
+	{
+		WriteLog( szSQL );
+		return;		
+	}
+
+	for( int i = 0; i < prj.m_aPropItem.GetSize(); i++ )
+	{
+		ItemProp* pItemProp =  prj.GetItemProp( i );
+		if( pItemProp && pItemProp->dwItemKind3 != IK3_VIRTUAL && pItemProp->dwID != 0 )
+		{
+			CString	strItem	= pItemProp->szName;
+			strItem.Replace( "'", "" );
+			CString strItemCommand = pItemProp->szCommand;
+			strItemCommand.Replace( "'", "" );
+			sprintf( szSQL, "ITEM_STR 'I1',"
+				"%d, '%s', %d, %d, %d, %d,"	// 0
+				"%d, %d, %d, %d, %d, %d,"	// 1
+				"%d, %d, %d, %d, %d, %d,"	// 2
+				"%d, %d, %d, %d, %d, %f,"	// 3
+				"%d, %d, %d, %d, %d, %d,"	// 4
+				"%d, %d, %d, %d, %d, %d,"	// 5
+				"%d, %d, %d, %d, %d, %d,"	// 6
+				"%d, %d, %d, %d, %d, %d,"	// 7
+				"%d, %d, %d, %d, %d, %d,"	// 8
+				"%d, %d, %f, %d, %d, %d,"	// 9
+				"%d, '%s', '%s'",			// 10
+
+				pItemProp->dwID, strItem, pItemProp->dwPackMax, pItemProp->dwItemKind1, pItemProp->dwItemKind2, pItemProp->dwItemKind3, // 0
+				pItemProp->dwItemJob, pItemProp->dwItemSex, pItemProp->dwCost, pItemProp->dwHanded, pItemProp->dwFlag, pItemProp->dwParts, // 1
+				pItemProp->dwPartsub, pItemProp->dwExclusive, pItemProp->dwItemLV, pItemProp->dwItemRare, pItemProp->dwShopAble, pItemProp->bCharged, // 2
+				pItemProp->dwAbilityMin, pItemProp->dwAbilityMax, pItemProp->eItemType, pItemProp->dwWeaponType, pItemProp->nAdjHitRate, pItemProp->fAttackSpeed, // 3
+				pItemProp->dwAttackRange, pItemProp->nProbability, pItemProp->dwDestParam[0], pItemProp->dwDestParam[1], pItemProp->dwDestParam[2], pItemProp->nAdjParamVal[0], // 4
+				pItemProp->nAdjParamVal[1], pItemProp->nAdjParamVal[2], pItemProp->dwChgParamVal[0], pItemProp->dwChgParamVal[1], pItemProp->dwChgParamVal[2], pItemProp->nDestData1[0], // 5
+				pItemProp->nDestData1[1], pItemProp->nDestData1[2], pItemProp->dwReqMp, pItemProp->dwReqFp, pItemProp->dwReqDisLV, pItemProp->dwCircleTime, // 6
+				pItemProp->dwSkillTime, pItemProp->dwReferStat1, pItemProp->dwReferStat2, pItemProp->dwReferTarget1, pItemProp->dwReferTarget2, pItemProp->dwReferValue1, // 7
+				pItemProp->dwReferValue2, pItemProp->dwSkillType, pItemProp->nItemResistElecricity, pItemProp->nItemResistFire, pItemProp->nItemResistWind, pItemProp->nItemResistWater, // 8
+				pItemProp->nItemResistEarth, pItemProp->dwExp, pItemProp->fFlightSpeed, pItemProp->dwFlightLimit, pItemProp->dwFFuelReMax, pItemProp->dwAFuelReMax, // 9
+				pItemProp->dwLimitLevel1, pItemProp->szIcon, strItemCommand // 10
+				);
+			if( FALSE == pQuery->Exec( szSQL ) )
+			{
+				WriteLog( szSQL );
+				return;
+			}
+		}	// if
+	}	// for
+	TRACE( "ChangeItemUpdate Complete\n" );
+}
+#endif // __NEW_CS_SHOP
 
 void CDbManager::ChangeSkillUpdate( CQuery* pQuery )
 {

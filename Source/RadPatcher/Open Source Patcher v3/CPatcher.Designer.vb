@@ -69,9 +69,9 @@ Partial Class CPatcher
         Me.Label2.ForeColor = System.Drawing.Color.DarkGray
         Me.Label2.Location = New System.Drawing.Point(9, 9)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(141, 16)
+        Me.Label2.Size = New System.Drawing.Size(151, 16)
         Me.Label2.TabIndex = 4
-        Me.Label2.Text = "Swift Flight Online Patcher"
+        Me.Label2.Text = "Radical Flight Online Patcher"
         '
         'Label3
         '

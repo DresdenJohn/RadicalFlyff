@@ -81,7 +81,7 @@ Public Class CFunc
             Dim Line As String = Scanner.ReadLine
             Dim Args() As String = Line.Split("|")
 
-            CFunc.Status("Checking for patches...")
+            CFunc.Status("Checking for patches...Please Wait...")
             CFunc.DirectoryCheck(Args(0))
             CFunc.FileCheck(Args)
 
@@ -110,22 +110,22 @@ Public Class CFunc
         Do While Process.GetProcessesByName("gZip").Length > 0 : Application.DoEvents() : Loop
         CFunc.DeleteFile("gZip.exe")
 
-        For i As Integer = 0 To CFunc.PatchList.Length - 2
-            Dim Args() As String = CFunc.PatchList(i).Split(vbTab)
+        'For i As Integer = 0 To CFunc.PatchList.Length - 2
+        '    Dim Args() As String = CFunc.PatchList(i).Split(vbTab)
 
-            Dim Fecha As New DateTime(1970, 1, 1)
+        '    Dim Fecha As New DateTime(1970, 1, 1)
 
-            Fecha.AddSeconds(Args(2))
+        '    'Fecha.AddSeconds(Args(2))
 
 
 
-            If Not Args(0).EndsWith(".gz") And File.Exists(Args(0)) Then
-                If Not Args(0).Contains("SwiftStarter") Then
-                    File.SetLastWriteTime(Args(0), Fecha)
-                End If
-            End If
+        '    If Not Args(0).EndsWith(".gz") And File.Exists(Args(0)) Then
+        '        If Not Args(0).Contains("SwiftStarter") Then
+        '            File.SetLastWriteTime(Args(0), Fecha)
+        '        End If
+        '    End If
 
-        Next
+        'Next
 
         CFunc.IsFinished = True
         CPatcher.Label1.Enabled = True
@@ -144,20 +144,20 @@ Public Class CFunc
 
     Public Shared Sub FileCheck(ByVal Param() As String)
 
-        Dim startDate As New DateTime(1970, 1, 1)
-        Dim noOfSeconds As Long = 0
+        'Dim startDate As New DateTime(1970, 1, 1)
+        'Dim noOfSeconds As Long = 0
 
-        Dim fileInfo As New FileInfo(Param(0))
-        Dim lastUpdate As String = fileInfo.LastWriteTime.ToString
+        'Dim fileInfo As New FileInfo(Param(0))
+        'Dim lastUpdate As String = fileInfo.LastWriteTime.ToString
 
-        Dim dateUpdated As DateTime = DateTime.Parse(lastUpdate)
+        'Dim dateUpdated As DateTime = DateTime.Parse(lastUpdate)
 
-        noOfSeconds = (dateUpdated - startDate).TotalSeconds
+        'noOfSeconds = (dateUpdated - startDate).TotalSeconds
 
         If Not Param(0).EndsWith(".gz") Then
             If Not Param(0).Contains("SwiftStarter") Then
                 If Not File.Exists(Param(0)) Then
-                    CFunc.PatchList = CFunc.AddLineToStringArray(CFunc.PatchList, Param(0) & vbTab & Param(1) & vbTab & Param(2))
+                    CFunc.PatchList = CFunc.AddLineToStringArray(CFunc.PatchList, Param(0) & vbTab & Param(1))
                     CFunc.MaxUpdate += 1
                     'ElseIf Not noOfSeconds.Equals(0) Then
                     '    CFunc.PatchList = CFunc.AddLineToStringArray(CFunc.PatchList, Param(0) & vbTab & Param(1) & vbTab & Param(2))
@@ -166,7 +166,7 @@ Public Class CFunc
                     '    CFunc.PatchList = CFunc.AddLineToStringArray(CFunc.PatchList, Param(0) & vbTab & Param(1) & vbTab & Param(2))
                     '    CFunc.MaxUpdate += 1
                 ElseIf Config.UseMd5Check AndAlso Not MD5FileHash(Param(0)) = Param(1) Then
-                    CFunc.PatchList = CFunc.AddLineToStringArray(CFunc.PatchList, Param(0) & vbTab & Param(1) & vbTab & Param(2))
+                    CFunc.PatchList = CFunc.AddLineToStringArray(CFunc.PatchList, Param(0) & vbTab & Param(1))
                     CFunc.MaxUpdate += 1
                 End If
             End If

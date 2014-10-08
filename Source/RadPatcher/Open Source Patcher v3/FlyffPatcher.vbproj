@@ -10,7 +10,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>Open_Source_Patcher_v3.My.MyApplication</StartupObject>
     <RootNamespace>Open_Source_Patcher_v3</RootNamespace>
-    <AssemblyName>SwiftStarter</AssemblyName>
+    <AssemblyName>RadStarter</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
@@ -22,7 +22,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>SwiftStarter.xml</DocumentationFile>
+    <DocumentationFile>RadStarter.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
@@ -32,7 +32,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>SwiftStarter.xml</DocumentationFile>
+    <DocumentationFile>RadStarter.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -48,7 +48,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <ApplicationIcon>main_ico.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
@@ -152,6 +152,7 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="icon.ico" />
+    <Content Include="main_ico.ico" />
     <None Include="Resources\StartButtonYellow.png" />
     <None Include="Resources\StartButtonViolett.png" />
     <None Include="Resources\StartButtonRed.png" />

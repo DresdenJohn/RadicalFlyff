@@ -49,3 +49,14 @@ C:\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CP
 C:\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.Resources.resources
 C:\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\FlyffPatcher.vbproj.GenerateResource.Cache
 C:\SwiftPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.Options.resources
+C:\RadicalFlyff\Source\RadPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CProgressBar.resources
+C:\RadicalFlyff\Source\RadPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.Options.resources
+C:\RadicalFlyff\Source\RadPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.CPatcher.resources
+C:\RadicalFlyff\Source\RadPatcher\Open Source Patcher v3\obj\x86\Release\Open_Source_Patcher_v3.Resources.resources
+C:\RadicalFlyff\Source\RadPatcher\Open Source Patcher v3\obj\x86\Release\FlyffPatcher.vbproj.GenerateResource.Cache
+C:\RadicalFlyff\Source\RadPatcher\Open Source Patcher v3\obj\x86\Release\RadStarter.exe
+C:\RadicalFlyff\Source\RadPatcher\Open Source Patcher v3\bin\Release\RadStarter.exe
+C:\RadicalFlyff\Source\RadPatcher\Open Source Patcher v3\bin\Release\RadStarter.pdb
+C:\RadicalFlyff\Source\RadPatcher\Open Source Patcher v3\bin\Release\RadStarter.xml
+C:\RadicalFlyff\Source\RadPatcher\Open Source Patcher v3\obj\x86\Release\RadStarter.xml
+C:\RadicalFlyff\Source\RadPatcher\Open Source Patcher v3\obj\x86\Release\RadStarter.pdb

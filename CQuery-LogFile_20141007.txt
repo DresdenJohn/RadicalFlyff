@@ -1,0 +1,9 @@
+2014/10/07	17:59:05
+query:ITEM_STR 'D2'
+SQLSTATE:42S02 error:[Microsoft][SQL Server Native Client 11.0][SQL Server]Cannot find the object "SKILL_TBL" because it does not exist or you do not have permissions.
+2014/10/07	17:59:05
+query:ITEM_STR 'D3'
+SQLSTATE:42S02 error:[Microsoft][SQL Server Native Client 11.0][SQL Server]Cannot find the object "MONSTER_TBL" because it does not exist or you do not have permissions.
+2014/10/07	17:59:05
+query:ITEM_STR 'D4'
+SQLSTATE:42S02 error:[Microsoft][SQL Server Native Client 11.0][SQL Server]Cannot find the object "QUEST_TBL" because it does not exist or you do not have permissions.

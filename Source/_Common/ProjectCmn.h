@@ -234,7 +234,7 @@ struct ItemProp : CtrlProp
 {
 	DWORD	dwMotion;			// 동작 
 	DWORD	dwNum;				// 기본생성개수	
-	DWORD	dwPackMax;			// 최대곂침개수	
+	DWORD	dwPackMax;			// 최대곂침개�?
 	DWORD	dwItemKind1;		// 1차아이템종류	
 	DWORD	dwItemKind2;		// 2차아이템종류	
 	DWORD	dwItemKind3;		// 3차아이템종류	
@@ -351,11 +351,19 @@ struct ItemProp : CtrlProp
 	DWORD	dwSndAttack2;		// 효과음 : 공격 2
 	DWORD	dwQuestId;
 	TCHAR	szTextFileName[64];	// item에 GM command에 넣는 것에 사용
+	
+#ifndef __NEW_CS_SHOP
+	#ifdef __CLIENT
+		TCHAR	szIcon[64];			// dds파일 이름 
+		TCHAR	szCommand[256];		// 설명문 
+	#endif
+#else
+	#if defined(__CLIENT) || defined(__DBSERVER)
+		TCHAR	szIcon[64];
+		TCHAR	szCommand[256];
+	#endif
+#endif // __NEW_CS_SHOP
 
-#ifdef __CLIENT
-    TCHAR	szIcon[64];			// dds파일 이름 
-	TCHAR	szCommand[256];		// 설명문 
-#endif
 	int		nVer;
 
 #ifdef __VERIFY_0201

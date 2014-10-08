@@ -222,6 +222,7 @@ void CDbManager::AccountOff( CQuery & qry, LPDB_OVERLAPPED_PLUS lpDbOverlappedPl
 	m_pDbIOData->Free( lpDbOverlappedPlus );
 }
 
+#ifndef __NEW_CS_SHOP
 void CDbManager::LogSMItem( CQuery & qryLog, LPDB_OVERLAPPED_PLUS lpDbOverlappedPlus )
 {
 	CAr arRead( lpDbOverlappedPlus->lpBuf, lpDbOverlappedPlus->uBufSize );
@@ -266,7 +267,12 @@ void CDbManager::LogSMItem( CQuery & qryLog, LPDB_OVERLAPPED_PLUS lpDbOverlapped
 	}
 	m_pDbIOData->Free( lpDbOverlappedPlus );
 }
-
+#else
+void CDbManager::LogSMItem( CQuery & qryLog, LPDB_OVERLAPPED_PLUS lpDbOverlappedPlus )
+{
+	return;
+}
+#endif // __NEW_CS_SHOP
 void CDbManager::QueryBillingInfo( CQuery& query, LPDB_OVERLAPPED_PLUS pOV )
 {
 	GetBillingMgr()->OnDBQuery( query, pOV );
