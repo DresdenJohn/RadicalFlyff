@@ -12795,26 +12795,58 @@ void CDPSrvr::OnPartyList( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf
 			partytmp.m_nSizeofMember = pParty->m_nSizeofMember;								// ±Ø´Ü¿ø ¼ýÀÚ	( 2 ~ 8 )
 
 			PlayerData* pPlayerData	= CPlayerDataCenter::GetInstance()->GetPlayerData( pParty->m_aMember[0].m_uPlayerId );
+			
+		int nLevel	= pPlayerData->data.nLevel;
+		int nJob	= pPlayerData->data.nJob;
+		CString strClass(prj.GetText(TID_GAME_MEMBER));
+		
 		if( pPlayerData )
 		{
+			if ( pParty->m_aMember[0].m_uPlayerId )
+			{
 			partytmp.m_nLeaderId =  pParty->m_aMember[0].m_uPlayerId;
-			sprintf( partytmp.m_sPartyList, "%s       %d       %d\n", pPlayerData->szPlayer, pPlayerData->data.nLevel, pPlayerData->data.nJob);
+			if( MAX_PROFESSIONAL <= nJob && nJob < MAX_MASTER )
+				sprintf( partytmp.m_sPartyList, "%s       %d%s       %d\n", pPlayerData->szPlayer, nLevel, prj.GetText( TID_GAME_TOOLTIP_MARK_MASTER ), nJob);
+			else if( MAX_MASTER <= nJob )
+				sprintf( partytmp.m_sPartyList, "%s       %d%s       %d\n", pPlayerData->szPlayer, nLevel, prj.GetText( TID_GAME_TOOLTIP_MARK_HERO ), nJob);
+			else
+				sprintf( partytmp.m_sPartyList, "%s       %d       %d\n", pPlayerData->szPlayer, nLevel, nJob);
+			}
+			else 		
+				for( int i = 1; i < pParty->GetSizeofMember(); i++)
+			{
+				
+				
+				PlayerData* pPlayerData	= CPlayerDataCenter::GetInstance()->GetPlayerData( pParty->m_aMember[i].m_uPlayerId );
+				//partytmp.m_uPartyId =  pParty->m_aMember[i].m_uPlayerId;
+				
+				if(!pPlayerData)
+					continue;
+				
+				/*char* m_nLevel = pPlayerData->data.nLevel;
+				char* m_nJob = pPlayerData->data.nJob;
+				
+				strcat( partytmp.m_sPartyList, pPlayerData->szPlayer);
+				strcat( partytmp.m_sPartyList, "       ");				
+				strcat( partytmp.m_sPartyList, m_nLevel );
+				strcat( partytmp.m_sPartyList, "       ");		
+				strcat( partytmp.m_sPartyList, m_nJob );
+				strcat( partytmp.m_sPartyList, "\n");*/	
+				
+				if( MAX_PROFESSIONAL <= nJob && nJob < MAX_MASTER )
+						sprintf( partytmp.m_sPartyList, "%s       %d%s       %d\n", pPlayerData->szPlayer, pPlayerData->data.nLevel, prj.GetText( TID_GAME_TOOLTIP_MARK_MASTER ), pPlayerData->data.nJob);
+					else if( MAX_MASTER <= nJob )
+						sprintf( partytmp.m_sPartyList, "%s       %d%s       %d\n", pPlayerData->szPlayer, pPlayerData->data.nLevel, prj.GetText( TID_GAME_TOOLTIP_MARK_HERO ), pPlayerData->data.nJob);
+					else
+					sprintf( partytmp.m_sPartyList, "%s       %d       %d\n", pPlayerData->szPlayer, pPlayerData->data.nLevel, pPlayerData->data.nJob);
+				
+				
+			}
 		}
 		 else
 		    sprintf( partytmp.m_sPartyList, "N/A\n" );
 
-			for( int i = 1; i < pParty->GetSizeofMember(); i++)
-			{
-				PlayerData* pPlayerData	= CPlayerDataCenter::GetInstance()->GetPlayerData( pParty->m_aMember[i].m_uPlayerId );
-				if(!pPlayerData)
-					continue;
 
-				strcat( partytmp.m_sPartyList, pPlayerData->szPlayer);
-				strcat( partytmp.m_sPartyList, pPlayerData->data.nLevel);
-				strcat( partytmp.m_sPartyList, pPlayerData->data.nJob);
-				
-			}
-			
 			vectmp.push_back( partytmp );
 			nCount++;
 		 }
