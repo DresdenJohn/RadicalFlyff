@@ -34,6 +34,8 @@
 
 #error files
 error_*.txt
+CQuery*.txt
+error*.txt
 
 #Archive
 *.rar
