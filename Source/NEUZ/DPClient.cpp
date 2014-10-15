@@ -2351,6 +2351,14 @@ void CDPClient::OnReplace( CAr & ar )
 			wideOffsetX = (g_Option.m_nResWidth - 1400) / 2;
 			g_Neuz.m_2DRender.RenderFillRect( CRect( 0, 0, g_Option.m_nResWidth, g_Option.m_nResHeight ), 0xff000000 );
 		}
+		
+		else if(g_Option.m_nResWidth == 1920 && g_Option.m_nResHeight == 1080)
+		{
+			g_Neuz.m_TexLoading.m_size = CSize(1600, FULLSCREEN_HEIGHT);
+			wideOffsetX = (g_Option.m_nResWidth - 1600) / 2;
+			g_Neuz.m_2DRender.RenderFillRect( CRect( 0, 0, g_Option.m_nResWidth, g_Option.m_nResHeight ), 0xff000000 );
+		}
+		
 		else
 			g_Neuz.m_TexLoading.m_size = CSize(FULLSCREEN_WIDTH, FULLSCREEN_HEIGHT);
 
@@ -3078,7 +3086,7 @@ void CDPClient::OnConfirmBankPass( OBJID objid, CAr & ar )
 	SAFE_DELETE( g_WndMng.m_pWndBank );
 	SAFE_DELETE( g_WndMng.m_pWndConfirmBank );
 	SAFE_DELETE( g_WndMng.m_pWndBankPassword );
-	if( nMode ) // 패스워드 확인 됬음.
+	if( nMode ) // 패스워드 확인 됬�?
 	{
 		g_WndMng.CreateApplet( APP_INVENTORY );
 		g_WndMng.m_pWndBank = new CWndBank;

@@ -1230,6 +1230,14 @@ HRESULT CNeuzApp::Render()
 					wideOffsetX = (g_Option.m_nResWidth - 1400) / 2;
 					m_2DRender.RenderFillRect( CRect( 0, 0, g_Option.m_nResWidth, g_Option.m_nResHeight ), 0xff000000 );
 				}
+			
+				else if(g_Option.m_nResWidth == 1920 && g_Option.m_nResHeight == 1080)
+				{
+					m_TexLoading.m_size = CSize(1600, FULLSCREEN_HEIGHT);
+					wideOffsetX = (g_Option.m_nResWidth - 1600) / 2;
+					m_2DRender.RenderFillRect( CRect( 0, 0, g_Option.m_nResWidth, g_Option.m_nResHeight ), 0xff000000 );
+				}
+			
 				else
 					m_TexLoading.m_size = CSize(FULLSCREEN_WIDTH, FULLSCREEN_HEIGHT);
 				

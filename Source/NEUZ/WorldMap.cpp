@@ -321,6 +321,15 @@ void CWorldMap::Init()
 		m_cOffset.x = (g_Option.m_nResWidth-m_cpScreen.x) / 2;
 		m_cOffset.y = (g_Option.m_nResHeight-m_cpScreen.y) / 2;
 		break;
+
+	case 1920:
+		m_fRate = (FLOAT)1920 / (FLOAT)1080;
+		m_cpScreen.x = 1600;
+		m_cpScreen.y = 950;
+		m_cOffset.x = (g_Option.m_nResWidth-m_cpScreen.x) / 2;
+		m_cOffset.y = (g_Option.m_nResHeight-m_cpScreen.y) / 2;
+		break;
+
 #endif //__CSC_VER9_RESOLUTION	
 	}
 
@@ -333,7 +342,7 @@ void CWorldMap::Init()
 	FLOAT fGap = 0;
 #if __VER >= 9 // __CSC_VER9_RESOLUTION
 	int wideOffsetX = 0;
-	if((g_Option.m_nResWidth == 1360 || g_Option.m_nResWidth == 1440 || g_Option.m_nResWidth == 1680) || 
+	if((g_Option.m_nResWidth == 1360 || g_Option.m_nResWidth == 1440 || g_Option.m_nResWidth == 1680 || g_Option.m_nResWidth == 1920) || 
 		(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 800))) //Wide Offset
 		wideOffsetX = m_cOffset.x;
 
@@ -545,7 +554,7 @@ void CWorldMap::RenderPlayer( C2DRender *p2DRender, BOOL bMyPlayer, D3DXVECTOR3 
 	// 화면 비율 때문에 임의로 정사각형 뷰포트를 지정해 놓는다. 안그러면 화살표 모양이 찌그러짐.
 #if __VER >= 9 // __CSC_VER9_RESOLUTION
 	D3DVIEWPORT9 viewport;
-	if((g_Option.m_nResWidth == 1360 || g_Option.m_nResWidth == 1440 || g_Option.m_nResWidth == 1680) || 
+	if((g_Option.m_nResWidth == 1360 || g_Option.m_nResWidth == 1440 || g_Option.m_nResWidth == 1680 || g_Option.m_nResWidth == 1920) || 
 		(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 800))) //Wide Offset
 	{
 		viewport.X      = m_cOffset.x;
@@ -743,7 +752,7 @@ void CWorldMap::RenderPlayer( C2DRender *p2DRender, BOOL bMyPlayer, D3DXVECTOR3 
 		int nX;
 		int nY;
 #if __VER >= 9 // __CSC_VER9_RESOLUTION
-	if((g_Option.m_nResWidth == 1360 || g_Option.m_nResWidth == 1440 || g_Option.m_nResWidth == 1680) || 
+	if((g_Option.m_nResWidth == 1360 || g_Option.m_nResWidth == 1440 || g_Option.m_nResWidth == 1680 || g_Option.m_nResWidth == 1920) || 
 		(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 800))) //Wide Offset
 	{
 		v1 = D3DXVECTOR3( (FLOAT)( m_cOffset.x ), 0.0f, 0.0f );
@@ -788,7 +797,7 @@ void CWorldMap::RenderWorldMap( C2DRender *p2DRender )
 	if( m_bRender )
 	{	
 #if __VER >= 9 // __CSC_VER9_RESOLUTION
-		if((g_Option.m_nResWidth == 1360 || g_Option.m_nResWidth == 1440 || g_Option.m_nResWidth == 1680) || 
+		if((g_Option.m_nResWidth == 1360 || g_Option.m_nResWidth == 1440 || g_Option.m_nResWidth == 1680 || g_Option.m_nResWidth == 1920) || 
 			(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 800))) //Wide Background Black
 			p2DRender->RenderFillRect( CRect( 0, 0, g_Option.m_nResWidth, g_Option.m_nResHeight ), 0xff000000 );
 		else
@@ -1472,7 +1481,7 @@ BOOL CWorldMap::WorldPosToMapPos( const D3DXVECTOR3& vPos, OUT CPoint& cPos )
 
 	int nX;
 	int nY;
-	if((g_Option.m_nResWidth == 1360 || g_Option.m_nResWidth == 1440 || g_Option.m_nResWidth == 1680) || 
+	if((g_Option.m_nResWidth == 1360 || g_Option.m_nResWidth == 1440 || g_Option.m_nResWidth == 1680 || g_Option.m_nResWidth == 1920) || 
 		(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 800))) //Wide Offset
 	{
 		v1 = D3DXVECTOR3( (FLOAT)( m_cOffset.x ), 0.0f, 0.0f );

@@ -3700,6 +3700,11 @@ void CWndWorld::OnInitialUpdate()
 	case 1680:
 		m_nLimitBuffCount = 18;
 		break;
+	
+	case 1920:
+		m_nLimitBuffCount = 20;
+		break;
+	
 #endif //__CSC_VER9_RESOLUTION
 	}
 	
