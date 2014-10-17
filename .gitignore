@@ -36,9 +36,8 @@
 error_*.txt
 CQuery*.txt
 error*.txt
-
-#Archive
-*.rar
+error*.log
+CQuery*.log
 
 #Ignored Folders
 Resource/Model
