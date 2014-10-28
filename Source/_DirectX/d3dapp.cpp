@@ -892,9 +892,51 @@ HRESULT CD3DApplication::Initialize3DEnvironment()
 								&m_pd3dDevice );
 #endif
 #else
+#ifndef __NEW_AA_SYSTEM
 	hr = m_pD3D->CreateDevice( m_d3dSettings.AdapterOrdinal(), pDeviceInfo->DevType,
 								m_hWndFocus, behaviorFlags, &m_d3dpp,
 								&m_pd3dDevice );
+#else
+DWORD MSQuality = 0;
+	D3DMULTISAMPLE_TYPE MSType = D3DMULTISAMPLE_NONE;
+	if( SUCCEEDED( m_pD3D->CheckDeviceMultiSampleType(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, D3DFMT_A8R8G8B8, TRUE, D3DMULTISAMPLE_8_SAMPLES, &MSQuality) ))
+		MSType = D3DMULTISAMPLE_8_SAMPLES;
+	else if( SUCCEEDED( m_pD3D->CheckDeviceMultiSampleType(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, D3DFMT_A8R8G8B8, TRUE, D3DMULTISAMPLE_4_SAMPLES, &MSQuality) ))
+		MSType = D3DMULTISAMPLE_4_SAMPLES;
+	else if( SUCCEEDED( m_pD3D->CheckDeviceMultiSampleType(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, D3DFMT_A8R8G8B8, TRUE, D3DMULTISAMPLE_2_SAMPLES, &MSQuality) ))
+		MSType = D3DMULTISAMPLE_2_SAMPLES;
+	int MSQ = MSQuality - 1;
+
+	// --------------------------------------------------------------
+	// ... Below Will Display a message box on Start-Up with the AntiAliasing 
+	// ... Multisample level Your Graphics card can handle .
+	// ---------------------------------------------------------------
+		char msaaText[128];
+		sprintf( msaaText, "Multi Sample Type = x%d", MSType );
+		MessageBox( NULL, msaaText, "MSAA AMOUNT", MB_OK );
+	// -------------------------------------------------------------------
+
+	m_d3dpp.SwapEffect      = D3DSWAPEFFECT_DISCARD;
+	m_d3dpp.MultiSampleType = MSType;
+	m_d3dpp.MultiSampleQuality = MSQ;
+	m_d3dpp.BackBufferFormat = D3DFMT_X8R8G8B8;
+	m_d3dpp.EnableAutoDepthStencil = TRUE;
+	m_d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
+	m_d3dpp.Flags = 0;
+	m_d3dpp.FullScreen_RefreshRateInHz      = D3DPRESENT_RATE_DEFAULT;
+	m_d3dpp.PresentationInterval                  = D3DPRESENT_INTERVAL_DEFAULT;
+
+	hr = m_pD3D->CreateDevice( m_d3dSettings.AdapterOrdinal(), pDeviceInfo->DevType,
+		m_hWndFocus, behaviorFlags, &m_d3dpp,
+		&m_pd3dDevice );
+
+
+	m_pd3dDevice->SetRenderState(D3DRS_MULTISAMPLEANTIALIAS, TRUE);
+	m_pd3dDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE); 
+	m_pd3dDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATEREQUAL); 
+	m_pd3dDevice->SetRenderState(D3DRS_ALPHAREF, (DWORD)8); 
+	m_pd3dDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+#endif // __NEW_AA_SYSTEM
 #endif
 	
     if( SUCCEEDED(hr) )
