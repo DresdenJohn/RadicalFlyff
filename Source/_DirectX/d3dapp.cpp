@@ -911,9 +911,9 @@ DWORD MSQuality = 0;
 	// ... Below Will Display a message box on Start-Up with the AntiAliasing 
 	// ... Multisample level Your Graphics card can handle .
 	// ---------------------------------------------------------------
-		char msaaText[128];
-		sprintf( msaaText, "Multi Sample Type = x%d", MSType );
-		MessageBox( NULL, msaaText, "MSAA AMOUNT", MB_OK );
+	//	char msaaText[128];
+	//	sprintf( msaaText, "Multi Sample Type = x%d", MSType );
+	//	MessageBox( NULL, msaaText, "MSAA AMOUNT", MB_OK );
 	// -------------------------------------------------------------------
 
 	m_d3dpp.SwapEffect      = D3DSWAPEFFECT_DISCARD;
