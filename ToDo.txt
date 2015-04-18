@@ -1,11 +1,9 @@
 To Do Before Release List
 
 Flyff Development
-* Change rates to 25/25/25. Drop rate MUST be checked.
 * Right click from bag to inventory, from inventory to bag, from bank to bag, etc.
 * 1 Awakening, unlimited up to 120
 * 1-160, 60M-150H, 150H-160H, 3rd Job = Jedi? Harhar
-* Change statted items to +12 max
 * Griffin = Speed
 * Teleport System
 * PK +10% Exp, +35% Drop
@@ -14,7 +12,7 @@ Flyff Development
 * MSGVER must be updated
 * Patcher must be completed (Include .rf encryption)
 * Weapon and Armor fix 
-* Change items from 3 stats to 5 stats
+* Change items from 3 stats to 4 stats
 * Quget eel bug/hack fixes
 * Buff pet is able to buff people
 * Collecting field to have A/S/G/XProtects, Revs, Pet Revs
@@ -37,6 +35,10 @@ Finished/Done
 * Changed Tax rate to max 5%
 * Removed Tickets
 * Finished Pet System
+* Change statted items to +18 max
+* Change rates to 25/25/25. Drop rate MUST be checked.
+* Link attack is 5 minute buff 15 skill point buff
+
 
 Website
 * Finish styling
