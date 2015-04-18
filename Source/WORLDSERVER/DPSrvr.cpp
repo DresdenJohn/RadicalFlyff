@@ -12901,9 +12901,6 @@ void CDPSrvr::OnPartyList( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf
 					else
 					sprintf( partytmp.m_sPartyList, "%s       %d       %d\n", pPlayerData->szPlayer, pPlayerData->data.nLevel, pPlayerData->data.nJob);
 				
-				// strcat( partytmp.m_sPartyList, pPlayerData->data.nLevel);
-				// strcat( partytmp.m_sPartyList, pPlayerData->data.nJob);
-				
 			}
 		}
 		 else

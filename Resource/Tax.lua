@@ -2,8 +2,8 @@
 dofile( ".\\LuaFunc\\TaxFunc.lua" )
 ----------------------------------------------------------------------------
 
-MinTaxRate = 5				-- 최소 세율
-MaxTaxRate = 20				-- 최대 세율
+MinTaxRate = 1				-- 최소 세율
+MaxTaxRate = 5				-- 최대 세율
 
 TaxSecretRoomRate	= 45	-- 대륙 점령 길드 수익률(%)
 TaxLordRate			= 45	-- 군주 수익률(%)

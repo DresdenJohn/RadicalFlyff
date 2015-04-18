@@ -5,6 +5,9 @@ Flyff Development
 * Right click from bag to inventory, from inventory to bag, from bank to bag, etc.
 * 1 Awakening, unlimited up to 120
 * 1-160, 60M-150H, 150H-160H, 3rd Job = Jedi? Harhar
+* Change statted items to +12 max
+* Griffin = Speed
+* Teleport System
 * PK +10% Exp, +35% Drop
 * Party Finder System, change lord "L" for usage. //John, you need to find the system for this
 * Password Salt must be updated
@@ -19,7 +22,7 @@ Flyff Development
 * /gmlist to see GMs Online
 * Couple leveling. Needs faster leveling and higher stats
 * Custom emotes
-
+* Remove lord system
 
 Needs Tested
 * Asal Nerf //Rev1 in worldserver, replacing MP with INT. May need formula changed. AttackArbiter.cpp -> Line 537
@@ -29,6 +32,11 @@ Needs Tested
 Finished/Buggy
 * Need to make one folder texture to reduce client size. Commented for now.
 * Debug stats next to charater window. No Player online count. Seems almost impossible to code in.
+
+Finished/Done
+* Changed Tax rate to max 5%
+* Removed Tickets
+* Finished Pet System
 
 Website
 * Finish styling

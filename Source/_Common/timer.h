@@ -130,7 +130,7 @@ extern	int		g_bHacking;
 void	InitTimerThread( void );
 void	DestroyTimerThread( void );
 
-#define		FRAME_PER_SEC		60
+#define		FRAME_PER_SEC		70
 #define		MAX_SKIP_FRAME		4		// ¹è¼Ó?
 #define		SEC1				PROCESS_COUNT
 
