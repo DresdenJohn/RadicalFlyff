@@ -1,21 +1,25 @@
 To Do Before Release List
 
 Flyff Development
-* Party Finder System, change lord "L" for usage.
+* Change rates to 25/25/25. Drop rate MUST be checked.
+* Right click from bag to inventory, from inventory to bag, from bank to bag, etc.
+* 1 Awakening, unlimited up to 120
+* 1-160, 60M-150H, 150H-160H, 3rd Job = Jedi? Harhar
+* PK +10% Exp, +35% Drop
+* Party Finder System, change lord "L" for usage. //John, you need to find the system for this
 * Password Salt must be updated
 * MSGVER must be updated
 * Patcher must be completed (Include .rf encryption)
-* Weapon and Armor nerf 
+* Weapon and Armor fix 
 * Change items from 3 stats to 5 stats
 * Quget eel bug/hack fixes
-* Items for being online for a few hours
-* Weapon piercing to 6 from 10
 * Buff pet is able to buff people
-* Collectinf field to have A/S/G/XProtects, Revs, Pet Revs
+* Collecting field to have A/S/G/XProtects, Revs, Pet Revs
 * Turn off debug stats with CTRL+F
 * /gmlist to see GMs Online
 * Couple leveling. Needs faster leveling and higher stats
 * Custom emotes
+
 
 Needs Tested
 * Asal Nerf //Rev1 in worldserver, replacing MP with INT. May need formula changed. AttackArbiter.cpp -> Line 537

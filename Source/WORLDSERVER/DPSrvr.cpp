@@ -12887,7 +12887,7 @@ void CDPSrvr::OnPartyList( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf
 				char* m_nJob = pPlayerData->data.nJob;
 				
 				strcat( partytmp.m_sPartyList, pPlayerData->szPlayer);
-<<<<<<< HEAD
+
 				strcat( partytmp.m_sPartyList, "       ");				
 				strcat( partytmp.m_sPartyList, m_nLevel );
 				strcat( partytmp.m_sPartyList, "       ");		
@@ -12901,10 +12901,8 @@ void CDPSrvr::OnPartyList( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf
 					else
 					sprintf( partytmp.m_sPartyList, "%s       %d       %d\n", pPlayerData->szPlayer, pPlayerData->data.nLevel, pPlayerData->data.nJob);
 				
-=======
 				// strcat( partytmp.m_sPartyList, pPlayerData->data.nLevel);
 				// strcat( partytmp.m_sPartyList, pPlayerData->data.nJob);
->>>>>>> origin/master
 				
 			}
 		}

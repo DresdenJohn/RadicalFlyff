@@ -4519,7 +4519,9 @@ CREATE TABLE [dbo].[CHARACTER_TBL](
 	[m_aCheckedQuest] [varchar](100) NULL,
 	[idCampus] [int] NULL,
 	[m_nCampusPoint] [int] NULL,
-	[tKeepTime] [int] NULL
+	[tKeepTime] [int] NULL,
+	[m_nNumKill] [int] NULL,
+	[m_nSlaughter] [int] NULL
 ) ON [PRIMARY]
 GO
 SET ANSI_PADDING OFF
@@ -13375,20 +13377,21 @@ CREATE proc [dbo].[CHARACTER_STR]
 	@im_chAuthority			CHAR(1)				= '',
 	@im_dwMode				INT						=	0,
 	@im_idparty					INT						=	0,
-	--@im_nNumKill				INT						=	0,
+	@im_nNumKill				INT						=	0,
 	@im_idMuerderer			INT						=	0,
-	--@im_nSlaughter			INT						=	0,
+	@im_nSlaughter			INT						=	0,
 	@im_nFame					INT						=	0,
 	@im_nDeathExp				BIGINT					=  0,
 	@im_nDeathLevel				INT					=  0,
 	@im_dwFlyTime					INT					=  0,
 	@im_nMessengerState 	INT					=  0,
 	@iTotalPlayTime			INT						= 	0,
-	 ---------- ?? ?? ----------
-	 -- PK Variable
-	 @im_nPKValue    int=0,
-	 @im_dwPKPropensity      int=0,
-	 @im_dwPKExp     int=0,
+
+	
+	-------------- (ADD : Version8-PK System)
+	 --@im_nPKValue    int=0,
+	 --@im_dwPKPropensity      int=0,
+	 --@im_dwPKExp     int=0,
 	 ---------- ?? ? ----------
 	-- CARD_CUBE_TBL
 	@im_Card 						VARCHAR(1980)= '',
@@ -13540,6 +13543,8 @@ IF @iGu = 'S2' -- ??? ?? ??????? ??????  ????
 							A.m_chAuthority,
 							A.m_idCompany,
 							A.m_nMessengerState,
+							A.m_nNumKill,
+							A.m_nSlaughter,
 							B.m_Inventory, 
 							B.m_apIndex,
 							B.m_adwEquipment,
@@ -13839,10 +13844,10 @@ IF @iGu = 'S8' -- ??? ?? ????
 								A.m_chAuthority,
 								A.m_dwMode,
 								A.m_idparty,
-								A.m_idCompany,
-								--A.m_nNumKill,
-								A.m_idMuerderer,
-								--A.m_nSlaughter,
+								A.m_idCompany,						
+
+								A.m_idMuerderer,						
+
 								A.m_nFame,
 								A.m_nDeathExp,
 								A.m_nDeathLevel,
@@ -13885,11 +13890,14 @@ IF @iGu = 'S8' -- ??? ?? ????
 							        ,A.dwEventFlag,
 							        A.dwEventTime,
 							        A.dwEventElapsed
-							      -------------- (?? ??)
-							        ----------?? ?? ----------
-							        , A.PKValue as m_nPKValue,
-							        A.PKPropensity as m_dwPKPropensity,
-							        A.PKExp as m_dwPKExp
+								-------------- (Version8 : PK System)
+
+
+								,A.m_nNumKill-- as m_nNumKill
+								,A.m_nSlaughter-- as m_nSlaughter
+						--		,A.PKValue 		as m_nPKValue
+						--		,A.PKPropensity as m_dwPKPropensity
+						--		,A.PKExp 		as m_dwPKExp
 							        ----------?? ? ----------
 							        ----------?? ?? ----------
 							        ,AngelExp as m_nAngelExp
@@ -14044,9 +14052,9 @@ IF @iGu = 'U1' -- ??? ??
 						m_aCompleteQuest = @im_aCompleteQuest,
 						m_dwMode 				= @im_dwMode,
 						m_idparty 					= @im_idparty,
-						--m_nNumKill 				= @im_nNumKill,	
-						m_idMuerderer 		= @im_idMuerderer,
-						--m_nSlaughter 			= @im_nSlaughter	,
+
+						m_idMuerderer 		= @im_idMuerderer,	
+
 
 						m_nFame 					= @im_nFame,	
 						m_nDeathExp			= @im_nDeathExp,
@@ -14070,10 +14078,16 @@ IF @iGu = 'U1' -- ??? ??
 					        dwEventTime                     =@idwEventTime,
 					        dwEventElapsed          =@idwEventElapsed
 					      -------------- (?? ??)
-					        ----------?? ?? ----------
-					        , PKValue               = @im_nPKValue,
-					        PKPropensity   = @im_dwPKPropensity,
-					        PKExp         = @im_dwPKExp
+
+
+
+
+				      -------------- (ADD: Version8-PK System)
+								,m_nNumKill = @im_nNumKill
+								,m_nSlaughter = @im_nSlaughter
+						--		,A.PKValue 		as m_nPKValue
+						--		,A.PKPropensity as m_dwPKPropensity
+						--		,A.PKExp 		as m_dwPKExp
 					        ----------?? ? ----------
 					        ----------?? ?? ----------
 					        , AngelExp= @im_nAngelExp
@@ -14081,8 +14095,8 @@ IF @iGu = 'U1' -- ??? ??
 					        ----------?? ? ----------
 						--------------------- Version9 Pet
 						, m_dwPetId = @im_dwPetId
-						, m_nExpLog = @im_nExpLog
-						, m_nAngelExpLog = @im_nAngelExpLog
+					--	, m_nExpLog = @im_nExpLog
+					--	, m_nAngelExpLog = @im_nAngelExpLog
 						---------- Ver.11 Coupon
 						, m_nCoupon = @im_nCoupon
 						---------- Ver.14 
@@ -14496,9 +14510,9 @@ IF @iGu = 'I1' -- ?? ?? ??
 								@om_apIndex_Cube		VARCHAR(215)	,
 								@om_dwObjIndex_Cube	VARCHAR(215)	,
 								@om_idparty						INT						,
-								--@om_nNumKill					INT						,
+
 								@om_idMuerderer			INT						,
-								--@om_nSlaughter				INT						,
+
 								@om_nFame						INT						,
 								@om_nDeathExp				BIGINT						,
 								@om_nDeathLevel			INT						,
@@ -14512,6 +14526,9 @@ IF @iGu = 'I1' -- ?? ?? ??
 								, @om_aCheckedQuest varchar(100) 
 								, @om_nCampusPoint int 
 								, @om_idCampus int
+								--V6 PK
+								, @om_nNumKill int
+								, @om_nSlaughter int
 
 				 IF EXISTS (SELECT * FROM CHARACTER_TBL WHERE  serverindex = @iserverindex)
 				 SELECT @om_idPlayer = RIGHT('0000000' + CONVERT(VARCHAR(7),MAX(m_idPlayer)+1),7)
@@ -14574,9 +14591,9 @@ IF @iGu = 'I1' -- ?? ?? ??
 
 								@om_dwObjIndex_Cube = m_dwObjIndex_Cube,
 								@om_idparty 						= m_idparty,			
-								--@om_nNumKill 					= m_nNumKill,	
+
 								@om_idMuerderer 			= m_idMuerderer,
-								--@om_nSlaughter 				= m_nSlaughter	,
+
 								@om_nFame 						= m_nFame,
 								@om_nDeathExp				= m_nDeathExp,
 								@om_nDeathLevel			= m_nDeathLevel,
@@ -14585,8 +14602,11 @@ IF @iGu = 'I1' -- ?? ?? ??
 								@om_Bank							= m_Bank,
 								@om_apIndex_Bank		 	= m_apIndex_Bank,
 								@om_dwObjIndex_Bank 	= m_dwObjIndex_Bank,
-								@om_dwGoldBank			= m_dwGoldBank			
-	
+								@om_dwGoldBank			= m_dwGoldBank,			
+
+									--V6 PK
+								@om_nNumKill = 0,
+								@om_nSlaughter = 0
 			       FROM BASE_VALUE_TBL
 				 WHERE g_nSex 								= @im_dwSex
 			
@@ -14651,9 +14671,11 @@ IF @iGu = 'I1' -- ?? ?? ??
 								m_dwMode,
 								m_idparty,
 								m_idCompany,
-								--m_nNumKill,
+
+
 								m_idMuerderer,
-								--m_nSlaughter,
+
+
 								m_nFame,
 								m_nDeathExp,
 								m_nDeathLevel,
@@ -14673,10 +14695,15 @@ IF @iGu = 'I1' -- ?? ?? ??
 								m_vReturnPos_x,
 								m_vReturnPos_y,
 								m_vReturnPos_z
+								-- m_SkillPoint,
+								-- m_SkillLv,
+								-- m_SkillExp
 								---------- Ver 15
 								, m_aCheckedQuest
 								, m_nCampusPoint
 								, idCampus
+								, m_nNumKill
+								, m_nSlaughter
 							)
 				VALUES
 							(
@@ -14735,9 +14762,9 @@ IF @iGu = 'I1' -- ?? ?? ??
 								@om_dwMode,
 								@om_idparty,
 								'000000', -- m_idCompany
-								--@om_nNumKill,
+
 								@om_idMuerderer,
-								--@om_nSlaughter,
+
 								@om_nFame,
 								@om_nDeathExp,
 								@om_nDeathLevel,
@@ -14759,7 +14786,14 @@ IF @iGu = 'I1' -- ?? ?? ??
                             0, 
                             0,
 							0
+							-- @im_SkillPoint,
+							-- @im_SkillLv,
+							-- @im_SkillExp
+							-- Ver 15
 							, '$'
+							, 0
+							, 0
+							-- V6 PK
 							, 0
 							, 0
 							)
@@ -21545,6 +21579,33 @@ set nocount on
 INSERT [dbo].[BASE_VALUE_TBL] ([g_nSex], [m_vScale_x], [m_dwMotion], [m_fAngle], [m_nHitPoint], [m_nManaPoint], [m_nFatiguePoint], [m_dwRideItemIdx], [m_dwGold], [m_nJob], [m_pActMover], [m_nStr], [m_nSta], [m_nDex], [m_nInt], [m_nLevel], [m_nExp1], [m_nExp2], [m_aJobSkill], [m_aLicenseSkill], [m_aJobLv], [m_dwExpertLv], [m_idMarkingWorld], [m_vMarkingPos_x], [m_vMarkingPos_y], [m_vMarkingPos_z], [m_nRemainGP], [m_nRemainLP], [m_nFlightLv], [m_nFxp], [m_nTxp], [m_lpQuestCntArray], [m_chAuthority], [m_dwMode], [blockby], [TotalPlayTime], [isblock], [m_Inventory], [m_apIndex], [m_adwEquipment], [m_aSlotApplet], [m_aSlotItem], [m_aSlotQueue], [m_SkillBar], [m_dwObjIndex], [m_Card], [m_Cube], [m_apIndex_Card], [m_dwObjIndex_Card], [m_apIndex_Cube], [m_dwObjIndex_Cube], [m_idparty], [m_nNumKill], [m_idMuerderer], [m_nSlaughter], [m_nFame], [m_nDeathExp], [m_nDeathLevel], [m_dwFlyTime], [m_nMessengerState], [m_Bank], [m_apIndex_Bank], [m_dwObjIndex_Bank], [m_dwGoldBank]) VALUES (N'0', 1, 0, 0, 230, 63, 32, 0, 0, 0, N'0,0', 15, 15, 15, 15, 1, 0, 0, N'0,1,1,1/0,1,2,1/0,1,3,1/0,1,-1,1/0,1,-1,1/0,1,-1,1/0,1,-1,1/0,1,-1,1/0,1,-1,1/0,1,-1,1/0,1,-1,1/0,1,-1,1/0,1,-1,1/$', N'0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/$', N'1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/$', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'$', N'F', 268566528, NULL, 0, N'F', N'0,502,0,0,,1,0,9000000,0,0,0,0,0/1,2801,0,0,,1,0,0,0,0,0,0,0/2,4805,0,0,,5,0,0,0,0,0,0,0/42,506,0,0,,1,0,5850000,0,0,0,0,0/43,510,0,0,,1,0,4500000,0,0,0,0,0/44,21,0,0,,1,0,7200000,0,0,0,0,0/45,2800,0,0,,3,0,0,0,0,0,0,0/$', N'45/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/-1/-1/0/-1/42/43/-1/-1/-1/-1/44/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/$', N'-1/-1/0/-1/42/43/-1/-1/-1/-1/44/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/$', N'0,2,400,0,0,0,0/1,2,398,0,1,0,0/2,2,2010,0,2,0,0/3,2,581,0,3,0,0/4,3,25,0,4,0,0/$', N'0,0,5,45,0,0,0,1/0,1,5,1,0,1,0,1/0,2,3,3,0,2,0,1/0,8,3,2,0,8,0,1/$', N'$', 0, N'44/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/46/47/52/0/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/$', N'$', N'$', N'5/36/37/38/39/40/41/$', N'0/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/$', N'0/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/$', N'0/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/$', 0, 0, 0, 0, 0, 0, 0, 0, 0, N'$', N'$', N'$', 0)
 INSERT [dbo].[BASE_VALUE_TBL] ([g_nSex], [m_vScale_x], [m_dwMotion], [m_fAngle], [m_nHitPoint], [m_nManaPoint], [m_nFatiguePoint], [m_dwRideItemIdx], [m_dwGold], [m_nJob], [m_pActMover], [m_nStr], [m_nSta], [m_nDex], [m_nInt], [m_nLevel], [m_nExp1], [m_nExp2], [m_aJobSkill], [m_aLicenseSkill], [m_aJobLv], [m_dwExpertLv], [m_idMarkingWorld], [m_vMarkingPos_x], [m_vMarkingPos_y], [m_vMarkingPos_z], [m_nRemainGP], [m_nRemainLP], [m_nFlightLv], [m_nFxp], [m_nTxp], [m_lpQuestCntArray], [m_chAuthority], [m_dwMode], [blockby], [TotalPlayTime], [isblock], [m_Inventory], [m_apIndex], [m_adwEquipment], [m_aSlotApplet], [m_aSlotItem], [m_aSlotQueue], [m_SkillBar], [m_dwObjIndex], [m_Card], [m_Cube], [m_apIndex_Card], [m_dwObjIndex_Card], [m_apIndex_Cube], [m_dwObjIndex_Cube], [m_idparty], [m_nNumKill], [m_idMuerderer], [m_nSlaughter], [m_nFame], [m_nDeathExp], [m_nDeathLevel], [m_dwFlyTime], [m_nMessengerState], [m_Bank], [m_apIndex_Bank], [m_dwObjIndex_Bank], [m_dwGoldBank]) VALUES (N'1', 1, 0, 0, 230, 63, 32, 0, 0, 0, N'0,0', 15, 15, 15, 15, 1, 0, 0, N'0,1,1,1/0,1,2,1/0,1,3,1/0,1,-1,1/0,1,-1,1/0,1,-1,1/0,1,-1,1/0,1,-1,1/0,1,-1,1/0,1,-1,1/0,1,-1,1/0,1,-1,1/0,1,-1,1/$', N'0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/0,0,0,1/$', N'1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/$', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, N'$', N'F', 268566528, NULL, 0, N'F', N'0,504,0,0,,1,0,9000000,0,0,0,0,0/1,2801,0,0,,1,0,0,0,0,0,0,0/2,4805,0,0,,5,0,0,0,0,0,0,0/42,508,0,0,,1,0,5850000,0,0,0,0,0/43,512,0,0,,1,0,4500000,0,0,0,0,0/44,21,0,0,,1,0,7200000,0,0,0,0,0/45,2800,0,0,,3,0,0,0,0,0,0,0/$', N'45/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/-1/-1/0/-1/42/43/-1/-1/-1/-1/44/-1/-1/-1/$', N'-1/-1/0/-1/42/43/-1/-1/-1/-1/44/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/$', N'0,2,400,0,0,0,0/1,2,398,0,1,0,0/2,2,2010,0,2,0,0/3,2,581,0,3,0,0/4,3,25,0,4,0,0/$', N'0,0,5,45,0,0,0,1/0,1,5,1,0,1,0,1/0,2,3,3,0,2,0,1/0,8,3,2,0,8,0,1/$', N'$', 0, N'44/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/46/47/52/0/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/$', N'$', N'$', N'5/36/37/38/39/40/41/$', N'0/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/$', N'0/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/$', N'0/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/$', 0, 0, 0, 0, 0, 0, 0, 0, 0, N'$', N'$', N'$', 0)
 set nocount off
+GO
+
+USE CHARACTER_01_DBF
+GO
+UPDATE BASE_VALUE_TBL
+SET m_Inventory ='0,523,0,0,,1,0,9000000,0,0,2,722278867,5,0,0,0,0/1,7000,0,0,,1,0,6570000,0,0,2,-480752627,5,0,0,0,0/2,4805,0,0,,5,0,0,0,0,0,-1273387868,0,0,0,0,0/8,2830,0,0,,99,0,-1,0,0,2,-767205874,0,0,0,0,0/9,2830,0,0,,99,0,-1,0,0,2,-767205874,0,0,0,0,0/10,2830,0,0,,99,0,-1,0,0,2,-767205874,0,0,0,0,0/11,2895,0,0,,50,0,-1,0,0,2,-150634449,0,0,0,0,0/12,10270,0,0,,5,0,-1,0,0,2,-306178500,0,0,0,0,0/13,100003,0,0,,1,0,-1,0,0,2,804777925,0,0,0,0,0/14,100000,0,0,,2,0,-1,0,0,2,1862094106,0,0,0,0,0/15,100001,0,0,,1,0,-1,0,0,2,-1418465205,0,0,0,0,0/42,524,0,0,,1,0,5850000,0,0,2,-559646448,5,0,0,0,0/43,525,0,0,,1,0,4500000,0,0,2,-1689609207,5,0,0,0,0/44,522,0,0,,1,0,3600000,0,0,2,-757954622,5,0,0,0,0/45,23,0,0,,1,0,7200000,0,0,2,-947743068,10,2,20,0,0/$'
+WHERE g_nSex = '0'
+
+UPDATE BASE_VALUE_TBL
+SET m_apIndex= '8/9/10/11/2/12/13/14/15/5/7/6/3/46/47/4/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/-1/-1/0/-1/42/43/44/-1/-1/-1/45/1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/$'
+WHERE g_nSex = '0'
+
+UPDATE BASE_VALUE_TBL
+SET m_dwObjIndex = '44/53/4/12/15/9/11/10/0/1/2/3/5/6/7/8/16/17/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/46/47/48/52/13/14/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/$'
+WHERE g_nSex = '0'
+
+UPDATE BASE_VALUE_TBL
+SET m_Inventory ='2,4805,0,0,,5,0,0,0,0,0,815460737,0,0,0,0,0/4,23,0,0,,1,0,7200000,0,0,2,450659006,10,2,20,0,0/5,7000,0,0,,1,0,6570000,0,0,2,-55722209,5,0,0,0,0/6,526,0,0,,1,0,3600000,0,0,2,925893228,5,0,0,0,0/7,527,0,0,,1,0,9000000,0,0,2,1807097909,5,0,0,0,0/8,528,0,0,,1,0,5850000,0,0,2,-1202058038,5,0,0,0,0/9,529,0,0,,1,0,4500000,0,0,2,477703739,5,0,0,0,0/10,2830,0,0,,99,0,-1,0,0,2,-934225576,0,0,0,0,0/11,2830,0,0,,99,0,-1,0,0,2,-934225576,0,0,0,0,0/12,2830,0,0,,99,0,-1,0,0,2,-934225576,0,0,0,0,0/13,2895,0,0,,50,0,-1,0,0,2,1588955825,0,0,0,0,0/14,10270,0,0,,5,0,-1,0,0,2,-646698090,0,0,0,0,0/15,100003,0,0,,1,0,-1,0,0,2,-943557865,0,0,0,0,0/16,100000,0,0,,2,0,-1,0,0,2,665203460,0,0,0,0,0/17,100001,0,0,,1,0,-1,0,0,2,-26795795,0,0,0,0,0/$'
+WHERE g_nSex = '1'
+
+UPDATE BASE_VALUE_TBL
+SET m_apIndex= '10/11/12/13/2/14/15/16/17/47/0/1/44/42/45/43/3/46/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/-1/-1/7/-1/8/9/6/-1/-1/-1/4/5/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/$'
+WHERE g_nSex = '1'
+
+UPDATE BASE_VALUE_TBL
+SET m_dwObjIndex = '10/11/4/16/52/53/48/44/46/47/0/1/2/3/5/6/7/8/18/19/20/21/22/23/24/25/26/27/28/29/30/31/32/33/34/35/36/37/38/39/40/41/13/15/12/14/17/9/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/$'
+WHERE g_nSex = '1'
 GO
 -- End adding default rows to [CHARACTER_01_DBF].[BASE_TBL_VALUE]
 
