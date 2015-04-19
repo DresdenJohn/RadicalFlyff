@@ -14,6 +14,7 @@
 #define __OLDPKSYS //V6 PK, remember to comment __PKSERVER_USE_ANGEL
 //#define __NEWPKSYS
 
+#define __NO_REVERSIONS_BELOW_105
 //#define __PARTY_FINDER
 #define __PMA_PARTYFINDER // Better than current party finder
 #define __INSTANT_JOBCHANGE

@@ -5751,10 +5751,10 @@ void CDPSrvr::OnDoUseItemTarget( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE
 			case II_SYS_SYS_SCR_AWAKECANCEL:
 			case II_SYS_SYS_SCR_AWAKECANCEL02:
 				b	= DoUseItemTarget_InitializeRandomOption( pUser, pTarget, CRandomOptionProperty::eAwakening,
-					TID_GAME_AWAKECANCEL_INFO, TID_GAME_AWAKECANCEL,
+					0, TID_GAME_AWAKECANCEL,
 					"r", "::AwakeCancel" );
 				break;
-			case II_SYS_SYS_SCR_AWAKE:
+			case II_SYS_SYS_SCR_AWAKE:		
 				b	= DoUseItemTarget_GenRandomOption( pUser, pTarget, CRandomOptionProperty::eAwakening, 
 					0, TID_GAME_INVALID_TARGET_ITEM, TID_GAME_AWAKE_OR_BLESSEDNESS01,
 					"r", "::Awake" );
@@ -11972,7 +11972,11 @@ BOOL CDPSrvr::DoUseItemTarget_GenRandomOption(
 		// 여신의 축복과 먹펫 각성은 각성 취소 없이 덮어 쓸 수 있게 한다
 		nKind != CRandomOptionProperty::eBlessing && nKind != CRandomOptionProperty::eEatPet &&
 #endif	// __J12_0
-		g_xRandomOptionProperty->GetRandomOptionSize( pTarget->GetRandomOptItemId() ) > 0
+		(g_xRandomOptionProperty->GetRandomOptionSize( pTarget->GetRandomOptItemId() ) > 0 
+#ifdef __NO_REVERSIONS_BELOW_105
+		&& pTarget->GetProp()->dwItemLV > 105
+#endif // __NO_REVERSIONS_BELOW_105
+	)
 	)
 	{
 		pUser->AddDefinedText( nHasOption );
@@ -11985,7 +11989,6 @@ BOOL CDPSrvr::DoUseItemTarget_GenRandomOption(
 	// 활성화 된 픽업펫이면  기존 효과를 제거	// 康: 2008-09-29 추가
 	if( pUser->IsUsing( pTarget ) && nKind == CRandomOptionProperty::eEatPet )
 		pUser->ResetDestParamRandomOptExtension( pTarget );
-
 
 	//	mulcom	BEGIN100405	각성 보호의 두루마리
 	//g_xRandomOptionProperty->InitializeRandomOption( pTarget->GetRandomOptItemIdPtr() );

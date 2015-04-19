@@ -179,12 +179,14 @@ BOOL CWndAwakening::OnDropIcon( LPSHORTCUT pShortcut, CPoint point )
 		g_WndMng.OpenMessageBox( prj.GetText( TID_GAME_INVALID_TARGET_ITEM ) );
 		return FALSE;
 	}
+	
 	if( g_xRandomOptionProperty->GetRandomOptionSize( pTempElem->GetRandomOptItemId() ) > 0 )
 	{
 		// 이미 각성된 아이템입니다.
 		//g_WndMng.PutString( prj.GetText( TID_GAME_AWAKE_OR_BLESSEDNESS01 ), NULL, prj.GetTextColor( TID_GAME_AWAKE_OR_BLESSEDNESS01  ) );
-		g_WndMng.OpenMessageBox( prj.GetText( TID_GAME_AWAKE_OR_BLESSEDNESS01 ) );
-		return FALSE;
+
+			g_WndMng.OpenMessageBox( prj.GetText( TID_GAME_AWAKE_OR_BLESSEDNESS01 ) );
+			return FALSE;
 	}
 	
 	if(pTempElem != NULL)

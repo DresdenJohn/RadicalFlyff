@@ -411,7 +411,7 @@ BOOL CItemElem::IsBinds( void )
 
 #if __VER >= 11 // __SYS_IDENTIFY
 	if( g_xRandomOptionProperty->GetRandomOptionSize( GetRandomOptItemId() ) > 0
-		&& ( g_xRandomOptionProperty->GetRandomOptionKind( this ) == CRandomOptionProperty::eBlessing || g_xRandomOptionProperty->GetRandomOptionKind( this ) == CRandomOptionProperty::eEatPet ) )
+		&& ( g_xRandomOptionProperty->GetRandomOptionKind( this ) == CRandomOptionProperty::eBlessing || g_xRandomOptionProperty->GetRandomOptionKind( this ) == CRandomOptionProperty::eEatPet ))
 		return TRUE;
 	if( GetLevelDown() < 0 )
 		return TRUE;
