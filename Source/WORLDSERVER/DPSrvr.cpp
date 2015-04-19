@@ -11464,8 +11464,8 @@ void	CDPSrvr::OnNPCBuff( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 		
 		if( lpChar )
 		{
-			if( !CNpcChecker::GetInstance()->IsCloseNpc(MMI_NPC_BUFF, pUser->GetWorld(), pUser->GetPos() ) )
-				return;
+			//if( !CNpcChecker::GetInstance()->IsCloseNpc(MMI_NPC_BUFF, pUser->GetWorld(), pUser->GetPos() ) )
+				//return;
 
 			vector<NPC_BUFF_SKILL> vecNPCBuff = lpChar->m_vecNPCBuffSkill;
 			for( int i=0; i<(int)( vecNPCBuff.size() ); i++ )
