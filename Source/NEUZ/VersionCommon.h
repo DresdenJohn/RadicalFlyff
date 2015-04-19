@@ -48,7 +48,7 @@
 #define __LOADER_SPLASH // Splash Screen on Loading
 #define __RANDOM_TITLE // Random title bar on client 
 // #define __FLYFF_INITPAGE_EXT // Map load on login screen (Currently Crashes)
-#define __NEW_CS_SHOP
+#define __NEW_CS_SHOP //Needs DB Fixed
 #define __NEW_AA_SYSTEM // Checks GPU for highest Anti Aliasing type and renders with it
 
 /**************************************************************************/

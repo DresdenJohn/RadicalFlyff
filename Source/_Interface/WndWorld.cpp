@@ -10820,7 +10820,7 @@ void CWndWorld::RenderEventIcon( C2DRender* p2DRender, BUFFICON_INFO* pInfo, CPo
 		editString.AddString( szTooltip, D3DCOLOR_XRGB( 0, 93, 0 ), ESSTY_BOLD );
 		CString strRest;
 		CTimeSpan timeSpan( 0, 0, pComponent->GetTick(), 0 );
-		strRest.Format( "\n%d", timeSpan.GetTotalMinutes() );
+		//strRest.Format( "\n%d", timeSpan.GetTotalMinutes() );
 		editString	+= strRest;
 		g_toolTip.PutToolTip( TTI_LORD_EVENT, editString, rectHittest, ptMouse, 1 );
 		pInfo->nCount++;

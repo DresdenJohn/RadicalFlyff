@@ -4505,6 +4505,20 @@ BOOL TextCmd_TransEggs( CScanner& s )
 }
 #endif //__CSC_VER12_5
 
+BOOL TextCmd_gmevent( CScanner& s )            
+{ 
+#ifdef __CLIENT
+	if( g_WndMng.m_pWndLordEvent == NULL )
+	{
+		SAFE_DELETE( g_WndMng.m_pWndLordEvent );
+		g_WndMng.m_pWndLordEvent = new CWndLordEvent;
+		g_WndMng.m_pWndLordEvent->Initialize( &g_WndMng, APP_LORD_EVENT );
+		return FALSE;
+	}
+#endif	// __CLIENT
+	return TRUE;
+}
+
 #if __VER >= 12 // __SECRET_ROOM
 BOOL TextCmd_SecretRoomOpen( CScanner& s )
 {
@@ -5287,6 +5301,7 @@ BEGINE_TEXTCMDFUNC_MAP
 	ON_TEXTCMDFUNC( TextCmd_NoInvisible,           "noinvisible",       "noinv",          "투명해제",       "투해",    TCM_SERVER, AUTH_GAMEMASTER   , "투명화 해제" )
 	ON_TEXTCMDFUNC( TextCmd_Summon,                "summon",            "su",             "소환",           "소환",    TCM_SERVER, AUTH_GAMEMASTER   , "유저소환" )
 	ON_TEXTCMDFUNC( TextCmd_count,                 "count",             "cnt",            "접속자수",       "접속자수",TCM_SERVER, AUTH_GAMEMASTER   , "접속자 카운트" )
+	ON_TEXTCMDFUNC( TextCmd_gmevent,               "gmevent",           "ge",             "",       	"",		TCM_BOTH, AUTH_GAMEMASTER   , "" )	
 	
 	// GM_LEVEL_2
 	ON_TEXTCMDFUNC( TextCmd_Out,                   "out",               "out",            "퇴출",           "퇴출",    TCM_SERVER, AUTH_GAMEMASTER2   , "퇴출" )

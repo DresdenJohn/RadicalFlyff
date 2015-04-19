@@ -173,10 +173,7 @@ void CWndMgr::AddAllApplet()
 #endif // __IMPROVE_MAP_SYSTEM
 #endif
 #if __VER >= 12 // __LORD
-	if( ::GetLanguage() == LANG_FRE )
-		AddAppletFunc( AppMain_LordSkill       , APP_LORD_SKILL             , _T( "WndLordSkill" )       , _T( "Icon_Infopang.dds"    )    , GETTEXT(TID_TIP_INFOPANG), 'A' );
-	else
-		AddAppletFunc( AppMain_LordSkill       , APP_LORD_SKILL             , _T( "WndLordSkill" )       , _T( "Icon_Infopang.dds"    )    , GETTEXT(TID_TIP_INFOPANG), 'L' );
+//		AddAppletFunc( AppMain_LordSkill       , APP_LORD_SKILL             , _T( "WndLordSkill" )       , _T( "Icon_Infopang.dds"    )    , GETTEXT(TID_TIP_INFOPANG), 'L' );
 #endif	// __LORD
 #if __VER >= 12 // __MOD_TUTORIAL
 	AddAppletFunc( AppMain_InfoPang       , APP_INFOPANG                , _T( "WndInfoPang" )       , _T( "Icon_Infopang.dds"    )    , GETTEXT(TID_TIP_INFOPANG), 0 );
@@ -282,6 +279,6 @@ void CWndMgr::AddAllApplet()
 	AddAppletFunc( AppMain_WndHelperWebBox , APP_WEBBOX2              , _T( "HelperWebBox" )       , _T( "Icon_HelperHelp.dds" ) , GETTEXT( TID_GAME_HELPER_WEB_BOX_ICON_TOOLTIP ), 0 );
 #endif // __NEW_WEB_BOX
 #ifdef __PMA_PARTYFINDER
-	AddAppletFunc( AppMain_PartyFinder		, APP_PARTYFINDER                , _T( "WndPartyFinder" )       , _T( "Icon_Housing.dds"    )    , GETTEXT(TID_GAME_HOUSING_BOX), 'V' );
+	AddAppletFunc( AppMain_PartyFinder		, APP_PARTYFINDER                , _T( "WndPartyFinder" )       , _T( "Icon_Housing.dds"    )    , GETTEXT(TID_GAME_HOUSING_BOX), 'L' );
 #endif //__PMA_PARTYFINDER
 }

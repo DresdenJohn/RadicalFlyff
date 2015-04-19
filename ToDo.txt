@@ -3,7 +3,7 @@ To Do Before Release List
 Flyff Development
 * Right click from bag to inventory, from inventory to bag, from bank to bag, etc.
 * 1-160, 60M-150H, 150H-160H, 3rd Job = Jedi? Harhar
-* Griffin = Speed
+
 * Teleport System
 * PK +10% Exp, +35% Drop
 * Party Finder System, change lord "L" for usage. //John, you need to find the system for this
@@ -18,7 +18,8 @@ Flyff Development
 * /gmlist to see GMs Online
 * Couple leveling. Needs faster leveling and higher stats
 * Custom emotes
-* Remove lord system
+
+* Reversions box needs removed
 
 Needs Tested
 * Asal Nerf //Rev1 in worldserver, replacing MP with INT. May need formula changed. AttackArbiter.cpp -> Line 537
@@ -28,6 +29,7 @@ Needs Tested
 Finished/Buggy
 * Need to make one folder texture to reduce client size. Commented for now.
 * Debug stats next to charater window. No Player online count. Seems almost impossible to code in.
+* Griffin = Speed //Error text shows up, despite working
 
 Finished/Done
 * Changed Tax rate to max 5%
@@ -38,6 +40,8 @@ Finished/Done
 * Link attack is 5 minute buff 15 skill point buff
 * 1 Awakening, unlimited up to 105
 * Buff pet is able to buff people
+* Remove lord system
+* GM Event by /ge or /gmevent //I'd really like this to be longer than an hour but I'm too lazy to figure out.
 
 Website
 * Finish styling

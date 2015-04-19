@@ -5,6 +5,7 @@
 #include "DPClient.h"
 #include "defineText.h"
 #include "playerdata.h"
+#include "authorization.h"
 
 #if __VER >= 12 // __LORD
 
@@ -609,7 +610,7 @@ CWndLordEvent::~CWndLordEvent()
 
 BOOL CWndLordEvent::Initialize( CWndBase* pWndParent, DWORD nType)
 {
-	if(!CCLord::Instance()->IsLord(g_pPlayer->m_idPlayer))
+	if( g_pPlayer->IsAuthorization( AUTH_GENERAL ) )
 	{
 		g_WndMng.OpenMessageBox(prj.GetText(TID_GAME_L_EVENT_CREATE_E001));
 		Destroy();
@@ -663,17 +664,6 @@ void CWndLordEvent::OnDraw( C2DRender* p2DRender )
 	if((nTemp % 5) != 0) nTemp += 1;
 	strTemp.Format("  %d %c", nTemp, '%');
 	pWndText = (CWndText*)GetDlgItem( WIDC_TEXT2 );	
-	pWndText->SetString(strTemp);
-	
-	__int64 iCost = CCLord::Instance()->GetEvent()->GetCost( m_nEEvent, m_nDEvent );
-	strTemp.Format("%I64d", iCost);
-	pWndText = (CWndText*)GetDlgItem( WIDC_TEXT3 );	
-	int nLength = strTemp.GetLength();
-	while(nLength - 3 > 0)
-	{
-		nLength -= 3;
-		strTemp.Insert(nLength, ',');
-	}
 	pWndText->SetString(strTemp);
 
 }
@@ -735,7 +725,7 @@ CWndLordSkill::~CWndLordSkill()
 
 BOOL CWndLordSkill::Initialize( CWndBase* pWndParent, DWORD nType)
 {
-	if(!CCLord::Instance()->IsLord(g_pPlayer->m_idPlayer))
+	if( g_pPlayer->IsAuthorization( AUTH_GENERAL ) )
 	{
 		g_WndMng.OpenMessageBox(prj.GetText(TID_GAME_L_EVENT_CREATE_E001));
 		Destroy();

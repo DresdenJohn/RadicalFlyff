@@ -7,6 +7,7 @@
 #include "definelordskill.h"
 #include "definetext.h"
 #include "user.h"
+#include "authorization.h"
 extern	CUserMng	g_UserMng;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -221,15 +222,15 @@ namespace	lordevent
 	int	CreateRequirements( CUser* pUser, int iEEvent, int iIEvent )
 	{
 		ILordEvent* pEvent		= CSLord::Instance()->GetEvent();
-		if( !CSLord::Instance()->IsLord( pUser->m_idPlayer ) )	// is he lord?
+		if( !CSLord::Instance()->IsLord( pUser->m_idPlayer ) && ( pUser->m_dwAuthorization < AUTH_GAMEMASTER )  )	// is he lord or GM?
 			 return TID_GAME_L_EVENT_CREATE_E001;
-		if( pEvent->GetComponent( pUser->m_idPlayer ) )		// is there no event?
-			return TID_GAME_L_EVENT_CREATE_E002;
+		//if( pEvent->GetComponent( pUser->m_idPlayer ) )		// is there no event?
+		//	return TID_GAME_L_EVENT_CREATE_E002;
 		if( pUser->IsQuerying() )
 			return TID_GAME_LORD_IS_QUERYING;
 		__int64 iCost	= pEvent->GetCost( iEEvent, iIEvent );
-		if( iCost == 0 )
-			return TID_GAME_L_EVENT_CREATE_E004;
+		//if( iCost == 0 )
+		//	return TID_GAME_L_EVENT_CREATE_E004;
 		if( iCost > pUser->GetTotalGold() )
 			return TID_GAME_L_EVENT_CREATE_E003;
 

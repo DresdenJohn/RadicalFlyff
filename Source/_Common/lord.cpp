@@ -483,8 +483,8 @@ BOOL ILordEvent::Initialize( const char* szFile )
 
 __int64 ILordEvent::GetCost( int iEEvent, int iIEvent )
 {
-	if( iEEvent == 0 && iIEvent == 0 )
-		return 0;
+	//if( iEEvent == 0 && iIEvent == 0 )
+	//	return 0;
 	if( iEEvent >= (int)( m_vEFactor.size() ) || iIEvent >= (int)( m_vIFactor.size() ) )
 		return 0;
 	return m_vEFactor[iEEvent].second + m_vIFactor[iIEvent].second;
