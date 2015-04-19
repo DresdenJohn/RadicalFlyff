@@ -16,6 +16,7 @@
 #define __PRISON //No blinkwings while in prison
 //#define __ONLY_TEXTUREMID //No texturelow or texture in model and world folders
 
+#define __SPEED_GRIFFIN //Up to 75% Speed
 #define __INVISIBLE_FIX
 #define __PMA_PARTYFINDER //More advanced than current party finder
 //#define __PARTY_FINDER

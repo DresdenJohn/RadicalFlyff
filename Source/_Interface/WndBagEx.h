@@ -28,6 +28,8 @@ public:
 	virtual void OnMouseWndSurface( CPoint point );
 	virtual BOOL process();
 
+	virtual void OnRButtonUp( UINT message, UINT nID, LRESULT* pLResult );
+	
 	void	InitItem( void );
 }; 
 #endif

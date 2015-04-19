@@ -211,7 +211,69 @@ void CWndBagEx::OnLButtonUp( UINT nFlags, CPoint point )
 void CWndBagEx::OnLButtonDown( UINT nFlags, CPoint point ) 
 { 
 } 
-
+void CWndBagEx::OnRButtonUp( UINT message, UINT nID, LRESULT* pLResult ) 
+{ // Will code on a rainy day
+	/*	LPSHORTCUT lpShortcut = (LPSHORTCUT)pLResult;
+		CWndBase* pWndFrame = lpShortcut->m_pFromWnd->GetFrameWnd();
+		CWndBase* pWndTarget = pWndFrame->m_pWndOnMouseMove;
+		CWndBase* pWndPut = pWndFrame->m_pCurFocus;
+		BYTE nSlot;
+			if( pWndFrame->GetWndId() == APP_INVENTORY )
+			{
+				SAFE_DELETE( g_WndMng.m_pWndTradeGold );
+				if( lpShortcut->m_dwData != 0 )
+				{
+					CWndItemCtrl* pWndItemCtrl = (CWndItemCtrl*)lpShortcut->m_pFromWnd;
+					UINT SelectCount = pWndItemCtrl->GetSelectedCount();
+					if( SelectCount != 1)
+					{
+						g_WndMng.PutString( prj.GetText(TID_GAME_EQUIPPUT), NULL, prj.GetTextColor( TID_GAME_EQUIPPUT ) );
+						
+					}
+					else
+					{
+						for( int i = 0; i < (int)( SelectCount ); i++ )
+						{
+							int nItem = pWndItemCtrl->GetSelectedItem( i );
+							pWndItemCtrl->GetItem( nItem );
+						}
+						CItemElem* itemElem = (CItemElem*)lpShortcut->m_dwData;
+						if( itemElem->GetProp()->dwItemKind3 == IK3_QUEST )
+						{
+							g_WndMng.PutString( prj.GetText( TID_GAME_ERROR_DONT_MOVE_QUEST_ITEM_TO_BAG_EX ), NULL, prj.GetTextColor( TID_GAME_ERROR_DONT_MOVE_QUEST_ITEM_TO_BAG_EX ) );
+						}
+						else
+						{
+							if( itemElem->m_nItemNum > 1 )
+							{
+								if( itemElem->GetExtra() == 0 )
+								{
+									g_WndMng.m_pWndTradeGold = new CWndTradeGold;
+									memcpy( &g_WndMng.m_pWndTradeGold->m_Shortcut, pLResult, sizeof(SHORTCUT) );
+									g_WndMng.m_pWndTradeGold->m_dwGold = itemElem->m_nItemNum;
+									g_WndMng.m_pWndTradeGold->m_nIdWndTo = APP_BAG_EX;
+									g_WndMng.m_pWndTradeGold->m_pWndBase = this;
+									g_WndMng.m_pWndTradeGold->m_nSlot = nSlot;
+									g_WndMng.m_pWndTradeGold->m_nPutSlot = -1;
+									g_WndMng.m_pWndTradeGold->Initialize( NULL, APP_TRADE_GOLD );
+									g_WndMng.m_pWndTradeGold->MoveParentCenter();
+									CWndStatic* pStatic	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_STATIC );
+									CWndStatic* pStaticCount	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_CONTROL1 );
+									CString strMain = prj.GetText(TID_GAME_MOVECOUNT);
+									CString strCount = prj.GetText(TID_GAME_NUMCOUNT);
+									pStatic->m_strTitle = strMain;
+									pStaticCount->m_strTitle = strCount;
+								}
+							}
+							else
+							{
+								g_DPlay.SendMoveItem_Pocket( -1, lpShortcut->m_dwId, 1 , nSlot);
+							}
+						}
+					}
+				}
+			}*/
+}
 BOOL CWndBagEx::OnDropIcon( LPSHORTCUT pShortcut, CPoint point )
 {
 	LPWNDCTRL	lpWndCtrl 	= GetWndCtrl( WIDC_ICO_BAG1 );
