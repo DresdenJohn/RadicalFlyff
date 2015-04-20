@@ -12,8 +12,8 @@ Echo Made by John
 Echo Running Merge....DONE!
 Echo Copying Files to ResClient....
 
-set source=C:\RadicalFlyff\Client
-set destination=C:\ResClient
+set source=E:\RadicalFlyff\Client
+set destination=E:\ResClient
 xcopy %source% %destination% /s /e /y
 
 cls

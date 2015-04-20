@@ -1027,6 +1027,13 @@
 #define TID_TOOLTIP_ALL_DEC_RATE		1410
 #define TID_TOOLTIP_ATTACKSPEED_RATE		1411
 
+#define TID_TOOLTIP_CRITRATE				1800
+#define TID_TOOLTIP_DCC					1801
+#define TID_TOOLTIP_BLOCKMELEE			1802
+#define TID_TOOLTIP_HIT				1803
+#define TID_TOOLTIP_BLOCKDISTANCE		1804
+#define TID_TOOLTIP_REFLECT				1805
+
 #define TID_DIAG_0001                  2000
 #define TID_DIAG_0002                  2001
 #define TID_DIAG_0003                  2002
@@ -1939,7 +1946,7 @@
 #define TID_GAME_VENDOR_MAX_ONE_GOLD		3141
 #define TID_GAME_VENDOR_MAX_ALL_GOLD		3142
 #define TID_GAME_NOTREADY_USESHOP		3143 //°¡¹ß ¹× ±âÅ¸ ¸Ó¸®¿¡ ¾²´Â ¾ÆÀÌÅÛ Âø¿ë ½Ã Çì¾î¼¥/¼ºÇü¼ö¼ú ÁøÀÔ ºÒ°¡
-#define TID_GAME_DONOTUSE_SHOP			3144 //Çì¾î˜Þ, ¼ºÇü¼ö¼ú ÀÌ¿ë ½Ã ¸Ó¸®¿¡ ¾²´Â ¾ÆÀÌÅÛ »ç¿ë ºÒ°¡
+#define TID_GAME_DONOTUSE_SHOP			3144 //Çì¾î˜? ¼ºÇü¼ö¼ú ÀÌ¿ë ½Ã ¸Ó¸®¿¡ ¾²´Â ¾ÆÀÌÅÛ »ç¿ë ºÒ°¡
 #define TID_GAME_COMPLETE_ANGEL			3145	
 #define TID_GAME_NOT_INVEN_ANGEL		3146	
 #define TID_GAME_NOT_QUEST_ANGEL		3147	
