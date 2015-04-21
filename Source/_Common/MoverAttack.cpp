@@ -152,6 +152,93 @@ BOOL CMover::CanFlyByAttack()
 	}
 	return bFly;
 }
+
+#ifdef __SHOW_ALL_STATS
+int CMover::GetSpeedDepla()
+{
+	int nSpeedDepla;
+	nSpeedDepla	= GetParam( DST_SPEED, 0 );	// 크리티컬 확률을 높여주는 스킬관련 
+	
+	return nSpeedDepla;
+}
+
+int CMover::GetCriticalRate()
+{
+	int nCriticalRate;
+	nCriticalRate = GetParam( DST_CRITICAL_BONUS, 0 );	// 크리티컬 확률을 높여주는 스킬관련 
+	
+	return nCriticalRate;
+}
+
+int CMover::GetSpellCastSpeed()
+{
+	int nSpellCastSpeed;
+	nSpellCastSpeed = GetParam( DST_SPELL_RATE, 0 );	// 크리티컬 확률을 높여주는 스킬관련 
+	
+	return nSpellCastSpeed;
+}
+
+int CMover::GetReflectDamage()
+{
+	int nReflectDamage;
+	nReflectDamage = GetParam( DST_REFLECT_DAMAGE, 0 );	// 크리티컬 확률을 높여주는 스킬관련 
+
+	return nReflectDamage;
+}
+
+int CMover::GetHitRate()
+{
+	int nHitRate;
+	nHitRate = GetParam( DST_ADJ_HITRATE, 0 );	// 크리티컬 확률을 높여주는 스킬관련 
+
+	return nHitRate;
+}
+
+int CMover::GetBlockmelee()
+{
+	int nBlockmelee;
+	nBlockmelee = GetParam( DST_BLOCK_MELEE, 0 );	// 크리티컬 확률을 높여주는 스킬관련 
+
+#ifdef __JEFF_11
+	if( nBlockmelee < 0 )
+		nBlockmelee = 0;
+	if( nBlockmelee > 96 )
+	nBlockmelee = 96;
+#endif	// __JEFF_11
+
+	return nBlockmelee;
+}
+
+int CMover::GetBlockRange()
+{
+	int nBlockRange;
+	nBlockRange = GetParam( DST_BLOCK_RANGE, 0 );	// 크리티컬 확률을 높여주는 스킬관련 
+
+#ifdef __JEFF_11
+	if( nBlockRange < 0 )
+		nBlockRange = 0;
+	if( nBlockRange > 96 )
+		nBlockRange = 96;
+#endif	// __JEFF_11
+
+	return nBlockRange;
+}
+
+int CMover::GetEsquiveRate()
+{
+	int nEsquiveRate;
+	nEsquiveRate	= (int)( ( GetDex() * 0.5 ) );
+	nEsquiveRate = GetParam( DST_PARRY, 0 );	// 크리티컬 확률을 높여주는 스킬관련 
+
+#ifdef __JEFF_11
+	if( nEsquiveRate < 0 )
+		nEsquiveRate = 0;
+#endif	// __JEFF_11
+
+	return nEsquiveRate;
+}
+#endif //__SHOW_ALL_STATS
+
 // 공속을 구한다.
 float CMover::GetAttackSpeed()
 {

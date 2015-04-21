@@ -375,6 +375,16 @@ public:
 	int m_nDEF;
 	int m_nCritical;
 	int m_nATKSpeed;
+#ifdef __SHOW_ALL_STATS
+	int m_nSpeedDepla;
+	int m_nCriticalRate;
+	int m_nSpellCastSpeed;
+	int m_nReflectDamage;
+	int m_nHitRate;
+	int m_nBlockmelee;
+	int m_nBlockRange;
+	int m_nEsquiveRate;
+#endif //__SHOW_ALL_STATS
 	
 public:
 	CWndCharacterDetail2();
@@ -396,6 +406,9 @@ public:
 	int GetVirtualDEF();
 	int GetVirtualCritical();
 	float GetVirtualATKSpeed();
+#ifdef __SHOW_ALL_STATS
+	int GetVirtualSpeedDepla();
+#endif //__SHOW_ALL_STATS
 
 protected:
 	void RenderATK( C2DRender* p2DRender, int x, int y );
@@ -483,6 +496,16 @@ public:
 	int m_nDEF;
 	int m_nCritical;
 	int m_nATKSpeed;
+#ifdef __SHOW_ALL_STATS
+	int m_nSpeedDepla;
+	int m_nCriticalRate;
+	int m_nSpellCastSpeed;
+	int m_nReflectDamage;
+	int m_nHitRate;
+	int m_nBlockmelee;
+	int m_nBlockRange;
+	int m_nEsquiveRate;
+#endif //__SHOW_ALL_STATS
 
 public:
 
@@ -504,6 +527,16 @@ public:
 	int GetVirtualDEF();
 	int GetVirtualCritical();
 	float GetVirtualATKSpeed();
+#ifdef __SHOW_ALL_STATS
+	int GetVirtualSpeedDepla();
+	int GetVirtualCriticalRate();
+	int GetVirtualSpellCastSpeed();
+	int GetVirtualReflectDamage();
+	int GetVirtualHitRate();
+	int GetVirtualBlockmelee();
+	int GetVirtualBlockRange();
+	int GetVirtualEsquiveRate();
+#endif //__SHOW_ALL_STATS
 
 protected:
 	void RenderATK( C2DRender* p2DRender, int x, int y );

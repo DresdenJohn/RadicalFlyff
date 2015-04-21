@@ -3,7 +3,6 @@ To Do Before Release List
 Flyff Development
 * Right click from bag to inventory, from inventory to bag, from bank to bag, etc.
 * 1-160, 60M-150H, 150H-160H, 3rd Job = Jedi? Harhar
-
 * Teleport System
 * PK +10% Exp, +35% Drop
 * Party Finder System, change lord "L" for usage. //John, you need to find the system for this
@@ -18,7 +17,6 @@ Flyff Development
 * /gmlist to see GMs Online
 * Couple leveling. Needs faster leveling and higher stats
 * Custom emotes
-
 * Reversions box needs removed
 
 Needs Tested

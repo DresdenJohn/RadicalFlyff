@@ -1195,6 +1195,16 @@ public:
 	int				GetFPRecovery();
 	int				GetNaturalArmor();
  	float			GetAttackSpeed();
+#ifdef __SHOW_ALL_STATS
+	int				GetSpeedDepla();
+	int				GetCriticalRate();
+	int				GetSpellCastSpeed();
+	int				GetReflectDamage();
+	int				GetHitRate();
+	int				GetBlockmelee();
+	int				GetBlockRange();
+	int				GetEsquiveRate();
+#endif //__SHOW_ALL_STATS
 	float			GetCastingAniSpeed();
 	int				GetCastingTime( int nCastingTime );
 	float			GetDamageMultiplier( ATTACK_INFO* pInfo );
