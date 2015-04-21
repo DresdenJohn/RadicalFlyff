@@ -29,7 +29,6 @@ Needs Tested
 Finished/Buggy
 * Need to make one folder texture to reduce client size. Commented for now.
 * Debug stats next to charater window. No Player online count. Seems almost impossible to code in.
-* Griffin = Speed //Error text shows up, despite working
 
 Finished/Done
 * Changed Tax rate to max 5%
@@ -42,6 +41,7 @@ Finished/Done
 * Buff pet is able to buff people
 * Remove lord system
 * GM Event by /ge or /gmevent //I'd really like this to be longer than an hour but I'm too lazy to figure out.
+* Griffin = Speed 
 
 Website
 * Finish styling

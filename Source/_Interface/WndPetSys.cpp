@@ -442,14 +442,14 @@ void CWndPetStatus::DrawPetInformation(C2DRender* p2DRender)
 			case DST_ADJDEF:
 				dwTooltip = TID_TOOLTIP_DEFENCE;
 				break;
-			#ifdef __SPEED_GRIFFIN
-			case DST_SPEED:
-				dwTooltip = TID_TOOLTIP_SPEED;
-				break;
-			#endif // __SPEED_GRIFFIN
 			case DST_HP_MAX:
 				dwTooltip = TID_TOOLTIP_HP;
 				break;
+#ifdef __SPEED_GRIFFIN
+			case DST_SPEED:
+				dwTooltip = TID_TOOLTIP_SPEED;
+				break;
+#endif // __SPEED_GRIFFIN
 		}
 		
 		CSize size = g_Neuz.m_2DRender.m_pFont->GetTextExtent( prj.GetText(TID_GAME_PET_STATUS_ABILITY) );

@@ -5385,6 +5385,11 @@ void CWndMgr::PutPetInfo( CItemElem* pItemElem, CEditString* pEdit )
 				case DST_HP_MAX:
 					dwTooltip = TID_TOOLTIP_DST_HP_MAX;
 					break;
+#ifdef __SPEED_GRIFFIN
+				case DST_SPEED:
+					dwTooltip = TID_TOOLTIP_SPEED;
+					break;
+#endif // __SPEED_GRIFFIN					
 			}
 			strTemp.Format( "%s : %s +%d", prj.GetText(TID_GAME_ABILITY), prj.GetText(dwTooltip), nParam );
 			pEdit->AddString( "\n" );
